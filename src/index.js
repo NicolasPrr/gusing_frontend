@@ -3,6 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Route, BrowserRouter as Router } from 'react-router-dom'
+
+import { Button } from "react-bulma-components/full";
+import Header from './components/Header'
+
+
+const routing = (
+    <Router>
+      <div>
+        <Header />
+        
+    </div>
+    </Router>
+  )
+ 
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
