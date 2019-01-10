@@ -5,49 +5,46 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <nav class="navbar is-transparent">
-          <div class="navbar-brand">
-            <a class="navbar-item">
+        <nav className="navbar is-light">
+          <div className="navbar-brand">
+            <a className="navbar-item">
               <img src="/resources/LogoGusing.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28" />
             </a>
-            <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+            <div className="navbar-burger burger" data-target="navbarExampleTransparentExample">
               <span></span>
               <span></span>
               <span></span>
             </div>
           </div>
 
-          <div id="navbarExampleTransparentExample" class="navbar-menu">
-            <div class="navbar-start">
-              <a class="navbar-item" href={baseURLFront} >
-                Home
+          <div id="navbarExampleTransparentExample" className="navbar-menu">
+            <div className="navbar-start">
+              <a className="navbar-item" href={baseURLFront} >
+                Pagina principal
       </a>
-              <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" href="https://bulma.io/documentation/overview/start/">
-                  Docs
+              <div className="navbar-item has-dropdown is-hoverable">
+                <a className="navbar-link">
+                  Insumos
         </a>
-                <div class="navbar-dropdown is-boxed">
-                  <a class="navbar-item" href="https://bulma.io/documentation/overview/start/">
+                <div className="navbar-dropdown is-boxed">
+                  <a className="navbar-item" href="https://bulma.io/documentation/overview/start/">
                     Overview
           </a>
-                  <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
+                  <a className="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
                     Modifiers
           </a>
-                  <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
+                  <a className="navbar-item" href="https://bulma.io/documentation/columns/basics/">
                     Columns
           </a>
-                  <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
+                  <a className="navbar-item" href="https://bulma.io/documentation/layout/container/">
                     Layout
           </a>
-                  <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
+                  <a className="navbar-item" href="https://bulma.io/documentation/form/general/">
                     Form
           </a>
-                  <hr class="navbar-divider" />
-                  <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
-                    Elements
-          </a>
-                  <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
-                    Components
+                  <hr className="navbar-divider" />
+                  <a className="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
+                    Crear informe
           </a>
                 </div>
               </div>

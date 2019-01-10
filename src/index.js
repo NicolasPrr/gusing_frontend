@@ -7,6 +7,7 @@ import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import { Button } from "react-bulma-components/full";
 import Header from './components/Header'
+import './App.css';
 
 
 const routing = (

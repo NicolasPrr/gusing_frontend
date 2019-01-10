@@ -6,8 +6,10 @@ import Header from './components/Header'
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div >
         <Header/>
+        as
+        <div class="pageloader"><span class="title">Pageloader</span></div>
       </div>
     );
   }
