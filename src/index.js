@@ -1,26 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-
 import { Button } from "react-bulma-components/full";
 import Header from './components/Header'
-import './App.css';
-
+import Loadersn from './components/loaders/Loadersn'
 
 const routing = (
     <Router>
       <div>
         <Header />
-        
+        <Route exact path="/" component={Loadersn} />  
     </div>
     </Router>
   )
  
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(routing, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
