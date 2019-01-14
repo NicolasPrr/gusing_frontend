@@ -16,7 +16,7 @@ class SearchBox extends PureComponent {
                         <input
                             className="input is-small"
                             type="text"
-                            placeholder="Find a chanel"
+                            placeholder="Find a product"
                             ref={this.search}
                         />
                     </div>

@@ -28,7 +28,7 @@ class GarnicForm extends Component {
       max_wall_gauge: this.cl_max.current.value.replace(",", ".")
     };
     
-    //this.props.createGarnic(info);
+    this.props.createGarnic(info);
   };
   render() {
     return (
