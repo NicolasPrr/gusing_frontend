@@ -9,6 +9,10 @@ class TableData extends Component {
         this.props.show(obj)
     }
 
+    edit(obj){
+        this.props.edit(obj)
+    }
+
     render() {
         const info = this.props.data
 
@@ -31,7 +35,7 @@ class TableData extends Component {
                         <th>{info[key].id}</th>
                         <td>{info[key].name}</td>
                         <td><a className="button is-info is-small" onClick = {this.show.bind(this,info[key])} >Ver</a></td>
-                        <td><a className="button is-success is-small" onClick = {""} >editar</a></td>
+                        <td><a className="button is-success is-small" onClick = {this.edit.bind(this,info[key])} >Editar</a></td>
                         <td><a className="button is-dark is-small" onClick = {""    } >Crear informe</a></td>
                     </tr>
                     ))}

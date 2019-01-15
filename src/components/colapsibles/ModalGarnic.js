@@ -12,7 +12,10 @@ class ModalGarnic extends Component {
                 <div class="modal-background"></div>
                 <div class="modal-card">
                     <header class="modal-card-head">
+                    <div className="control">
+                     </div>
                         <p class="modal-card-title">{params.name} </p>
+                        
                         <button class="delete" aria-label="close" onClick={this.exitModal}></button>
                     </header>
                     <section class="modal-card-body">
@@ -48,10 +51,7 @@ class ModalGarnic extends Component {
 
 
                     </section>
-                    <footer class="modal-card-foot">
-                        <button class="button is-success">Save changes</button>
-                        <button class="button" >Cancel</button>
-                    </footer>
+                    
                 </div>
             </div>
         }
