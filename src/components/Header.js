@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import baseURLFront from './Urlpage'
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
 
@@ -9,7 +9,7 @@ class Header extends Component {
       <div>
         <nav className="navbar is-light">
           <div className="navbar-brand">
-            <a className="navbar-item">
+            <a className="navbar-item" >
               <img src="/resources/LogoGusing.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28" />
             </a>
             <div className="navbar-burger burger" data-target="buggerg">

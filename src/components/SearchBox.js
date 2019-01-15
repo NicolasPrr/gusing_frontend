@@ -21,7 +21,7 @@ class SearchBox extends PureComponent {
                         />
                     </div>
                     <div className="control">
-                        <a className="button is-warning is-small" onClick = {this.handle} >Search</a>
+                        <button className="button is-warning is-small" onClick = {this.handle} >Search</button>
                     </div>
                 </div>
             </div>
