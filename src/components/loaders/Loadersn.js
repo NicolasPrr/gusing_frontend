@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
 import './loader.css';
+import DatePicker from "react-datepicker";
+ 
+import "react-datepicker/dist/react-datepicker.css";
 class Loadersn extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          startDate: new Date()
+        };
+        this.handleChange = this.handleChange.bind(this);
+      }
+     
+      handleChange(date) {
+        this.setState({
+          startDate: date
+        });
+      }
     render() {
         return (
             <div className="container rwcenter">
@@ -19,6 +35,31 @@ class Loadersn extends Component {
                     <div class="sk-circle12 sk-circle"></div>
                 </div>
                 Selecciona una opción
+
+                
+
+<DatePicker className = "input is-small"
+    selected={this.state.startDate}
+    onChange={this.handleChange}
+/>
+{/*
+<input type="text" list="data" onChange={this._onChange} />
+
+<datalist id="data">
+        <option value="hola" />
+    
+</datalist>
+
+
+<datalist id="dataclients">
+        <option value="Cliente 1" />
+        <option value="Cl2 1" />
+        <option value="Cl3 " />
+    
+</datalist>
+
+*/
+}
             </div>
         );
     }

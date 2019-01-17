@@ -19,7 +19,10 @@ class LeftMenu extends Component {
         this.props.render_form(option)
     }
     render() {
-        
+        const render_create_form = this.props.create
+        let create
+        if (render_create_form === "create") create = <li><a className = "is-active"    >Crear informe</a></li>
+        else create = null
         return (
             <div>
                 <aside className="menu">
@@ -29,7 +32,7 @@ class LeftMenu extends Component {
                     <ul className="menu-list">
                         <li><a className = {this.select_option_class(1)} onClick = {this.change_option.bind(this,1)}>Listar</a></li>
                         <li><a className = {this.select_option_class(2)} onClick = {this.change_option.bind(this,2)}>Crear producto</a></li>
-                   
+                        {create}
                     </ul>
                 </aside>
             </div>

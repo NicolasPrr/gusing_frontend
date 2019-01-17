@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import HeroDark from '../HeroDark'
 import LeftMenu from '../LeftMenu';
-import GarnicForm from './GarnicForm'
+import GarnicForm from './garnic/GarnicForm'
 import axios from "axios";
 import URLBack from '../../UrlBack'
 import SearchBox from '../SearchBox'
 import TableData from '../TableData'
-import ModalGarnic from './ModalGarnic'
-import EditGarnic from './EditGarnic'
+import ModalGarnic from './garnic/ModalGarnic'
+import EditGarnic from './garnic/EditGarnic'
 import Swal from 'sweetalert2'
+import Report from './garnic/Report'
 class Garnic extends Component {
     state = {
         opt: 0,
@@ -92,31 +93,56 @@ class Garnic extends Component {
         this.setState({garnic: object, mode: "edit"})
         //habilita la edicion de los datos
     }
+    showReport = (object) => {
+        this.setState({garnic: object, opt: 3}) 
+    }
     exitModal = () => {
         this.setState({garnic: null, mode: null})
     }
+    option_create = () =>{
+        if(this.state.opt === 3 ) return "create"
+        else return null
+    }
+    /*
+    showGarnic renderiza los modal, una para la edicion  y el otro para ver los datos
+    rnd se encarga de renderizar la opcion, es decir, si selecciona crear o listar, esto se debe al modo, si esta en modo editar
+    o modo ver, o modo crear formulario.
+
+    opt == 0 -> opcion no seleccionada
+    otp == 1 -> lista los datos
+    opt == 2 -> crear
+    opt == 3 -> reporte
+
+    */
+    
     render() {
         let rnd = []
         let showGarnic = null
+        let render_create
         //opt, es la opcion, si se pondra el formulario o la lista
         if (this.state.opt === 0) rnd = null
         if (this.state.opt === 1){ 
             rnd.push( <SearchBox lookingProduct={this.lookingProduct} key = {0} />)
-            if(this.state.garnics.length > 0 )rnd.push( <TableData data= {this.state.garnics} key = {1}  show = {this.showFeatures} edit = {this.editFeatures} delete = {this.deleteGarnic}/> )
+            if(this.state.garnics.length > 0 )rnd.push( <TableData data= {this.state.garnics} key = {1}  show = {this.showFeatures} edit = {this.editFeatures} delete = {this.deleteGarnic} report = {this.showReport}/> )
         }
         if (this.state.opt === 2) rnd = <GarnicForm createGarnic={this.createGarnic} />
+        if (this.state.opt === 3){
+            render_create = "create"
+            rnd = <Report garnic = {this.state.garnic}  sample = "Garnic"/>
+        }
+        //modals            
         const garnic = this.state.garnic
-        if (this.state.mode == null ) showGarnic = null
-            
-        else if(this.state.mode === "edit") showGarnic =   <EditGarnic data = {garnic} exit = {this.exitModal} editGarnic = {this.editGarnic} />
+        if (this.state.mode === null ) showGarnic = null
+        else if(this.state.mode === "edit") showGarnic =   <EditGarnic data = {garnic} exit = {this.exitModal} editGarnic = {this.editGarnic}/>
         else if(this.state.mode === "show") showGarnic =   <ModalGarnic data = {garnic} exit = {this.exitModal}/>
+        
 
         return (
             <div>
                 <HeroDark title="Colapsible" subtitle="garnic" />
                 <div >
                     <div className="columns">
-                        <div className="column is-one-fifth"><LeftMenu render_form={this.render_option} /></div>
+                        <div className="column is-one-fifth"><LeftMenu render_form={this.render_option} create = {render_create} /></div>
                         <div className="column">{rnd}
                         {showGarnic}
                         </div>

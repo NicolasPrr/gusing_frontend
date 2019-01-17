@@ -7,6 +7,7 @@ class TableData extends Component {
         this.show = this.show.bind(this)
         this.edit = this.edit.bind(this)
         this.delete = this.delete.bind(this)
+        this.report = this.report.bind(this)
     }
     show(obj){
         this.props.show(obj)
@@ -14,6 +15,9 @@ class TableData extends Component {
 
     edit(obj){
         this.props.edit(obj)
+    }
+    report(obj){
+        this.props.report(obj)
     }
     delete(obj, key){
         const txt = "Nombre del elemento: " + obj.name + ". Se borraran todos los elementos asociados de este tipo" 
@@ -57,9 +61,8 @@ class TableData extends Component {
                         <th>{info[key].id}</th>
                         <td>{info[key].name}</td>
                         <td><button className="button is-info is-small" onClick = {this.show.bind(this,info[key])} >Ver</button></td>
-                        <td><button className="button is-success is-small" onClick = {this.edit.bind(this,info[key], key)} >Editar</button></td>
-                        <td><button className="button is-dark is-small" onClick = {""    } >Crear informe</button></td>
-
+                        <td><button className="button is-success is-small" onClick = {this.edit.bind(this,info[key])} >Editar</button></td>
+                        <td><button className="button is-dark is-small" onClick = {this.report.bind(this, info[key])} >Crear informe</button></td>
                         <td><button className="delete is-large" onClick = {this.delete.bind(this,info[key] , key)}></button></td>
                     </tr>
                     ))}
