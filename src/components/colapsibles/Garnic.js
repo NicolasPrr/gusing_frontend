@@ -128,7 +128,7 @@ class Garnic extends Component {
         if (this.state.opt === 2) rnd = <GarnicForm createGarnic={this.createGarnic} />
         if (this.state.opt === 3){
             render_create = "create"
-            rnd = <Report garnic = {this.state.garnic}  sample = "Garnic"/>
+            rnd = <Report obj = {this.state.garnic}  sample = "Garnic"/>
         }
         //modals            
         const garnic = this.state.garnic
