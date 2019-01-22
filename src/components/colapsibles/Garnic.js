@@ -10,6 +10,9 @@ import ModalGarnic from './garnic/ModalGarnic'
 import EditGarnic from './garnic/EditGarnic'
 import Swal from 'sweetalert2'
 import Report from './garnic/Report'
+import Stepper from '../Stepper'
+import ReportGarnic from './garnic/ReportGarnic'
+
 class Garnic extends Component {
     state = {
         opt: 0,
@@ -23,22 +26,22 @@ class Garnic extends Component {
     lookingProduct = (data) => {
         let url = URLBack + "/colapsible_garnics"
         axios.get(url).then(res => {
-            this.setState({garnics: res.data})
+            this.setState({ garnics: res.data })
         })
     }
     createGarnic = (data) => {
         let url = URLBack + "/colapsible_garnics"
         axios.post(url, { colapsible_garnic: data }).then(res => {
-            if(res.status === 201 ){
+            if (res.status === 201) {
                 Swal({
                     position: 'top-end',
                     type: 'success',
                     title: 'Se ha agregado el elemento',
                     showConfirmButton: false,
                     timer: 1500
-                    })
+                })
             }
-            
+
         }).catch(function (error) {
             console.log(error)
         });
@@ -46,61 +49,66 @@ class Garnic extends Component {
     deleteGarnic = (data, key) => {
         let url = URLBack + "/colapsible_garnics/" + data.id
         axios.delete(url).then(res => {
-            if(res.status === 204 ){
-                console.log(this.state.garnics.splice(key,1))
-                
+            if (res.status === 204) {
+                console.log(this.state.garnics.splice(key, 1))
+
                 Swal({
-                position: 'top-end',
-                type: 'success',
-                title: 'Cambios realizados',
-                showConfirmButton: false,
-                timer: 1500
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Cambios realizados',
+                    showConfirmButton: false,
+                    timer: 1500
                 })
 
-                this.setState({garnic: null })
+                this.setState({ garnic: null })
             }
-            
-        }).catch(function (error) {
-            console.log(error)
-        });   
-    }
-    
-    editGarnic = (data) => {
-        let url = URLBack + "/colapsible_garnics/" + this.state.garnic.id
-        alert(url)
-        axios.put(url, { colapsible_garnic: data }).then(res => {
-            if(res.status === 200 ){
-                Swal({
-                position: 'top-end',
-                type: 'success',
-                title: 'Se ha editado con exito',
-                showConfirmButton: false,
-                timer: 1500
-                })
-                
-            }
-            
+
         }).catch(function (error) {
             console.log(error)
         });
     }
 
+    editGarnic = (data) => {
+        let url = URLBack + "/colapsible_garnics/" + this.state.garnic.id
+        alert(url)
+        axios.put(url, { colapsible_garnic: data }).then(res => {
+            if (res.status === 200) {
+                let gars = [...this.state.garnics];
+                gars[this.state.key_i] = res.data 
+                this.setState({garnics: gars})
+                
+                Swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Se ha editado con exito',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                
+              
+            }
+
+        }).catch(function (error) {
+            console.log(error)  
+        });
+    }
+
     showFeatures = (object) => {
-        this.setState({garnic: object, mode: "show"})
+        this.setState({ garnic: object, mode: "show" })
         //habilita la visualizacion de los datos
     }
-    editFeatures = (object) => {
-        this.setState({garnic: object, mode: "edit"})
+    editFeatures = (object, key_id) => {
+        this.setState({ garnic: object, mode: "edit" , key_i: key_id})
         //habilita la edicion de los datos
     }
     showReport = (object) => {
-        this.setState({garnic: object, opt: 3}) 
+        this.setState({ garnic: object, opt: 3 })
     }
     exitModal = () => {
-        this.setState({garnic: null, mode: null})
+        this.setState({ garnic: null, mode: null })
     }
-    option_create = () =>{
-        if(this.state.opt === 3 ) return "create"
+    option_create = () => {
+        if (this.state.opt === 3) return "create"
         else return null
     }
     /*
@@ -114,37 +122,39 @@ class Garnic extends Component {
     opt == 3 -> reporte
 
     */
-    
+
     render() {
         let rnd = []
         let showGarnic = null
         let render_create
         //opt, es la opcion, si se pondra el formulario o la lista
         if (this.state.opt === 0) rnd = null
-        if (this.state.opt === 1){ 
-            rnd.push( <SearchBox lookingProduct={this.lookingProduct} key = {0} />)
-            if(this.state.garnics.length > 0 )rnd.push( <TableData data= {this.state.garnics} key = {1}  show = {this.showFeatures} edit = {this.editFeatures} delete = {this.deleteGarnic} report = {this.showReport}/> )
+        if (this.state.opt === 1) {
+            rnd.push(<SearchBox lookingProduct={this.lookingProduct} key={0} />)
+            if (this.state.garnics.length > 0)
+             rnd.push(<TableData data={this.state.garnics} key={1} show={this.showFeatures} edit={this.editFeatures} delete={this.deleteGarnic} report={this.showReport} />)
         }
         if (this.state.opt === 2) rnd = <GarnicForm createGarnic={this.createGarnic} />
-        if (this.state.opt === 3){
+        if (this.state.opt === 3) {
             render_create = "create"
-            rnd = <Report obj = {this.state.garnic}  sample = "Garnic"/>
+            // rnd = <Report obj = {this.state.garnic}  sample = "Garnic"/>
+            rnd = <Stepper rnd={<Report obj={this.state.garnic} sample="Garnic" />} rnd2={<ReportGarnic obj={this.state.garnic} handleF={this.handleForm} />} />
         }
         //modals            
         const garnic = this.state.garnic
-        if (this.state.mode === null ) showGarnic = null
-        else if(this.state.mode === "edit") showGarnic =   <EditGarnic data = {garnic} exit = {this.exitModal} editGarnic = {this.editGarnic}/>
-        else if(this.state.mode === "show") showGarnic =   <ModalGarnic data = {garnic} exit = {this.exitModal}/>
-        
+        if (this.state.mode === null) showGarnic = null
+        else if (this.state.mode === "edit") showGarnic = <EditGarnic data={garnic} exit={this.exitModal} editGarnic={this.editGarnic} />
+        else if (this.state.mode === "show") showGarnic = <ModalGarnic data={garnic} exit={this.exitModal} />
+
 
         return (
             <div>
                 <HeroDark title="Colapsible" subtitle="garnic" />
                 <div >
                     <div className="columns">
-                        <div className="column is-one-fifth"><LeftMenu render_form={this.render_option} create = {render_create} /></div>
+                        <div className="column is-one-fifth"><LeftMenu render_form={this.render_option} create={render_create} /></div>
                         <div className="column">{rnd}
-                        {showGarnic}
+                            {showGarnic}
                         </div>
                     </div>
 

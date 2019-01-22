@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
 class ReportGarnic extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.handle = this.handle.bind(this)
     }
-    handle = ( e ) =>{
+    handle = (e) => {
         e.preventDefault();
         this.props.handleF("hey")
-        
+
     }
     render() {
         return (
@@ -68,14 +68,8 @@ class ReportGarnic extends Component {
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
-                <button
-            onClick = {this.handle}
-            className="button is-fullwidth is-info is-rounded"
-          >
-            Crear Producto
-          </button>
             </div>
         );
     }

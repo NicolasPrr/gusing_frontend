@@ -45,11 +45,11 @@ class EditlGarnic extends Component {
         if (params === null) return null
         else {
             
-            return <div class="modal">
-                <div class="modal-background"></div>
+            return <div className="modal">
+                <div className="modal-background"></div>
                 <form>
-                    <div class="modal-card">
-                        <header class="modal-card-head">
+                    <div className="modal-card">
+                        <header className="modal-card-head">
                             <input
                                 className="input is-medium"
                                 type="text"
@@ -58,11 +58,11 @@ class EditlGarnic extends Component {
                                 defaultValue = {params.name}
                             />
 
-                            <button class="delete" aria-label="close" onClick={this.exitModal}></button>
+                            <button className="delete" aria-label="close" onClick={this.exitModal}></button>
 
 
                         </header>
-                        <section class="modal-card-body">
+                        <section className="modal-card-body">
                             <label className="label">Diametro de base</label>
                             <div className="columns">
                                 <div className="column">
@@ -124,8 +124,8 @@ class EditlGarnic extends Component {
 
 
                         </section>
-                        <footer class="modal-card-foot">
-                            <button class="button is-success" onClick = {this.handle}>Guardar cambios</button>
+                        <footer className="modal-card-foot">
+                            <button className="button is-success" onClick = {this.handle}>Guardar cambios</button>
                             
                         </footer>
 

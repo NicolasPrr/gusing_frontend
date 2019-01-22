@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
-import ReportGarnic from './ReportGarnic'
 class Report extends Component {
 
   constructor(props) {
@@ -91,8 +90,16 @@ class Report extends Component {
                   className="input is-small"
                   type="text"
                   placeholder="Nombre del cliente"
+                  list ="dataclients"
                   ref={this.client_name}
                 />
+
+                <datalist id="dataclients">
+                        <option value="Cliente 1" />
+                        <option value="Cl2 1" />
+                        <option value="Cl3 " />
+                    
+                </datalist>
               </div>
               <div className="columns is-mobile">
                 <div className="column">
@@ -266,7 +273,7 @@ class Report extends Component {
                     <input
                       className="input is-small"
                       type="text"
-                      ref={this.fv} 
+                      ref={this.fv}
                     />
                   </div>
                 </div>
@@ -286,9 +293,9 @@ class Report extends Component {
               {/*second column main*/}
             </div>
           </div>
-          Parametros
-          <ReportGarnic obj={this.props.obj} handleF = {this.handleForm} />
          
+          
+
         </form>
 
 

@@ -38,10 +38,6 @@ class Loadersn extends Component {
 
                 
 
-<DatePicker className = "input is-small"
-    selected={this.state.startDate}
-    onChange={this.handleChange}
-/>
 {/*
 <input type="text" list="data" onChange={this._onChange} />
 
