@@ -7,13 +7,17 @@ import Header from './components/Header'
 import Loadersn from './components/loaders/Loadersn'
 import './styles/App.scss';
 import Garnic from './components/colapsibles/Garnic'
+import InterfaceReport from './components/reportInterfaz/InterfaceReport'
 const routing = (
     <Router>
       <div>
         
         <Header />
         <Route exact path="/" component={Loadersn} />  
-        <Route path="/colapsible/garnic" component={Garnic} />
+        
+        <Route path="/colapsible/garnic" component={Garnic}   />
+        <Route path="/reports" component={InterfaceReport} />
+        
         
     </div>
     </Router>

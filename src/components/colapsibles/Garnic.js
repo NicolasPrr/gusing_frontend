@@ -9,16 +9,16 @@ import TableData from '../TableData'
 import ModalGarnic from './garnic/ModalGarnic'
 import EditGarnic from './garnic/EditGarnic'
 import Swal from 'sweetalert2'
-import Report from './garnic/Report'
 import Stepper from '../Stepper'
-import ReportGarnic from './garnic/ReportGarnic'
+
 
 class Garnic extends Component {
     state = {
         opt: 0,
         garnics: [],
         garnic: null,
-        mode: null
+        mode: null,
+        data: null
     }
     render_option = (option) => {
         this.setState({ opt: option })
@@ -28,7 +28,7 @@ class Garnic extends Component {
         axios.get(url).then(res => {
             this.setState({ garnics: res.data })
         })
-    }
+    } 
     createGarnic = (data) => {
         let url = URLBack + "/colapsible_garnics"
         axios.post(url, { colapsible_garnic: data }).then(res => {
@@ -74,9 +74,9 @@ class Garnic extends Component {
         axios.put(url, { colapsible_garnic: data }).then(res => {
             if (res.status === 200) {
                 let gars = [...this.state.garnics];
-                gars[this.state.key_i] = res.data 
-                this.setState({garnics: gars})
-                
+                gars[this.state.key_i] = res.data
+                this.setState({ garnics: gars })
+
                 Swal({
                     position: 'top-end',
                     type: 'success',
@@ -84,12 +84,12 @@ class Garnic extends Component {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                
-              
+
+
             }
 
         }).catch(function (error) {
-            console.log(error)  
+            console.log(error)
         });
     }
 
@@ -98,7 +98,7 @@ class Garnic extends Component {
         //habilita la visualizacion de los datos
     }
     editFeatures = (object, key_id) => {
-        this.setState({ garnic: object, mode: "edit" , key_i: key_id})
+        this.setState({ garnic: object, mode: "edit", key_i: key_id })
         //habilita la edicion de los datos
     }
     showReport = (object) => {
@@ -128,23 +128,28 @@ class Garnic extends Component {
         let showGarnic = null
         let render_create
         //opt, es la opcion, si se pondra el formulario o la lista
-        if (this.state.opt === 0) rnd = null
+        if (this.state.opt === 0)
+            rnd = null
         if (this.state.opt === 1) {
             rnd.push(<SearchBox lookingProduct={this.lookingProduct} key={0} />)
             if (this.state.garnics.length > 0)
-             rnd.push(<TableData data={this.state.garnics} key={1} show={this.showFeatures} edit={this.editFeatures} delete={this.deleteGarnic} report={this.showReport} />)
+                rnd.push(<TableData data={this.state.garnics} key={1} show={this.showFeatures} edit={this.editFeatures} delete={this.deleteGarnic} report={this.showReport} />)
         }
-        if (this.state.opt === 2) rnd = <GarnicForm createGarnic={this.createGarnic} />
+        if (this.state.opt === 2)
+            rnd = <GarnicForm createGarnic={this.createGarnic} />
         if (this.state.opt === 3) {
             render_create = "create"
             // rnd = <Report obj = {this.state.garnic}  sample = "Garnic"/>
-            rnd = <Stepper rnd={<Report obj={this.state.garnic} sample="Garnic" />} rnd2={<ReportGarnic obj={this.state.garnic} handleF={this.handleForm} />} />
+            rnd = <Stepper   obj = {this.state.garnic} sample = "Colapsible"  mode = "garnic" />
         }
         //modals            
         const garnic = this.state.garnic
-        if (this.state.mode === null) showGarnic = null
-        else if (this.state.mode === "edit") showGarnic = <EditGarnic data={garnic} exit={this.exitModal} editGarnic={this.editGarnic} />
-        else if (this.state.mode === "show") showGarnic = <ModalGarnic data={garnic} exit={this.exitModal} />
+        if (this.state.mode === null)
+            showGarnic = null
+        else if (this.state.mode === "edit")
+            showGarnic = <EditGarnic data={garnic} exit={this.exitModal} editGarnic={this.editGarnic} />
+        else if (this.state.mode === "show")
+            showGarnic = <ModalGarnic data={garnic} exit={this.exitModal} />
 
 
         return (

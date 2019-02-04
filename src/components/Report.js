@@ -8,6 +8,10 @@ class Report extends Component {
     this.handleAnalisys = this.handleAnalisys.bind(this);
     this.handleReport = this.handleReport.bind(this);
     this.handleReception = this.handleReception.bind(this);
+    this.handleExpiration = this.handleExpiration.bind(this);
+    this.handleFabrication = this.handleFabrication.bind(this);
+    
+
     this.handleForm = this.handleForm.bind(this)
 
     this.state = {
@@ -15,8 +19,10 @@ class Report extends Component {
       analisysDate: new Date(),
       receptionDate: new Date(),
       reportDate: new Date(),
+      manufactoringDate: new Date(),
+      expirationDate: new Date(),
     };
-    //       this.handleChange = this.handleChange.bind(this);
+    
   }
 
 
@@ -40,6 +46,17 @@ class Report extends Component {
       reportDate: date
     });
   }
+  handleFabrication(date) {
+    this.setState({
+      fabricationDate: date
+    });
+  }
+
+  handleExpiration(date) {
+    this.setState({
+      expirationDate: date
+    });
+  }
 
   report = React.createRef();
   client_name = React.createRef();
@@ -49,36 +66,57 @@ class Report extends Component {
   ff = React.createRef();
   fv = React.createRef();
   method = React.createRef();
+  sample = React.createRef();
+  sample_name = React.createRef();
+  
   /*<ReportGarnic obj={this.props.obj} />
     */
 
-  handleForm = (subform) => {
+  handleForm = (e) => {
+    e.preventDefault()
     const data = {
-      rerport_number: this.report.current.value,
+      report_number: this.report.current.value,
       client_name: this.client_name.current.value,
       direction: this.direction.current.value,
       analisys: this.analisys.current.value,
       lot: this.lot.current.value,
-      ff: this.ff.current.value,
-      fv: this.fv.current.value,
-      method: this.method.current.value
+      method: this.method.current.value,
+
+/*      ff: this.state.manufactoringDate,
+      fv: this.state.expirationDate,
+      date_sampling : this.state.samplingDate,
+      date_analisis : this.state.analisysDate,
+      date_reception : this.state.receptionDate,
+      date_report : this.state.reportDate*/
+
+      
     }
-    console.log(data)
-    console.log(subform)
-
+    this.props.reportAction(data)
   }
-
-
+  componentDidMount(){
+    const data = this.props.data
+    if(data != null){
+      this.setState(
+        {reportDate: data.date_report ,
+        samplingDate: data.date_sampling,
+        analisysDate: data.date_analisis,
+        receptionDate: data.date_reception,
+        expirationDate: data.fv,
+        fabricationDate: data.ff
+      })
+    }
+  }
   render() {
     return (
-      <div>
-        <form >
+      <div  >
+        <form onSubmit={this.handleForm}  >
           <p>N°de reporte ensayo FQ </p>
           <input
             className="input is-small"
             type="text"
             placeholder="Numero de reporte"
             ref={this.report}
+            defaultValue = {this.props.data.report_number}
           />
           <div className="columns">
             <div className="column">
@@ -90,15 +128,16 @@ class Report extends Component {
                   className="input is-small"
                   type="text"
                   placeholder="Nombre del cliente"
-                  list ="dataclients"
+                  list="dataclients"
                   ref={this.client_name}
+                  defaultValue = {this.props.data.client_name}
                 />
 
                 <datalist id="dataclients">
-                        <option value="Cliente 1" />
-                        <option value="Cl2 1" />
-                        <option value="Cl3 " />
-                    
+                  <option value="Cliente 1" />
+                  <option value="Cl2 1" />
+                  <option value="Cl3 " />
+
                 </datalist>
               </div>
               <div className="columns is-mobile">
@@ -110,6 +149,7 @@ class Report extends Component {
                     className="input is-small"
                     selected={this.state.samplingDate}
                     onChange={this.handleSampling}
+                    dateFormat = "yyyy-MM-dd"
                   />
                 </div>
                 <div className="column">
@@ -120,6 +160,8 @@ class Report extends Component {
                     className="input is-small"
                     selected={this.state.analisysDate}
                     onChange={this.handleAnalisys}
+                    dateFormat ="yyyy-MM-dd"
+
                   />
                 </div>
               </div>
@@ -164,6 +206,7 @@ class Report extends Component {
                       type="text"
                       placeholder="Nombre de la muestra"
                       ref={this.analisys}
+                      defaultValue = {this.props.data.analisys}
 
                     />
                   </div>
@@ -178,7 +221,7 @@ class Report extends Component {
                       type="text"
                       placeholder="Nombre de la muestra"
                       ref={this.lot}
-
+                      defaultValue = {this.props.data.lot}
                     />
                   </div>
                 </div>
@@ -197,6 +240,7 @@ class Report extends Component {
                   type="text"
                   placeholder="direccion del cliente"
                   ref={this.direction}
+                  defaultValue = {this.props.data.direction}
                 />
               </div>
               <div className="columns is-mobile">
@@ -208,6 +252,7 @@ class Report extends Component {
                     className="input is-small"
                     selected={this.state.receptionDate}
                     onChange={this.handleReception}
+                    dateFormat ="yyyy-MM-dd"
                   />
                 </div>
                 <div className="column">
@@ -218,6 +263,7 @@ class Report extends Component {
                     className="input is-small"
                     selected={this.state.reportDate}
                     onChange={this.handleReport}
+                    dateFormat = "yyyy-MM-dd"
                   />
                 </div>
               </div>
@@ -257,25 +303,23 @@ class Report extends Component {
                   <div className="field">
                     <label className="label is-small">FF</label>
                   </div>
-                  <div className="control">
-                    <input
-                      className="input is-small"
-                      type="text"
-                      ref={this.ff}
-                    />
-                  </div>
+                  <DatePicker
+                    className="input is-small"
+                    selected={this.state.fabricationDate}
+                    onChange={this.handleFabrication}
+                    dateFormat="yyyy-MM-dd"
+                  />
                 </div>
                 <div className="column">
                   <div className="field">
                     <label className="label is-small">FV</label>
                   </div>
-                  <div className="control">
-                    <input
-                      className="input is-small"
-                      type="text"
-                      ref={this.fv}
-                    />
-                  </div>
+                  <DatePicker
+                    className="input is-small"
+                    selected={this.state.expirationDate}
+                    onChange={this.handleExpiration}
+                    dateFormat="yyyy-MM-dd"
+                  />
                 </div>
                 <div className="column">
                   <div className="field">
@@ -286,6 +330,7 @@ class Report extends Component {
                       className="input is-small"
                       type="text"
                       ref={this.method}
+                      defaultValue = {this.props.data.method}
                     />
                   </div>
                 </div>
@@ -293,8 +338,8 @@ class Report extends Component {
               {/*second column main*/}
             </div>
           </div>
-         
-          
+
+          <button className="button is-small is-info" type="submit"> Siguiente </button>
 
         </form>
 
