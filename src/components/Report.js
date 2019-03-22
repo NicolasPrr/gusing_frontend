@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
+import axios from 'axios';
+import URLBack from "../UrlBack";
 class Report extends Component {
 
   constructor(props) {
@@ -10,7 +12,7 @@ class Report extends Component {
     this.handleReception = this.handleReception.bind(this);
     this.handleExpiration = this.handleExpiration.bind(this);
     this.handleFabrication = this.handleFabrication.bind(this);
-    
+    this.changeDirection = this.changeDirection.bind(this);
 
     this.handleForm = this.handleForm.bind(this)
 
@@ -21,6 +23,7 @@ class Report extends Component {
       reportDate: new Date(),
       manufactoringDate: new Date(),
       expirationDate: new Date(),
+      clients: []
     };
     
   }
@@ -48,7 +51,7 @@ class Report extends Component {
   }
   handleFabrication(date) {
     this.setState({
-      fabricationDate: date
+      manufactoringDate: date
     });
   }
 
@@ -56,6 +59,16 @@ class Report extends Component {
     this.setState({
       expirationDate: date
     });
+  }
+  changeDirection(){
+    const vl = this.client_name.current.value;
+    for(var i = 0; i < this.state.clients.length; i++){
+      if(vl === this.state.clients[i].name){
+        this.direction.current.value = this.state.clients[i].direction;
+        i = this.state.clients.length;
+        
+      }
+    }
   }
 
   report = React.createRef();
@@ -82,14 +95,12 @@ class Report extends Component {
       lot: this.lot.current.value,
       method: this.method.current.value,
 
-/*      ff: this.state.manufactoringDate,
+      ff: this.state.manufactoringDate,
       fv: this.state.expirationDate,
       date_sampling : this.state.samplingDate,
       date_analisis : this.state.analisysDate,
       date_reception : this.state.receptionDate,
-      date_report : this.state.reportDate*/
-
-      
+      date_report : this.state.reportDate
     }
     this.props.reportAction(data)
   }
@@ -102,13 +113,23 @@ class Report extends Component {
         analisysDate: data.date_analisis,
         receptionDate: data.date_reception,
         expirationDate: data.fv,
-        fabricationDate: data.ff
+        manufactoringDate: data.ff
       })
     }
+    let url = URLBack + "/clients";
+    axios.get(url).then(res => {
+        if (res.status === 200) {
+            this.setState({ clients: res.data })
+        }
+    })
+        .catch(function (error) {
+            console.log(error)
+        });
+
   }
   render() {
     return (
-      <div  >
+      <div >
         <form onSubmit={this.handleForm}  >
           <p>N°de reporte ensayo FQ </p>
           <input
@@ -131,13 +152,14 @@ class Report extends Component {
                   list="dataclients"
                   ref={this.client_name}
                   defaultValue = {this.props.data.client_name}
+                  onChange={this.changeDirection}
                 />
 
                 <datalist id="dataclients">
-                  <option value="Cliente 1" />
-                  <option value="Cl2 1" />
-                  <option value="Cl3 " />
-
+                  {Object.keys(this.state.clients).map(key => (
+                    <option value={this.state.clients[key].name}/>
+                  )) }
+      
                 </datalist>
               </div>
               <div className="columns is-mobile">
@@ -149,7 +171,7 @@ class Report extends Component {
                     className="input is-small"
                     selected={this.state.samplingDate}
                     onChange={this.handleSampling}
-                    dateFormat = "yyyy-MM-dd"
+                    dateFormat = "dd-MMM-yy"
                   />
                 </div>
                 <div className="column">
@@ -160,7 +182,7 @@ class Report extends Component {
                     className="input is-small"
                     selected={this.state.analisysDate}
                     onChange={this.handleAnalisys}
-                    dateFormat ="yyyy-MM-dd"
+                    dateFormat ="dd-MMM-yy"
 
                   />
                 </div>
@@ -252,7 +274,7 @@ class Report extends Component {
                     className="input is-small"
                     selected={this.state.receptionDate}
                     onChange={this.handleReception}
-                    dateFormat ="yyyy-MM-dd"
+                    dateFormat ="dd-MMM-yy"
                   />
                 </div>
                 <div className="column">
@@ -263,7 +285,7 @@ class Report extends Component {
                     className="input is-small"
                     selected={this.state.reportDate}
                     onChange={this.handleReport}
-                    dateFormat = "yyyy-MM-dd"
+                    dateFormat = "dd-MMM-yy"
                   />
                 </div>
               </div>
@@ -305,9 +327,9 @@ class Report extends Component {
                   </div>
                   <DatePicker
                     className="input is-small"
-                    selected={this.state.fabricationDate}
+                    selected={this.state.manufactoringDate}
                     onChange={this.handleFabrication}
-                    dateFormat="yyyy-MM-dd"
+                    dateFormat="dd-MMM-yy"
                   />
                 </div>
                 <div className="column">
@@ -318,7 +340,7 @@ class Report extends Component {
                     className="input is-small"
                     selected={this.state.expirationDate}
                     onChange={this.handleExpiration}
-                    dateFormat="yyyy-MM-dd"
+                    dateFormat="dd-MMM-yy"
                   />
                 </div>
                 <div className="column">

@@ -8,6 +8,7 @@ import Loadersn from './components/loaders/Loadersn'
 import './styles/App.scss';
 import Garnic from './components/colapsibles/Garnic'
 import InterfaceReport from './components/reportInterfaz/InterfaceReport'
+import Clients from './components/clients/Clients'
 const routing = (
     <Router>
       <div>
@@ -17,6 +18,7 @@ const routing = (
         
         <Route path="/colapsible/garnic" component={Garnic}   />
         <Route path="/reports" component={InterfaceReport} />
+        <Route path="/clients" component={Clients} />
         
         
     </div>

@@ -8,17 +8,17 @@ class ModalGarnic extends Component {
     renderModal(params) {
         if (params === null) return null
         else {
-            return <div class="modal">
-                <div class="modal-background"></div>
-                <div class="modal-card">
-                    <header class="modal-card-head">
+            return <div className="modal">
+                <div className="modal-background"></div>
+                <div className="modal-card">
+                    <header className="modal-card-head">
                     <div className="control">
                      </div>
-                        <p class="modal-card-title">{params.name} </p>
+                        <p className="modal-card-title">{params.name} </p>
                         
-                        <button class="delete" aria-label="close" onClick={this.exitModal}></button>
+                        <button className="delete" aria-label="close" onClick={this.exitModal}></button>
                     </header>
-                    <section class="modal-card-body">
+                    <section className="modal-card-body">
                    
                     <label className="label">Diametro de base</label>
                     <div className = "columns">

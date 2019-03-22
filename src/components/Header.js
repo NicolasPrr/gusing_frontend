@@ -16,32 +16,25 @@ class Header extends Component {
               <span></span>
               <span></span>
               <span></span>
-
             </div>
           </div>
 
           <div id="buggerg" className="navbar-menu">
             <div className="navbar-start">
-
               <a className="navbar-item" href={baseURLFront} >
-                Pagina principal
-
-      </a>
+                Pagina principal</a>
               <div className="navbar-item has-dropdown is-hoverable">
-                <a className="navbar-link">
-                  Insumos
-
-        </a>
+                <a className="navbar-link">Insumos</a>
                 <div className="navbar-dropdown is-boxed">
                   <Link to='/colapsible/garnic' className="navbar-item">Colapsible garnic</Link>
                   <Link to='/colapsible/normal' className="navbar-item">Colapsible normal</Link>
                   <Link to='/colapsible/desflant/normal' className="navbar-item">Colapsible desflant</Link>
-                  <hr className="navbar-divider" />
-                  <a className="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
-                    Crear informe
-          </a>
                 </div>
               </div>
+              <Link className="navbar-item"  to='/reports' >
+                Reportes</Link>
+                <Link className="navbar-item"  to='/clients' >
+                Gestion de clientes</Link>
             </div>
           </div>
         </nav>
