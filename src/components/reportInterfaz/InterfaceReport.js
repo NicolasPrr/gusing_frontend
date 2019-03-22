@@ -7,7 +7,6 @@ class InterfaceReport extends Component {
     constructor(props){
         super();
         this.state = {reports: []}
-
     }
      componentDidMount(){
         let url = URLBack + "/reports"

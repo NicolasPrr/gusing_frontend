@@ -67,7 +67,13 @@ class Garnic extends Component {
             console.log(error)
         });
     }
+    componentDidMount(){
+        let url = URLBack + "/colapsible_garnics"
+        axios.get(url).then(res => {
+            this.setState({ garnics: res.data })
+        })
 
+    }
     editGarnic = (data) => {
         let url = URLBack + "/colapsible_garnics/" + this.state.garnic.id
         alert(url)

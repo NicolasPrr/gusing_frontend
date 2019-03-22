@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import axios from 'axios';
 import URLBack from "../UrlBack";
 class Report extends Component {
-
+  //Formulario para creación de reporte.
   constructor(props) {
     super(props);
     this.handleSampling = this.handleSampling.bind(this);
