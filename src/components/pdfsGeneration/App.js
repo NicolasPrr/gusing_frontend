@@ -2,14 +2,14 @@ import React from "react";
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet, Link,Font } from '@react-pdf/renderer';
 
 Font.register(
-  `app/resources/fonts/fonts/Open_Sans/OpenSans-Regular.ttf`,
-  { family: 'Open Sans' },
+  'https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf',
+  { family: 'Oswald' },
 );
 const styles = StyleSheet.create({
 	name: {
 		fontSize: 24,
 		textTransform: 'uppercase',
-		fontFamily: 'Open Sans'
+		fontFamily: 'Oswald'
 	},
 	page: {
 		flexDirection: 'row',
@@ -20,11 +20,10 @@ const styles = StyleSheet.create({
 		padding: 10,
 		flexGrow: 1
 	}
-});
-Font.register(`${node.__dirname}/fonts/fonts/Open_Sans/OpenSans-Regular.ttf`, {
+});/*
+Font.register(`/fonts/fonts/Open_Sans/OpenSans-Regular.ttf`, {
   family: 'Open Sans',
 });
-/*
 Font.register(`${__dirname}/fonts/fonts/Lato/Lato-Regular.ttf`, {
   family: 'Lato',
 });
