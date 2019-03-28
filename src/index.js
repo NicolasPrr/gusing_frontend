@@ -9,22 +9,21 @@ import './styles/App.scss';
 import Garnic from './components/colapsibles/Garnic'
 import InterfaceReport from './components/reportInterfaz/InterfaceReport'
 import Clients from './components/clients/Clients'
+import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
 const routing = (
-    <Router>
-      <div>
-        
-        <Header />
-        <Route exact path="/" component={Loadersn} />  
-        
-        <Route path="/colapsible/garnic" component={Garnic}   />
-        <Route path="/reports" component={InterfaceReport} />
-        <Route path="/clients" component={Clients} />
-        
-        
+  <Router>
+    <div>
+
+      <Header />
+      <Route exact path="/" component={Loadersn} />
+      <Route path="/colapsible/garnic" component={Garnic} />
+      <Route exact path="/reports/:reportId" component={HeaderGeneral} />
+      <Route path="/reports/" component={InterfaceReport} />
+      <Route path="/clients" component={Clients} />
     </div>
-    </Router>
-  )
- 
+  </Router>
+)
+
 
 ReactDOM.render(routing, document.getElementById('root'));
 

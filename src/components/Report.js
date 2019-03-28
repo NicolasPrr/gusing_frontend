@@ -81,26 +81,34 @@ class Report extends Component {
   method = React.createRef();
   sample = React.createRef();
   sample_name = React.createRef();
-  
+  farmaceutic_shape = React.createRef();
+  sampling_type = React.createRef();
+
   /*<ReportGarnic obj={this.props.obj} />
     */
 
   handleForm = (e) => {
     e.preventDefault()
+    console.log(this.props.data.sample)
     const data = {
+
+      sample: this.sample.current.value,
+      sample_name: this.sample_name.current.value,
       report_number: this.report.current.value,
       client_name: this.client_name.current.value,
       direction: this.direction.current.value,
       analisys: this.analisys.current.value,
       lot: this.lot.current.value,
       method: this.method.current.value,
-
+      farmaceutic_shape: this.farmaceutic_shape.current.value,
+      sampling_type: this.sampling_type.current.value,
+      
       ff: this.state.manufactoringDate,
       fv: this.state.expirationDate,
       date_sampling : this.state.samplingDate,
       date_analisis : this.state.analisysDate,
       date_reception : this.state.receptionDate,
-      date_report : this.state.reportDate
+      date_report : this.state.reportDate 
     }
     this.props.reportAction(data)
   }
@@ -128,6 +136,17 @@ class Report extends Component {
 
   }
   render() {
+    let samples;
+    let samples_name;
+    if(this.props.data.sample === undefined)
+      samples = this.props.sample
+    else 
+      samples = this.props.data.sample 
+    
+    if(this.props.data.sample_name === undefined)
+      samples_name = this.props.obj.name
+    else 
+      samples_name = this.props.data.sample_name 
     return (
       <div >
         <form onSubmit={this.handleForm}  >
@@ -197,8 +216,10 @@ class Report extends Component {
                       className="input is-small"
                       type="text"
                       placeholder="Nombre de la muestra"
-                      ref={this.name}
-                      defaultValue={this.props.sample}
+                      ref={this.sample}
+                      defaultValue={
+                        samples
+                      }
                     />
                   </div>
                 </div>
@@ -211,8 +232,11 @@ class Report extends Component {
                       className="input is-small"
                       type="text"
                       placeholder="Nombre de la muestra"
-                      ref={this.name}
-                      defaultValue={this.props.obj.name}
+                      ref={this.sample_name}
+                      defaultValue={
+                        samples_name
+                      }
+
                     />
                   </div>
                 </div>
@@ -300,7 +324,7 @@ class Report extends Component {
                       className="input is-small"
                       type="text"
                       placeholder="Nombre de la muestra"
-                      ref={this.name}
+                      ref={this.sampling_type}
                       defaultValue="Aleatoreo"
                     />
                   </div>
@@ -314,7 +338,7 @@ class Report extends Component {
                       className="input is-small"
                       type="text"
                       placeholder="Nombre de la muestra"
-                      ref={this.name}
+                      ref={this.farmaceutic_shape}
                       defaultValue="N.A."
                     />
                   </div>

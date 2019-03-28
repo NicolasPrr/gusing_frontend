@@ -1,9 +1,9 @@
 import React from "react";
-import { PDFDownloadLink, Document, Page, Text, View, StyleSheet, Link,Font } from '@react-pdf/renderer';
-
+import { PDFDownloadLink, Document, Page, Text, View, StyleSheet, Font, PDFViewer, BlobProvider } from '@react-pdf/renderer';
+import './pdfviwer.css'
 Font.register(
-  'https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf',
-  { family: 'Oswald' },
+	'https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf',
+	{ family: 'Oswald' },
 );
 const styles = StyleSheet.create({
 	name: {
@@ -29,7 +29,16 @@ Font.register(`${__dirname}/fonts/fonts/Lato/Lato-Regular.ttf`, {
 });
 Font.register(`${__dirname}/fonts/fonts/Lato/Lato-Italic.ttf`, {
   family: 'Lato Italic',
-});*/
+});
+				<PDFDownloadLink
+				  className = "button"
+					document={<MyDocument name ={this.props.name} />}
+					fileName="somename.pdf">
+					{({ blob, url, loading, error }) => (
+						loading ? 'Loading...' : 'Descargar!'
+					)}
+				</PDFDownloadLink>
+*/
 
 
 
@@ -37,34 +46,33 @@ Font.register(`${__dirname}/fonts/fonts/Lato/Lato-Italic.ttf`, {
 const MyDocument = (props) => (
 	<Document>
 		<Page size="A4" >
-			<Text style={styles.name}>Luke Skywalker</Text>
+			<Text style={styles.name}>{props.name}</Text>
 		</Page>
-
 	</Document>
 );
 
 class App extends React.Component {
 	state = { url: null };
-
 	onRender = ({ blob }) => {
 		this.setState({ url: URL.createObjectURL(blob) });
 	};
-	componentDidMount(){
+	componentDidMount() {
 		var path = require("path");
-		console.log("hey");	
+		console.log("hey");
 		console.log(`./fonts/Lato/Lato-Bold.ttf`)
 		console.log(`./fonts/fonts/Lato/Lato-Bold.ttf`)
 	}
 	render() {
 		return (
-			<div>
-				<PDFDownloadLink
-					document={<MyDocument />}
-					fileName="somename.pdf">
-					{({ blob, url, loading, error }) => (
-						loading ? 'Loading...' : 'Descargar!'
-					)}
-				</PDFDownloadLink>
+			<div className="container">
+			
+					<PDFViewer
+						className = "pdfviwer"
+						children={<MyDocument name="hey" />}
+					>
+
+					</PDFViewer>
+
 			</div>
 		);
 	}

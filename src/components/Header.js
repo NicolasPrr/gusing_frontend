@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import baseURLFront from './Urlpage'
-import { Link } from 'react-router-dom';
+import { Link , Switch, Redirect } from 'react-router-dom';
 
 class Header extends Component {
 
@@ -29,11 +29,12 @@ class Header extends Component {
                   <Link to='/colapsible/garnic' className="navbar-item">Colapsible garnic</Link>
                   <Link to='/colapsible/normal' className="navbar-item">Colapsible normal</Link>
                   <Link to='/colapsible/desflant/normal' className="navbar-item">Colapsible desflant</Link>
+                  
                 </div>
               </div>
-              <Link className="navbar-item"  to='/reports' >
+              <Link className="navbar-item"   to="/reports/" onClick={() => window.location.refresh()}   >
                 Reportes</Link>
-                <Link className="navbar-item"  to='/clients' >
+              <Link className="navbar-item" to='/clients' >
                 Gestion de clientes</Link>
             </div>
           </div>
