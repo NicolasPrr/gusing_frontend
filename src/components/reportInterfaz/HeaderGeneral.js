@@ -29,7 +29,7 @@ const Header = (props) => {
     return (
 
         <div>
-            <p> N° de reporte: {props.data.report_number} </p>
+            <p> N° de reporte: <code> {props.data.report_number} </code></p>
             <p> Cliente: {props.data.client_name}          </p>
             <p> N° de analisis: {props.data.analisys}           </p>
             <p> Nombre de la muestra: {props.data.sample_name}          </p>
@@ -55,7 +55,17 @@ const Report = (props) => {
 
         <div>
             <p> Diametro de base: {props.data.diameter_base} </p>
-            <p> Largo total {props.data.total_length}          </p>
+            <p> Largo total {props.data.total_lenght}          </p>
+            <p> Calibre de pared: {props.data.wall_gauge}           </p>
+
+        </div>
+    )
+}
+const Espec = (props) => {
+    return (
+        <div>
+            <p> Diametro de base: {props.data.diameter_base} </p>
+            <p> Largo total {props.data.total_lenght}          </p>
             <p> Calibre de pared: {props.data.wall_gauge}           </p>
 
         </div>
@@ -78,20 +88,28 @@ class HeaderGeneral extends Component {
     render() {
         const dat = this.state.data;
         let test = [];
-        if (dat !== null){
-            test.push(<Header data = {dat.report_header}/>)
-            test.push(<Report data = {dat.reportable}/>)
-
-        } 
+        if (dat !== null) {
+            test.push(<Header data={dat.report_header} />)
+            test.push(<Report data={dat.reportable} />)
+        }
         else
-            test = null; 
-        
+            test = null;
+
         return (
             <div>
-               
+
                 <div className="container">
                     {test}
                 </div>
+                <section class="section">
+                    <div class="container">
+                        <h1 class="title">Section</h1>
+                        <h2 class="subtitle">
+                            A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading
+      </h2>
+                    </div>
+                </section>
+                <button className="button is-warning">Descargar PDF </button>
             </div>
         );
     }

@@ -3,21 +3,38 @@ import Header from '../pdfsGeneration/Header'
 import HeaderGeneral from './HeaderGeneral'
 import Swal from 'sweetalert2'
 import { Redirect } from 'react-router-dom'
+import SearchBox from './SearchBox'
 
 function dateR(data) {
     var regDate = /(\d{4}-\d{2}-\d{2})[A-Z]{1,2}(\d{1,2}:\d{2}:\d{2}).*/
     var [exp, date, hour] = regDate.exec(data)
     return [date, hour]
 }
+const Test = (props) => {
+    return (
+        <div>
+            <form>
+                <div class="field">
+                    <label class="label is-small">Numero de reporte</label>
+                    <div class="control">
+                        <input class="input is-small" type="text" placeholder="# reporte" />
+                    </div>
+                </div>
+                <button className="button is-dark is-small" onClick={props.action}> Buscar</button>
+            </form>
+        </div>
+    )
+}
 class Table extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             goTo: false,
             key_r: null
         }
         this.downloadLink = this.downloadLink.bind(this);
         this.delete = this.delete.bind(this);
+        this.test = this.test.bind(this);
 
     }
     downloadLink(key) {
@@ -45,18 +62,23 @@ class Table extends Component {
     }
     renderRedirect = (id) => {
         if (this.state.goTo) {
-            return <Redirect  push to={'/reports/' + id} />
+            return <Redirect push to={'/reports/' + id} />
         }
+    }
+    test(e,data) {
+        e.preventDefault();
+   //     console.log(data)
     }
     render() {
         let info = this.props.data
         if (this.state.goTo === true)
-            return <Redirect  push to={'/reports/' + this.props.data[this.state.key_r].id} />
+            return <Redirect push to={'/reports/' + this.props.data[this.state.key_r].id} />
 
         //        return <HeaderGeneral  data = {info[this.state.key_r]} />
 
         return (
             <div className="container">
+                <SearchBox  />
                 <table className="table is-fullwidth is- ">
                     <thead>
                         <tr>
