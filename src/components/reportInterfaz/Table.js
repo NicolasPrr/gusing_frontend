@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../pdfsGeneration/Header'
 import HeaderGeneral from './HeaderGeneral'
 import Swal from 'sweetalert2'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 function dateR(data) {
     var regDate = /(\d{4}-\d{2}-\d{2})[A-Z]{1,2}(\d{1,2}:\d{2}:\d{2}).*/
@@ -35,11 +35,11 @@ class Table extends Component {
         selected[key] = hovered;
         this.setState({ selected: selected, currentRow: key })
     }
-    disableHover(key){
+    disableHover(key) {
         let selected = [...this.state.selected]
         let current = this.state.currentRow;
         selected[current] = null;
-        this.setState({selected: selected, currentRow: current})
+        this.setState({ selected: selected, currentRow: current })
 
     }
     downloadLink(key) {
@@ -107,7 +107,8 @@ class Table extends Component {
                                 <td>{info[key].sample_name}</td>
 
                                 <td>{dateR(info[key].created_at)[0]} </td>
-                                <td><button className="button is-link is-small" onClick={this.downloadLink.bind(this, key)}>Visualizar</button></td>
+                                <td><Link to={"/reports/" + info[key].id} target="_blank"    >
+                                    <button className="button is-link is-small" >Visualizar</button></Link> </td>
                                 <td><button className="button is-danger is-small" onClick={this.delete.bind(this, key)}>Eliminar</button></td>
                             </tr>
                         ))}

@@ -16,8 +16,8 @@ class Pagination extends Component {
     disableButton = (type) =>{
         if (this.props.currentPage === 1 &&  type === 0)
              return true
-             if (this.props.currentPage === this.props.pages &&  type === 1)
-                return true
+        if (this.props.currentPage === this.props.pages &&  type === 1)
+            return true
     }
     render() {
         const numberPages = this.props.pages;
@@ -26,8 +26,8 @@ class Pagination extends Component {
         return (
             <div>
                 <nav class="pagination is-rounded is-centered" role="navigation" aria-label="pagination">
-                    <a class=  "pagination-previous " disabled = {this.disableButton(0)}  >Anterior</a>
-                    <a class="pagination-next" disabled = {this.disableButton(1)}>Siguiente</a>
+                    <a class=  "pagination-previous " disabled = {this.disableButton(0)} onClick ={this.props.changePage.bind( this, this.props.currentPage - 1)}  >Anterior</a>
+                    <a class="pagination-next" disabled = {this.disableButton(1) } onClick ={this.props.changePage.bind( this, this.props.currentPage + 1)}>Siguiente</a>
                     <ul class="pagination-list">
                         {allItems}
                      </ul>

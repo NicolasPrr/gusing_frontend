@@ -13,7 +13,9 @@ class InterfaceReport extends Component {
         this.state = {
             reports: [],
             currentPage: 1,
-            amountPages: 1,
+            amountPages: 0,
+            paramsSearch: null,
+
         };
         this.deleteRequest = this.deleteRequest.bind(this);
         this.search = this.search.bind(this);
@@ -25,7 +27,28 @@ class InterfaceReport extends Component {
         nextOnePage(i) donde i es -1 o  previos or next
     */
     goToPage(page) {
-        this.setState({currentPage: page})
+        if (page >= 1 && page <= this.state.amountPages) {
+            this.setState({ currentPage: page })
+            if (this.state.paramsSearch === null) {
+                let url = URLBack + "/reports/pages/" + page;
+                axios.get(url).then(res => {
+                    console.log(res)
+                    this.setState({ reports: res.data })
+                })
+            } else {
+                let url = URLBack + "/reports/search/" + page;
+                const data = this.state.paramsSearch;
+                axios.post(url, data).then(res => {
+                    console.log(res)
+                    if (res.status === 200) {
+                        this.setState({ reports: res.data })
+                    }
+                }).catch(function (error) {
+                    console.log(error)
+                })
+            }
+        }
+        
     }
 
     deleteRequest(id, key) {
@@ -51,16 +74,31 @@ class InterfaceReport extends Component {
 
     }
     componentDidMount() {
-        let url = URLBack + "/reports"
+        let url = URLBack + "/reports/pages/1"
         axios.get(url).then(res => {
             console.log(res)
             this.setState({ reports: res.data })
         })
-        console.log(this.state.reports)
+        url = URLBack + "/reports/pages"
+        axios.get(url).then(res => {
+            console.log(res)
+            this.setState({ amountPages: res.data })
+        })
     }
 
     search(data) {
-        let url = URLBack + "/reports/search"
+        this.setState({ paramsSearch: data }) //parametros de busqueda para paginacion, si no está nulo, hara la consulta con estos parametros.
+        let url = URLBack + "/reports/search/"
+        axios.post(url, data).then(res => {
+            console.log(res)
+            if (res.status === 200) {
+                this.setState({ amountPages: res.data })
+            }
+        }).catch(function (error) {
+            console.log(error)
+        })
+
+        url = URLBack + "/reports/search/1"
         axios.post(url, data).then(res => {
             console.log(res)
             if (res.status === 200) {
@@ -74,7 +112,7 @@ class InterfaceReport extends Component {
         let renderTable = [];
         if (this.state.reports.length > 0) {
             renderTable.push(<Table data={this.state.reports} key={1} deleteRequest={this.deleteRequest} search={this.search} />)
-            renderTable.push(<Pagination pages={this.state.reports.length * 6} currentPage = {this.state.currentPage} changePage = {this.goToPage} />)
+            renderTable.push(<Pagination pages={this.state.amountPages} currentPage={this.state.currentPage} changePage={this.goToPage} />)
         }
         else
             renderTable = <h1 className="title"> No hay reportes que mostrar</h1>

@@ -42,7 +42,7 @@ class Stepper extends Component {
         const st = this.state.step
         switch (numberButton) {
             case 2:
-                if (st > 1 && st <= 2)
+                if (st > 1 && st <= 4)
                     return <button className="button is-small is-dark" onClick={this.nextStep.bind(this, -1)}>retroceder</button>
                 else
                     return null
@@ -90,6 +90,14 @@ class Stepper extends Component {
 
         }).catch(function (error) {
             console.log(error)
+            Swal({
+                position: 'top-end',
+                type: 'error',
+                title: 'No se ha podido agregar el reporte',
+                text: 'Posiblemente se ha repetido el numero de reporte!',
+                showConfirmButton: false,
+                timer: 2500
+            })
         });
 
     }
