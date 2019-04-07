@@ -3,38 +3,43 @@ import Header from '../pdfsGeneration/Header'
 import HeaderGeneral from './HeaderGeneral'
 import Swal from 'sweetalert2'
 import { Redirect } from 'react-router-dom'
-import SearchBox from './SearchBox'
 
 function dateR(data) {
     var regDate = /(\d{4}-\d{2}-\d{2})[A-Z]{1,2}(\d{1,2}:\d{2}:\d{2}).*/
     var [exp, date, hour] = regDate.exec(data)
     return [date, hour]
 }
-const Test = (props) => {
-    return (
-        <div>
-            <form>
-                <div class="field">
-                    <label class="label is-small">Numero de reporte</label>
-                    <div class="control">
-                        <input class="input is-small" type="text" placeholder="# reporte" />
-                    </div>
-                </div>
-                <button className="button is-dark is-small" onClick={props.action}> Buscar</button>
-            </form>
-        </div>
-    )
-}
 class Table extends Component {
     constructor(props) {
         super(props)
         this.state = {
             goTo: false,
-            key_r: null
+            key_r: null,
+            selected: [],
+            currentRow: null
         }
         this.downloadLink = this.downloadLink.bind(this);
         this.delete = this.delete.bind(this);
-        this.test = this.test.bind(this);
+        this.enableHover = this.enableHover.bind(this);
+        this.disableHover = this.disableHover.bind(this);
+    }
+
+    enableHover(key) {
+        let selected = [...this.state.selected]
+        let hovered = "is-selected";
+        let current = this.state.currentRow;
+
+        if (current != key && current != null) {
+            selected[current] = null;
+        }
+        selected[key] = hovered;
+        this.setState({ selected: selected, currentRow: key })
+    }
+    disableHover(key){
+        let selected = [...this.state.selected]
+        let current = this.state.currentRow;
+        selected[current] = null;
+        this.setState({selected: selected, currentRow: current})
 
     }
     downloadLink(key) {
@@ -65,9 +70,11 @@ class Table extends Component {
             return <Redirect push to={'/reports/' + id} />
         }
     }
-    test(e,data) {
-        e.preventDefault();
-   //     console.log(data)
+    componentDidMount() {
+        let size = this.props.data.length;
+        let arraySelected = [];
+        for (var i = 0; i < size; i++) arraySelected.push(null);
+        this.setState({ selected: arraySelected })
     }
     render() {
         let info = this.props.data
@@ -77,9 +84,9 @@ class Table extends Component {
         //        return <HeaderGeneral  data = {info[this.state.key_r]} />
 
         return (
-            <div className="container">
-                <SearchBox  />
-                <table className="table is-fullwidth is- ">
+            <div>
+                <p className="is-small">Numero de reportes: {info.length} </p>
+                <table className="table is-fullwidth is-bordered">
                     <thead>
                         <tr>
                             <th><abbr >N° de reporte</abbr></th>
@@ -92,10 +99,8 @@ class Table extends Component {
                         </tr>
                     </thead>
                     <tbody>
-
-
                         {Object.keys(info).map(key => (
-                            <tr key={key}>
+                            <tr key={key} className={this.state.selected[key]} onMouseEnter={this.enableHover.bind(this, key)} onMouseLeave={this.disableHover.bind(this, key)}>
                                 <td >{info[key].report_number}</td>
                                 <td>{info[key].client_name}</td>
                                 <td>{info[key].sample}</td>

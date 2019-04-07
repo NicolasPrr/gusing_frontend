@@ -11,25 +11,26 @@ class SearchBox extends Component {
 
     number_report = React.createRef();
     client = React.createRef();
-    handleCreationDate = (date) =>{
-        this.setState({creationDate: date})
+    sample = React.createRef();
+
+    handleCreationDate = (date) => {
+        this.setState({ creationDate: date })
     }
-    handle (e) {
+    handle(e) {
+        e.preventDefault();
         const data = {
-            number_report : this.number_report.current.value,
-            client_name : this.client.current.value
+            number_report: this.number_report.current.value,
+            client_name: this.client.current.value,
+            sample: this.sample.current.value
         }
-        console.log(data)
-        alert("data")
-        alert("hey")
-        //this.props.action( data)
+        this.props.search(data)
     }
     render() {
         return (
             <div>
-                <form onSubmit = {this.handle}>
+                <form onSubmit={this.handle}>
                     <div className="columns">
-                        <div className="column is-one-fifth">
+                        <div className="column is-one-quarter">
                             <label className="label is-small">Numero de reporte</label>
                             <div className="field">
                                 <div className="control">
@@ -50,39 +51,29 @@ class SearchBox extends Component {
                                 <label className="label is-small">Muestra</label>
                                 <div className="control">
                                     <div className="select is-small">
-                                        <select disabled>
-                                            <option>Selecciona muestra</option>
-                                            <option>Colapsible </option>
-                                            <option>Envases de vidrio </option>
-                                            <option>Envases plasticos </option>
-                                            <option>Tapas </option>
-                                            <option>Gotero y dosificadores </option>
-                                            <option>Linners </option>
-                                            <option>Tapon y agrafe </option>
-                                            <option>Otro </option>
-
+                                        <select ref ={this.sample}>
+                                            <option value="">Selecciona muestra</option>
+                                            <option value="colapsible">Colapsible </option>
+                                            <option value="envases de vidrio" >Envases de vidrio </option>
+                                            <option value="envases de plasticos">Envases plasticos </option>
+                                            <option value="tapas">Tapas </option>
+                                            <option value="goteros">Goteros </option>
+                                            <option value="dosificadores">Dosificadores </option>
+                                            <option value="linners">Linners </option>
+                                            <option value="tapon">Tapon y agrafe </option>
+                                            <option value="otro">Otro </option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="column is-one-quarter">
-                            <div className="field">
-                                <label className="label is-small">Fecha de creacion del informe</label>
-                                <div className="control">
-                                    <DatePicker disabled
-                                        className="input is-small"
-                                        selected={this.state.creationDate}
-                                        onChange={this.handleCreationDate}
-                                        dateFormat="dd-MMM-yy"
-                                    />
-                                </div>
-                            </div>
+                        <div className="column">
+                            <label className="label is-small has-text-centered">Click para buscar</label>
+
+                            <button type="submit" className="button is-fullwidth is-link is-rounded is-small" onClick={this.props.action}> Buscar</button>
+                            
                         </div>
-
-
                     </div>
-                    <button type ="submit" className="button is-dark is-small" onClick={this.props.action}> Buscar</button>
                 </form>
             </div>
 
