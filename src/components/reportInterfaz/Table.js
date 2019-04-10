@@ -26,7 +26,7 @@ class Table extends Component {
 
     enableHover(key) {
         let selected = [...this.state.selected]
-        let hovered = "is-selected";
+        let hovered = "is-selected is-warning";
         let current = this.state.currentRow;
 
         if (current != key && current != null) {
@@ -65,11 +65,6 @@ class Table extends Component {
         })
 
     }
-    renderRedirect = (id) => {
-        if (this.state.goTo) {
-            return <Redirect push to={'/reports/' + id} />
-        }
-    }
     componentDidMount() {
         let size = this.props.data.length;
         let arraySelected = [];
@@ -78,11 +73,6 @@ class Table extends Component {
     }
     render() {
         let info = this.props.data
-        if (this.state.goTo === true)
-            return <Redirect push to={'/reports/' + this.props.data[this.state.key_r].id} />
-
-        //        return <HeaderGeneral  data = {info[this.state.key_r]} />
-
         return (
             <div>
                 <p className="is-small">Numero de reportes: {info.length} </p>
@@ -107,7 +97,7 @@ class Table extends Component {
                                 <td>{info[key].sample_name}</td>
 
                                 <td>{dateR(info[key].created_at)[0]} </td>
-                                <td><Link to={"/reports/" + info[key].id} target="_blank"    >
+                                <td><Link to={"/print/" + info[key].id} target="_blank"    >
                                     <button className="button is-link is-small" >Visualizar</button></Link> </td>
                                 <td><button className="button is-danger is-small" onClick={this.delete.bind(this, key)}>Eliminar</button></td>
                             </tr>

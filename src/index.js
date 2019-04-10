@@ -17,7 +17,7 @@ const routing = (
       <Header />
       <Route exact path="/" component={Loadersn} />
       <Route path="/colapsible/garnic" component={Garnic} />
-      <Route exact path="/reports/:reportId" component={HeaderGeneral} />
+      <Route exact strict path="/print/:reportId" component={HeaderGeneral} />
       <Route path="/reports/" component={InterfaceReport} />
       <Route path="/clients" component={Clients} />
     </div>

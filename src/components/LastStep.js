@@ -9,9 +9,7 @@ class LastStep extends Component {
     handle = (e) => {
         e.preventDefault();
         const data = {
-            observations: this.observations.current.value,
-            producer: this.producer.current.value,
-            checker: this.checker.current.value
+            observation: this.observations.current.value,
         }
         this.props.action(data , 1)
        
@@ -19,9 +17,7 @@ class LastStep extends Component {
     handleBack = (e) => {
         e.preventDefault();
         const data = {
-            observations: this.observations.current.value,
-            producer: this.producer.current.value,
-            checker: this.checker.current.value
+            observation: this.observations.current.value,
         }
         this.props.action(data , -1)
        
@@ -34,30 +30,7 @@ class LastStep extends Component {
                     <div className="field">
                         Observaciones
                         <div className="control">
-                            <textarea className="textarea is-primary is-small" placeholder="Observaciones" defaultValue={this.props.data.observations} ref = {this.observations} ></textarea>
-                        </div>
-                    </div>
-                    <div className="columns">
-                        <div className="column">
-                
-                            <div className="field">
-                                <label className="label is-small">Realizado por</label>
-                                <div className="control">
-                                    <input className="input is-small" type="text" placeholder="Realizador" defaultValue={this.props.data.producer} ref = {this.producer} />
-                                </div>
-                                <p className="help">Coordinador de control de calidad</p>
-                            </div>
-
-                        </div>
-                        <div className="column">
-                            <div className="field">
-                                <label className="label is-small">Verificado por</label>
-                                <div className="control">
-                                    <input className="input is-small" type="text" placeholder="Verificador" defaultValue={this.props.data.checker}  ref = {this.checker }/>
-                                </div>
-                                <p className="help">Jefe de control de calidad</p>
-                            </div>
-                          
+                            <textarea className="textarea is-primary is-small" placeholder="Observaciones" defaultValue={this.props.data.observation} ref = {this.observations} ></textarea>
                         </div>
                     </div>
                     <button className="button is-success is-small" type="submit"> Finalizar </button>

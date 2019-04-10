@@ -73,8 +73,10 @@ class Stepper extends Component {
         }
     }
     createReport(data) {
-
-        let url = URLBack + "/report_garnics"
+        let url = URLBack + "/report_garnics";
+        let report = this.state.dataReport;
+        report.observation = data.observation;
+        this.setState({dataReport: report}) 
         axios.post(url, { report_garnic: this.state.dataProduct, id_asociation: this.props.obj.id , report: this.state.dataReport}).then(res => {
             if (res.status === 201) {
                 console.log(res.data)
