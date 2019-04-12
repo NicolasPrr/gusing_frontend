@@ -6,7 +6,7 @@ function ItemPage(props) {
     return (
         <div>
             <li>
-                <a class={"pagination-link " + select }  onClick = {props.action.bind(this, props.page)} >{props.page}</a>
+                <a className={"pagination-link " + select }  onClick = {props.action.bind(this, props.page)} >{props.page}</a>
             </li>
         </div>
     )
@@ -25,10 +25,10 @@ class Pagination extends Component {
         for(var i = 0; i < numberPages; i++) allItems.push(<ItemPage page = { i +1 } nowPage = {this.props.currentPage} action = {this.props.changePage}/>)
         return (
             <div>
-                <nav class="pagination is-rounded is-centered" role="navigation" aria-label="pagination">
-                    <a class=  "pagination-previous " disabled = {this.disableButton(0)} onClick ={this.props.changePage.bind( this, this.props.currentPage - 1)}  >Anterior</a>
-                    <a class="pagination-next" disabled = {this.disableButton(1) } onClick ={this.props.changePage.bind( this, this.props.currentPage + 1)}>Siguiente</a>
-                    <ul class="pagination-list">
+                <nav className="pagination is-rounded is-centered" role="navigation" aria-label="pagination">
+                    <a className=  "pagination-previous " disabled = {this.disableButton(0)} onClick ={this.props.changePage.bind( this, this.props.currentPage - 1)}  >Anterior</a>
+                    <a className="pagination-next" disabled = {this.disableButton(1) } onClick ={this.props.changePage.bind( this, this.props.currentPage + 1)}>Siguiente</a>
+                    <ul className="pagination-list">
                         {allItems}
                      </ul>
                 </nav>

@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import axios from 'axios'
+import './textbackground.css'
 import URLBack from '../../UrlBack'
 /* 
 
@@ -79,16 +80,37 @@ const Header = (props) => {
         </div>
     )
 }
-const Observation =  (props) => {
+const Observation = (props) => {
     return (
-        <div>
-            <p className =" is-5"> <strong>Observaciones: </strong> </p>
+        <div className="box">
+            <p className=" is-5"> <strong>Observaciones: </strong> </p>
             <p> {props.data}</p>
         </div>
-
     )
 }
+const Signature = (props) => {
+    return (
+        <div id="signature">
 
+            <div className="columns"    >
+                <div className="column">
+                    <p>Realizado por:</p>
+                    <br />
+                    <hr />
+                    Coordinador control de calidad
+            </div>
+
+                <div className="column">
+                    <p>Verificado por: </p>
+                    <br />
+                    <hr />
+                    Jefe de control de calidad
+            </div>
+
+            </div>
+        </div>
+    )
+}
 const Report = (props) => {
     /*
     <h2 class="subtitle">
@@ -109,8 +131,8 @@ const Report = (props) => {
 
     return (
 
-        <div className="box">
-            
+        <div className="box" id="content">
+
             <table className="table is-fullwidth is-bordered">
                 <thead>
                     <tr>
@@ -141,7 +163,7 @@ const Report = (props) => {
                         <td>{min_wall_gauge}</td>
                         <td>{max_wall_gauge}</td>
                     </tr>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -186,8 +208,7 @@ class HeaderGeneral extends Component {
             test.push(
                 <Report data={dat.reportable} data1={dat.especificable} />
             )
-            test.push(<Observation data = {dat.report_header.observation}/>)
-
+            test.push(<Observation data={dat.report_header.observation} />)
         }
         else
             test = null;
@@ -197,7 +218,10 @@ class HeaderGeneral extends Component {
                 <div>
                     {test}
                 </div>
-                <button className="button is-warning" onClick={this.testDate}>Descargar PDF </button>
+                <div id="background">
+                    <p id="bg-text">COPIA CONTROLADA</p>
+                </div>
+                <Signature />
             </div>
         );
     }
