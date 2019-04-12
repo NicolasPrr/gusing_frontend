@@ -88,17 +88,31 @@ const Observation = (props) => {
         </div>
     )
 }
-const Signature = (props) => {
+const Note = () => {
+
+    return (
+        <div id = "note"> 
+            <p className ="is-size-7 has-text-centered">
+                
+            Nota: Solo se puede hacer producción parcial
+            o total de este certificado con previa autorización de Laboratorios Gusing.
+            El resultado es valido únicamente para la muestra analizada. MA= Material de analisis,
+            FQ = Fisicoquimico, NA = No aplica.
+
+            </p>
+        </div>
+    )
+}
+const Signature = () => {
     return (
         <div id="signature">
-
             <div className="columns"    >
                 <div className="column">
                     <p>Realizado por:</p>
                     <br />
                     <hr />
                     Coordinador control de calidad
-            </div>
+                </div>
 
                 <div className="column">
                     <p>Verificado por: </p>
@@ -222,6 +236,7 @@ class HeaderGeneral extends Component {
                     <p id="bg-text">COPIA CONTROLADA</p>
                 </div>
                 <Signature />
+                <Note />
             </div>
         );
     }

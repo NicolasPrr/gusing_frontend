@@ -33,3 +33,9 @@ hr {
     border-style: inset;
     border-width: 1px;
 }
+
+
+#note {
+    position: relative;
+    top: 90px;
+}
