@@ -107,6 +107,8 @@ const Header = (props) => {
                     <p> <strong>Tipo de muestreo: </strong> {sampling_type}          </p>
                     <p> <strong>Forma farmaceutica:</strong> {farmaceutic_shape}          </p>
                     <p> <strong>Metodo de analisis:</strong> {method}          </p>
+                    <p> <strong>Fecha de recepción:</strong> {date_reception}          </p>
+                    
 
                 </div>
                 <div className="column  has-text-justified is-size-7">
@@ -114,6 +116,8 @@ const Header = (props) => {
                     <p> <strong> Fecha de vencimiento:</strong> {fv}          </p>
                     <p> <strong>Fecha de muestreo: </strong> {date_sampling}          </p>
                     <p> <strong>Fecha de analisis: </strong> {date_analisis}          </p>
+                    <p> <strong>Fecha de informe:</strong> {date_report}          </p>
+             
 
 
 
@@ -239,16 +243,13 @@ const Report = (props) => {
                         <td>{max_wall_gauge}</td>
                     </tr>
 
-                  
-
-
                 </tbody>
             </table>
         </div>
     )
 }
 function formateDate(dateInput) {
-    const months = ["Ene", "Feb", "Mar", "Abr", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+    const months = ["Ene", "Feb", "Mar", "Abr","May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
     var Regexp = /(\d{4})-(\d{2})-(\d{2})/
     let [inp, year, month, day] = Regexp.exec(dateInput)
     month = months[parseInt(month) - 1];
@@ -277,7 +278,7 @@ class HeaderGeneral extends Component {
             this.setState({ data: res.data })
         })
         console.log(this.state.data)
-        alert("Para imprimer, por favor presionar las teclas ctrl + p")
+        alert("Para imprimir, por favor presionar las teclas Ctrl + P")
     }
     render() {
         const dat = this.state.data;
@@ -293,33 +294,33 @@ class HeaderGeneral extends Component {
             test = null;
 
         return (
-            <div>
-            <div className="container">
-                <div className="columns is-gapless">
-                    <div className="column is-2">
-                        <span className="image is-96x96">
-                            <img src="/resources/LogoGusing.png" />
-                        </span>
+                <div className="container">
+                    <div className="columns is-gapless">
+                        <div className="column is-3 box">
+                            <span className="image">
+                                <br/>
+                                <img src="/resources/LogoGusing.png" />
+                            </span>
+                        </div>
+                        <div className="column">
+                            <Encabezado1 />
+                            <Encabezado2 />
+                            <Encabezado3 />
+                        </div>
                     </div>
-                    <div className="column">
-                        <Encabezado1 />
-                        <Encabezado2 />
-                        <Encabezado3 />
+
+                    <div>
+                        {test}
                     </div>
+                    <div id="background">
+                        <p id="bg-text">COPIA CONTROLADA</p>
+                    </div>
+                    <Signature />
+                    <Note />
+                    <Footer />
+           
                 </div>
-
-                <div>
-                    {test}
-                </div>
-                <div id="background">
-                    <p id="bg-text">COPIA CONTROLADA</p>
-                </div>
-                <Signature />
-                <Note />
-
-            </div>
-                            <Footer/>
-                            </div>
+           
         );
     }
 }

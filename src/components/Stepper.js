@@ -6,7 +6,6 @@ import axios from 'axios'
 import URLBack from '../UrlBack'
 import Swal from 'sweetalert2'
 
-
 class Stepper extends Component {
     constructor(props) {
         super(props)
@@ -14,7 +13,8 @@ class Stepper extends Component {
             step: 1,
             dataReport: {},
             dataProduct: {},
-            dataVef: {}
+            dataVef: {},
+            mode: null,
         }
         this.nextStep = this.nextStep.bind(this)
         this.headerForm = this.headerForm.bind(this)
@@ -55,7 +55,6 @@ class Stepper extends Component {
         switch (arg) {
             case "garnic":
                 return <ReportGarnic obj={this.props.obj} productAction={this.productForm} data={this.state.dataProduct} />
-
             default:
                 return null
         }
@@ -65,7 +64,7 @@ class Stepper extends Component {
             case 1:
                 return <Report obj={this.props.obj} sample={this.props.sample} reportAction={this.headerForm} data={this.state.dataReport} />
             case 2:
-                return this.choseForm(this.props.mode)
+                return this.choseForm(this.state.mode)
             case 3:
                 return <LastStep data={this.state.dataVef} action={this.verfForm} />
             default:
@@ -76,8 +75,8 @@ class Stepper extends Component {
         let url = URLBack + "/report_garnics";
         let report = this.state.dataReport;
         report.observation = data.observation;
-        this.setState({dataReport: report}) 
-        axios.post(url, { report_garnic: this.state.dataProduct, id_asociation: this.props.obj.id , report: this.state.dataReport}).then(res => {
+        this.setState({ dataReport: report })
+        axios.post(url, { report_garnic: this.state.dataProduct, id_asociation: this.props.obj.id, report: this.state.dataReport }).then(res => {
             if (res.status === 201) {
                 console.log(res.data)
                 Swal({
@@ -117,6 +116,20 @@ class Stepper extends Component {
         this.nextStep(step)
 
         if (step === 1) this.createReport(data)
+    }
+    componentDidMount() {
+        let report_header;
+        if (this.props.match !== undefined) {
+            const { reportId } = this.props.match.params;
+            let url = URLBack + "/reports/" + reportId;
+            axios.get(url).then(res => {
+                console.log(res)
+                report_header = res.data.report_header;
+                this.setState({ dataReport: report_header, dataProduct: res.data.reportable, dataVef: res.data.report_header.observation })
+            })
+            console.log(this.state.data)
+        }
+        if(this.props.mode !== undefined) this.setState({mode: this.props.mode})
     }
     render() {
         return (

@@ -10,6 +10,7 @@ import Garnic from './components/colapsibles/Garnic'
 import InterfaceReport from './components/reportInterfaz/InterfaceReport'
 import Clients from './components/clients/Clients'
 import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
+import Stepper from './components/Stepper'
 
 const routing = (
   <Router>
@@ -18,6 +19,8 @@ const routing = (
       <Header/>
       <Route exact path="/" component={Loadersn} />
       <Route path="/colapsible/garnic" component={Garnic} />
+      <Route path="/clone/report/:reportId" component={Stepper} />
+      
       <Route exact strict path="/print/:reportId" component={HeaderGeneral} />
       <Route path="/reports/" component={InterfaceReport} />
       <Route path="/clients" component={Clients} />

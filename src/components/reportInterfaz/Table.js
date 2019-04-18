@@ -97,26 +97,38 @@ class Table extends Component {
                                 <td className="has-text-centered">{info[key].sample}</td>
                                 <td className="has-text-centered">{info[key].sample_name}</td>
                                 <td className="has-text-centered">
-                                    <Link to={"/print/" + info[key].id} target="_blank"  >
-                                    <span class="icon has-text-info is-small">
-                                        <i class="fas fa-lg fa-print "></i>
-                                    </span>
-                                </Link>
+                                    <a>
+                                        <Link to={"/print/" + info[key].id} target="_blank"  >
+                                            <span class="icon is-small has-text-success ">
+                                                <i class="fas fa-lg fa-print   "></i>
+                                            </span>
+                                        </Link>
+                                    </a>
                                 </td>
                                 <td className="has-text-centered">
-                                    <span class="icon has-text-success is-small">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
+                                    <a>
+                                        <span class="icon is-small">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                    </a>
                                 </td>
-                                <td  className="has-text-centered">
-                                    <span class="icon has-text-link is-small">
-                                        <i class="fas fa-clone"></i>
-                                    </span>
+                                <td className="has-text-centered">
+                                    <a>
+                                        <Link to={"/clone/report/" + info[key].id} target="_blank"  >
+                                            <span class="icon  is-small has-text-primary">
+                                                <i class="fas fa-clone"></i>
+                                            </span>
+                                        </Link>
+                                    </a>
+
                                 </td>
-                                <td  className="has-text-centered">
-                                    <span class="icon has-text-danger is-small" onClick={this.delete.bind(this, key)}>
-                                        <i class="fas fa-trash-alt"></i>
-                                    </span>
+                                <td className="has-text-centered">
+                                    <a>
+                                        <span class="icon has-text-danger is-small" onClick={this.delete.bind(this, key)}>
+                                            <i class="fas fa-trash-alt"></i>
+                                        </span>
+
+                                    </a>
                                 </td>
 
                             </tr>

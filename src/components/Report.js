@@ -113,17 +113,24 @@ class Report extends Component {
     this.props.reportAction(data)
   }
   componentDidMount(){
-    const data = this.props.data
-    if(data != null){
-      this.setState(
-        {reportDate: data.date_report ,
-        samplingDate: data.date_sampling,
-        analisysDate: data.date_analisis,
-        receptionDate: data.date_reception,
-        expirationDate: data.fv,
-        manufactoringDate: data.ff
-      })
-    }
+    setTimeout(() => {
+      const data = this.props.data
+      if(data != null){
+        this.setState(
+          {reportDate: data.date_report ,
+          samplingDate: data.date_sampling,
+          analisysDate: data.date_analisis,
+          receptionDate: data.date_reception,
+          expirationDate: data.fv,
+          manufactoringDate: data.ff
+        })
+        console.log("hasd")
+        console.log(data)
+      }
+      
+      
+    }, 1500);
+    
     let url = URLBack + "/clients";
     axios.get(url).then(res => {
         if (res.status === 200) {
@@ -138,15 +145,19 @@ class Report extends Component {
   render() {
     let samples;
     let samples_name;
-    if(this.props.data.sample === undefined)
+    if(this.props.obj !== undefined){
       samples = this.props.sample
-    else 
-      samples = this.props.data.sample 
+      samples_name = this.props.obj.name
+    }
+    else{
+      samples_name = this.props.data.sample_name
+      samples = this.props.data.sample
+    }
     
-    if(this.props.data.sample_name === undefined)
+   /* if(this.props.data.sample_name === undefined)
       samples_name = this.props.obj.name
     else 
-      samples_name = this.props.data.sample_name 
+      samples_name = this.props.data.sample_name */
     return (
       <div >
         <form onSubmit={this.handleForm}  >
