@@ -5,6 +5,7 @@ import { Link , Switch, Redirect } from 'react-router-dom';
 class Header extends Component {
 
   render() {
+    if (window.location.pathname.includes("print")) return null;
     return (
       <div>
         <nav className="navbar is-light">

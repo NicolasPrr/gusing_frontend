@@ -6,13 +6,12 @@
     min-height:50%; 
     min-width:50%;
     color:yellow;
-    top: 70%;   
+    top: 55%;   
 }
 
 #content{
     z-index:1;
     position: relative;
-    
 }
 
 #bg-text
@@ -25,7 +24,8 @@
 }
 #signature {
     position: relative;
-    top: 50px;
+    top: 35px;
+    padding-bottom: 40px;
 }
 hr {
     width: 55%; 
@@ -34,8 +34,19 @@ hr {
     border-width: 1px;
 }
 
-
 #note {
-    position: relative;
-    top: 90px;
+    position: absolute;
+    font-size: 0.60em;
+    width: 100%;
+    top: 900px;
+    
+}
+#footer {
+    position: absolute;
+    width: 100%;
+    font-size: 0.70em;
+    top: 940px;
+}
+.container{
+    height: 50%;
 }

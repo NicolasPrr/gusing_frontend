@@ -25,6 +25,48 @@ import URLBack from '../../UrlBack'
 
 
 */
+const Encabezado1 = (props) => {
+    return (
+        <div>
+            <table className="table is-fullwidth is-bordered is-size-7">
+                <thead>
+                    <tr>
+                        <td className=" is-title has-text-centered">Control de calidad</td >
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    );
+}
+const Encabezado2 = (props) => {
+    return (
+        <div>
+            <table className="table is-fullwidth is-bordered is-size-7">
+                <thead>
+                    <tr>
+                        <td className="  has-text-centered">TITULO REPORTE ENSAYO  PT-PP</td >
+                        <td className="  has-text-centered">Codigo FR-CC -51</td >
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    );
+}
+const Encabezado3 = (props) => {
+    return (
+        <div>
+            <table className="table is-fullwidth is-bordered is-size-7">
+                <thead>
+                    <tr>
+                        <td className=" has-text-centered " >Version 04</td >
+                        <td className=" has-text-centered">VIGENCIA DESDE EL 28 DE DICIEMBRE DEL 2018</td >
+                        <td className=" has-text-centered">Pagina 1 de 1</td >
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    );
+}
 const Header = (props) => {
     const report_number = props.data.report_number;
     const client_name = props.data.client_name;
@@ -43,47 +85,49 @@ const Header = (props) => {
     const fv = formateDate(props.data.fv);
     const method = props.data.method;
     return (
-        <div>
-            <div >
+        <div className="box is-zise-7">
 
-                <div className="columns">
-                    <div className="column has-text-left">
-                        <p>  <strong>N° de reporte FQ: </strong> {report_number} </p>
-                    </div>
+            <div className="columns">
+                <div className="column has-text-left is-size-7 ">
+                    <p><strong>N° de reporte FQ: </strong> {report_number} </p>
                 </div>
-                <div className="columns">
-                    <div className="column  has-text-justified">
-                        <p> <strong>Cliente: </strong> {client_name}</p>
-                        <p> <strong>Fecha de muestreo: </strong> {date_sampling}          </p>
-                        <p> <strong>Fecha de analisis: </strong> {date_analisis}          </p>
-                        <p> <strong>Muestra:</strong> {sample}          </p>
-                        <p> <strong>Nombre de la muestra:</strong> {sample_name}          </p>
-                        <p> <strong>N° de analisis: </strong> {analisys} </p>
-                        <p> <strong> Lote de proveedor: </strong>  {lot}          </p>
-                        <p> <strong>Metodo de analisis:</strong> {method}          </p>
+            </div>
+            <div className="columns">
+                <div className="column  has-text-justified is-size-7">
+                    <p> <strong>Cliente: </strong> {client_name}</p>
+                    <p> <strong>Muestra:</strong> {sample}          </p>
+                    <p> <strong>Nombre de la muestra:</strong> {sample_name}          </p>
+                    <p> <strong>N° de analisis: </strong> {analisys} </p>
+                    <p> <strong> Lote de proveedor: </strong>  {lot}          </p>
 
 
-                    </div>
-                    <div className="column has-text-justified">
-                        <p> <strong>Dirección:</strong> {direction} </p>
-                        <p> <strong>Fecha de recepcion:</strong>  {date_reception}             </p>
-                        <p> <strong>Fecha de informe: </strong> {date_report}          </p>
-                        <p> <strong>Tipo de muestreo: </strong> {sampling_type}          </p>
-                        <p> <strong>Forma farmaceutica:</strong> {farmaceutic_shape}          </p>
-                        <p> <strong>Fecha de fabricacion: </strong> {ff}          </p>
-                        <p> <strong> Fecha de vencimiento:</strong> {fv}          </p>
+                </div>
+                <div className="column has-text-justified is-size-7">
+                    <p> <strong>Dirección:</strong> {direction} </p>
+                    <p> <strong>Tipo de muestreo: </strong> {sampling_type}          </p>
+                    <p> <strong>Forma farmaceutica:</strong> {farmaceutic_shape}          </p>
+                    <p> <strong>Metodo de analisis:</strong> {method}          </p>
 
-                    </div>
+                </div>
+                <div className="column  has-text-justified is-size-7">
+                    <p> <strong>Fecha de fabricacion: </strong> {ff}          </p>
+                    <p> <strong> Fecha de vencimiento:</strong> {fv}          </p>
+                    <p> <strong>Fecha de muestreo: </strong> {date_sampling}          </p>
+                    <p> <strong>Fecha de analisis: </strong> {date_analisis}          </p>
+
+
+
                 </div>
 
             </div>
+
         </div>
     )
 }
 const Observation = (props) => {
     return (
-        <div className="box">
-            <p className=" is-5"> <strong>Observaciones: </strong> </p>
+        <div className="box is-size-7">
+            <p> <strong>Observaciones: </strong> </p>
             <p> {props.data}</p>
         </div>
     )
@@ -91,14 +135,31 @@ const Observation = (props) => {
 const Note = () => {
 
     return (
-        <div id = "note"> 
-            <p className ="is-size-7 has-text-centered">
-                
-            Nota: Solo se puede hacer producción parcial
-            o total de este certificado con previa autorización de Laboratorios Gusing.
-            El resultado es valido únicamente para la muestra analizada. MA= Material de analisis,
-            FQ = Fisicoquimico, NA = No aplica.
+        <div id="note" className="columns">
+            <div className="column">
+                <p className=" has-text-centered">
 
+                    Nota: Solo se puede hacer producción parcial
+                    o total de este certificado con previa autorización de Laboratorios Gusing.
+                    El resultado es valido únicamente para la muestra analizada. MA= Material de analisis,
+                    FQ = Fisicoquimico, NA = No aplica.
+
+                </p>
+
+
+            </div>
+        </div>
+    )
+}
+
+
+const Footer = () => {
+    return (
+        <div id="footer">
+            <p className=" has-text-centered">
+
+                Laboratorios Gusing 100% Productos Naturales y Homeopaticos <br />
+                Carrera 10 Este N°30-03 San Mateo-Soacha PBX 761-75-96<br /> www.laboratoriosgusing.com
             </p>
         </div>
     )
@@ -145,9 +206,9 @@ const Report = (props) => {
 
     return (
 
-        <div className="box" id="content">
+        <div id="content">
 
-            <table className="table is-fullwidth is-bordered">
+            <table className="table is-fullwidth is-bordered is-size-7">
                 <thead>
                     <tr>
                         <th> Nombre del parametro   </th>
@@ -177,6 +238,9 @@ const Report = (props) => {
                         <td>{min_wall_gauge}</td>
                         <td>{max_wall_gauge}</td>
                     </tr>
+
+                  
+
 
                 </tbody>
             </table>
@@ -213,6 +277,7 @@ class HeaderGeneral extends Component {
             this.setState({ data: res.data })
         })
         console.log(this.state.data)
+        alert("Para imprimer, por favor presionar las teclas ctrl + p")
     }
     render() {
         const dat = this.state.data;
@@ -228,7 +293,21 @@ class HeaderGeneral extends Component {
             test = null;
 
         return (
+            <div>
             <div className="container">
+                <div className="columns is-gapless">
+                    <div className="column is-2">
+                        <span className="image is-96x96">
+                            <img src="/resources/LogoGusing.png" />
+                        </span>
+                    </div>
+                    <div className="column">
+                        <Encabezado1 />
+                        <Encabezado2 />
+                        <Encabezado3 />
+                    </div>
+                </div>
+
                 <div>
                     {test}
                 </div>
@@ -237,7 +316,10 @@ class HeaderGeneral extends Component {
                 </div>
                 <Signature />
                 <Note />
+
             </div>
+                            <Footer/>
+                            </div>
         );
     }
 }

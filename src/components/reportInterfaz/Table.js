@@ -76,30 +76,49 @@ class Table extends Component {
         return (
             <div>
                 <p className="is-small">Numero de reportes: {info.length} </p>
-                <table className="table is-fullwidth is-bordered">
+                <table className="table is-fullwidth is-bordered is-size-7 ">
                     <thead>
                         <tr>
                             <th><abbr >N° de reporte</abbr></th>
                             <th>Cliente</th>
                             <th>Muestra</th>
-                            <th>Nombre de la muestra</th>
-                            <th>Fecha de creación</th>
-                            <th>Visualizar</th>
-                            <th>Borrar</th>
+                            <th>Nombre  muestra</th>
+                            <th>Imprimir</th>
+                            <th>Editar</th>
+                            <th>Clonar</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
                         {Object.keys(info).map(key => (
                             <tr key={key} className={this.state.selected[key]} onMouseEnter={this.enableHover.bind(this, key)} onMouseLeave={this.disableHover.bind(this, key)}>
-                                <td >{info[key].report_number}</td>
-                                <td>{info[key].client_name}</td>
-                                <td>{info[key].sample}</td>
-                                <td>{info[key].sample_name}</td>
+                                <td>{info[key].report_number}</td>
+                                <td className="has-text-centered">{info[key].client_name}</td>
+                                <td className="has-text-centered">{info[key].sample}</td>
+                                <td className="has-text-centered">{info[key].sample_name}</td>
+                                <td className="has-text-centered">
+                                    <Link to={"/print/" + info[key].id} target="_blank"  >
+                                    <span class="icon has-text-info is-small">
+                                        <i class="fas fa-lg fa-print "></i>
+                                    </span>
+                                </Link>
+                                </td>
+                                <td className="has-text-centered">
+                                    <span class="icon has-text-success is-small">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                </td>
+                                <td  className="has-text-centered">
+                                    <span class="icon has-text-link is-small">
+                                        <i class="fas fa-clone"></i>
+                                    </span>
+                                </td>
+                                <td  className="has-text-centered">
+                                    <span class="icon has-text-danger is-small" onClick={this.delete.bind(this, key)}>
+                                        <i class="fas fa-trash-alt"></i>
+                                    </span>
+                                </td>
 
-                                <td>{dateR(info[key].created_at)[0]} </td>
-                                <td><Link to={"/print/" + info[key].id} target="_blank"    >
-                                    <button className="button is-link is-small" >Visualizar</button></Link> </td>
-                                <td><button className="button is-danger is-small" onClick={this.delete.bind(this, key)}>Eliminar</button></td>
                             </tr>
                         ))}
 

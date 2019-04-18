@@ -10,11 +10,12 @@ import Garnic from './components/colapsibles/Garnic'
 import InterfaceReport from './components/reportInterfaz/InterfaceReport'
 import Clients from './components/clients/Clients'
 import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
+
 const routing = (
   <Router>
     <div>
 
-      <Header />
+      <Header/>
       <Route exact path="/" component={Loadersn} />
       <Route path="/colapsible/garnic" component={Garnic} />
       <Route exact strict path="/print/:reportId" component={HeaderGeneral} />
