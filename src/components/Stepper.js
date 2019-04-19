@@ -5,15 +5,26 @@ import LastStep from './LastStep'
 import axios from 'axios'
 import URLBack from '../UrlBack'
 import Swal from 'sweetalert2'
-
+function selectUrlRequest(type){
+    let url, requiereDatabase;
+    switch(type){
+        //"[url, requiereDatabase]"
+        case "ReportGarnic":
+            return  ["/report_garnics" , "report_garnic"]
+        default:
+            return null;
+    }
+        
+}
 class Stepper extends Component {
     constructor(props) {
         super(props)
         this.state = {
             step: 1,
-            dataReport: {},
-            dataProduct: {},
-            dataVef: {},
+            dataReport: {}, //Datos del reporte, como numero de reporte, es el encabezado
+            dataProduct: {}, //Datos del producto, es el resultado de las mediciones
+            dataVef: {}, //Observaciones
+            dataEspec: {}, // Datos de especificaciones
             mode: null,
         }
         this.nextStep = this.nextStep.bind(this)
@@ -25,6 +36,7 @@ class Stepper extends Component {
     }
 
     stateStep(step) {
+        //Activa el paso actual.
         if (step === this.state.step)
             return " is-active is-warning"
         if (step < this.state.step)
@@ -33,12 +45,15 @@ class Stepper extends Component {
             return ""
     }
     nextStep(option) {
+        //Cambia de paso
         if (this.state.step >= 0 && this.state.step <= 4) {
             const st = this.state.step + option
             this.setState({ step: st })
         }
+
     }
     renderButtons(numberButton) {
+        //Retorna los botones de retroceder
         const st = this.state.step
         switch (numberButton) {
             case 2:
@@ -53,13 +68,19 @@ class Stepper extends Component {
     }
     choseForm(arg) {
         switch (arg) {
-            case "garnic":
-                return <ReportGarnic obj={this.props.obj} productAction={this.productForm} data={this.state.dataProduct} />
+            case "ReportGarnic":
+            //obj infomracion de las especificaciones del producto más el nombre de la muestra
+            //productAction  accion del producto, maneja el stepper
+            //data, infromacion del resultado del producto
+                return <ReportGarnic obj={this.state.dataEspec} productAction={this.productForm} data={this.state.dataProduct} />
             default:
                 return null
         }
     }
     renderForm(step) {
+        //Selecciona que reenderizar por paso...
+        //mode es el tipo de producto, se renderiza un formulario para cada tipo.
+        //3 es observaciones
         switch (step) {
             case 1:
                 return <Report obj={this.props.obj} sample={this.props.sample} reportAction={this.headerForm} data={this.state.dataReport} />
@@ -72,11 +93,17 @@ class Stepper extends Component {
         }
     }
     createReport(data) {
-        let url = URLBack + "/report_garnics";
+        const [url_complement, requiere ] = selectUrlRequest(this.state.mode)
+        let url = URLBack + url_complement;
+        selectUrlRequest(this.state.mode)
         let report = this.state.dataReport;
         report.observation = data.observation;
         this.setState({ dataReport: report })
-        axios.post(url, { report_garnic: this.state.dataProduct, id_asociation: this.props.obj.id, report: this.state.dataReport }).then(res => {
+
+        axios.post(url, { report_garnic: this.state.dataProduct,
+             id_asociation: this.state.dataEspec.id, 
+             report: this.state.dataReport
+         }).then(res => {
             if (res.status === 201) {
                 console.log(res.data)
                 Swal({
@@ -86,9 +113,7 @@ class Stepper extends Component {
                     showConfirmButton: false,
                     timer: 1500
                 })
-
             }
-
         }).catch(function (error) {
             console.log(error)
             Swal({
@@ -119,17 +144,31 @@ class Stepper extends Component {
     }
     componentDidMount() {
         let report_header;
+        //Cargamos los datos desde la peticion buscando el match
+        //Si se hace una solicitud de edición o clonar se accede al if
         if (this.props.match !== undefined) {
             const { reportId } = this.props.match.params;
             let url = URLBack + "/reports/" + reportId;
+            let  mode ;
             axios.get(url).then(res => {
                 console.log(res)
                 report_header = res.data.report_header;
-                this.setState({ dataReport: report_header, dataProduct: res.data.reportable, dataVef: res.data.report_header.observation })
+                this.setState({ dataReport: report_header, 
+                    dataProduct: res.data.reportable,
+                     dataVef: {observation: res.data.report_header.observation},
+                     dataEspec: res.data.especificable,
+                     defaultReport: report_header,
+                     })
+                //Seleccionamos el modo para renderizarlo luego
+                mode = report_header.reportable_type;
+                this.setState({mode: mode})
             })
             console.log(this.state.data)
+
+
         }
         if(this.props.mode !== undefined) this.setState({mode: this.props.mode})
+        if(this.props.obj  !== undefined) this.setState({dataEspec: this.props.obj})
     }
     render() {
         return (

@@ -146,7 +146,7 @@ class Garnic extends Component {
         if (this.state.opt === 3) {
             render_create = "create"
             // rnd = <Report obj = {this.state.garnic}  sample = "Garnic"/>
-            rnd = <Stepper   obj = {this.state.garnic} sample = "Colapsible"  mode = "garnic" />
+            rnd = <Stepper   obj = {this.state.garnic} sample = "Colapsible"  mode = "ReportGarnic" />
         }
         //modals            
         const garnic = this.state.garnic
