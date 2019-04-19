@@ -107,10 +107,14 @@ class Table extends Component {
                                 </td>
                                 <td className="has-text-centered">
                                     <a>
-                                        <span class="icon is-small">
-                                            <i class="fas fa-edit"></i>
-                                        </span>
+                                        <Link to={"/edit/report/" + info[key].id} target="_blank"  >
+
+                                            <span class="icon is-small">
+                                                <i class="fas fa-edit"></i>
+                                            </span>
+                                        </Link>
                                     </a>
+
                                 </td>
                                 <td className="has-text-centered">
                                     <a>
@@ -124,6 +128,7 @@ class Table extends Component {
                                 </td>
                                 <td className="has-text-centered">
                                     <a>
+
                                         <span class="icon has-text-danger is-small" onClick={this.delete.bind(this, key)}>
                                             <i class="fas fa-trash-alt"></i>
                                         </span>

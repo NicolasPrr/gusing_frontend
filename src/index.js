@@ -20,7 +20,7 @@ const routing = (
       <Route exact path="/" component={Loadersn} />
       <Route path="/colapsible/garnic" component={Garnic} />
       <Route path="/clone/report/:reportId" component={Stepper} />
-      
+      <Route path="/edit/report/:reportId" component={Stepper} />
       <Route exact strict path="/print/:reportId" component={HeaderGeneral} />
       <Route path="/reports/" component={InterfaceReport} />
       <Route path="/clients" component={Clients} />

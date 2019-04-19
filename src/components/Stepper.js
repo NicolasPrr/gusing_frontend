@@ -26,6 +26,7 @@ class Stepper extends Component {
             dataVef: {}, //Observaciones
             dataEspec: {}, // Datos de especificaciones
             mode: null,
+            defaultReport: null,
         }
         this.nextStep = this.nextStep.bind(this)
         this.headerForm = this.headerForm.bind(this)
@@ -50,7 +51,6 @@ class Stepper extends Component {
             const st = this.state.step + option
             this.setState({ step: st })
         }
-
     }
     renderButtons(numberButton) {
         //Retorna los botones de retroceder
@@ -69,9 +69,9 @@ class Stepper extends Component {
     choseForm(arg) {
         switch (arg) {
             case "ReportGarnic":
-            //obj infomracion de las especificaciones del producto más el nombre de la muestra
-            //productAction  accion del producto, maneja el stepper
-            //data, infromacion del resultado del producto
+            //obj infomracion de las especificaciones del producto más el nombre de la muestra.
+            //productAction  accion del producto, maneja el stepper.
+            //data, infromacion del resultado del producto.
                 return <ReportGarnic obj={this.state.dataEspec} productAction={this.productForm} data={this.state.dataProduct} />
             default:
                 return null
@@ -93,14 +93,14 @@ class Stepper extends Component {
         }
     }
     createReport(data) {
-        const [url_complement, requiere ] = selectUrlRequest(this.state.mode)
+        const [url_complement, require ] = selectUrlRequest(this.state.mode)
         let url = URLBack + url_complement;
         selectUrlRequest(this.state.mode)
         let report = this.state.dataReport;
         report.observation = data.observation;
         this.setState({ dataReport: report })
 
-        axios.post(url, { report_garnic: this.state.dataProduct,
+        axios.post(url, { [require]: this.state.dataProduct,
              id_asociation: this.state.dataEspec.id, 
              report: this.state.dataReport
          }).then(res => {
@@ -127,20 +127,61 @@ class Stepper extends Component {
         });
 
     }
+    editReport(data) {
+        const [url_complement, require ] = selectUrlRequest(this.state.mode)
+        let url = URLBack + url_complement + "/" + this.state.defaultReport.reportable_id;
+        selectUrlRequest(this.state.mode)
+        let report = this.state.dataReport;
+        report.observation = data.observation;
+        this.setState({ dataReport: report })
+        
+        axios.put(url, { [require]: this.state.dataProduct,
+             id_report: this.state.defaultReport.id, 
+             report: this.state.dataReport
+         }).then(res => {
+            if (res.status === 201) {
+                console.log(res.data)
+                Swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Se ha editado el reporte',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }).catch(function (error) {
+            console.log(error)
+            Swal({
+                position: 'top-end',
+                type: 'error',
+                title: 'No se ha podido editar el reporte',
+                text: 'Posiblemente se ha repetido el numero de reporte!',
+                showConfirmButton: false,
+                timer: 2500
+            })
+        });
 
+    }
+
+    //Se avanza un paso, se guarda el estado
     headerForm(data) {
         this.setState({ dataReport: data })
         this.nextStep(1)
     }
     productForm(data) {
+        //paso del producto
         this.setState({ dataProduct: data })
         this.nextStep(1)
     }
     verfForm(data, step) {
+        //paso final, la url contiene edit, se hará la solicitud de edición.
         this.setState({ dataVef: data })
         this.nextStep(step)
-
-        if (step === 1) this.createReport(data)
+        if(window.location.pathname.includes("edit")){
+            this.editReport(data);
+        }else{
+            if (step === 1) this.createReport(data)
+        }
     }
     componentDidMount() {
         let report_header;
