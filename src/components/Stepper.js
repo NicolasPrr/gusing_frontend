@@ -6,7 +6,8 @@ import axios from 'axios'
 import URLBack from '../UrlBack'
 import Swal from 'sweetalert2'
 function selectUrlRequest(type){
-    let url, requiereDatabase;
+    //Retorna la url despues y el el tipo de require 
+    //http://localhost:3000/report_garnics
     switch(type){
         //"[url, requiereDatabase]"
         case "ReportGarnic":
