@@ -28,14 +28,14 @@ class EditlGarnic extends Component {
         const info = {
           name: this.name.current.value,
           
-          min_diameter_base: this.db_min.current.value.replace(",", "."),
-          max_diameter_base: this.db_max.current.value.replace(",", "."),
+          diameter_base: this.db_min.current.value.replace(",", "."),
+          range_diameter_base: this.db_max.current.value.replace(",", "."),
     
-          min_total_lenght: this.lt_min.current.value.replace(",", "."),
-          max_total_lenght: this.lt_max.current.value.replace(",", "."),
+          total_length: this.lt_min.current.value.replace(",", "."),
+          range_total_length: this.lt_max.current.value.replace(",", "."),
     
-          min_wall_gauge: this.cl_min.current.value.replace(",", "."),
-          max_wall_gauge: this.cl_max.current.value.replace(",", ".")
+          wall_gauge: this.cl_min.current.value.replace(",", "."),
+          range_wall_gauge: this.cl_max.current.value.replace(",", ".")
         };
         
         this.props.editGarnic(info);
@@ -66,18 +66,18 @@ class EditlGarnic extends Component {
                             <label className="label">Diametro de base</label>
                             <div className="columns">
                                 <div className="column">
-                                    Minimo: <input
+                                    Medida base: <input
                                         className="input is-small"
                                         type="text"
-                                        defaultValue = {params.min_diameter_base}
+                                        defaultValue = {params.diameter_base}
                                         ref ={this.db_min}
                                     />
                                 </div>
                                 <div className="column">
-                                    Maximo: <input
+                                    Rango (±)               : <input
                                         className="input is-small"
                                         type="text"
-                                        defaultValue = {params.max_diameter_base}
+                                        defaultValue = {params.range_diameter_base}
                                         ref ={this.db_max}
                                     />
                                 </div>
@@ -86,18 +86,18 @@ class EditlGarnic extends Component {
                             <label className="label">Largo total</label>
                             <div className="columns">
                                 <div className="column">
-                                    Minimo: <input
+                                    Medida base: <input
                                         className="input is-small"
                                         type="text"
-                                        defaultValue = {params.min_total_lenght}
+                                        defaultValue = {params.total_length}
                                         ref ={this.lt_min}
                                     />
                                 </div>
                                 <div className="column">
-                                    Maximo: <input
+                                    Rango (±)               : <input
                                         className="input is-small"
                                         type="text"
-                                        defaultValue = {params.max_total_lenght}
+                                        defaultValue = {params.range_total_length}
                                         ref ={this.lt_max}
                                     />
                                 </div>
@@ -105,18 +105,18 @@ class EditlGarnic extends Component {
                             <label className="label">Calibre de pared</label>
                             <div className="columns">
                                 <div className="column">
-                                    Minimo: <input
+                                    Medida base: <input
                                         className="input is-small"
                                         type="text"
-                                        defaultValue = {params.min_wall_gauge}
+                                        defaultValue = {params.wall_gauge}
                                         ref ={this.cl_min}
                                     />
                                 </div>
                                 <div className="column">
-                                    Maximo: <input
+                                    Rango (±)               : <input
                                         className="input is-small"
                                         type="text"
-                                        defaultValue = {params.max_wall_gauge}
+                                        defaultValue = {params.range_wall_gauge}
                                         ref ={this.cl_max}
                                     />
                                 </div>

@@ -23,33 +23,34 @@ class ModalGarnic extends Component {
                     <label className="label">Diametro de base</label>
                     <div className = "columns">
                         <div className = "column">
-                        Minimo: { params.min_diameter_base  }
+                        Medida: { params.diameter_base  }
                         </div> 
                         <div className = "column">
-                        Maximo: {params.max_diameter_base  }
+                        ± 
+                         {params.range_diameter_base  }
                         </div>
                     </div>
 
                      <label className="label">Largo total</label>
                     <div className = "columns">
                         <div className = "column">
-                        Minimo: { params.min_total_lenght  }
+                        Medida: { params.total_length  }
                         </div> 
                         <div className = "column">
-                        Maximo: {params.max_total_lenght }
+                         ±
+                         {params.range_total_length }
                         </div>
                     </div>
                     <label className="label">Calibre de pared</label>
                       <div className = "columns">
                         <div className = "column">
-                        Minimo: { params.min_wall_gauge  }
+                        Medida: { params.wall_gauge  }
                         </div> 
                         <div className = "column">
-                        Maximo: {params.max_wall_gauge  }
+                         ±
+                         {params.range_wall_gauge  }
                         </div>
                     </div>
-
-
                     </section>
                     
                 </div>

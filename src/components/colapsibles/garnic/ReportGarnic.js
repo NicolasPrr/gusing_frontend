@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+//Cuando se está creando el reporte  se renderiza este formulario
 class ReportGarnic extends Component {
     constructor(props) {
         super(props)
@@ -59,21 +59,21 @@ class ReportGarnic extends Component {
                                         <label className="label is-small">Especificacion</label>
                                     </div>
                                     <div className="field">
-                                        <label className="label is-small">{this.props.obj.min_diameter_base}  - {this.props.obj.max_diameter_base}  </label>
+                                        <label className="label is-small">{this.props.obj.diameter_base}  ±  {this.props.obj.range_diameter_base}  </label>
                                     </div>
 
                                     <div className="field">
                                         <label className="label is-small">Especificacion</label>
                                     </div>
                                     <div className="field">
-                                        <label className="label is-small">{this.props.obj.min_total_lenght}  - {this.props.obj.max_total_lenght}  </label>
+                                        <label className="label is-small">{this.props.obj.total_length}  ± {this.props.obj.range_total_length}  </label>
                                     </div>
 
                                     <div className="field">
                                         <label className="label is-small">Especificacion</label>
                                     </div>
                                     <div className="field">
-                                        <label className="label is-small">{this.props.obj.min_wall_gauge}  - {this.props.obj.max_wall_gauge}  </label>
+                                        <label className="label is-small">{this.props.obj.wall_gauge}  ± {this.props.obj.range_wall_gauge}  </label>
                                     </div>
 
                                 </div>

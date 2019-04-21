@@ -33,7 +33,7 @@ class Header extends Component {
                   
                 </div>
               </div>
-              <Link className="navbar-item"   to="/reports/" onClick={() => window.location.refresh()}   >
+              <Link className="navbar-item"   to="/reports/"   >
                 Reportes</Link>
               <Link className="navbar-item" to='/clients' >
                 Gestion de clientes</Link>
