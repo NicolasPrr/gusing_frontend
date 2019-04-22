@@ -87,13 +87,10 @@ const Header = (props) => {
     return (
         <div className="box is-zise-7">
 
-            <div className="columns">
-                <div className="column has-text-left is-size-7 ">
-                    <p><strong>N° de reporte FQ: </strong> {report_number} </p>
-                </div>
-            </div>
+           
             <div className="columns">
                 <div className="column  has-text-justified is-size-7">
+                   <p><strong>N° de reporte FQ: </strong> {report_number} </p>
                     <p> <strong>Cliente: </strong> {client_name}</p>
                     <p> <strong>Muestra:</strong> {sample}          </p>
                     <p> <strong>Nombre de la muestra:</strong> {sample_name}          </p>
@@ -239,6 +236,11 @@ const Report = (props) => {
                         <td>{result_wall_gauge}</td>
                         <td>{wall_gauge} ± {range_wall_gauge}</td>
                     </tr>
+                    <tr>
+                        <td>Color</td>
+                        <td>{result_wall_gauge}</td>
+                    </tr>
+
 
                 </tbody>
             </table>
