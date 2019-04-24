@@ -204,18 +204,18 @@ const Report = (props) => {
     const result_diameter_base = props.data.diameter_base;
     const result_total_length = props.data.total_lenght;
     const result_wall_gauge = props.data.wall_gauge;
-
+    const color = props.data.color;
+    const fulfillment = props.data.fulfillment;
     return (
 
         <div id="content">
-
+        
             <table className="table is-fullwidth is-bordered is-size-7">
                 <thead>
                     <tr>
-                        <th> Nombre del parametro   </th>
-                        <th> Resultados        </th>
-                        <th> Rango de especificacion   </th>
-
+                        <th> Parametro   </th>
+                        <th> Resultados  (cm)      </th>
+                        <th> Especificación (cm)   </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -238,8 +238,13 @@ const Report = (props) => {
                     </tr>
                     <tr>
                         <td>Color</td>
-                        <td>{result_wall_gauge}</td>
+                        <td>{color}</td>
                     </tr>
+                    <tr>
+                        <td>Cumple</td>
+                        <td>{fulfillment}</td>
+                    </tr>
+
 
 
                 </tbody>

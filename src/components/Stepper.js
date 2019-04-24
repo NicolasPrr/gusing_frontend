@@ -96,7 +96,6 @@ class Stepper extends Component {
     createReport(data) {
         const [url_complement, require ] = selectUrlRequest(this.state.mode)
         let url = URLBack + url_complement;
-        selectUrlRequest(this.state.mode)
         let report = this.state.dataReport;
         report.observation = data.observation;
         this.setState({ dataReport: report })
