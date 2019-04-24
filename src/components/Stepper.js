@@ -6,7 +6,8 @@ import axios from 'axios'
 import URLBack from '../UrlBack'
 import Swal from 'sweetalert2'
 function selectUrlRequest(type){
-    let url, requiereDatabase;
+    //Retorna la url despues y el el tipo de require 
+    //http://localhost:3000/report_garnics
     switch(type){
         //"[url, requiereDatabase]"
         case "ReportGarnic":
@@ -95,7 +96,6 @@ class Stepper extends Component {
     createReport(data) {
         const [url_complement, require ] = selectUrlRequest(this.state.mode)
         let url = URLBack + url_complement;
-        selectUrlRequest(this.state.mode)
         let report = this.state.dataReport;
         report.observation = data.observation;
         this.setState({ dataReport: report })

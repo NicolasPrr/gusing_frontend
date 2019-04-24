@@ -3,8 +3,8 @@ import React, { Component } from "react";
 class GarnicForm extends Component {
   name = React.createRef();
 
-  db_min = React.createRef();
-  db_max = React.createRef();
+  db_min = React.createRef(); //base
+  db_max = React.createRef(); //rango
 
   lt_min = React.createRef();
   lt_max = React.createRef();
@@ -18,14 +18,14 @@ class GarnicForm extends Component {
     const info = {
       name: this.name.current.value,
       
-      min_diameter_base: this.db_min.current.value.replace(",", "."),
-      max_diameter_base: this.db_max.current.value.replace(",", "."),
+      diameter_base: this.db_min.current.value.replace(",", "."),
+      range_diameter_base: this.db_max.current.value.replace(",", "."),
 
-      min_total_lenght: this.lt_min.current.value.replace(",", "."),
-      max_total_lenght: this.lt_max.current.value.replace(",", "."),
+      total_length: this.lt_min.current.value.replace(",", "."),
+      range_total_length: this.lt_max.current.value.replace(",", "."),
 
-      min_wall_gauge: this.cl_min.current.value.replace(",", "."),
-      max_wall_gauge: this.cl_max.current.value.replace(",", ".")
+      wall_gauge: this.cl_min.current.value.replace(",", "."),
+      range_wall_gauge: this.cl_max.current.value.replace(",", ".")
     };
     
     this.props.createGarnic(info);
@@ -52,27 +52,30 @@ class GarnicForm extends Component {
           </div>
           <div className="columns">
             <div className="column">
-              {" "}
-              Minimo
+              
+              Base
               <div className="control">
                 <input
                   className="input is-small"
-                  type="text"
-                  placeholder="Minimo"
+                  type="number"
+                  step ="0.01"
+           
+                  placeholder="Numero base"
                   ref={this.db_min}
                 />
               </div>
             </div>
 
             <div className="column">
-              {" "}
-              Maximo
+
+              Rango (±)
               <div className="control">
                 <input
                   className="input is-small"
-                  type="text"
-                  placeholder="Maximo"
+                  type="number"
+                  placeholder="Numero rango"
                   ref={this.db_max}
+                  step ="0.01"
                 />
               </div>
             </div>
@@ -83,28 +86,32 @@ class GarnicForm extends Component {
           </div>
           <div className="columns">
             <div className="column">
-              {" "}
-              Minimo
+
+              Base
               <div className="control">
                 <input
                   className="input is-small"
-                  type="text"
-                  placeholder="Minimo"
+                  type="number"
+                  placeholder="Base"
                   ref={this.lt_min}
+                  step ="0.01"
+               
                 />
               </div>
             </div>
 
             <div className="column">
-              {" "}
-              Maximo
+            Rango (±)
               <div className="control">
                 <input
                   className="input is-small"
-                  type="text"
-                  placeholder="Maximo"
+                  type="number"
+                  placeholder="Numero rango"
                   ref={this.lt_max}
+                  step ="0.01"
+           
                 />
+                
               </div>
             </div>
           </div>
@@ -115,27 +122,29 @@ class GarnicForm extends Component {
           ￼
           <div className="columns">
             <div className="column">
-              {" "}
-              Minimo
+              Base
               <div className="control">
                 <input
                   className="input is-small"
-                  type="text"
-                  placeholder="Minimo"
+                  type="number"
+                  placeholder="Base"
                   ref={this.cl_min}
+                  step ="0.01"
+           
                 />
               </div>
             </div>
 
             <div className="column">
-              {" "}
-              Maximo
+            Rango (±)
               <div className="control">
                 <input
                   className="input is-small"
-                  type="text"
-                  placeholder="Maximo"
+                  type="number"
+                  placeholder="Numero rango"
                   ref={this.cl_max}
+                  step ="0.01"
+           
                 />
               </div>
             </div>

@@ -87,13 +87,10 @@ const Header = (props) => {
     return (
         <div className="box is-zise-7">
 
-            <div className="columns">
-                <div className="column has-text-left is-size-7 ">
-                    <p><strong>N° de reporte FQ: </strong> {report_number} </p>
-                </div>
-            </div>
+           
             <div className="columns">
                 <div className="column  has-text-justified is-size-7">
+                   <p><strong>N° de reporte FQ: </strong> {report_number} </p>
                     <p> <strong>Cliente: </strong> {client_name}</p>
                     <p> <strong>Muestra:</strong> {sample}          </p>
                     <p> <strong>Nombre de la muestra:</strong> {sample_name}          </p>
@@ -197,51 +194,58 @@ const Report = (props) => {
             </h2>
     */
     //Datos de especificacion
-    const max_diameter_base = props.data1.max_diameter_base;
-    const min_diameter_base = props.data1.min_diameter_base;
-    const max_total_lenght = props.data1.max_total_lenght;
-    const min_total_lenght = props.data1.max_total_lenght;
-    const max_wall_gauge = props.data1.max_wall_gauge;
-    const min_wall_gauge = props.data1.min_wall_gauge;
+    const range_diameter_base = props.data1.range_diameter_base;
+    const diameter_base = props.data1.diameter_base;
+    const range_total_length = props.data1.range_total_length;
+    const total_length = props.data1.total_length;
+    const range_wall_gauge = props.data1.range_wall_gauge;
+    const wall_gauge = props.data1.wall_gauge;
     //datos resultados
-    const diameter_base = props.data.diameter_base;
-    const total_lenght = props.data.total_lenght;
-    const wall_gauge = props.data.wall_gauge;
-
+    const result_diameter_base = props.data.diameter_base;
+    const result_total_length = props.data.total_lenght;
+    const result_wall_gauge = props.data.wall_gauge;
+    const color = props.data.color;
+    const fulfillment = props.data.fulfillment;
     return (
 
         <div id="content">
-
+        
             <table className="table is-fullwidth is-bordered is-size-7">
                 <thead>
                     <tr>
-                        <th> Nombre del parametro   </th>
-                        <th> Resultados        </th>
-                        <th> Especificación minima  </th>
-                        <th> Especificación maxima  </th>
+                        <th> Parametro   </th>
+                        <th> Resultados  (cm)      </th>
+                        <th> Especificación (cm)   </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Diametro de base</td>
-                        <td>{diameter_base}</td>
-                        <td>{min_diameter_base}</td>
-                        <td>{max_diameter_base}</td>
+                        <td>{result_diameter_base}</td>
+                        <td>{diameter_base} ± {range_diameter_base}</td>
                     </tr>
 
                     <tr>
                         <td>Largo total</td>
-                        <td>{total_lenght}</td>
-                        <td>{min_total_lenght}</td>
-                        <td>{max_total_lenght}</td>
+                        <td>{result_total_length}</td>
+                        <td>{total_length} ± {range_total_length} </td>
                     </tr>
 
                     <tr>
                         <td>Calibre pared</td>
-                        <td>{wall_gauge}</td>
-                        <td>{min_wall_gauge}</td>
-                        <td>{max_wall_gauge}</td>
+                        <td>{result_wall_gauge}</td>
+                        <td>{wall_gauge} ± {range_wall_gauge}</td>
                     </tr>
+                    <tr>
+                        <td>Color</td>
+                        <td>{color}</td>
+                    </tr>
+                    <tr>
+                        <td>Cumple</td>
+                        <td>{fulfillment}</td>
+                    </tr>
+
+
 
                 </tbody>
             </table>

@@ -8,19 +8,14 @@ class Header extends Component {
     if (window.location.pathname.includes("print")) return null;
     return (
       <div>
-        <nav className="navbar is-light">
+        <nav className="navbar is-warning">
           <div className="navbar-brand">
             <a className="navbar-item" >
               <img src="/resources/LogoGusing.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28" />
             </a>
-            <div className="navbar-burger burger" data-target="buggerg">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
           </div>
 
-          <div id="buggerg" className="navbar-menu">
+          <div id="buggerg" className="navbar-menu is-active">
             <div className="navbar-start">
               <a className="navbar-item" href={baseURLFront} >
                 Pagina principal</a>
@@ -30,10 +25,11 @@ class Header extends Component {
                   <Link to='/colapsible/garnic' className="navbar-item">Colapsible garnic</Link>
                   <Link to='/colapsible/normal' className="navbar-item">Colapsible normal</Link>
                   <Link to='/colapsible/desflant/normal' className="navbar-item">Colapsible desflant</Link>
+                  <Link to='/insumos' className="navbar-item">Insumos</Link>
                   
                 </div>
               </div>
-              <Link className="navbar-item"   to="/reports/" onClick={() => window.location.refresh()}   >
+              <Link className="navbar-item"   to="/reports/"   >
                 Reportes</Link>
               <Link className="navbar-item" to='/clients' >
                 Gestion de clientes</Link>
