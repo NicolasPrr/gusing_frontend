@@ -31,7 +31,7 @@ const Encabezado1 = (props) => {
             <table className="table is-fullwidth is-bordered is-size-7">
                 <thead>
                     <tr>
-                        <td className=" is-title has-text-centered">Control de calidad</td >
+                        <td className=" is-title has-text-centered">CONTROL DE CALIDAD</td >
                     </tr>
                 </thead>
             </table>
@@ -44,8 +44,8 @@ const Encabezado2 = (props) => {
             <table className="table is-fullwidth is-bordered is-size-7">
                 <thead>
                     <tr>
-                        <td className="  has-text-centered">TITULO REPORTE ENSAYO  PT-PP</td >
-                        <td className="  has-text-centered">Codigo FR-CC -51</td >
+                        <td className="  has-text-centered">TITULO: REPORTE ENSAYO DE MATERIALES  PT-PP</td >
+                        <td className="  has-text-centered">Codigo FR-CC -65</td >
                     </tr>
                 </thead>
             </table>
@@ -59,7 +59,7 @@ const Encabezado3 = (props) => {
                 <thead>
                     <tr>
                         <td className=" has-text-centered " >Version 04</td >
-                        <td className=" has-text-centered">VIGENCIA DESDE EL 28 DE DICIEMBRE DEL 2018</td >
+                        <td className=" has-text-centered">VIGENCIA DESDE EL 28 DE FEBRERO DE 2017</td >
                         <td className=" has-text-centered">Pagina 1 de 1</td >
                     </tr>
                 </thead>
@@ -160,7 +160,7 @@ const Footer = () => {
             <p className=" has-text-centered">
 
                 Laboratorios Gusing 100% Productos Naturales y Homeopaticos <br />
-                Carrera 10 Este N°30-03 San Mateo-Soacha PBX 761-75-96<br /> www.laboratoriosgusing.com
+                Carrera 10 Este N°30-03 San Mateo-Soacha PBX 781-75-98<br /> www.laboratoriosgusing.com
             </p>
         </div>
     )
@@ -180,7 +180,7 @@ const Signature = () => {
                     <p>Verificado por: </p>
                     <br />
                     <hr />
-                    Jefe de control de calidad
+                    Jefe control de calidad
             </div>
 
             </div>
@@ -214,8 +214,8 @@ const Report = (props) => {
                 <thead>
                     <tr>
                         <th> Parametro   </th>
-                        <th> Resultados  (cm)      </th>
-                        <th> Especificación (cm)   </th>
+                        <th> Resultados       </th>
+                        <th> Especificación    </th>
                     </tr>
                 </thead>
                 <tbody>

@@ -34,7 +34,7 @@ class GarnicForm extends Component {
     return (
       <div className="notification">
         <form onSubmit={this.handle}>
-          {/*Diametro de base*/}
+          {/*Nombre*/}
           <div className="field">
             <label className="label">Nombre</label>
           </div>

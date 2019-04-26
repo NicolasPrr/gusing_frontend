@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import axios from 'axios';
 import URLBack from "../UrlBack";
+
+function isEmptyObject(obj){
+  return (Object.getOwnPropertyNames(obj).length === 0);
+}
 class Report extends Component {
   //Formulario para creación de reporte.
   constructor(props) {
@@ -146,12 +150,16 @@ class Report extends Component {
     let samples;
     let samples_name;
     if(this.props.obj !== undefined){
-      samples = this.props.sample
-      samples_name = this.props.obj.name
+      samples = this.props.sample;
+      samples_name = this.props.obj.name;
     }
     else{
-      samples_name = this.props.data.sample_name
-      samples = this.props.data.sample
+      samples_name = this.props.data.sample_name;
+      samples = this.props.data.sample;
+    }
+    let method = "Dimensional";
+    if(!isEmptyObject(this.props.data)){
+      method = this.props.data.method;
     }
     
    /* if(this.props.data.sample_name === undefined)
@@ -387,7 +395,7 @@ class Report extends Component {
                       className="input is-small"
                       type="text"
                       ref={this.method}
-                      defaultValue = {this.props.data.method}
+                      defaultValue = {method}
                     />
                   </div>
                 </div>

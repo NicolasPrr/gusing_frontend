@@ -178,7 +178,7 @@ class Stepper extends Component {
         this.setState({ dataVef: data })
         this.nextStep(step)
         if(window.location.pathname.includes("edit")){
-            this.editReport(data);
+            if (step === 1)  this.editReport(data);
         }else{
             if (step === 1) this.createReport(data)
         }

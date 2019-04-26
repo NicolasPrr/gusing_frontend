@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+
 const Garnic = () => {
     return (
         <div class="card">
@@ -10,9 +11,9 @@ const Garnic = () => {
             </header>
             <div class="card-content">
                 <div class="content">
-                    <Link to='/colapsible/garnic' >Colapsible garnic</Link><br/>
-                    <Link to='/colapsible/normal' >Colapsible normal</Link><br/>
-                    <Link to='/colapsible/desflant/normal'>Colapsible desflant</Link>
+                    <Link to='/colapsible/garnic' >Colapsible garnic</Link><br />
+                    <Link to='/colapsible/normal' >Colapsible normal</Link><br />
+                    <Link to='/colapsible/desflant'>Colapsible desflant</Link>
                 </div>
             </div>
         </div>
@@ -28,8 +29,8 @@ const EnvasesVidrio = () => {
             </header>
             <div class="card-content">
                 <div class="content">
-                    <Link to='/colapsible/garnic' >Envases de vidrio</Link><br/>
-                    <Link to='/colapsible/garnic' >Envases plasticos</Link><br/>
+                    <Link to='/colapsible/garnic' >Envases de vidrio</Link><br />
+                    <Link to='/colapsible/garnic' >Envases plasticos</Link><br />
                 </div>
             </div>
         </div>
@@ -46,9 +47,9 @@ const TapasGoteros = () => {
             </header>
             <div class="card-content">
                 <div class="content">
-                    <Link to='/colapsible/garnic' >Tapas</Link><br/>
-                    <Link to='/colapsible/garnic' >Goteros</Link><br/>
-                    <Link to='/colapsible/garnic' >Dosificadores</Link><br/>
+                    <Link to='/colapsible/garnic' >Tapas</Link><br />
+                    <Link to='/colapsible/garnic' >Goteros</Link><br />
+                    <Link to='/colapsible/garnic' >Dosificadores</Link><br />
                 </div>
             </div>
         </div>
@@ -65,19 +66,20 @@ const Other = () => {
             </header>
             <div class="card-content">
                 <div class="content">
-                    <Link to='/colapsible/garnic' >Linners</Link><br/>
-                    <Link to='/colapsible/garnic' >Tapon</Link><br/>
-                    <Link to='/colapsible/garnic' >Agafre</Link><br/>
-                    <Link to='/colapsible/garnic' >Cucharas</Link><br/>
-                    <Link to='/colapsible/garnic' >Cunas </Link><br/>
+                    <Link to='/colapsible/garnic' >Linners</Link><br />
+                    <Link to='/colapsible/garnic' >Tapon</Link><br />
+                    <Link to='/colapsible/garnic' >Agafre</Link><br />
+                    <Link to='/colapsible/garnic' >Cucharas</Link><br />
+                    <Link to='/colapsible/garnic' >Cunas </Link><br />
                 </div>
             </div>
         </div>
     );
 }
-const HomeInsumos = () => {
-    return (
-        <div className="container notification">
+class HomeInsumos extends Component {
+    state = { measure: [] }
+    render() {
+        return (<div className="container notification">
             <div className="columns">
                 <div className="column" >
                     <Garnic />
@@ -89,15 +91,12 @@ const HomeInsumos = () => {
                 <div className="column" >
                     <TapasGoteros />
                 </div>
-
-                <div className="column" >
-                    <TapasGoteros />
-                </div>
             </div>
             <Other />
-
         </div>
-    );
-};
 
-export default HomeInsumos;
+        );
+    }
+}
+
+export default HomeInsumos; 

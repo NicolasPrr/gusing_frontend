@@ -22,7 +22,7 @@ function fulfillmentSelected(key, props) {
     if (props === st[key]) return "selected"
     else return null
 }
-class ReportGarnic extends Component {
+class ReportDesflanat extends Component {
     constructor(props) {
         super(props)
         this.handle = this.handle.bind(this)
@@ -150,4 +150,4 @@ class ReportGarnic extends Component {
     }
 }
 
-export default ReportGarnic;
+export default ReportDesflanat;
