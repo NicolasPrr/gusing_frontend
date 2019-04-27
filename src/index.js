@@ -14,7 +14,7 @@ import Clients from './components/clients/Clients'
 import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
 import Stepper from './components/Stepper'
 import HomeInsumos from './components/HomeInsumos';
-
+import HomeSupply from './components/supplies/HomeSupply'
 const routing = (
   <Router>
     <div>
@@ -23,7 +23,7 @@ const routing = (
       <Route exact path="/" component={Loadersn} />
       <Route path="/colapsible/garnic" component={Garnic} />
       <Route path="/colapsible/desflanat" component={Desflanat} />
-      <Route path="/insumos" component={HomeInsumos} />
+      <Route path="/insumos" component={HomeSupply} />
       <Route path="/clone/report/:reportId" component={Stepper} />
       <Route path="/edit/report/:reportId" component={Stepper} />
       <Route exact strict path="/print/:reportId" component={HeaderGeneral} />
