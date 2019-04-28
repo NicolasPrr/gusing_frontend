@@ -146,7 +146,8 @@ class HomeSupply extends Component {
             modal = null;
 
         if(this.state.render_create)
-            create = <CreateSupply data = {this.state.type_list[this.state.key]}/>
+            create = <CreateSupply 
+            data = {this.state.type_list[this.state.key]}/>
         else
             create = null;
         
