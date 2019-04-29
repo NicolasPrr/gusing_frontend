@@ -35,8 +35,8 @@ class CreateType extends Component {
             <div className="notification" >
                 Crea un tipo de insumo
                 <form onSubmit ={this.doRequest}>
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
+                    <div className="field has-addons">
+                        <div className="control is-expanded">
                             <input ref = {this.name} className="input is-small" type="text" placeholder="Tipo de insumo" />
                         </div>
                         <button className="button is-small is-dark">

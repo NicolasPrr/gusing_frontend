@@ -99,8 +99,8 @@ class Table extends Component {
                                 <td className="has-text-centered">
                                     <a>
                                         <Link to={"/print/" + info[key].id} target="_blank"  >
-                                            <span class="icon is-small has-text-success ">
-                                                <i class="fas fa-lg fa-print   "></i>
+                                            <span className="icon is-small has-text-success ">
+                                                <i className="fas fa-lg fa-print   "></i>
                                             </span>
                                         </Link>
                                     </a>
@@ -109,8 +109,8 @@ class Table extends Component {
                                     <a>
                                         <Link to={"/edit/report/" + info[key].id} target="_blank"  >
 
-                                            <span class="icon is-small">
-                                                <i class="fas fa-edit"></i>
+                                            <span className="icon is-small">
+                                                <i className="fas fa-edit"></i>
                                             </span>
                                         </Link>
                                     </a>
@@ -119,8 +119,8 @@ class Table extends Component {
                                 <td className="has-text-centered">
                                     <a>
                                         <Link to={"/clone/report/" + info[key].id} target="_blank"  >
-                                            <span class="icon  is-small has-text-primary">
-                                                <i class="fas fa-clone"></i>
+                                            <span className="icon  is-small has-text-primary">
+                                                <i className="fas fa-clone"></i>
                                             </span>
                                         </Link>
                                     </a>
@@ -129,8 +129,8 @@ class Table extends Component {
                                 <td className="has-text-centered">
                                     <a>
 
-                                        <span class="icon has-text-danger is-small" onClick={this.delete.bind(this, key)}>
-                                            <i class="fas fa-trash-alt"></i>
+                                        <span className="icon has-text-danger is-small" onClick={this.delete.bind(this, key)}>
+                                            <i className="fas fa-trash-alt"></i>
                                         </span>
 
                                     </a>

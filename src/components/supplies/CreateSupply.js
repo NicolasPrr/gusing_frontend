@@ -1,10 +1,33 @@
 import React, { Component } from 'react';
+import axios from 'axios'
+import URLBack from '../../UrlBack';
+import Swal from 'sweetalert2';
+
+
 function Menu(props) {
+    if (props.edit_data !== null) {
+        return <h1 className="title">Edita un insumo de {props.data.name}</h1>
+    }
     return (
         <h1 className="title">Crea un insumo de {props.data.name}</h1>
     );
 }
+function OptionMenu(props) {
+    if (props.edit_data !== null) {
+        return (
+            <button className="button is-info is-small is-pulled-right" onClick={props.createRequest} type="submit">
+                Editar insumo
+           </button>
+        )
+    }
+    return (
+        <button className="button is-success is-small is-pulled-right" onClick={props.createRequest} type="submit">
+            Agregar insumo
+       </button>
+    )
 
+
+}
 
 class Name extends Component {
     name = React.createRef();
@@ -13,14 +36,15 @@ class Name extends Component {
         this.props.action(value, this.props.id);
     }
     render() {
+        let defaultName = this.props.name
         return (
             <div className="field ">
                 <div className="control is-expanded">
-                    <input className=" is-small input is-primary" type="text"
+                    <input className=" is-small input is-dark" type="text"
                         placeholder="nombre de la especificación"
                         ref={this.name}
                         onChange={this.change}
-                        defaultValue={this.props.name}
+                        defaultValue={defaultName}
                     />
                 </div>
             </div >
@@ -42,14 +66,17 @@ class Especification extends Component {
         this.props.remove(this.props.id);
     }
     render() {
+        let defaultEspc = this.props.espec
         return (
             <div className="field has-addons">
                 <div className="control is-expanded">
-                    <input className=" is-small input is-dark" type="text"
+                    <input className=" is-small input is-dark"
+                        defaultValue={defaultEspc}
+                        type="text"
                         placeholder="Especificacion, Ejemplo 3±10"
                         ref={this.espec}
                         onChange={this.change}
-                        defaultValue={this.props.espec}
+
                     />
                 </div>
                 <div className="control">
@@ -79,6 +106,7 @@ class CreateSupply extends Component {
         this.addToName = this.addToName.bind(this);
         this.addItem = this.addItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
+        this.createRequest = this.createRequest.bind(this);
     }
     addToEspec(value, key) {
         let espc = [...this.state.espc]
@@ -90,6 +118,20 @@ class CreateSupply extends Component {
         name[key] = value;
         this.setState({ name: name })
     }
+    /*componentDidUpdate() {
+        const data = this.props.edit_data;
+        let names = [];
+        let espec = [];
+        if (data !== null) {
+            for (var i = 0; i < data.features.length; i++) {
+                names.push(data.features[i].name);
+                espec.push(data.features[i].especification);
+            }
+            this.setState({ name: names, espc: espec })
+
+        }
+    }
+    */
     componentDidMount() {
         this.addItem();
     }
@@ -108,49 +150,91 @@ class CreateSupply extends Component {
         let espc_r = [...this.state.espc];
         name_r.splice(key, 1);
         espc_r.splice(key, 1);
-        this.setState({
-            name: name_r,
-            espc: espc_r,
+        this.setState({ name: [], espc: [] })
+        setTimeout(() => {
+            this.setState({
+                name: name_r,
+                espc: espc_r,
+            })
+        }, 100);
+    }
+    createRequest() {
+        let url;
+        let features = [];
+        for (var i = 0; i < this.state.espc.length; i++) {
+            features.push({ name: this.state.name[i], especification: this.state.espc[i] })
+        }
+        const info = {
+            name: this.name.current.value,
+            type_supply_id: this.props.data.id,
+        }
+        url = `${URLBack}/supplies`
+        axios.post(url, {
+            supply: info,
+            features,
+        }).then(res => {
+            if (res.status === 201) {
+                Swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Se ha agregado el insumo',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }).catch(function (error) {
+            console.log(error)
         })
     }
     name = React.createRef();
+
     render() {
+        let names = this.state.name;
+        let espec = this.state.espc;
+
+        let name_input;
+        if (this.props.edit_data === null) {
+            name_input = null;
+        } else {
+            name_input = this.props.edit_data.name;
+        }
         return (
+
             <div className="notification">
-                <Menu data={this.props.data} />
-               <div className="control is-expanded">
+                <Menu data={this.props.data} edit_data={this.props.edit_data} />
+                <div className="control is-expanded">
                     <input className=" is-small input is-dark" type="text"
                         placeholder="Nombre del producto"
                         ref={this.name}
                         onChange={this.change}
-                        
-                    />
-                </div>                    <div className="columns">
-                        <div className="column">
-                            Nombre de Especificación:
-                        {Object.keys(this.state.name).map(key => (
-                                <Name name={this.state.name[key]} action={this.addToName} key={key} id={key} />
-                            ))
-                            }
-                        </div>
-                        <div className="column">
-                            Especificación:
-                        {Object.keys(this.state.name).map(key => (
-                                <Especification espec={this.state.espc[key]} key={key} id={key} action={this.addToEspec.bind(this)} remove={this.removeItem} />
+                        defaultValue={name_input}
 
-                            ))
-                            }
-                        </div>
+                    />
+                </div>
+
+                <div className="columns">
+                    <div className="column">
+                        Nombre de Especificación:
+                        {Object.keys(names).map(key => (
+                            <Name name={names[key]} action={this.addToName} key={key} id={key} />
+                        ))
+                        }
                     </div>
-                    <div className="field">
-                        <button className="button is-link is-small" onClick={this.addItem}>
-                            Agregar item
+                    <div className="column">
+                        Especificación:
+                        {Object.keys(espec).map(k => (
+                            <Especification espec={espec[k]} key={k} id={k} action={this.addToEspec.bind(this)} remove={this.removeItem} />
+
+                        ))
+                        }
+                    </div>
+                </div>
+                <div className="field">
+                    <button className="button is-link is-small" onClick={this.addItem}>
+                        Agregar especificación(item)
                        </button>
-                        <button className="button is-success is-small is-pulled-right" onClick={this.addItem} type="submit">
-                            Agregar insumo
-                      </button>
-                    </div>
-         
+                    <OptionMenu edit_data={this.props.edit_data} createRequest={this.createRequest} />
+                </div>
             </div>
         );
     }
