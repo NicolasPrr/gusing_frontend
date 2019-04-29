@@ -6,10 +6,11 @@ import URLBack from '../../UrlBack';
 import EditType from './EditType';
 import Swal from 'sweetalert2';
 import CreateSupply from './CreateSupply'
-function formatTooltip(features){
+import { setTimeout } from 'timers';
+function formatTooltip(features) {
     let string = ""
-    for(var i = 0; i < features.length; i++){
-        string += features[i].name + ": "+  features[i].especification  + " | "
+    for (var i = 0; i < features.length; i++) {
+        string += features[i].name + ": " + features[i].especification + " | "
     }
     return string
 }
@@ -58,7 +59,7 @@ const TableSupplies = (props) => {
                     <tr>
                         <td><abbr >id</abbr></td>
                         <th>Nombre tipo</th>
-                        <th className = "has-text-centered">Cantidad de atributos</th>
+                        <th className="has-text-centered">Cantidad de atributos</th>
                         <th><abbr title="Opciones">Editar</abbr></th>
                         <th><abbr title="Opciones">Borrar</abbr></th>
                     </tr>
@@ -71,16 +72,16 @@ const TableSupplies = (props) => {
                             <td>
                                 {info[key].name}
                             </td>
-                            <td className = "has-text-centered"> 
-                            <button className="button  tooltip is-small is-tooltip-multiline " data-tooltip={formatTooltip(info[key].features)}>  
-                              {info[key].features.length}
-                            </button>
-                                
+                            <td className="has-text-centered">
+                                <button className="button  tooltip is-small is-tooltip-multiline " data-tooltip={formatTooltip(info[key].features)}>
+                                    {info[key].features.length}
+                                </button>
+
                             </td>
-                            <td><a><span className="icon is-small has-text-success" onClick = {props.setSupplie.bind(this, key)}>
+                            <td><a><span className="icon is-small has-text-success" onClick={props.setSupplie.bind(this, key)}>
                                 <i className="fas fa-lg fa-edit   "></i>
                             </span></a></td>
-                            <td><a><span className="icon has-text-danger is-small" onClick = {props.actionDelete.bind(this, key)}>
+                            <td><a><span className="icon has-text-danger is-small" onClick={props.actionDelete.bind(this, key)}>
                                 <i className="fas fa-trash-alt"></i>
                             </span></a></td>
                         </tr>
@@ -95,11 +96,12 @@ class HomeSupply extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            type_list: [], 
+            type_list: [],
             render_modal: false,
             supplies: [],
             key: null,
             render_create: false,
+            render_supply_table: false,
             supplie: null,
         }
         this.addItem = this.addItem.bind(this); //Agregar elemento a los tipos de insumo
@@ -117,7 +119,7 @@ class HomeSupply extends Component {
         //en caso de que se de click en la x del modal, no se renderizara y se mantendra el elemento insumo actual (key).
         this.setState({ render_modal: false })
     }
-    deleteSupplyRequest(key){
+    deleteSupplyRequest(key) {
         const id = this.state.supplies[key].id;
         const url = `${URLBack}/supplies/${id}`
         Swal({
@@ -154,9 +156,14 @@ class HomeSupply extends Component {
         items.push(item);
         this.setState({ type_list: items });
     }
-    setSupplie(key){
-        alert("Hey")
-        this.setState({supplie: this.state.supplies[key]})
+    setSupplie(key) {
+        this.setState({ supplie: this.state.supplies[key], render_create: false })
+        
+
+        setTimeout(() => {
+            this.setState({render_create: true})    
+        }, 100);
+        
     }
     editRequest(info) { //info : {name: name}
         const id = this.state.type_list[this.state.key].id;
@@ -179,16 +186,16 @@ class HomeSupply extends Component {
         });
     }
     renderAddSupply(key) {
-        const id =  this.state.type_list[key].id;
+        const id = this.state.type_list[key].id;
         let url = `${URLBack}/supplies/type/${id}`
         axios.get(url).then(res => {
-            console.log(res)
-            this.setState({supplies: res.data})
+            //console.log(res)
+            this.setState({ supplies: res.data })
         }).catch(
-            function (error){
+            function (error) {
                 console.log(error)
-        })
-        this.setState({ key: key, render_create: true, supplie: null })
+            })
+        this.setState({ key: key, render_create: true, supplie: null, render_supply_table: true })
     }
     deleteRequest(key) {
         Swal({
@@ -250,18 +257,22 @@ class HomeSupply extends Component {
             //create  también servira para la edición de insumos
             create = <CreateSupply
                 data={this.state.type_list[this.state.key]}
-                edit_data = {this.state.supplie} 
-                />
+                edit_data={this.state.supplie}
+            />
+
+        } else {
+            create = null;
+        }
+        if (this.state.render_supply_table) {
             suppliesTable = <TableSupplies
                 data={this.state.supplies}
-                actionDelete = {this.deleteSupplyRequest}
-                setSupplie = {this.setSupplie}
-                />
-        }
-        else {
-            create = null;
+                actionDelete={this.deleteSupplyRequest}
+                setSupplie={this.setSupplie}
+            />
+        } else {
             suppliesTable = null;
         }
+
         return (
             <div>
                 <div className="columns">

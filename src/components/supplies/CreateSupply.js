@@ -3,7 +3,7 @@ import axios from 'axios'
 import URLBack from '../../UrlBack';
 import Swal from 'sweetalert2';
 
-
+/*Puede editar o crear un insumo siempre, la condicion es que reciba los datos props del insumo*/
 function Menu(props) {
     if (props.edit_data !== null) {
         return <h1 className="title">Edita un insumo de {props.data.name}</h1>
@@ -15,7 +15,7 @@ function Menu(props) {
 function OptionMenu(props) {
     if (props.edit_data !== null) {
         return (
-            <button className="button is-info is-small is-pulled-right" onClick={props.createRequest} type="submit">
+            <button className="button is-info is-small is-pulled-right" onClick={props.editRequest} type="submit">
                 Editar insumo
            </button>
         )
@@ -107,6 +107,7 @@ class CreateSupply extends Component {
         this.addItem = this.addItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
         this.createRequest = this.createRequest.bind(this);
+        this.editRequest = this.editRequest.bind(this);
     }
     addToEspec(value, key) {
         let espc = [...this.state.espc]
@@ -118,7 +119,7 @@ class CreateSupply extends Component {
         name[key] = value;
         this.setState({ name: name })
     }
-    /*componentDidUpdate() {
+    componentDidMount() {
         const data = this.props.edit_data;
         let names = [];
         let espec = [];
@@ -129,11 +130,10 @@ class CreateSupply extends Component {
             }
             this.setState({ name: names, espc: espec })
 
+        } else {
+            this.addItem();
+
         }
-    }
-    */
-    componentDidMount() {
-        this.addItem();
     }
     addItem() {
         let name_r = this.state.name;
@@ -157,6 +157,31 @@ class CreateSupply extends Component {
                 espc: espc_r,
             })
         }, 100);
+    }
+    editRequest() {
+        const id = this.props.edit_data.id;
+        let features = [];
+        for (var i = 0; i < this.state.espc.length; i++) {
+            features.push({ name: this.state.name[i], especification: this.state.espc[i] })
+        }
+        const url = `${URLBack}/supplies/${id}`
+        const info = {
+            name: this.name.current.value,
+        }
+        axios.put(url, { supply: info, features }).then(res => {
+            if (res.status === 200) {
+                Swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Se ha editado el insumo',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }).catch(function (error) {
+            console.log(error);
+        })
+
     }
     createRequest() {
         let url;
@@ -233,7 +258,7 @@ class CreateSupply extends Component {
                     <button className="button is-link is-small" onClick={this.addItem}>
                         Agregar especificación(item)
                        </button>
-                    <OptionMenu edit_data={this.props.edit_data} createRequest={this.createRequest} />
+                    <OptionMenu edit_data={this.props.edit_data} createRequest={this.createRequest} editRequest={this.editRequest} />
                 </div>
             </div>
         );
