@@ -7,6 +7,7 @@ import EditType from './EditType';
 import Swal from 'sweetalert2';
 import CreateSupply from './CreateSupply'
 import { setTimeout } from 'timers';
+import { Link } from 'react-router-dom';
 function formatTooltip(features) {
     let string = ""
     for (var i = 0; i < features.length; i++) {
@@ -60,8 +61,9 @@ const TableSupplies = (props) => {
                         <td><abbr >id</abbr></td>
                         <th>Nombre tipo</th>
                         <th className="has-text-centered">Cantidad de atributos</th>
-                        <th><abbr title="Opciones">Editar</abbr></th>
-                        <th><abbr title="Opciones">Borrar</abbr></th>
+                        <th className="has-text-centered">Crear informe</th>
+                        <th className="has-text-centered"><abbr title="Opciones">Editar</abbr></th>
+                        <th className="has-text-centered"><abbr title="Opciones">Borrar</abbr></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,16 +74,30 @@ const TableSupplies = (props) => {
                             <td>
                                 {info[key].name}
                             </td>
+
+
                             <td className="has-text-centered">
                                 <button className="button  tooltip is-small is-tooltip-multiline " data-tooltip={formatTooltip(info[key].features)}>
                                     {info[key].features.length}
                                 </button>
-
                             </td>
-                            <td><a><span className="icon is-small has-text-success" onClick={props.setSupplie.bind(this, key)}>
+                            <td className="has-text-centered">
+                                <a>
+                                    <Link to={{
+                                        pathname: "/supply/report/create",
+                                        state: { supply: info[key] }
+                                    }} >
+                                        <span className="icon is-small has-text-dark">
+                                            <i class="far fa-sticky-note"></i>
+                                        </span>
+                                    </Link>
+                                </a>
+                            </td>
+
+                            <td className="has-text-centered"><a><span className="icon is-small has-text-link" onClick={props.setSupplie.bind(this, key)}>
                                 <i className="fas fa-lg fa-edit   "></i>
                             </span></a></td>
-                            <td><a><span className="icon has-text-danger is-small" onClick={props.actionDelete.bind(this, key)}>
+                            <td className="has-text-centered"><a><span className="icon has-text-danger is-small" onClick={props.actionDelete.bind(this, key)}>
                                 <i className="fas fa-trash-alt"></i>
                             </span></a></td>
                         </tr>
@@ -158,12 +174,9 @@ class HomeSupply extends Component {
     }
     setSupplie(key) {
         this.setState({ supplie: this.state.supplies[key], render_create: false })
-        
-
         setTimeout(() => {
-            this.setState({render_create: true})    
+            this.setState({ render_create: true })
         }, 100);
-        
     }
     editRequest(info) { //info : {name: name}
         const id = this.state.type_list[this.state.key].id;

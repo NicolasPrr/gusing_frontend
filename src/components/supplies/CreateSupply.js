@@ -183,6 +183,7 @@ class CreateSupply extends Component {
         })
 
     }
+    
     createRequest() {
         let url;
         let features = [];
@@ -260,6 +261,7 @@ class CreateSupply extends Component {
                        </button>
                     <OptionMenu edit_data={this.props.edit_data} createRequest={this.createRequest} editRequest={this.editRequest} />
                 </div>
+                
             </div>
         );
     }

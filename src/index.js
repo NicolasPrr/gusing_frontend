@@ -13,12 +13,13 @@ import InterfaceReport from './components/reportInterfaz/InterfaceReport'
 import Clients from './components/clients/Clients'
 import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
 import Stepper from './components/Stepper'
+import StepperSupply from './components/supplies/reports/StepperSupply'
 import HomeInsumos from './components/HomeInsumos';
 import HomeSupply from './components/supplies/HomeSupply'
+
 const routing = (
   <Router>
     <div>
-
       <Header/>
       <Route exact path="/" component={Loadersn} />
       <Route path="/colapsible/garnic" component={Garnic} />
@@ -27,6 +28,7 @@ const routing = (
       <Route path="/clone/report/:reportId" component={Stepper} />
       <Route path="/edit/report/:reportId" component={Stepper} />
       <Route exact strict path="/print/:reportId" component={HeaderGeneral} />
+      <Route path ="/supply/report/create" component ={StepperSupply} /> 
       <Route path="/reports/" component={InterfaceReport} />
       <Route path="/clients" component={Clients} />
     </div>

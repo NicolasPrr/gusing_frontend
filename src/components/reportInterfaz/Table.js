@@ -87,6 +87,7 @@ class Table extends Component {
                             <th>Editar</th>
                             <th>Clonar</th>
                             <th>Eliminar</th>
+                            <td className="has-text-centered"> <input className = "input is-small"/></td>
                         </tr>
                     </thead>
                     <tbody>
