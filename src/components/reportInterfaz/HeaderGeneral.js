@@ -87,10 +87,10 @@ const Header = (props) => {
     return (
         <div className="box is-zise-7">
 
-           
+
             <div className="columns">
                 <div className="column  has-text-justified is-size-7">
-                   <p><strong>N° de reporte FQ: </strong> {report_number} </p>
+                    <p><strong>N° de reporte FQ: </strong> {report_number} </p>
                     <p> <strong>Cliente: </strong> {client_name}</p>
                     <p> <strong>Muestra:</strong> {sample}          </p>
                     <p> <strong>Nombre de la muestra:</strong> {sample_name}          </p>
@@ -105,7 +105,7 @@ const Header = (props) => {
                     <p> <strong>Forma farmaceutica:</strong> {farmaceutic_shape}          </p>
                     <p> <strong>Metodo de analisis:</strong> {method}          </p>
                     <p> <strong>Fecha de recepción:</strong> {date_reception}          </p>
-                    
+
 
                 </div>
                 <div className="column  has-text-justified is-size-7">
@@ -114,7 +114,7 @@ const Header = (props) => {
                     <p> <strong>Fecha de muestreo: </strong> {date_sampling}          </p>
                     <p> <strong>Fecha de analisis: </strong> {date_analisis}          </p>
                     <p> <strong>Fecha de informe:</strong> {date_report}          </p>
-             
+
 
 
 
@@ -188,72 +188,75 @@ const Signature = () => {
     )
 }
 const Report = (props) => {
-    /*
-    <h2 class="subtitle">
-                Parametros y especificacion
-            </h2>
-    */
-    //Datos de especificacion
-    const range_diameter_base = props.data1.range_diameter_base;
-    const diameter_base = props.data1.diameter_base;
-    const range_total_length = props.data1.range_total_length;
-    const total_length = props.data1.total_length;
-    const range_wall_gauge = props.data1.range_wall_gauge;
-    const wall_gauge = props.data1.wall_gauge;
-    //datos resultados
-    const result_diameter_base = props.data.diameter_base;
-    const result_total_length = props.data.total_lenght;
-    const result_wall_gauge = props.data.wall_gauge;
-    const color = props.data.color;
-    const fulfillment = props.data.fulfillment;
+    const features = props.features;
+    const results = props.results
     return (
 
         <div id="content">
-        
-            <table className="table is-fullwidth is-bordered is-size-7">
-                <thead>
-                    <tr>
-                        <th> Parametro   </th>
-                        <th> Resultados       </th>
-                        <th> Especificación    </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Diametro de base</td>
-                        <td>{result_diameter_base}</td>
-                        <td>{diameter_base} ± {range_diameter_base}</td>
-                    </tr>
+            <div className="columns">
+                <div className="column">
 
-                    <tr>
-                        <td>Largo total</td>
-                        <td>{result_total_length}</td>
-                        <td>{total_length} ± {range_total_length} </td>
-                    </tr>
+                    <table className="table is-fullwidth is-bordered is-size-7">
+                        <thead>
+                            <tr>
+                                <th> Parametro   </th>
+                                <th> Resultados       </th>
+                                <th> Especificación    </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Object.keys(features).map(key => (
+                                <tr>
+                                    <td> {features[key].name}</td>
+                                    <td> {results[key].result} </td>
+                                    <td> {features[key].especification}</td>
 
-                    <tr>
-                        <td>Calibre pared</td>
-                        <td>{result_wall_gauge}</td>
-                        <td>{wall_gauge} ± {range_wall_gauge}</td>
-                    </tr>
-                    <tr>
-                        <td>Color</td>
-                        <td>{color}</td>
-                    </tr>
-                    <tr>
-                        <td>Cumple</td>
-                        <td>{fulfillment}</td>
-                    </tr>
+                                </tr>
+                            ))}
+
+                        </tbody>
+                    </table>
+                </div>
+                <div className="column">
+
+                    <table className="table is-fullwidth is-bordered is-size-7">
+                        <thead>
+                            <tr>
+                                <th> Parametro   </th>
+                                <th> Resultados       </th>
+                                <th> Especificación    </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Object.keys(features).map(key => (
+                                <tr>
+                                    <td> {features[key].name}</td>
+                                    <td> {results[key].result} </td>
+                                    <td> {features[key].especification}</td>
+
+                                </tr>
+                            ))}
+
+                            <tr>
+                                <td> Color</td>
+                                <td> {props.color} </td>
+                            </tr>
+
+                            <tr>
+                                <td> Cumple</td>
+                                <td> {props.isok} </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
 
-
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
     )
 }
 function formateDate(dateInput) {
-    const months = ["Ene", "Feb", "Mar", "Abr","May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+    const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
     var Regexp = /(\d{4})-(\d{2})-(\d{2})/
     let [inp, year, month, day] = Regexp.exec(dateInput)
     month = months[parseInt(month) - 1];
@@ -289,42 +292,42 @@ class HeaderGeneral extends Component {
         let test = [];
         if (dat !== null) {
             test.push(<Header data={dat} />)
-             test.push(
-                 <Report data={dat.reportable} data1={dat.especificable} />
-             )
-             test.push(<Observation data={dat.report_header.observation} />)
+            test.push(
+                <Report features={dat.features} results={dat.result_supplies} color={dat.color} isok={dat.isok} />
+            )
+              test.push(<Observation data={dat.observation} />)
         }
         else
             test = null;
 
         return (
-                <div className="container">
-                    <div className="columns is-gapless">
-                        <div className="column is-3 box">
-                            <span className="image">
-                                <br/>
-                                <img src="/resources/LogoGusing.png" />
-                            </span>
-                        </div>
-                        <div className="column">
-                            <Encabezado1 />
-                            <Encabezado2 />
-                            <Encabezado3 />
-                        </div>
+            <div className="container">
+                <div className="columns is-gapless">
+                    <div className="column is-3 box">
+                        <span className="image">
+                            <br />
+                            <img src="/resources/LogoGusing.png" />
+                        </span>
                     </div>
-
-                    <div>
-                        {test}
+                    <div className="column">
+                        <Encabezado1 />
+                        <Encabezado2 />
+                        <Encabezado3 />
                     </div>
-                    <div id="background">
-                        <p id="bg-text">COPIA CONTROLADA</p>
-                    </div>
-                    <Signature />
-                    <Note />
-                    <Footer />
-           
                 </div>
-           
+
+                <div>
+                    {test}
+                </div>
+                <div id="background">
+                    <p id="bg-text">COPIA CONTROLADA</p>
+                </div>
+                <Signature />
+                <Note />
+                <Footer />
+
+            </div>
+
         );
     }
 }

@@ -20,7 +20,7 @@ const routing = (
   <Router>
     <div>
       <Header/>
-      <Route exact path="/" component={Loadersn} />
+      
       <Route path="/colapsible/garnic" component={Garnic} />
       <Route path="/colapsible/desflanat" component={Desflanat} />
       <Route path="/insumos" component={HomeSupply} />
