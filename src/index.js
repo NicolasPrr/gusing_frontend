@@ -14,7 +14,6 @@ import Clients from './components/clients/Clients'
 import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
 import Stepper from './components/Stepper'
 import StepperSupply from './components/supplies/reports/StepperSupply'
-import HomeInsumos from './components/HomeInsumos';
 import HomeSupply from './components/supplies/HomeSupply'
 
 const routing = (

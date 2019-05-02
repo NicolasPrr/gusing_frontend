@@ -276,7 +276,7 @@ class HeaderGeneral extends Component {
     }
     componentDidMount() {
         const { reportId } = this.props.match.params;
-        let url = URLBack + "/reports/" + reportId
+        let url = URLBack + "/report_supplies/" + reportId
         axios.get(url).then(res => {
             console.log(res)
             this.setState({ data: res.data })
@@ -288,11 +288,11 @@ class HeaderGeneral extends Component {
         const dat = this.state.data;
         let test = [];
         if (dat !== null) {
-            test.push(<Header data={dat.report_header} />)
-            test.push(
-                <Report data={dat.reportable} data1={dat.especificable} />
-            )
-            test.push(<Observation data={dat.report_header.observation} />)
+            test.push(<Header data={dat} />)
+             test.push(
+                 <Report data={dat.reportable} data1={dat.especificable} />
+             )
+             test.push(<Observation data={dat.report_header.observation} />)
         }
         else
             test = null;

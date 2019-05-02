@@ -127,6 +127,7 @@ class HomeSupply extends Component {
         this.renderAddSupply = this.renderAddSupply.bind(this);// Renderiza el componente para crear un insumo
         this.deleteSupplyRequest = this.deleteSupplyRequest.bind(this);//borra el insumo
         this.setSupplie = this.setSupplie.bind(this);
+        this.getTypes = this.getTypes.bind(this); 
     }
     activeEditModal(key) {
         this.setState({ key: key, render_modal: true });
@@ -173,6 +174,7 @@ class HomeSupply extends Component {
         this.setState({ type_list: items });
     }
     setSupplie(key) {
+        //renderiza el form paraa crear o editar 
         this.setState({ supplie: this.state.supplies[key], render_create: false })
         setTimeout(() => {
             this.setState({ render_create: true })
@@ -241,6 +243,14 @@ class HomeSupply extends Component {
             }
         });
     }
+    getTypes(name){
+        const url = `${URLBack}/type_supplies/search`;
+        axios.post(url, {name: name}).then(res => {
+            this.setState({type_list: res.data})
+        }).catch(function (error){
+            console.log(error);
+        })
+    }
     getAllRequest() {
         //Obtiene todos los tipos de insumo
         const url = `${URLBack}/type_supplies`;
@@ -291,7 +301,7 @@ class HomeSupply extends Component {
                 <div className="columns">
                     <div className="column is-one-third">
                         <CreateType addItem={this.addItem} />
-                        <SearchBox />
+                        <SearchBox action = {this.getTypes}/>
                         <Table
                             data={this.state.type_list}
                             edit={this.activeEditModal}

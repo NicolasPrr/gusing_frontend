@@ -95,7 +95,7 @@ class ReportForm extends Component {
     e.preventDefault()
     console.log(this.props.data.sample)
     const data = {
-
+      
       sample: this.sample.current.value,
       sample_name: this.sample_name.current.value,
       report_number: this.report.current.value,

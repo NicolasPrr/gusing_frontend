@@ -3,10 +3,10 @@ import React, { PureComponent } from "react";
 class SearchBox extends PureComponent {
     search = React.createRef();
     handle = (e) => {
-        const info = {
-            busqueda: this.search.current.value
-        }
-        this.props.lookingProduct(info);
+        // /const info = {
+        //     busqueda: this.search.current.value
+        // }
+        this.props.action(this.search.current.value);
     }
     render() {
         return (

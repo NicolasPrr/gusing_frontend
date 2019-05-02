@@ -30,13 +30,13 @@ class InterfaceReport extends Component {
         if (page >= 1 && page <= this.state.amountPages) {
             this.setState({ currentPage: page })
             if (this.state.paramsSearch === null) {
-                let url = URLBack + "/reports/pages/" + page;
+                let url = URLBack + "/report_supplies/pages/" + page;
                 axios.get(url).then(res => {
                     console.log(res)
                     this.setState({ reports: res.data })
                 })
             } else {
-                let url = URLBack + "/reports/search/" + page;
+                let url = URLBack + "/report_supplies/search/" + page;
                 const data = this.state.paramsSearch;
                 axios.post(url, data).then(res => {
                     console.log(res)
@@ -52,7 +52,7 @@ class InterfaceReport extends Component {
     }
 
     deleteRequest(id, key) {
-        let url = URLBack + "/reports/" + id;
+        let url = URLBack + "/report_supplies/" + id;
         let reports;
         axios.delete(url).then(res => {
             if (res.status === 204) {
@@ -74,12 +74,12 @@ class InterfaceReport extends Component {
 
     }
     componentDidMount() {
-        let url = URLBack + "/reports/pages/1"
+        let url = URLBack + "/report_supplies/pages/1"
         axios.get(url).then(res => {
             console.log(res)
             this.setState({ reports: res.data })
         })
-        url = URLBack + "/reports/pages"
+        url = `${URLBack}/report_supplies/pages`
         axios.get(url).then(res => {
             console.log(res)
             this.setState({ amountPages: res.data })
@@ -88,7 +88,7 @@ class InterfaceReport extends Component {
 
     search(data) {
         this.setState({ paramsSearch: data }) //parametros de busqueda para paginacion, si no está nulo, hara la consulta con estos parametros.
-        let url = URLBack + "/reports/search/"
+        let url = URLBack + "/report_supplies/search/"
         axios.post(url, data).then(res => {
             console.log(res)
             if (res.status === 200) {
@@ -98,7 +98,7 @@ class InterfaceReport extends Component {
             console.log(error)
         })
 
-        url = URLBack + "/reports/search/1"
+        url = URLBack + "/report_supplies/search/1"
         axios.post(url, data).then(res => {
             console.log(res)
             if (res.status === 200) {
