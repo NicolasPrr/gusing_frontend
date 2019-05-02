@@ -187,36 +187,94 @@ const Signature = () => {
         </div>
     )
 }
+function renderColorIsOk(i, color, isok) {
+    if (parseInt(i) === 0) {
+        return (
+            <React.Fragment>
+                <tr>
+                    <td> Color</td>
+                    <td> {color} </td>
+                </tr>
+
+                <tr>
+                    <td> Cumple</td>
+                    <td> {isok} </td>
+                </tr>
+            </React.Fragment>
+        )
+    }
+    
+}
 const Report = (props) => {
-    const features = props.features;
-    const results = props.results
+    let features = [];
+    let results = []
+    let attrResults = [];
+    let attrFeatures = [];
+
+    let attrResults2 = [];
+    let attrFeatures2 = [];
+
+    for (let i = 0; i < props.features.length; i++) {
+        if (i < 4) {
+            attrFeatures.push(props.features[i])
+            attrResults.push(props.results[i])
+        } else {
+            attrFeatures2.push(props.features[i])
+            attrResults2.push(props.results[i])
+        }
+    }
+    features.push(attrFeatures)
+    features.push(attrFeatures2)
+    results.push(attrResults)
+    results.push(attrResults2)
+    console.log(features)
+
+    // const results = props.results
     return (
 
         <div id="content">
             <div className="columns">
-                <div className="column">
+                {Object.keys(features).map(key => (
 
-                    <table className="table is-fullwidth is-bordered is-size-7">
-                        <thead>
-                            <tr>
-                                <th> Parametro   </th>
-                                <th> Resultados       </th>
-                                <th> Especificación    </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.keys(features).map(key => (
+                    <div className="column">
+
+                        <table className="table is-fullwidth is-bordered is-size-7">
+                            <thead>
                                 <tr>
-                                    <td> {features[key].name}</td>
-                                    <td> {results[key].result} </td>
-                                    <td> {features[key].especification}</td>
-
+                                    <th> Parametro   </th>
+                                    <th> Resultados       </th>
+                                    <th> Especificación    </th>
                                 </tr>
-                            ))}
+                            </thead>
+                            <tbody>
+                                {Object.keys(features[key]).map(subkey => (
+                                    <tr>
+                                        <td> {features[key][subkey].name}</td>
+                                        <td> {results[key][subkey].result} </td>
+                                        <td> {features[key][subkey].especification}</td>
 
-                        </tbody>
-                    </table>
-                </div>
+                                    </tr>
+                                ))}
+                                
+                                {renderColorIsOk(key,props.color,props.isok)}
+                            </tbody>
+
+
+
+
+                        </table>
+
+
+
+                    </div>
+
+                ))}
+
+
+
+
+                {/*             
+                
                 <div className="column">
 
                     <table className="table is-fullwidth is-bordered is-size-7">
@@ -248,9 +306,32 @@ const Report = (props) => {
                             </tr>
                         </tbody>
                     </table>
-
-
                 </div>
+                <div className="column">
+
+                    <table className="table is-fullwidth is-bordered is-size-7">
+                        <thead>
+                            <tr>
+                                <th> Parametro   </th>
+                                <th> Resultados       </th>
+                                <th> Especificación    </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Object.keys(features).map(key => (
+                                <tr>
+                                    <td> {features[key].name}</td>
+                                    <td> {results[key].result} </td>
+                                    <td> {features[key].especification}</td>
+
+                                </tr>
+                            ))}
+
+                        </tbody>
+                    </table>
+
+
+                </div> */}
             </div>
         </div>
     )
@@ -295,7 +376,7 @@ class HeaderGeneral extends Component {
             test.push(
                 <Report features={dat.features} results={dat.result_supplies} color={dat.color} isok={dat.isok} />
             )
-              test.push(<Observation data={dat.observation} />)
+            test.push(<Observation data={dat.observation} />)
         }
         else
             test = null;
