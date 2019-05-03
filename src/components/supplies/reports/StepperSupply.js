@@ -122,6 +122,7 @@ class StepperSupply extends Component {
         let dataReport = this.state.dataReport;
         dataReport.color = this.state.dataProduct.color;
         dataReport.isok = this.state.dataProduct.isOk;
+        dataReport.observation = this.state.dataVef
         dataReport.supply_id = this.state.dataSupply.supply.id;
         this.setState({ dataReport: dataReport });
         axios.post(url, {

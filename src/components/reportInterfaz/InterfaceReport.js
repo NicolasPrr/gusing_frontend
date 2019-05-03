@@ -118,7 +118,7 @@ class InterfaceReport extends Component {
             renderTable = <h1 className="title"> No hay reportes que mostrar</h1>
         return (
 
-            <div className="container">
+            <div className="container notification">
                 <SearchBox search={this.search} />
                 {renderTable}
             </div>

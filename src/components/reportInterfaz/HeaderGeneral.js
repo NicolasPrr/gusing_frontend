@@ -203,7 +203,7 @@ function renderColorIsOk(i, color, isok) {
             </React.Fragment>
         )
     }
-    
+
 }
 const Report = (props) => {
     let features = [];
@@ -224,9 +224,11 @@ const Report = (props) => {
         }
     }
     features.push(attrFeatures)
-    features.push(attrFeatures2)
     results.push(attrResults)
-    results.push(attrResults2)
+    if (props.features.length >= 4) {
+        features.push(attrFeatures2)
+        results.push(attrResults2)
+    }
     console.log(features)
 
     // const results = props.results
@@ -255,8 +257,8 @@ const Report = (props) => {
 
                                     </tr>
                                 ))}
-                                
-                                {renderColorIsOk(key,props.color,props.isok)}
+
+                                {renderColorIsOk(key, props.color, props.isok)}
                             </tbody>
 
 
