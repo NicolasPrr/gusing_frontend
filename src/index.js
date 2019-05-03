@@ -7,23 +7,27 @@ import Header from './components/Header'
 import Loadersn from './components/loaders/Loadersn'
 import './styles/App.scss';
 import Garnic from './components/colapsibles/Garnic'
+import Desflanat from './components/colapsibles/Desflanat'
+
 import InterfaceReport from './components/reportInterfaz/InterfaceReport'
 import Clients from './components/clients/Clients'
 import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
 import Stepper from './components/Stepper'
-import HomeInsumos from './components/HomeInsumos';
+import StepperSupply from './components/supplies/reports/StepperSupply'
+import HomeSupply from './components/supplies/HomeSupply'
 
 const routing = (
   <Router>
     <div>
-
       <Header/>
-      <Route exact path="/" component={Loadersn} />
+      
       <Route path="/colapsible/garnic" component={Garnic} />
-      <Route path="/insumos" component={HomeInsumos} />
+      <Route path="/colapsible/desflanat" component={Desflanat} />
+      <Route path="/insumos" component={HomeSupply} />
       <Route path="/clone/report/:reportId" component={Stepper} />
       <Route path="/edit/report/:reportId" component={Stepper} />
       <Route exact strict path="/print/:reportId" component={HeaderGeneral} />
+      <Route path ="/supply/report/create" component ={StepperSupply} /> 
       <Route path="/reports/" component={InterfaceReport} />
       <Route path="/clients" component={Clients} />
     </div>

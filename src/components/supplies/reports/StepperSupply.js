@@ -1,23 +1,52 @@
 import React, { Component } from 'react';
-import Report from './Report'
-import ReportGarnic from './colapsibles/garnic/ReportGarnic'
-import LastStep from './LastStep'
+import ReportForm from './ReportForm';
+// import LastStep from '../../LastStep'
 import axios from 'axios'
-import URLBack from '../UrlBack'
+import URLBack from '../../../UrlBack'
 import Swal from 'sweetalert2'
-function selectUrlRequest(type){
+import ResultForm from './ResultForm';
+function selectUrlRequest(type) {
     //Retorna la url despues y el el tipo de require 
     //http://localhost:3000/report_garnics
-    switch(type){
+    switch (type) {
         //"[url, requiereDatabase]"
         case "ReportGarnic":
-            return  ["/report_garnics" , "report_garnic"]
+            return ["/report_garnics", "report_garnic"]
         default:
             return null;
     }
-        
 }
-class Stepper extends Component {
+
+
+function isEmptyObject(obj) {
+    return (Object.getOwnPropertyNames(obj).length === 0);
+}
+const LastStep = (props) => {
+    let value = props.dataVef;
+    if (isEmptyObject(value)) {
+        value = null;
+    }
+    return (
+        <div>
+            <form>
+                <div className="field">
+                    Observaciones
+                        <div className="control">
+                        <textarea className="textarea is-primary is-small"
+                            placeholder="Observaciones"
+                            defaultValue={value}
+                            onChange={props.setDataVef}
+                        >
+                        </textarea>
+                    </div>
+                </div>
+                <button className="button is-success is-small" type="submit" onClick={props.action.bind(this, 1)} > Finalizar </button>
+            </form>
+            <button className="button is-dark is-small" type="submit" onClick={props.action.bind(this, -1)} > Retroceder </button>
+        </div >
+    );
+}
+class StepperSupply extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -31,9 +60,10 @@ class Stepper extends Component {
         }
         this.nextStep = this.nextStep.bind(this)
         this.headerForm = this.headerForm.bind(this)
-        this.productForm = this.productForm.bind(this)
+        this.setProductForm = this.setProductForm.bind(this)
         this.verfForm = this.verfForm.bind(this)
         this.createReport = this.createReport.bind(this)
+        this.setDataVef = this.setDataVef.bind(this)
 
     }
 
@@ -58,7 +88,7 @@ class Stepper extends Component {
         const st = this.state.step
         switch (numberButton) {
             case 2:
-                if (st > 1 && st <= 4)
+                if (st === 4)
                     return <button className="button is-small is-dark" onClick={this.nextStep.bind(this, -1)}>retroceder</button>
                 else
                     return null
@@ -67,45 +97,39 @@ class Stepper extends Component {
 
         }
     }
-    choseForm(arg) {
-        switch (arg) {
-            case "ReportGarnic":
-            //obj infomracion de las especificaciones del producto más el nombre de la muestra.
-            //productAction  accion del producto, maneja el stepper.
-            //data, infromacion del resultado del producto.
-                return <ReportGarnic obj={this.state.dataEspec} productAction={this.productForm} data={this.state.dataProduct} />
-            default:
-                return null
-        }
-    }
     renderForm(step) {
         //Selecciona que reenderizar por paso...
         //mode es el tipo de producto, se renderiza un formulario para cada tipo.
         //3 es observaciones
         switch (step) {
             case 1:
-                return <Report obj={this.props.obj} sample={this.props.sample} reportAction={this.headerForm} data={this.state.dataReport} />
+                return <ReportForm reportAction={this.headerForm} 
+                data={this.state.dataReport} 
+                />
             case 2:
-                return this.choseForm(this.state.mode)
+                return <ResultForm dataEspec={this.state.dataEspec}
+                    dataProduct={this.state.dataProduct}
+                    setProductForm={this.setProductForm}
+                />
             case 3:
-                return <LastStep data={this.state.dataVef} action={this.verfForm} />
+                return <LastStep dataVef={this.state.dataVef} action={this.verfForm} setDataVef={this.setDataVef} />
             default:
                 return null
         }
     }
-    createReport(data) {
-        const [url_complement, require ] = selectUrlRequest(this.state.mode)
-        let url = URLBack + url_complement;
-        let report = this.state.dataReport;
-        report.observation = data.observation;
-        this.setState({ dataReport: report })
-
-        axios.post(url, { [require]: this.state.dataProduct,
-             id_asociation: this.state.dataEspec.id, 
-             report: this.state.dataReport
-         }).then(res => {
+    createReport() {
+        let url = `${URLBack}/report_supplies`;
+        let dataReport = this.state.dataReport;
+        dataReport.color = this.state.dataProduct.color;
+        dataReport.isok = this.state.dataProduct.isOk;
+        dataReport.observation = this.state.dataVef
+        dataReport.supply_id = this.state.dataSupply.supply.id;
+        this.setState({ dataReport: dataReport });
+        axios.post(url, {
+            report_supply: this.state.dataReport,
+            results: this.state.dataProduct,
+        }).then(res => {
             if (res.status === 201) {
-                console.log(res.data)
                 Swal({
                     position: 'top-end',
                     type: 'success',
@@ -128,19 +152,19 @@ class Stepper extends Component {
 
     }
     editReport(data) {
-        const [url_complement, require ] = selectUrlRequest(this.state.mode)
+        const [url_complement, require] = selectUrlRequest(this.state.mode)
         let url = URLBack + url_complement + "/" + this.state.defaultReport.reportable_id;
-        selectUrlRequest(this.state.mode)
+        // selectUrlRequest(this.state.mode)
         let report = this.state.dataReport;
         report.observation = data.observation;
         this.setState({ dataReport: report })
-        
-        axios.put(url, { [require]: this.state.dataProduct,
-             id_report: this.state.defaultReport.id, 
-             report: this.state.dataReport
-         }).then(res => {
+
+        axios.put(url, {
+            [require]: this.state.dataProduct,
+            id_report: this.state.defaultReport.id,
+            report: this.state.dataReport
+        }).then(res => {
             if (res.status === 201) {
-                console.log(res.data)
                 Swal({
                     position: 'top-end',
                     type: 'success',
@@ -162,54 +186,47 @@ class Stepper extends Component {
         });
 
     }
-
+    setDataVef(e) {
+        const info = e.target.value;
+        this.setState({ dataVef: info })
+    }
     //Se avanza un paso, se guarda el estado
     headerForm(data) {
         this.setState({ dataReport: data })
         this.nextStep(1)
     }
-    productForm(data) {
-        //paso del producto
+    setProductForm(data, next) {
         this.setState({ dataProduct: data })
-        this.nextStep(1)
+        this.nextStep(next)
     }
-    verfForm(data, step) {
+    verfForm(step) {
         //paso final, la url contiene edit, se hará la solicitud de edición.
-        this.setState({ dataVef: data })
         this.nextStep(step)
-        if(window.location.pathname.includes("edit")){
-            if (step === 1)  this.editReport(data);
-        }else{
-            if (step === 1) this.createReport(data)
+        if (window.location.pathname.includes("edit")) {
+            if (step === 1) this.editReport();
+        } else {
+            if (step === 1) this.createReport()
         }
     }
     componentDidMount() {
-        let report_header;
-        //Cargamos los datos desde la peticion buscando el match
-        //Si se hace una solicitud de edición o clonar se accede al if
-        if (this.props.match !== undefined) {
-            const { reportId } = this.props.match.params;
-            let url = URLBack + "/reports/" + reportId;
-            let  mode ;
-            axios.get(url).then(res => {
-                console.log(res)
-                report_header = res.data.report_header;
-                this.setState({ dataReport: report_header, 
-                    dataProduct: res.data.reportable,
-                     dataVef: {observation: res.data.report_header.observation},
-                     dataEspec: res.data.especificable,
-                     defaultReport: report_header,
-                     })
-                //Seleccionamos el modo para renderizarlo luego
-                mode = report_header.reportable_type;
-                this.setState({mode: mode})
-            })
-            console.log(this.state.data)
+        let supply;
+        let dataEspec = [];
+        //const {supply} = this.props.location.state;
+        //&& isEmptyObject(this.state.dataReport))
+        if (this.props.location.state !== undefined) {
+            supply = this.props.location.state.supply
+            const data = { sample: supply.type_supply.name, sample_name: supply.name, supply_id: supply.id }
+            for (let i = 0; i < supply.features.length; i++)
+                dataEspec.push(supply.features[i])
 
+            this.setState({
+                dataReport: data,
+                dataEspec: dataEspec,
+            })
 
         }
-        if(this.props.mode !== undefined) this.setState({mode: this.props.mode})
-        if(this.props.obj  !== undefined) this.setState({dataEspec: this.props.obj})
+        this.setState({ dataSupply: this.props.location.state });
+
     }
     render() {
         return (
@@ -257,4 +274,4 @@ class Stepper extends Component {
     }
 }
 
-export default Stepper; 
+export default StepperSupply; 

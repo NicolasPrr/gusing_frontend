@@ -22,7 +22,7 @@ class Pagination extends Component {
     render() {
         const numberPages = this.props.pages;
         let allItems = [];
-        for(var i = 0; i < numberPages; i++) allItems.push(<ItemPage page = { i +1 } nowPage = {this.props.currentPage} action = {this.props.changePage}/>)
+        for(var i = 0; i < numberPages; i++) allItems.push(<ItemPage page = { i +1 } nowPage = {this.props.currentPage} action = {this.props.changePage} key = {i}/>)
         return (
             <div>
                 <nav className="pagination is-rounded is-centered" role="navigation" aria-label="pagination">

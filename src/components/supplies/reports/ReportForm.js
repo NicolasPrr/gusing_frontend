@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import axios from 'axios';
-import URLBack from "../UrlBack";
+import URLBack from '../../../UrlBack'
 
 function isEmptyObject(obj){
   return (Object.getOwnPropertyNames(obj).length === 0);
 }
-class Report extends Component {
+class ReportForm extends Component {
   //Formulario para creación de reporte.
   constructor(props) {
     super(props);
@@ -95,7 +95,7 @@ class Report extends Component {
     e.preventDefault()
     console.log(this.props.data.sample)
     const data = {
-
+      
       sample: this.sample.current.value,
       sample_name: this.sample_name.current.value,
       report_number: this.report.current.value,
@@ -145,25 +145,17 @@ class Report extends Component {
   render() {
     let samples;
     let samples_name;
-    if(this.props.obj !== undefined){
-      samples = this.props.sample;
-      samples_name = this.props.obj.name;
-    }
-    else{
-      samples_name = this.props.data.sample_name;
-      samples = this.props.data.sample;
-    }
-    let method = "Dimensional";
+    let method = "Dimensional"
     if(!isEmptyObject(this.props.data)){
+      samples = this.props.data.sample;
+      samples_name = this.props.data.sample_name;
       method = this.props.data.method;
     }
+    console.log("Props")
+    console.log(this.props)
     
-   /* if(this.props.data.sample_name === undefined)
-      samples_name = this.props.obj.name
-    else 
-      samples_name = this.props.data.sample_name */
     return (
-      <div >
+      <div className = "notification" >
         <form onSubmit={this.handleForm}  >
           <p>N°de reporte ensayo FQ </p>
           <input
@@ -410,4 +402,4 @@ class Report extends Component {
   }
 }
 
-export default Report;
+export default ReportForm;

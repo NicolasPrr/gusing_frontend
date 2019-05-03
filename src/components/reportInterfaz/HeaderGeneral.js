@@ -31,7 +31,7 @@ const Encabezado1 = (props) => {
             <table className="table is-fullwidth is-bordered is-size-7">
                 <thead>
                     <tr>
-                        <td className=" is-title has-text-centered">Control de calidad</td >
+                        <td className=" is-title has-text-centered">CONTROL DE CALIDAD</td >
                     </tr>
                 </thead>
             </table>
@@ -44,8 +44,8 @@ const Encabezado2 = (props) => {
             <table className="table is-fullwidth is-bordered is-size-7">
                 <thead>
                     <tr>
-                        <td className="  has-text-centered">TITULO REPORTE ENSAYO  PT-PP</td >
-                        <td className="  has-text-centered">Codigo FR-CC -51</td >
+                        <td className="  has-text-centered">TITULO: REPORTE ENSAYO DE MATERIALES  PT-PP</td >
+                        <td className="  has-text-centered">Codigo FR-CC -65</td >
                     </tr>
                 </thead>
             </table>
@@ -59,7 +59,7 @@ const Encabezado3 = (props) => {
                 <thead>
                     <tr>
                         <td className=" has-text-centered " >Version 04</td >
-                        <td className=" has-text-centered">VIGENCIA DESDE EL 28 DE DICIEMBRE DEL 2018</td >
+                        <td className=" has-text-centered">VIGENCIA DESDE EL 28 DE FEBRERO DE 2017</td >
                         <td className=" has-text-centered">Pagina 1 de 1</td >
                     </tr>
                 </thead>
@@ -87,10 +87,10 @@ const Header = (props) => {
     return (
         <div className="box is-zise-7">
 
-           
+
             <div className="columns">
                 <div className="column  has-text-justified is-size-7">
-                   <p><strong>N° de reporte FQ: </strong> {report_number} </p>
+                    <p><strong>N° de reporte FQ: </strong> {report_number} </p>
                     <p> <strong>Cliente: </strong> {client_name}</p>
                     <p> <strong>Muestra:</strong> {sample}          </p>
                     <p> <strong>Nombre de la muestra:</strong> {sample_name}          </p>
@@ -105,7 +105,7 @@ const Header = (props) => {
                     <p> <strong>Forma farmaceutica:</strong> {farmaceutic_shape}          </p>
                     <p> <strong>Metodo de analisis:</strong> {method}          </p>
                     <p> <strong>Fecha de recepción:</strong> {date_reception}          </p>
-                    
+
 
                 </div>
                 <div className="column  has-text-justified is-size-7">
@@ -114,7 +114,7 @@ const Header = (props) => {
                     <p> <strong>Fecha de muestreo: </strong> {date_sampling}          </p>
                     <p> <strong>Fecha de analisis: </strong> {date_analisis}          </p>
                     <p> <strong>Fecha de informe:</strong> {date_report}          </p>
-             
+
 
 
 
@@ -160,7 +160,7 @@ const Footer = () => {
             <p className=" has-text-centered">
 
                 Laboratorios Gusing 100% Productos Naturales y Homeopaticos <br />
-                Carrera 10 Este N°30-03 San Mateo-Soacha PBX 761-75-96<br /> www.laboratoriosgusing.com
+                Carrera 10 Este N°30-03 San Mateo-Soacha PBX 781-75-98<br /> www.laboratoriosgusing.com
             </p>
         </div>
     )
@@ -180,80 +180,166 @@ const Signature = () => {
                     <p>Verificado por: </p>
                     <br />
                     <hr />
-                    Jefe de control de calidad
+                    Jefe control de calidad
             </div>
 
             </div>
         </div>
     )
 }
+function renderColorIsOk(i, color, isok) {
+    if (parseInt(i) === 0) {
+        return (
+            <React.Fragment>
+                <tr>
+                    <td> Color</td>
+                    <td> {color} </td>
+                </tr>
+
+                <tr>
+                    <td> Cumple</td>
+                    <td> {isok} </td>
+                </tr>
+            </React.Fragment>
+        )
+    }
+
+}
 const Report = (props) => {
-    /*
-    <h2 class="subtitle">
-                Parametros y especificacion
-            </h2>
-    */
-    //Datos de especificacion
-    const range_diameter_base = props.data1.range_diameter_base;
-    const diameter_base = props.data1.diameter_base;
-    const range_total_length = props.data1.range_total_length;
-    const total_length = props.data1.total_length;
-    const range_wall_gauge = props.data1.range_wall_gauge;
-    const wall_gauge = props.data1.wall_gauge;
-    //datos resultados
-    const result_diameter_base = props.data.diameter_base;
-    const result_total_length = props.data.total_lenght;
-    const result_wall_gauge = props.data.wall_gauge;
-    const color = props.data.color;
-    const fulfillment = props.data.fulfillment;
+    let features = [];
+    let results = []
+    let attrResults = [];
+    let attrFeatures = [];
+
+    let attrResults2 = [];
+    let attrFeatures2 = [];
+
+    for (let i = 0; i < props.features.length; i++) {
+        if (i < 4) {
+            attrFeatures.push(props.features[i])
+            attrResults.push(props.results[i])
+        } else {
+            attrFeatures2.push(props.features[i])
+            attrResults2.push(props.results[i])
+        }
+    }
+    features.push(attrFeatures)
+    results.push(attrResults)
+    if (props.features.length >= 4) {
+        features.push(attrFeatures2)
+        results.push(attrResults2)
+    }
+    console.log(features)
+
+    // const results = props.results
     return (
 
         <div id="content">
-        
-            <table className="table is-fullwidth is-bordered is-size-7">
-                <thead>
-                    <tr>
-                        <th> Parametro   </th>
-                        <th> Resultados  (cm)      </th>
-                        <th> Especificación (cm)   </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Diametro de base</td>
-                        <td>{result_diameter_base}</td>
-                        <td>{diameter_base} ± {range_diameter_base}</td>
-                    </tr>
+            <div className="columns">
+                {Object.keys(features).map(key => (
 
-                    <tr>
-                        <td>Largo total</td>
-                        <td>{result_total_length}</td>
-                        <td>{total_length} ± {range_total_length} </td>
-                    </tr>
+                    <div className="column">
 
-                    <tr>
-                        <td>Calibre pared</td>
-                        <td>{result_wall_gauge}</td>
-                        <td>{wall_gauge} ± {range_wall_gauge}</td>
-                    </tr>
-                    <tr>
-                        <td>Color</td>
-                        <td>{color}</td>
-                    </tr>
-                    <tr>
-                        <td>Cumple</td>
-                        <td>{fulfillment}</td>
-                    </tr>
+                        <table className="table is-fullwidth is-bordered is-size-7">
+                            <thead>
+                                <tr>
+                                    <th> Parametro   </th>
+                                    <th> Resultados       </th>
+                                    <th> Especificación    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {Object.keys(features[key]).map(subkey => (
+                                    <tr>
+                                        <td> {features[key][subkey].name}</td>
+                                        <td> {results[key][subkey].result} </td>
+                                        <td> {features[key][subkey].especification}</td>
+
+                                    </tr>
+                                ))}
+
+                                {renderColorIsOk(key, props.color, props.isok)}
+                            </tbody>
 
 
 
-                </tbody>
-            </table>
+
+                        </table>
+
+
+
+                    </div>
+
+                ))}
+
+
+
+
+                {/*             
+                
+                <div className="column">
+
+                    <table className="table is-fullwidth is-bordered is-size-7">
+                        <thead>
+                            <tr>
+                                <th> Parametro   </th>
+                                <th> Resultados       </th>
+                                <th> Especificación    </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Object.keys(features).map(key => (
+                                <tr>
+                                    <td> {features[key].name}</td>
+                                    <td> {results[key].result} </td>
+                                    <td> {features[key].especification}</td>
+
+                                </tr>
+                            ))}
+
+                            <tr>
+                                <td> Color</td>
+                                <td> {props.color} </td>
+                            </tr>
+
+                            <tr>
+                                <td> Cumple</td>
+                                <td> {props.isok} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div className="column">
+
+                    <table className="table is-fullwidth is-bordered is-size-7">
+                        <thead>
+                            <tr>
+                                <th> Parametro   </th>
+                                <th> Resultados       </th>
+                                <th> Especificación    </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Object.keys(features).map(key => (
+                                <tr>
+                                    <td> {features[key].name}</td>
+                                    <td> {results[key].result} </td>
+                                    <td> {features[key].especification}</td>
+
+                                </tr>
+                            ))}
+
+                        </tbody>
+                    </table>
+
+
+                </div> */}
+            </div>
         </div>
     )
 }
 function formateDate(dateInput) {
-    const months = ["Ene", "Feb", "Mar", "Abr","May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+    const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
     var Regexp = /(\d{4})-(\d{2})-(\d{2})/
     let [inp, year, month, day] = Regexp.exec(dateInput)
     month = months[parseInt(month) - 1];
@@ -276,7 +362,7 @@ class HeaderGeneral extends Component {
     }
     componentDidMount() {
         const { reportId } = this.props.match.params;
-        let url = URLBack + "/reports/" + reportId
+        let url = URLBack + "/report_supplies/" + reportId
         axios.get(url).then(res => {
             console.log(res)
             this.setState({ data: res.data })
@@ -288,43 +374,43 @@ class HeaderGeneral extends Component {
         const dat = this.state.data;
         let test = [];
         if (dat !== null) {
-            test.push(<Header data={dat.report_header} />)
+            test.push(<Header data={dat} />)
             test.push(
-                <Report data={dat.reportable} data1={dat.especificable} />
+                <Report features={dat.features} results={dat.result_supplies} color={dat.color} isok={dat.isok} />
             )
-            test.push(<Observation data={dat.report_header.observation} />)
+            test.push(<Observation data={dat.observation} />)
         }
         else
             test = null;
 
         return (
-                <div className="container">
-                    <div className="columns is-gapless">
-                        <div className="column is-3 box">
-                            <span className="image">
-                                <br/>
-                                <img src="/resources/LogoGusing.png" />
-                            </span>
-                        </div>
-                        <div className="column">
-                            <Encabezado1 />
-                            <Encabezado2 />
-                            <Encabezado3 />
-                        </div>
+            <div className="container">
+                <div className="columns is-gapless">
+                    <div className="column is-3 box">
+                        <span className="image">
+                            <br />
+                            <img src="/resources/LogoGusing.png" />
+                        </span>
                     </div>
-
-                    <div>
-                        {test}
+                    <div className="column">
+                        <Encabezado1 />
+                        <Encabezado2 />
+                        <Encabezado3 />
                     </div>
-                    <div id="background">
-                        <p id="bg-text">COPIA CONTROLADA</p>
-                    </div>
-                    <Signature />
-                    <Note />
-                    <Footer />
-           
                 </div>
-           
+
+                <div>
+                    {test}
+                </div>
+                <div id="background">
+                    <p id="bg-text">COPIA CONTROLADA</p>
+                </div>
+                <Signature />
+                <Note />
+                <Footer />
+
+            </div>
+
         );
     }
 }
