@@ -213,14 +213,25 @@ const Report = (props) => {
 
     let attrResults2 = [];
     let attrFeatures2 = [];
-
+    const nullObject = {
+        result: null
+    }
+    //En el caso de que la cantidad especificaciones sean mayor a la cantidad de los resultados, se ingresa el objeto null
+    // con el objetivo de que no tire error
     for (let i = 0; i < props.features.length; i++) {
         if (i < 4) {
             attrFeatures.push(props.features[i])
-            attrResults.push(props.results[i])
+            if (i < props.results.length)
+                attrResults.push(props.results[i])
+            else
+                attrResults.push(nullObject)
+
         } else {
             attrFeatures2.push(props.features[i])
-            attrResults2.push(props.results[i])
+            if (i < props.results.length)
+                attrResults2.push(props.results[i])
+            else
+                attrResults2.push(nullObject)
         }
     }
     features.push(attrFeatures)
