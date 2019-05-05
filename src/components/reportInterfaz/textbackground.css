@@ -50,3 +50,11 @@ hr {
 .container{
     height: 50%;
 }
+.text {
+    background-color: #B6DCFE
+}
+.testbox {
+    border: 1.5px;
+    border-style: solid;
+    border-color:white; 
+}

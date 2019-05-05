@@ -7,9 +7,9 @@ $danger: $danger_color;
 $table-row-active-background-color: $hover_table;
 $table-background-color: transparent;
 $box-background-color: transparent;
+// $table-cell-border: 2px solid #9CAFB7;
 @import 'bulma';
 @import "~bulma-extensions/bulma-steps/dist/css/bulma-steps";
-@import "~bulma-extensions/bulma-pageloader/dist/css/bulma-pageloader";
+@import "~bulma-extensions/bulma-checkradio/dist/css/bulma-checkradio";
 @import "~bulma-extensions/bulma-tooltip/dist/css/bulma-tooltip";
-
-
+//@import "~bulma-extensions/bulma-pageloader/dist/css/bulma-pageloader";

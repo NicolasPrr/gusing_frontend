@@ -44,7 +44,7 @@ const Encabezado2 = (props) => {
             <table className="table is-fullwidth is-bordered is-size-7">
                 <thead>
                     <tr>
-                        <td className="  has-text-centered">TITULO: REPORTE ENSAYO DE MATERIALES  PT-PP</td >
+                        <td className="  has-text-centered">TITULO: REPORTE ENSAYO DE MATERIALES</td >
                         <td className="  has-text-centered">Codigo FR-CC -65</td >
                     </tr>
                 </thead>
@@ -59,7 +59,7 @@ const Encabezado3 = (props) => {
                 <thead>
                     <tr>
                         <td className=" has-text-centered " >Version 04</td >
-                        <td className=" has-text-centered">VIGENCIA DESDE EL 28 DE FEBRERO DE 2017</td >
+                        <td className=" has-text-centered"> FECHA DEVIGENCIA DESDE EL 28 DE FEBRERO DE 2017</td >
                         <td className=" has-text-centered">Pagina 1 de 1</td >
                     </tr>
                 </thead>
@@ -81,8 +81,9 @@ const Header = (props) => {
     const farmaceutic_shape = props.data.farmaceutic_shape;
     const analisys = props.data.analisys;
     const lot = props.data.lot;
-    const ff = formateDate(props.data.ff);
-    const fv = formateDate(props.data.fv);
+    const name_provider = props.data.name_provider;
+    const ff = formateDate(props.data.ff, true);
+    const fv = formateDate(props.data.fv, true);
     const method = props.data.method;
     return (
         <div className="box is-zise-7">
@@ -90,29 +91,30 @@ const Header = (props) => {
 
             <div className="columns">
                 <div className="column  has-text-justified is-size-7">
-                    <p><strong>N° de reporte FQ: </strong> {report_number} </p>
+                    <p className="text"> <strong>N° de reporte FQ: </strong> {report_number} </p>
+                    <p className="text"> <strong>N° de analisis: </strong> {analisys} </p>
                     <p> <strong>Cliente: </strong> {client_name}</p>
-                    <p> <strong>Muestra:</strong> {sample}          </p>
-                    <p> <strong>Nombre de la muestra:</strong> {sample_name}          </p>
-                    <p> <strong>N° de analisis: </strong> {analisys} </p>
+                    <p> <strong>Dirección:</strong> {direction} </p>
                     <p> <strong> Lote de proveedor: </strong>  {lot}          </p>
+                    <p> <strong> Nombre de proveedor: </strong>  {name_provider}          </p>
 
 
                 </div>
                 <div className="column has-text-justified is-size-7">
-                    <p> <strong>Dirección:</strong> {direction} </p>
+                    <p> <strong>Muestra:</strong> {sample}          </p>
+                    <p> <strong>Nombre de la muestra:</strong> {sample_name}          </p>
                     <p> <strong>Tipo de muestreo: </strong> {sampling_type}          </p>
                     <p> <strong>Forma farmaceutica:</strong> {farmaceutic_shape}          </p>
                     <p> <strong>Metodo de analisis:</strong> {method}          </p>
-                    <p> <strong>Fecha de recepción:</strong> {date_reception}          </p>
 
 
                 </div>
-                <div className="column  has-text-justified is-size-7">
+                <div className="column  has-text-left is-size-7">
                     <p> <strong>Fecha de fabricacion: </strong> {ff}          </p>
-                    <p> <strong> Fecha de vencimiento:</strong> {fv}          </p>
+                    <p> <strong>Fecha de vencimiento:</strong> {fv}          </p>
                     <p> <strong>Fecha de muestreo: </strong> {date_sampling}          </p>
                     <p> <strong>Fecha de analisis: </strong> {date_analisis}          </p>
+                    <p> <strong>Fecha de recepción:</strong> {date_reception}          </p>
                     <p> <strong>Fecha de informe:</strong> {date_report}          </p>
 
 
@@ -196,15 +198,29 @@ function renderColorIsOk(i, color, isok) {
                     <td> {color} </td>
                 </tr>
 
-                <tr>
-                    <td> Cumple</td>
-                    <td> {isok} </td>
-                </tr>
             </React.Fragment>
         )
     }
 
 }
+
+function renderIsOk(props) {
+    let checked  = true
+    console.log(props)
+    if(props === null)
+        return null
+    if(props === "No"){
+        checked = false
+    }
+    return (
+        <React.Fragment>
+            <strong> Cumplimiento de parametros: </strong>
+            <input class="is-checkradio is-info is-circle" id="isFulliment" type="checkbox" name="isFulliment"  defaultChecked={checked} />
+            <label for="isFulliment">{props}</label>
+        </React.Fragment>
+    )
+}
+
 const Report = (props) => {
     let features = [];
     let results = []
@@ -219,7 +235,7 @@ const Report = (props) => {
     //En el caso de que la cantidad especificaciones sean mayor a la cantidad de los resultados, se ingresa el objeto null
     // con el objetivo de que no tire error
     for (let i = 0; i < props.features.length; i++) {
-        if (i < 4) {
+        if (i < 5) {
             attrFeatures.push(props.features[i])
             if (i < props.results.length)
                 attrResults.push(props.results[i])
@@ -271,92 +287,26 @@ const Report = (props) => {
 
                                 {renderColorIsOk(key, props.color, props.isok)}
                             </tbody>
-
-
-
-
                         </table>
-
-
-
                     </div>
 
                 ))}
-
-
-
-
-                {/*             
-                
-                <div className="column">
-
-                    <table className="table is-fullwidth is-bordered is-size-7">
-                        <thead>
-                            <tr>
-                                <th> Parametro   </th>
-                                <th> Resultados       </th>
-                                <th> Especificación    </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.keys(features).map(key => (
-                                <tr>
-                                    <td> {features[key].name}</td>
-                                    <td> {results[key].result} </td>
-                                    <td> {features[key].especification}</td>
-
-                                </tr>
-                            ))}
-
-                            <tr>
-                                <td> Color</td>
-                                <td> {props.color} </td>
-                            </tr>
-
-                            <tr>
-                                <td> Cumple</td>
-                                <td> {props.isok} </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div className="column">
-
-                    <table className="table is-fullwidth is-bordered is-size-7">
-                        <thead>
-                            <tr>
-                                <th> Parametro   </th>
-                                <th> Resultados       </th>
-                                <th> Especificación    </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.keys(features).map(key => (
-                                <tr>
-                                    <td> {features[key].name}</td>
-                                    <td> {results[key].result} </td>
-                                    <td> {features[key].especification}</td>
-
-                                </tr>
-                            ))}
-
-                        </tbody>
-                    </table>
-
-
-                </div> */}
             </div>
         </div>
     )
 }
-function formateDate(dateInput) {
+function formateDate(dateInput, onlyMonth) {
+    if (dateInput === null) return "N.A";
     const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
     var Regexp = /(\d{4})-(\d{2})-(\d{2})/
     let [inp, year, month, day] = Regexp.exec(dateInput)
     month = months[parseInt(month) - 1];
     year = year[2] + year[3];
-
-    return day + "-" + month + "-" + year
+    if (onlyMonth === true) {
+        return month + "-" + year;
+    } else {
+        return day + "-" + month + "-" + year;
+    }
 
 }
 class HeaderGeneral extends Component {
@@ -383,8 +333,10 @@ class HeaderGeneral extends Component {
     }
     render() {
         const dat = this.state.data;
+        let isok = null;
         let test = [];
         if (dat !== null) {
+            isok = dat.isok;
             test.push(<Header data={dat} />)
             test.push(
                 <Report features={dat.features} results={dat.result_supplies} color={dat.color} isok={dat.isok} />
@@ -397,7 +349,7 @@ class HeaderGeneral extends Component {
         return (
             <div className="container">
                 <div className="columns is-gapless">
-                    <div className="column is-3 box">
+                    <div className="column is-3  testbox">
                         <span className="image">
                             <br />
                             <img src="/resources/LogoGusing.png" />
@@ -410,9 +362,8 @@ class HeaderGeneral extends Component {
                     </div>
                 </div>
 
-                <div>
-                    {test}
-                </div>
+                {test}
+                {renderIsOk(isok)}
                 <div id="background">
                     <p id="bg-text">COPIA CONTROLADA</p>
                 </div>

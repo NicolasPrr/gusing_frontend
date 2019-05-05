@@ -123,11 +123,12 @@ class StepperSupply extends Component {
         dataReport.color = this.state.dataProduct.color;
         dataReport.isok = this.state.dataProduct.isOk;
         dataReport.observation = this.state.dataVef
-        dataReport.supply_id = this.state.dataSupply.supply.id;
-        this.setState({ dataReport: dataReport });
+        const features = this.state.dataSupply.supply.features;
+        this.setState({ dataReport: dataReport});
         axios.post(url, {
             report_supply: this.state.dataReport,
             results: this.state.dataProduct,
+            features:  features,
         }).then(res => {
             if (res.status === 201) {
                 Swal({
@@ -223,9 +224,8 @@ class StepperSupply extends Component {
                 dataReport: data,
                 dataEspec: dataEspec,
             })
-
+            this.setState({ dataSupply: this.props.location.state });
         }
-        this.setState({ dataSupply: this.props.location.state });
 
     }
     render() {

@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import axios from 'axios';
 import URLBack from '../../../UrlBack'
 
-function isEmptyObject(obj){
+function isEmptyObject(obj) {
   return (Object.getOwnPropertyNames(obj).length === 0);
 }
 class ReportForm extends Component {
@@ -29,7 +29,7 @@ class ReportForm extends Component {
       expirationDate: new Date(),
       clients: []
     };
-    
+
   }
 
 
@@ -64,13 +64,13 @@ class ReportForm extends Component {
       expirationDate: date
     });
   }
-  changeDirection(){
+  changeDirection() {
     const vl = this.client_name.current.value;
-    for(var i = 0; i < this.state.clients.length; i++){
-      if(vl === this.state.clients[i].name){
+    for (var i = 0; i < this.state.clients.length; i++) {
+      if (vl === this.state.clients[i].name) {
         this.direction.current.value = this.state.clients[i].direction;
         i = this.state.clients.length;
-        
+
       }
     }
   }
@@ -80,6 +80,7 @@ class ReportForm extends Component {
   direction = React.createRef();
   analisys = React.createRef();
   lot = React.createRef();
+  name_provider = React.createRef();
   ff = React.createRef();
   fv = React.createRef();
   method = React.createRef();
@@ -95,7 +96,7 @@ class ReportForm extends Component {
     e.preventDefault()
     console.log(this.props.data.sample)
     const data = {
-      
+
       sample: this.sample.current.value,
       sample_name: this.sample_name.current.value,
       report_number: this.report.current.value,
@@ -103,59 +104,61 @@ class ReportForm extends Component {
       direction: this.direction.current.value,
       analisys: this.analisys.current.value,
       lot: this.lot.current.value,
+      name_provider: this.name_provider.current.value,
       method: this.method.current.value,
       farmaceutic_shape: this.farmaceutic_shape.current.value,
       sampling_type: this.sampling_type.current.value,
-      
+
       ff: this.state.manufactoringDate,
       fv: this.state.expirationDate,
-      date_sampling : this.state.samplingDate,
-      date_analisis : this.state.analisysDate,
-      date_reception : this.state.receptionDate,
-      date_report : this.state.reportDate 
+      date_sampling: this.state.samplingDate,
+      date_analisis: this.state.analisysDate,
+      date_reception: this.state.receptionDate,
+      date_report: this.state.reportDate
     }
     this.props.reportAction(data)
   }
-  componentDidMount(){
+  componentDidMount() {
     setTimeout(() => {
       const data = this.props.data
-      if(data != null){
+      if (data != null) {
         this.setState(
-          {reportDate: data.date_report ,
-          samplingDate: data.date_sampling,
-          analisysDate: data.date_analisis,
-          receptionDate: data.date_reception,
-          expirationDate: data.fv,
-          manufactoringDate: data.ff
-        })
-      }      
+          {
+            reportDate: data.date_report,
+            samplingDate: data.date_sampling,
+            analisysDate: data.date_analisis,
+            receptionDate: data.date_reception,
+            expirationDate: data.fv,
+            manufactoringDate: data.ff
+          })
+      }
     }, 1500);
-    
+
     let url = URLBack + "/clients";
     axios.get(url).then(res => {
-        if (res.status === 200) {
-            this.setState({ clients: res.data })
-        }
+      if (res.status === 200) {
+        this.setState({ clients: res.data })
+      }
     })
-        .catch(function (error) {
-            console.log(error)
-        });
+      .catch(function (error) {
+        console.log(error)
+      });
 
   }
   render() {
     let samples;
     let samples_name;
     let method = "Dimensional"
-    if(!isEmptyObject(this.props.data)){
+    if (!isEmptyObject(this.props.data)) {
       samples = this.props.data.sample;
       samples_name = this.props.data.sample_name;
       method = this.props.data.method;
     }
     console.log("Props")
     console.log(this.props)
-    
+
     return (
-      <div className = "notification" >
+      <div className="notification" >
         <form onSubmit={this.handleForm}  >
           <p>N°de reporte ensayo FQ </p>
           <input
@@ -163,7 +166,7 @@ class ReportForm extends Component {
             type="text"
             placeholder="Numero de reporte"
             ref={this.report}
-            defaultValue = {this.props.data.report_number}
+            defaultValue={this.props.data.report_number}
           />
           <div className="columns">
             <div className="column">
@@ -177,15 +180,15 @@ class ReportForm extends Component {
                   placeholder="Nombre del cliente"
                   list="dataclients"
                   ref={this.client_name}
-                  defaultValue = {this.props.data.client_name}
+                  defaultValue={this.props.data.client_name}
                   onChange={this.changeDirection}
                 />
 
                 <datalist id="dataclients">
                   {Object.keys(this.state.clients).map(key => (
-                    <option value={this.state.clients[key].name}/>
-                  )) }
-      
+                    <option value={this.state.clients[key].name} />
+                  ))}
+
                 </datalist>
               </div>
               <div className="columns is-mobile">
@@ -197,7 +200,7 @@ class ReportForm extends Component {
                     className="input is-small"
                     selected={this.state.samplingDate}
                     onChange={this.handleSampling}
-                    dateFormat = "dd-MMM-yy"
+                    dateFormat="dd-MMM-yy"
                   />
                 </div>
                 <div className="column">
@@ -208,7 +211,7 @@ class ReportForm extends Component {
                     className="input is-small"
                     selected={this.state.analisysDate}
                     onChange={this.handleAnalisys}
-                    dateFormat ="dd-MMM-yy"
+                    dateFormat="dd-MMM-yy"
 
                   />
                 </div>
@@ -259,7 +262,7 @@ class ReportForm extends Component {
                       type="text"
                       placeholder="Nombre de la muestra"
                       ref={this.analisys}
-                      defaultValue = {this.props.data.analisys}
+                      defaultValue={this.props.data.analisys}
 
                     />
                   </div>
@@ -274,10 +277,26 @@ class ReportForm extends Component {
                       type="text"
                       placeholder="Nombre de la muestra"
                       ref={this.lot}
-                      defaultValue = {this.props.data.lot}
+                      defaultValue={this.props.data.lot}
                     />
                   </div>
                 </div>
+                <div className="column">
+                  <div className="field">
+                    <label className="label is-small">Nombre de proveedor</label>
+                  </div>
+                  <div className="control">
+                    <input
+                      className="input is-small"
+                      type="text"
+                      placeholder="Nombre de la muestra"
+                      ref={this.name_provider}
+                      defaultValue={this.props.data.name_provider}
+                    />
+                  </div>
+                </div>
+                
+
               </div>
 
               {/*first column main*/}
@@ -293,7 +312,7 @@ class ReportForm extends Component {
                   type="text"
                   placeholder="direccion del cliente"
                   ref={this.direction}
-                  defaultValue = {this.props.data.direction}
+                  defaultValue={this.props.data.direction}
                 />
               </div>
               <div className="columns is-mobile">
@@ -305,7 +324,7 @@ class ReportForm extends Component {
                     className="input is-small"
                     selected={this.state.receptionDate}
                     onChange={this.handleReception}
-                    dateFormat ="dd-MMM-yy"
+                    dateFormat="dd-MMM-yy"
                   />
                 </div>
                 <div className="column">
@@ -316,7 +335,7 @@ class ReportForm extends Component {
                     className="input is-small"
                     selected={this.state.reportDate}
                     onChange={this.handleReport}
-                    dateFormat = "dd-MMM-yy"
+                    dateFormat="dd-MMM-yy"
                   />
                 </div>
               </div>
@@ -332,7 +351,7 @@ class ReportForm extends Component {
                       type="text"
                       placeholder="Nombre de la muestra"
                       ref={this.sampling_type}
-                      defaultValue="Aleatoreo"
+                      defaultValue="Aleatorio"
                     />
                   </div>
                 </div>
@@ -360,7 +379,8 @@ class ReportForm extends Component {
                     className="input is-small"
                     selected={this.state.manufactoringDate}
                     onChange={this.handleFabrication}
-                    dateFormat="dd-MMM-yy"
+                    isClearable={true}
+                    dateFormat="MMM-yy"
                   />
                 </div>
                 <div className="column">
@@ -371,7 +391,8 @@ class ReportForm extends Component {
                     className="input is-small"
                     selected={this.state.expirationDate}
                     onChange={this.handleExpiration}
-                    dateFormat="dd-MMM-yy"
+                    isClearable={true}
+                    dateFormat="MMM-yy"
                   />
                 </div>
                 <div className="column">
@@ -383,7 +404,7 @@ class ReportForm extends Component {
                       className="input is-small"
                       type="text"
                       ref={this.method}
-                      defaultValue = {method}
+                      defaultValue={method}
                     />
                   </div>
                 </div>
@@ -391,7 +412,9 @@ class ReportForm extends Component {
               {/*second column main*/}
             </div>
           </div>
-
+          <div className="field">
+            <label className="label is-small">*En caso de NO tener fecha, DEJAR EN BLANCO, el sistema lo reconocera como 'N.A'</label>
+          </div>
           <button className="button is-small is-info" type="submit"> Siguiente </button>
 
         </form>

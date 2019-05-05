@@ -85,7 +85,7 @@ class Table extends Component {
                             <th>Nombre  muestra</th>
                             <th>Imprimir</th>
                             <th>Editar</th>
-                            <th>Clonar</th>
+                            <th>Duplicar</th>
                             <th>Eliminar</th>
                 
                         </tr>
