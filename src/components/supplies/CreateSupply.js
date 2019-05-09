@@ -52,6 +52,14 @@ class Name extends Component {
     }
 }
 class Especification extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            mode: null
+        }
+        this.changeMode = this.changeMode.bind(this);
+    }
+
     espec = React.createRef();
     addChar = () => {
         let value = `${this.espec.current.value}±`;
@@ -65,7 +73,22 @@ class Especification extends Component {
     remove = () => {
         this.props.remove(this.props.id);
     }
+    changeMode (mode){
+        this.setState({ mode: mode })
+    }
     render() {
+        let data = []
+        const colors = ["Amarrillo", "Azul", "Rojo",
+            "Naranja",
+        ]
+        const materials = ["Ladrillo", "Vidrio", "Madera",
+            "Gaseoso",
+        ]
+        if( this.state.mode == "color")
+            data = colors;
+        if( this.state.mode == "material")
+            data = materials;
+            
         let defaultEspc = this.props.espec
         return (
             <div className="field has-addons">
@@ -76,8 +99,13 @@ class Especification extends Component {
                         placeholder="Especificacion, Ejemplo 3±10"
                         ref={this.espec}
                         onChange={this.change}
-
+                        list="data"
                     />
+                    <datalist id="data">
+                        {Object.keys(data).map(key => (
+                            <option value={data[key]} />
+                        ))}
+                    </datalist>
                 </div>
                 <div className="control">
                     <a className="button is-small is-info" onClick={this.addChar} >
@@ -85,10 +113,21 @@ class Especification extends Component {
                     </a>
                 </div>
                 <div className="control">
+                    <a className="button is-small is-primary" onClick={this.changeMode.bind(this,"color")} >
+                        C
+                        </a>
+                </div>
+                <div className="control">
+                    <a className="button is-small is-info" onClick={this.changeMode.bind(this,"material")} >
+                        M
+                        </a>
+                </div>
+                <div className="control">
                     <a className="button is-small is-danger" onClick={this.remove} >
                         Remover
                     </a>
                 </div>
+
             </div >
         );
     }
@@ -183,7 +222,7 @@ class CreateSupply extends Component {
         })
 
     }
-    
+
     createRequest() {
         let url;
         let features = [];
@@ -261,7 +300,7 @@ class CreateSupply extends Component {
                        </button>
                     <OptionMenu edit_data={this.props.edit_data} createRequest={this.createRequest} editRequest={this.editRequest} />
                 </div>
-                
+
             </div>
         );
     }

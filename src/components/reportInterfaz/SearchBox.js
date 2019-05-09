@@ -60,7 +60,7 @@ class SearchBox extends Component {
                                             <option value="goteros">Goteros </option>
                                             <option value="dosificadores">Dosificadores </option>
                                             <option value="linners">Linners </option>
-                                            <option value="tapon">Tapon y agrafe </option>
+                                            <option value="Tapón y Agrafe">Tapón y Agrafe </option>
                                             <option value="otro">Otro </option>
                                         </select>
                                     </div>

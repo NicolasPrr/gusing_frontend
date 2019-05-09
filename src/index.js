@@ -25,7 +25,7 @@ const routing = (
       <Route path="/colapsible/desflanat" component={Desflanat} />
       <Route path="/insumos" component={HomeSupply} />
       <Route path="/clone/report/:reportId" component={Stepper} />
-      <Route path="/edit/report/:reportId" component={Stepper} />
+      <Route path="/edit/report/:reportId" component={StepperSupply} />
       <Route exact strict path="/print/:reportId" component={HeaderGeneral} />
       <Route path ="/supply/report/create" component ={StepperSupply} /> 
       <Route path="/reports/" component={InterfaceReport} />
