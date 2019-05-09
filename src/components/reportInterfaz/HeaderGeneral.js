@@ -189,21 +189,6 @@ const Signature = () => {
         </div>
     )
 }
-function renderColorIsOk(i, color, isok) {
-    if (parseInt(i) === 0) {
-        return (
-            <React.Fragment>
-                <tr>
-                    <td> Color</td>
-                    <td> {color} </td>
-                </tr>
-
-            </React.Fragment>
-        )
-    }
-
-}
-
 function renderIsOk(props) {
     let checked  = true
     console.log(props)
@@ -252,11 +237,13 @@ const Report = (props) => {
     }
     features.push(attrFeatures)
     results.push(attrResults)
-    if (props.features.length >= 4) {
+    if (props.features.length > 5) {
         features.push(attrFeatures2)
         results.push(attrResults2)
     }
     console.log(features)
+    console.log(results)
+    console.log(props.features.length)
 
     // const results = props.results
     return (
@@ -284,8 +271,6 @@ const Report = (props) => {
 
                                     </tr>
                                 ))}
-
-                                {renderColorIsOk(key, props.color, props.isok)}
                             </tbody>
                         </table>
                     </div>
