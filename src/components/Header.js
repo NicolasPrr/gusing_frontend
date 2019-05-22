@@ -19,16 +19,8 @@ class Header extends Component {
             <div className="navbar-start">
               <a className="navbar-item" href={baseURLFront} >
                 Pagina principal</a>
-              <div className="navbar-item has-dropdown is-hoverable">
-                <a className="navbar-link">Insumos</a>
-                <div className="navbar-dropdown is-boxed">
-                  <Link to='/colapsible/garnic' className="navbar-item">Colapsible garnic</Link>
-                  <Link to='/colapsible/normal' className="navbar-item">Colapsible normal</Link>
-                  <Link to='/colapsible/desflanat' className="navbar-item">Colapsible desflant</Link>
-                  <Link to='/insumos' className="navbar-item">Insumos</Link>
-                  
-                </div>
-              </div>
+              <Link className="navbar-item"   to="/insumos/"   >
+              Insumos</Link>
               <Link className="navbar-item"   to="/reports/"   >
                 Reportes</Link>
               <Link className="navbar-item" to='/clients' >

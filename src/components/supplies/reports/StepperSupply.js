@@ -107,7 +107,8 @@ class StepperSupply extends Component {
                 data={this.state.dataReport} 
                 />
             case 2:
-                return <ResultForm dataEspec={this.state.dataEspec}
+                return <ResultForm 
+                    dataEspec={this.state.dataEspec}
                     dataProduct={this.state.dataProduct}
                     setProductForm={this.setProductForm}
                 />
@@ -120,10 +121,9 @@ class StepperSupply extends Component {
     createReport() {
         let url = `${URLBack}/report_supplies`;
         let dataReport = this.state.dataReport;
-        dataReport.color = this.state.dataProduct.color;
         dataReport.isok = this.state.dataProduct.isOk;
         dataReport.observation = this.state.dataVef
-        const features = this.state.dataSupply.supply.features;
+        const features = this.state.dataEspec;
         this.setState({ dataReport: dataReport});
         axios.post(url, {
             report_supply: this.state.dataReport,
@@ -196,8 +196,10 @@ class StepperSupply extends Component {
         this.setState({ dataReport: data })
         this.nextStep(1)
     }
-    setProductForm(data, next) {
+    setProductForm(data, next, dataEspec) {
         this.setState({ dataProduct: data })
+        this.setState({ dataEspec: dataEspec })
+
         this.nextStep(next)
     }
     verfForm(step) {
