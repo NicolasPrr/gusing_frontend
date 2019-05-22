@@ -150,20 +150,22 @@ class StepperSupply extends Component {
                 timer: 2500
             })
         });
-
+        
     }
-    editReport(data) {
-        const [url_complement, require] = selectUrlRequest(this.state.mode)
-        let url = URLBack + url_complement + "/" + this.state.defaultReport.reportable_id;
+    editReport() {
+        let url = `${URLBack}/report_supplies/${this.state.id}`
+        alert(url)
         // selectUrlRequest(this.state.mode)
-        let report = this.state.dataReport;
-        report.observation = data.observation;
-        this.setState({ dataReport: report })
-
+        let dataReport = this.state.dataReport;
+        dataReport.isok = this.state.dataProduct.isOk;
+        dataReport.observation = this.state.dataVef
+        const features = this.state.dataEspec;
+        this.setState({ dataReport: dataReport });
+        
         axios.put(url, {
-            [require]: this.state.dataProduct,
-            id_report: this.state.defaultReport.id,
-            report: this.state.dataReport
+            report_supply: dataReport,
+            features: features,
+            results: this.state.dataProduct,
         }).then(res => {
             if (res.status === 201) {
                 Swal({
@@ -206,6 +208,7 @@ class StepperSupply extends Component {
         //paso final, la url contiene edit, se hará la solicitud de edición.
         this.nextStep(step)
         if (window.location.pathname.includes("edit")) {
+            alert("here")
             if (step === 1) this.editReport();
         } else {
             if (step === 1) this.createReport()
@@ -237,6 +240,8 @@ class StepperSupply extends Component {
                 this.setState({dataEspec: res.data.features})
                 this.setState({dataReport: res.data})
                 this.setState({dataProduct: result})
+                this.setState({id: res.data.id})
+                this.setState({dataVef: res.data.observation})
                 // this.setState({dataProduct: {inputs: {res.data.results_supllies}}})
             })
 
