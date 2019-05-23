@@ -154,7 +154,6 @@ class StepperSupply extends Component {
     }
     editReport() {
         let url = `${URLBack}/report_supplies/${this.state.id}`
-        alert(url)
         // selectUrlRequest(this.state.mode)
         let dataReport = this.state.dataReport;
         dataReport.isok = this.state.dataProduct.isOk;
@@ -167,7 +166,7 @@ class StepperSupply extends Component {
             features: features,
             results: this.state.dataProduct,
         }).then(res => {
-            if (res.status === 201) {
+            if (res.status === 200) {
                 Swal({
                     position: 'top-end',
                     type: 'success',
@@ -208,7 +207,6 @@ class StepperSupply extends Component {
         //paso final, la url contiene edit, se hará la solicitud de edición.
         this.nextStep(step)
         if (window.location.pathname.includes("edit")) {
-            alert("here")
             if (step === 1) this.editReport();
         } else {
             if (step === 1) this.createReport()
@@ -219,15 +217,12 @@ class StepperSupply extends Component {
         let dataEspec = [];
         //const {supply} = this.props.location.state;
         //&& isEmptyObject(this.state.dataReport))
-        if (window.location.pathname.includes("edit") || window.location.pathname.includes("clone")) {
+        const name = window.location.pathname; 
+        if (name.includes("edit") || name.includes("clone")) {
             const { reportId } = this.props.match.params;
             let url = URLBack + "/report_supplies/" + reportId;
             axios.get(url).then(res => {
                 console.log(res)
-                const data = {
-                    sample: res.data.sample,
-                    sample_name: res.data.sample_name,
-                }
                 let inputs = []
                 for(let i = 0; i < res.data.result_supplies.length; i++){
                     inputs.push(res.data.result_supplies[i].result)
