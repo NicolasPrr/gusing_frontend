@@ -57,7 +57,6 @@ class Especification extends Component {
         this.state = {
             mode: null
         }
-        this.changeMode = this.changeMode.bind(this);
     }
 
     espec = React.createRef();
@@ -73,22 +72,8 @@ class Especification extends Component {
     remove = () => {
         this.props.remove(this.props.id);
     }
-    changeMode (mode){
-        this.setState({ mode: mode })
-    }
     render() {
-        let data = []
-        const colors = ["Amarrillo", "Azul", "Rojo",
-            "Naranja",
-        ]
-        const materials = ["Ladrillo", "Vidrio", "Madera",
-            "Gaseoso",
-        ]
-        if( this.state.mode == "color")
-            data = colors;
-        if( this.state.mode == "material")
-            data = materials;
-            
+        let data = []          
         let defaultEspc = this.props.espec
         return (
             <div className="field has-addons">
@@ -111,16 +96,6 @@ class Especification extends Component {
                     <a className="button is-small is-info" onClick={this.addChar} >
                         ±
                     </a>
-                </div>
-                <div className="control">
-                    <a className="button is-small is-primary" onClick={this.changeMode.bind(this,"color")} >
-                        C
-                        </a>
-                </div>
-                <div className="control">
-                    <a className="button is-small is-info" onClick={this.changeMode.bind(this,"material")} >
-                        M
-                        </a>
                 </div>
                 <div className="control">
                     <a className="button is-small is-danger" onClick={this.remove} >

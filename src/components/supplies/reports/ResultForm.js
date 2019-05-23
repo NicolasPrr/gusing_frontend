@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
 
-function colorSelected(color, props) {
-    if (color === props)
-        return "selected"
-    else
-        return null
-}
 function fulfillmentSelected(key, props) {
     const st = ["No", "Si"]
     if (props === st[key]) return "selected"
@@ -14,6 +8,132 @@ function fulfillmentSelected(key, props) {
 
 function isEmptyObject(obj) {
     return (Object.getOwnPropertyNames(obj).length === 0);
+}
+function renderEspecifications(props, ck, especificationName) {
+    console.log(especificationName)
+    const colors = [
+        "N.A",
+        "Azul",
+        "Ámbar",
+        "Cristal",
+        "Blanco",
+        "Verde",
+        "Gris",
+        "Blanco Contramarcado",
+        "Contramarcado",
+        "Rojo",
+        "Transparente"
+    ]
+    const materials = [
+        "N,A",
+        "PVC",
+        "Polipropileno (PP)",
+        "Pead",
+        "PEBD",
+        "PSC",
+        "Polietileno",
+    ]
+    if (props.especifications[ck].name.includes("COLOR")) {
+        return (
+            <React.Fragment>
+                <input className="input is-small" type="text"
+                    id={ck}
+                    defaultValue={especificationName}
+                    onChange={props.setEspecification.bind(ck)}
+                    list="colors"
+                />
+                <datalist id="colors">
+                    {Object.keys(colors).map(key => (
+                        <option value={colors[key]} />
+                    ))}
+                </datalist>
+            </React.Fragment>
+        );
+    }
+
+    if (props.especifications[ck].name.includes("MATERIAL")) {
+        return (
+            <React.Fragment>
+                <input className="input is-small" type="text"
+                    id={ck}
+                    defaultValue={especificationName}
+                    onChange={props.setEspecification.bind(ck)}
+                    list="materials"
+                />
+                <datalist id="materials">
+                    {Object.keys(materials).map(key => (
+                        <option value={materials[key]} />
+                    ))}
+                </datalist>
+            </React.Fragment>
+        );
+    }
+    return (especificationName);
+
+}
+function renderInputs(props, ck, name) {
+    const colors = [
+        "N.A",
+        "Azul",
+        "Ámbar",
+        "Cristal",
+        "Blanco",
+        "Verde",
+        "Gris",
+        "Blanco Contramarcado",
+        "Contramarcado",
+        "Rojo",
+        "Transparente"
+    ]
+    const materials = [
+        "N,A",
+        "PVC",
+        "Polipropileno (PP)",
+        "Pead",
+        "PEBD",
+        "PSC",
+        "Polietileno",
+    ]
+    if (name.includes("COLOR")) {
+        return (
+            <React.Fragment>
+                <input className="input is-small" type="text"
+                    id={ck}
+                    defaultValue={props.inputs[ck]}
+                    onChange={props.setResult.bind(ck)}
+                    list="colors"
+                />
+                <datalist id="colors">
+                    {Object.keys(colors).map(key => (
+                        <option value={colors[key]} />
+                    ))}
+                </datalist>
+            </React.Fragment>
+        );
+    }
+
+    if (name.includes("MATERIAL")) {
+        return (
+            <React.Fragment>
+                <input className="input is-small" type="text"
+                    id={ck}
+                    defaultValue={props.inputs[ck]}
+                    onChange={props.setResult.bind(ck)}
+                    list="materials"
+                />
+                <datalist id="materials">
+                    {Object.keys(materials).map(key => (
+                        <option value={materials[key]} />
+                    ))}
+                </datalist>
+            </React.Fragment>
+        );
+    }
+    return (<input className="input is-small" type="text"
+        id={ck}
+        defaultValue={props.inputs[ck]}
+        onChange={props.setResult.bind(ck)}
+    />);
 }
 const Table = (props) => {
     const info = props.especifications;
@@ -30,11 +150,8 @@ const Table = (props) => {
                 {Object.keys(info).map(key => (
                     <tr key={key} >
                         <td> {info[key].name}                                  </td>
-                        <td> <input className="input is-small" type="text"
-                            id={key}
-                            defaultValue={props.inputs[key]}
-                            onChange={props.setResult.bind(key)} /> </td>
-                        <td> {info[key].especification}                        </td>
+                        <td> {renderInputs(props, key, info[key].name)} </td>
+                        <td> {renderEspecifications(props, key, info[key].especification)}                        </td>
                     </tr>
                 ))}
             </tbody>
@@ -44,25 +161,15 @@ const Table = (props) => {
 class ResultForm extends Component {
     constructor(props) {
         super(props);
-        this.colors = [
-            "N.A",
-            "Ámbar",
-            "Azul",
-            "Cristal",
-            "Blanco",
-            "Plateado",
-            "Gris",
-            "Contramarcado",
-            "Rojo"
-        ]
+
         this.state = {
-            results: { color: null, inputs: [], isOk: null },
+            results: { inputs: [], isOk: null},
         }
         this.setResult = this.setResult.bind(this);
+        this.setEspecification = this.setEspecification.bind(this);
         this.handleNext = this.handleNext.bind(this);
     }
 
-    color = React.createRef();
     fulfillment = React.createRef();
 
     setResult(e) {
@@ -72,11 +179,18 @@ class ResultForm extends Component {
         results.inputs[id] = value;
         this.setState({ results: results })
     }
+    setEspecification(e) {
+        let especifications = this.state.especifications;
+        const id = e.target.id;
+        const value = e.target.value;
+        especifications[id].especification = value;
+        this.setState({ especifications: especifications })
+    }
 
     componentDidMount() {
         let init = Array(this.props.dataEspec.length).fill(null);
         let resultsStepper = this.props.dataProduct;
-        if (!isEmptyObject(resultsStepper)){
+        if (!isEmptyObject(resultsStepper)) {
             for (let i = 0; i < resultsStepper.inputs.length; i++) {
                 init[i] = this.props.dataProduct.inputs[i];
             }
@@ -84,35 +198,19 @@ class ResultForm extends Component {
         let results = this.state.results;
         results.inputs = init;
         this.setState({ results: results })
+        this.setState({ especifications: this.props.dataEspec })
+
     }
     handleNext(step) {
         let results = this.state.results;
-        results.color = this.color.current.value
-        results.isOk  = this.fulfillment.current.value
-        this.props.setProductForm(results, step)
+        results.isOk = this.fulfillment.current.value
+        this.props.setProductForm(results, step, this.state.especifications)
     }
     render() {
         return (
             <div className="container notification">
-                <Table especifications={this.props.dataEspec} inputs={this.state.results.inputs} setResult={this.setResult} />
+                <Table especifications={this.props.dataEspec} inputs={this.state.results.inputs} setResult={this.setResult} setEspecification={this.setEspecification} />
 
-                {/*colors*/}
-                <div className="field">
-                    <label className="label is-small">Color</label>
-                </div>
-                <div className="control">
-                    <div className="select is-rounded is-small">
-                        <select ref={this.color} >
-                            {Object.keys(this.colors).map(key => (
-                                <option selected={colorSelected(this.colors[key], this.props.dataProduct.color)}
-                                    value={this.colors[key]}>
-                                    {this.colors[key]}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
-                {/* end colors*/}
                 <div className="field">
                     <label className="label is-small">Cumplimiento</label>
                 </div>
@@ -130,13 +228,11 @@ class ResultForm extends Component {
                 </div>
 
                 {/*end fulliment*/}
-                <div className="field">
-                    <div className="control">
-                        <button className="button is-small is-info" type="submit" onClick={this.handleNext.bind(this, 1)}> Siguiente </button>
-                    </div>
-                    <div className="control">
-                        <button className="button is-small is-dark" type="submit" onClick={this.handleNext.bind(this, -1)}> Retroceder </button>
-                    </div>
+                <div className="field  is-pulled-right">
+                    <button className="button is-small is-info " type="submit" onClick={this.handleNext.bind(this, 1)}> Siguiente </button>
+                </div>
+                <div className="field  is-pulled-right">
+                    <button className="button is-small is-dark" type="submit" onClick={this.handleNext.bind(this, -1)}> Retroceder </button>
                 </div>
 
             </div>

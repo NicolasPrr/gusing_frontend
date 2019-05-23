@@ -200,7 +200,6 @@ function renderIsOk(props) {
     return (
         <React.Fragment>
             <strong> Cumplimiento de parametros: </strong>
-            <input class="is-checkradio is-info is-circle" id="isFulliment" type="checkbox" name="isFulliment"  defaultChecked={checked} />
             <label for="isFulliment">{props}</label>
         </React.Fragment>
     )

@@ -103,11 +103,12 @@ class StepperSupply extends Component {
         //3 es observaciones
         switch (step) {
             case 1:
-                return <ReportForm reportAction={this.headerForm} 
-                data={this.state.dataReport} 
+                return <ReportForm reportAction={this.headerForm}
+                    data={this.state.dataReport}
                 />
             case 2:
-                return <ResultForm dataEspec={this.state.dataEspec}
+                return <ResultForm
+                    dataEspec={this.state.dataEspec}
                     dataProduct={this.state.dataProduct}
                     setProductForm={this.setProductForm}
                 />
@@ -120,15 +121,14 @@ class StepperSupply extends Component {
     createReport() {
         let url = `${URLBack}/report_supplies`;
         let dataReport = this.state.dataReport;
-        dataReport.color = this.state.dataProduct.color;
         dataReport.isok = this.state.dataProduct.isOk;
         dataReport.observation = this.state.dataVef
-        const features = this.state.dataSupply.supply.features;
-        this.setState({ dataReport: dataReport});
+        const features = this.state.dataEspec;
+        this.setState({ dataReport: dataReport });
         axios.post(url, {
             report_supply: this.state.dataReport,
             results: this.state.dataProduct,
-            features:  features,
+            features: features,
         }).then(res => {
             if (res.status === 201) {
                 Swal({
@@ -150,22 +150,23 @@ class StepperSupply extends Component {
                 timer: 2500
             })
         });
-
+        
     }
-    editReport(data) {
-        const [url_complement, require] = selectUrlRequest(this.state.mode)
-        let url = URLBack + url_complement + "/" + this.state.defaultReport.reportable_id;
+    editReport() {
+        let url = `${URLBack}/report_supplies/${this.state.id}`
         // selectUrlRequest(this.state.mode)
-        let report = this.state.dataReport;
-        report.observation = data.observation;
-        this.setState({ dataReport: report })
-
+        let dataReport = this.state.dataReport;
+        dataReport.isok = this.state.dataProduct.isOk;
+        dataReport.observation = this.state.dataVef
+        const features = this.state.dataEspec;
+        this.setState({ dataReport: dataReport });
+        
         axios.put(url, {
-            [require]: this.state.dataProduct,
-            id_report: this.state.defaultReport.id,
-            report: this.state.dataReport
+            report_supply: dataReport,
+            features: features,
+            results: this.state.dataProduct,
         }).then(res => {
-            if (res.status === 201) {
+            if (res.status === 200) {
                 Swal({
                     position: 'top-end',
                     type: 'success',
@@ -196,8 +197,10 @@ class StepperSupply extends Component {
         this.setState({ dataReport: data })
         this.nextStep(1)
     }
-    setProductForm(data, next) {
+    setProductForm(data, next, dataEspec) {
         this.setState({ dataProduct: data })
+        this.setState({ dataEspec: dataEspec })
+
         this.nextStep(next)
     }
     verfForm(step) {
@@ -214,17 +217,43 @@ class StepperSupply extends Component {
         let dataEspec = [];
         //const {supply} = this.props.location.state;
         //&& isEmptyObject(this.state.dataReport))
-        if (this.props.location.state !== undefined) {
-            supply = this.props.location.state.supply
-            const data = { sample: supply.type_supply.name, sample_name: supply.name, supply_id: supply.id }
-            for (let i = 0; i < supply.features.length; i++)
-                dataEspec.push(supply.features[i])
-
-            this.setState({
-                dataReport: data,
-                dataEspec: dataEspec,
+        const name = window.location.pathname; 
+        if (name.includes("edit") || name.includes("clone")) {
+            const { reportId } = this.props.match.params;
+            let url = URLBack + "/report_supplies/" + reportId;
+            axios.get(url).then(res => {
+                console.log(res)
+                let inputs = []
+                for(let i = 0; i < res.data.result_supplies.length; i++){
+                    inputs.push(res.data.result_supplies[i].result)
+                }
+                let result = {
+                    isok: res.data.isok,
+                    inputs: inputs
+                };
+                // res.inputs = res.data.result_supplies
+                this.setState({dataEspec: res.data.features})
+                this.setState({dataReport: res.data})
+                this.setState({dataProduct: result})
+                this.setState({id: res.data.id})
+                this.setState({dataVef: res.data.observation})
+                // this.setState({dataProduct: {inputs: {res.data.results_supllies}}})
             })
-            this.setState({ dataSupply: this.props.location.state });
+
+        } else {
+
+            if (this.props.location.state !== undefined) {
+                supply = this.props.location.state.supply
+                const data = { sample: supply.type_supply.name, sample_name: supply.name, supply_id: supply.id }
+                for (let i = 0; i < supply.features.length; i++)
+                    dataEspec.push(supply.features[i])
+
+                this.setState({
+                    dataReport: data,
+                    dataEspec: dataEspec,
+                })
+                this.setState({ dataSupply: this.props.location.state });
+            }
         }
 
     }
