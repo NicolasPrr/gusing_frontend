@@ -82,8 +82,8 @@ const Header = (props) => {
     const analisys = props.data.analisys;
     const lot = props.data.lot;
     const name_provider = props.data.name_provider;
-    const ff = formateDate(props.data.ff, true);
-    const fv = formateDate(props.data.fv, true);
+    const ff = formateDate(props.data.ff, props.data.formatFF);
+    const fv = formateDate(props.data.fv, props.data.formatFV);
     const method = props.data.method;
     return (
         <div className="box is-zise-7">
@@ -286,7 +286,7 @@ function formateDate(dateInput, onlyMonth) {
     let [inp, year, month, day] = Regexp.exec(dateInput)
     month = months[parseInt(month) - 1];
     year = year[2] + year[3];
-    if (onlyMonth === true) {
+    if (onlyMonth) {
         return month + "-" + year;
     } else {
         return day + "-" + month + "-" + year;

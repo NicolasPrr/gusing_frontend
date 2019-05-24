@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from '../pdfsGeneration/Header'
 import HeaderGeneral from './HeaderGeneral'
 import Swal from 'sweetalert2'
 import { Redirect, Link } from 'react-router-dom'

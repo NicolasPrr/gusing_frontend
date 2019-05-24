@@ -2,9 +2,17 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import axios from 'axios';
 import URLBack from '../../../UrlBack'
+import Switch from '../../bulma/Switch'
+
 
 function isEmptyObject(obj) {
   return (Object.getOwnPropertyNames(obj).length === 0);
+}
+function chooseFormat(isTrue) {
+  if (isTrue) {
+    return "MMM-yy"
+  }
+  return "dd-MMM-yy" //Only mmm-yy
 }
 class ReportForm extends Component {
   //Formulario para creación de reporte.
@@ -19,6 +27,7 @@ class ReportForm extends Component {
     this.changeDirection = this.changeDirection.bind(this);
 
     this.handleForm = this.handleForm.bind(this)
+    this.changeDateFormat = this.changeDateFormat.bind(this)
 
     this.state = {
       samplingDate: new Date(),
@@ -27,12 +36,17 @@ class ReportForm extends Component {
       reportDate: new Date(),
       manufactoringDate: new Date(),
       expirationDate: new Date(),
-      clients: []
+      clients: [],
+      formatFF: false,
+      formatFV: false,
+
     };
 
   }
 
-
+  changeDateFormat(id, now) {
+    this.setState({ [id]: now })
+  }
   handleSampling(date) {
     this.setState({
       samplingDate: date
@@ -90,7 +104,7 @@ class ReportForm extends Component {
   sampling_type = React.createRef();
 
   /*<ReportGarnic obj={this.props.obj} />
-    */
+  */
 
   handleForm = (e) => {
     e.preventDefault()
@@ -114,7 +128,9 @@ class ReportForm extends Component {
       date_sampling: this.state.samplingDate,
       date_analisis: this.state.analisysDate,
       date_reception: this.state.receptionDate,
-      date_report: this.state.reportDate
+      date_report: this.state.reportDate,
+      formatFF: this.state.formatFF,
+      formatFV: this.state.formatFV,
     }
     this.props.reportAction(data)
   }
@@ -129,7 +145,9 @@ class ReportForm extends Component {
             analisysDate: data.date_analisis,
             receptionDate: data.date_reception,
             expirationDate: data.fv,
-            manufactoringDate: data.ff
+            manufactoringDate: data.ff,
+            formatFF: data.formatFF,
+            formatFV: data.formatFV
           })
       }
     }, 1500);
@@ -161,6 +179,7 @@ class ReportForm extends Component {
       <div className="notification" >
         <form onSubmit={this.handleForm}  >
           <p>N°de reporte ensayo FQ </p>
+
           <input
             className="input is-small"
             type="text"
@@ -295,7 +314,7 @@ class ReportForm extends Component {
                     />
                   </div>
                 </div>
-                
+
 
               </div>
 
@@ -380,8 +399,9 @@ class ReportForm extends Component {
                     selected={this.state.manufactoringDate}
                     onChange={this.handleFabrication}
                     isClearable={true}
-                    dateFormat="MMM-yy"
+                    dateFormat={chooseFormat(this.state.formatFF)}
                   />
+                  <Switch isTrue={this.state.formatFF} id="formatFF" changeStatus={this.changeDateFormat} />
                 </div>
                 <div className="column">
                   <div className="field">
@@ -392,8 +412,9 @@ class ReportForm extends Component {
                     selected={this.state.expirationDate}
                     onChange={this.handleExpiration}
                     isClearable={true}
-                    dateFormat="MMM-yy"
+                    dateFormat={chooseFormat(this.state.formatFV)}
                   />
+                  <Switch isTrue={this.state.formatFV} id="formatFV" changeStatus={this.changeDateFormat} />
                 </div>
                 <div className="column">
                   <div className="field">
@@ -418,8 +439,6 @@ class ReportForm extends Component {
           <button className="button is-small is-info" type="submit"> Siguiente </button>
 
         </form>
-
-
       </div>
     );
   }
