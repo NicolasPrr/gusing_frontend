@@ -4,15 +4,12 @@ import * as serviceWorker from './serviceWorker';
 
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import Header from './components/Header'
-import Loadersn from './components/loaders/Loadersn'
+import Loadersn from './components/loaders/Loadersn' // don't delete
 import './styles/App.scss';
-import Garnic from './components/colapsibles/Garnic'
-import Desflanat from './components/colapsibles/Desflanat'
 
 import InterfaceReport from './components/reportInterfaz/InterfaceReport'
 import Clients from './components/clients/Clients'
 import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
-import Stepper from './components/Stepper'
 import StepperSupply from './components/supplies/reports/StepperSupply'
 import HomeSupply from './components/supplies/HomeSupply'
 
@@ -21,8 +18,6 @@ const routing = (
     <div>
       <Header/>
       
-      <Route path="/colapsible/garnic" component={Garnic} />
-      <Route path="/colapsible/desflanat" component={Desflanat} />
       <Route path="/insumos" component={HomeSupply} />
       <Route path="/clone/report/:reportId" component={StepperSupply} />
       <Route path="/edit/report/:reportId" component={StepperSupply} />
