@@ -12,6 +12,7 @@ import Clients from './components/clients/Clients'
 import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
 import StepperSupply from './components/supplies/reports/StepperSupply'
 import HomeSupply from './components/supplies/HomeSupply'
+import Database from './components/databaseGUI/Database'
 
 const routing = (
   <Router>
@@ -25,6 +26,7 @@ const routing = (
       <Route path ="/supply/report/create" component ={StepperSupply} /> 
       <Route path="/reports/" component={InterfaceReport} />
       <Route path="/clients" component={Clients} />
+      <Route path="/database" component={Database} />
     </div>
   </Router>
 )
