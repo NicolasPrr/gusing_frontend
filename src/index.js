@@ -5,7 +5,6 @@ import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import Header from './components/Header'
 import Loadersn from './components/loaders/Loadersn' // don't delete
-import './styles/App.scss';
 
 import InterfaceReport from './components/reportInterfaz/InterfaceReport'
 import Clients from './components/clients/Clients'
@@ -14,6 +13,7 @@ import StepperSupply from './components/supplies/reports/StepperSupply'
 import HomeSupply from './components/supplies/HomeSupply'
 import Database from './components/databaseGUI/Database'
 
+import './styles/App.scss';
 const routing = (
   <Router>
     <div>

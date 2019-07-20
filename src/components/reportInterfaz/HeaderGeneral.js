@@ -3,32 +3,12 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import './textbackground.css'
 import URLBack from '../../UrlBack'
-/* 
+import './table.sass';
 
-                    <p> N° de reporte: {data.report_number} </p>
-                    <p> Cliente: {data.client_name}          </p>
-                    <p> N° de analisis: {data.analisys}           </p>
-                    <p> Nombre de la muestra: {data.sample_name}          </p>
-                    <p> Muestra: {data.sample}          </p>
-                    <p> Tipo de muestreo: {data.sampling_type}          </p>
-                    <p> Forma farmaceutica: {data.farmaceutic_shape}          </p>
-                    <p> Fecha de recepcion: {data.date_reception}          </p>
-                    <p> Fecha de reporte : {data.date_report}          </p>
-                    <p> Fecha de muestreo: {data.date_sampling}          </p>
-                    <p> Dirección: {data.direction}          </p>
-                    <p> Fecha de fabricacion: {data.ff}          </p>
-                    <p> Fecha de vencimiento: {data.fv}          </p>
-                    <p> Lote: {data.lot}          </p>
-                    <p> Fecha de muestreo: {data.date_sampling}          </p>
-                    <p> Metodo de analisis: {data.method}          </p>
-
-
-
-*/
-const Encabezado1 = (props) => {
+const Encabezado1 = () => {
     return (
         <div>
-            <table className="table is-fullwidth is-bordered is-size-7">
+            <table className="table is-fullwidth is-bordered is-size-7 ">
                 <thead>
                     <tr>
                         <td className=" is-title has-text-centered">CONTROL DE CALIDAD</td >
@@ -38,13 +18,13 @@ const Encabezado1 = (props) => {
         </div>
     );
 }
-const Encabezado2 = (props) => {
+const Encabezado2 = () => {
     return (
         <div>
             <table className="table is-fullwidth is-bordered is-size-7">
                 <thead>
                     <tr>
-                        <td className="  has-text-centered">TITULO: REPORTE ENSAYO DE MATERIALES</td >
+                        <td className="  has-text-centered">TITULO: REPORTE DE ENSAYO DE MATERIALES</td >
                         <td className="  has-text-centered">Codigo FR-CC -65</td >
                     </tr>
                 </thead>
@@ -52,7 +32,7 @@ const Encabezado2 = (props) => {
         </div>
     );
 }
-const Encabezado3 = (props) => {
+const Encabezado3 = () => {
     return (
         <div>
             <table className="table is-fullwidth is-bordered is-size-7">
@@ -142,7 +122,7 @@ const Note = () => {
             <div className="column">
                 <p className=" has-text-centered">
 
-                    Nota: Solo se puede hacer producción parcial
+                    Nota: Solo se puede hacer reproducción parcial
                     o total de este certificado con previa autorización de Laboratorios Gusing.
                     El resultado es valido únicamente para la muestra analizada. MA= Material de analisis,
                     FQ = Fisicoquimico, NA = No aplica.
@@ -161,7 +141,7 @@ const Footer = () => {
         <div id="footer">
             <p className=" has-text-centered">
 
-                Laboratorios Gusing 100% Productos Naturales y Homeopaticos <br />
+                Laboratorios Gusing 100% Productos Naturales y Homeopaticos S.A.S <br />
                 Carrera 10 Este N°30-03 San Mateo-Soacha PBX 781-75-98<br /> www.laboratoriosgusing.com
             </p>
         </div>
@@ -190,12 +170,10 @@ const Signature = () => {
     )
 }
 function renderIsOk(props) {
-    let checked  = true
     console.log(props)
     if(props === null)
         return null
     if(props === "No"){
-        checked = false
     }
     return (
         <React.Fragment>
@@ -253,7 +231,7 @@ const Report = (props) => {
 
                     <div className="column">
 
-                        <table className="table is-fullwidth is-bordered is-size-7">
+                        <table className="tables is-fullwidth is-bordered is-size-7">
                             <thead>
                                 <tr>
                                     <th> Parametro   </th>
@@ -283,7 +261,7 @@ function formateDate(dateInput, onlyMonth) {
     if (dateInput === null) return "N.A";
     const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
     var Regexp = /(\d{4})-(\d{2})-(\d{2})/
-    let [inp, year, month, day] = Regexp.exec(dateInput)
+    let [, year, month, day] = Regexp.exec(dateInput)
     month = months[parseInt(month) - 1];
     year = year[2] + year[3];
     if (onlyMonth) {

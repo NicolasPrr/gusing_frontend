@@ -1,0 +1,91 @@
+
+$grey-darker: hsl(0, 0%, 21%)
+$white:	hsl(0, 0%, 100%)
+$grey-lighter: #024989
+$text-strong: hsl(0, 0%, 21%);
+$white-bis: hsl(0, 0%, 98%)
+$primary: hsl(171, 100%, 41%)
+
+$table-color: $grey-darker !default
+$table-background-color: $white !default
+
+$table-cell-border: 1px solid $grey-lighter !default
+$table-cell-border-width: 0 0 1px !default
+$table-cell-padding: 0.5em 0.75em !default
+$table-cell-heading-color: $text-strong !default
+
+$table-head-cell-border-width: 0 0 2px !default
+$table-head-cell-color: $text-strong !default
+$table-foot-cell-border-width: 2px 0 0 !default
+$table-foot-cell-color: $text-strong !default
+
+$table-head-background-color: transparent !default
+$table-body-background-color: transparent !default
+$table-foot-background-color: transparent !default
+
+$table-row-hover-background-color: $white-bis !default
+
+$table-row-active-background-color: $primary !default
+
+
+
+.tables
+  td,
+  th
+    border: $table-cell-border
+    border-width: $table-cell-border-width
+    padding: $table-cell-padding
+    vertical-align: top
+    // Colors
+    // Modifiers
+    &.is-narrow
+      white-space: nowrap
+      width: 1%
+   
+  th
+    color: $table-cell-heading-color
+    &:not([align])
+      text-align: left
+  tr
+    &.is-selected
+      background-color: $table-row-active-background-color
+      a,
+      strong
+        color: currentColor
+      td,
+      th
+        color: currentColor
+    
+  thead
+    background-color: $table-head-background-color
+    td,
+    th
+      border-width: $table-head-cell-border-width
+      color: $table-head-cell-color
+  tfoot
+    background-color: $table-foot-background-color
+    td,
+    th
+      border-width: $table-foot-cell-border-width
+      color: $table-foot-cell-color
+  tbody
+    background-color: $table-body-background-color
+    tr
+      &:last-child
+        td,
+        th
+          border-bottom-width: 0
+  // Modifiers
+  &.is-fullwidth
+    width: 100%
+  &.is-bordered
+    td,
+    th
+      border-width: 1px
+    tr
+      &:last-child
+        td,
+        th
+          border-bottom-width: 1px
+
+
