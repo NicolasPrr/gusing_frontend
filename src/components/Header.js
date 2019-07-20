@@ -8,10 +8,10 @@ class Header extends Component {
     if (window.location.pathname.includes("print")) return null;
     return (
       <div>
-        <nav className="navbar is-warning">
+        <nav className="navbar is-light">
           <div className="navbar-brand">
             <a className="navbar-item" >
-              <img src="/resources/LogoGusing.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28" />
+              <img src="/resources/LogoInpv2.png" width="130" height="100" />
             </a>
           </div>
 

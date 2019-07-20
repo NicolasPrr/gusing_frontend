@@ -314,7 +314,8 @@ class HeaderGeneral extends Component {
                     <div className="column is-3  testbox">
                         <span className="image">
                             <br />
-                            <img src="/resources/LogoGusing.png" />
+                            {/* <img src="/resources/LogoGusing.png" /> */}
+                            <img src="/resources/LogoInpv2.png" />
                         </span>
                     </div>
                     <div className="column">
