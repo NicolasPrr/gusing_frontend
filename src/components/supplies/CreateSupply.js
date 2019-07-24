@@ -191,13 +191,16 @@ class CreateSupply extends Component {
                     showConfirmButton: false,
                     timer: 1500
                 })
+                // this.setState({ name: [], espc: [] })
+                window.location.reload();
+
             }
         }).catch(function (error) {
             console.log(error);
         })
-
+        
     }
-
+    
     createRequest() {
         let url;
         let features = [];

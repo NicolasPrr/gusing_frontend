@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import DatePicker from "react-datepicker";
 import axios from 'axios';
 import URLBack from '../../../UrlBack'
-import Switch from '../../bulma/Switch'
 
 
 function isEmptyObject(obj) {
@@ -18,66 +16,16 @@ class ReportForm extends Component {
   //Formulario para creación de reporte.
   constructor(props) {
     super(props);
-    this.handleSampling = this.handleSampling.bind(this);
-    this.handleAnalisys = this.handleAnalisys.bind(this);
-    this.handleReport = this.handleReport.bind(this);
-    this.handleReception = this.handleReception.bind(this);
-    this.handleExpiration = this.handleExpiration.bind(this);
-    this.handleFabrication = this.handleFabrication.bind(this);
+    
+    this.handleForm = this.handleForm.bind(this)
     this.changeDirection = this.changeDirection.bind(this);
 
-    this.handleForm = this.handleForm.bind(this)
-    this.changeDateFormat = this.changeDateFormat.bind(this)
-
     this.state = {
-      samplingDate: new Date(),
-      analisysDate: new Date(),
-      receptionDate: new Date(),
-      reportDate: new Date(),
-      manufactoringDate: new Date(),
-      expirationDate: new Date(),
       clients: [],
-      formatFF: false,
-      formatFV: false,
-
     };
 
   }
 
-  changeDateFormat(id, now) {
-    this.setState({ [id]: now })
-  }
-  handleSampling(date) {
-    this.setState({
-      samplingDate: date
-    });
-  }
-  handleAnalisys(date) {
-    this.setState({
-      analisysDate: date
-    });
-  }
-  handleReception(date) {
-    this.setState({
-      receptionDate: date
-    });
-  }
-  handleReport(date) {
-    this.setState({
-      reportDate: date
-    });
-  }
-  handleFabrication(date) {
-    this.setState({
-      manufactoringDate: date
-    });
-  }
-
-  handleExpiration(date) {
-    this.setState({
-      expirationDate: date
-    });
-  }
   changeDirection() {
     const vl = this.client_name.current.value;
     for (var i = 0; i < this.state.clients.length; i++) {
@@ -95,13 +43,21 @@ class ReportForm extends Component {
   analisys = React.createRef();
   lot = React.createRef();
   name_provider = React.createRef();
-  ff = React.createRef();
-  fv = React.createRef();
   method = React.createRef();
   sample = React.createRef();
   sample_name = React.createRef();
   farmaceutic_shape = React.createRef();
   sampling_type = React.createRef();
+  
+  ff = React.createRef();
+  fv = React.createRef();
+  report_date = React.createRef();
+  reception_date = React.createRef();
+  sampling_date = React.createRef();
+  analisis_date = React.createRef();
+
+ 
+  
 
   /*<ReportGarnic obj={this.props.obj} />
   */
@@ -123,35 +79,17 @@ class ReportForm extends Component {
       farmaceutic_shape: this.farmaceutic_shape.current.value,
       sampling_type: this.sampling_type.current.value,
 
-      ff: this.state.manufactoringDate,
-      fv: this.state.expirationDate,
-      date_sampling: this.state.samplingDate,
-      date_analisis: this.state.analisysDate,
-      date_reception: this.state.receptionDate,
-      date_report: this.state.reportDate,
-      formatFF: this.state.formatFF,
-      formatFV: this.state.formatFV,
+
+      ff: this.ff.current.value,
+      fv: this.fv.current.value,
+      date_sampling:  this.sampling_date.current.value,
+      date_analisis:  this.analisis_date.current.value,
+      date_reception: this.reception_date.current.value,
+      date_report:    this.report_date.current.value,
     }
     this.props.reportAction(data)
   }
   componentDidMount() {
-    setTimeout(() => {
-      const data = this.props.data
-      if (data != null) {
-        this.setState(
-          {
-            reportDate: data.date_report,
-            samplingDate: data.date_sampling,
-            analisysDate: data.date_analisis,
-            receptionDate: data.date_reception,
-            expirationDate: data.fv,
-            manufactoringDate: data.ff,
-            formatFF: data.formatFF,
-            formatFV: data.formatFV
-          })
-      }
-    }, 1500);
-
     let url = URLBack + "/clients";
     axios.get(url).then(res => {
       if (res.status === 200) {
@@ -215,23 +153,26 @@ class ReportForm extends Component {
                   <div className="field">
                     <label className="label is-small">Fecha de muestreo</label>
                   </div>
-                  <DatePicker
+                  
+                  <input
                     className="input is-small"
-                    selected={this.state.samplingDate}
-                    onChange={this.handleSampling}
-                    dateFormat="dd-MMM-yy"
+                    type="text"
+                    placeholder="Fecha de muestreo"
+                    ref={this.sampling_date}
+                    defaultValue={this.props.data.date_sampling}
                   />
                 </div>
                 <div className="column">
                   <div className="field">
                     <label className="label is-small">Fecha de analisis</label>
                   </div>
-                  <DatePicker
+         
+                  <input
                     className="input is-small"
-                    selected={this.state.analisysDate}
-                    onChange={this.handleAnalisys}
-                    dateFormat="dd-MMM-yy"
-
+                    type="text"
+                    placeholder="Fecha de analisis"
+                    ref={this.analisis_date}
+                    defaultValue={this.props.data.date_analisis}
                   />
                 </div>
               </div>
@@ -339,22 +280,24 @@ class ReportForm extends Component {
                   <div className="field">
                     <label className="label is-small">Fecha de recepcion</label>
                   </div>
-                  <DatePicker
+                  <input
                     className="input is-small"
-                    selected={this.state.receptionDate}
-                    onChange={this.handleReception}
-                    dateFormat="dd-MMM-yy"
+                    type="text"
+                    placeholder="Fecha de recepción"
+                    ref={this.reception_date}
+                    defaultValue={this.props.data.date_reception}
                   />
                 </div>
                 <div className="column">
                   <div className="field">
                     <label className="label is-small">Fecha de informe</label>
                   </div>
-                  <DatePicker
+                  <input
                     className="input is-small"
-                    selected={this.state.reportDate}
-                    onChange={this.handleReport}
-                    dateFormat="dd-MMM-yy"
+                    type="text"
+                    placeholder="Fecha de infrome"
+                    ref={this.report_date}
+                    defaultValue={this.props.data.date_report}
                   />
                 </div>
               </div>
@@ -394,27 +337,26 @@ class ReportForm extends Component {
                   <div className="field">
                     <label className="label is-small">FF</label>
                   </div>
-                  <DatePicker
+                  <input
                     className="input is-small"
-                    selected={this.state.manufactoringDate}
-                    onChange={this.handleFabrication}
-                    isClearable={true}
-                    dateFormat={chooseFormat(this.state.formatFF)}
+                    type="text"
+                    placeholder="Nombre de la muestra"
+                    ref={this.ff}
+                    defaultValue={this.props.data.ff}
                   />
-                  <Switch isTrue={this.state.formatFF} id="formatFF" changeStatus={this.changeDateFormat} />
                 </div>
                 <div className="column">
                   <div className="field">
                     <label className="label is-small">FV</label>
                   </div>
-                  <DatePicker
+                  <input
                     className="input is-small"
-                    selected={this.state.expirationDate}
-                    onChange={this.handleExpiration}
-                    isClearable={true}
-                    dateFormat={chooseFormat(this.state.formatFV)}
+                    type="text"
+                    placeholder="Nombre de la muestra"
+                    ref={this.fv}
+                    defaultValue={this.props.data.fv}
                   />
-                  <Switch isTrue={this.state.formatFV} id="formatFV" changeStatus={this.changeDateFormat} />
+
                 </div>
                 <div className="column">
                   <div className="field">
