@@ -88,7 +88,7 @@ const TableSupplies = (props) => {
                                         state: { supply: info[key] }
                                     }} >
                                         <span className="icon is-small has-text-dark">
-                                            <i class="far fa-sticky-note"></i>
+                                            <i className="far fa-sticky-note"></i>
                                         </span>
                                     </Link>
                                 </a>

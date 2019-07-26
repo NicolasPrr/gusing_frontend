@@ -10,7 +10,7 @@ function isEmptyObject(obj) {
     return (Object.getOwnPropertyNames(obj).length === 0);
 }
 function renderEspecifications(props, ck, especificationName) {
-    console.log(especificationName)
+    
     const colors = [
         "N.A",
         "Azul",
@@ -22,7 +22,8 @@ function renderEspecifications(props, ck, especificationName) {
         "Blanco Contramarcado",
         "Contramarcado",
         "Rojo",
-        "Transparente"
+        "Transparente",
+        "Cumple",
     ]
     const materials = [
         "N,A",
@@ -32,6 +33,7 @@ function renderEspecifications(props, ck, especificationName) {
         "PEBD",
         "PSC",
         "Polietileno",
+        "Cumple",
     ]
     if (props.especifications[ck].name.includes("COLOR")) {
         return (
@@ -83,7 +85,8 @@ function renderInputs(props, ck, name) {
         "Blanco Contramarcado",
         "Contramarcado",
         "Rojo",
-        "Transparente"
+        "Transparente",
+        "Cumple"
     ]
     const materials = [
         "N,A",
@@ -93,6 +96,7 @@ function renderInputs(props, ck, name) {
         "PEBD",
         "PSC",
         "Polietileno",
+        "Cumple"
     ]
     if (name.includes("COLOR")) {
         return (

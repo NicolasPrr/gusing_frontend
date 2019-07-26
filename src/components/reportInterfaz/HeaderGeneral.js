@@ -48,22 +48,22 @@ const Encabezado3 = () => {
     );
 }
 const Header = (props) => {
-    const report_number = props.data.report_number;
-    const client_name = props.data.client_name;
-    const direction = props.data.direction;
-    const date_sampling = formateDate(props.data.date_sampling);
-    const date_reception = formateDate(props.data.date_reception);
-    const date_analisis = formateDate(props.data.date_analisis);
-    const date_report = formateDate(props.data.date_report);
-    const sample = props.data.sample;
-    const sample_name = props.data.sample_name;
-    const sampling_type = props.data.sampling_type;
+    const report_number =  props.data.report_number;
+    const client_name =    props.data.client_name;
+    const direction =      props.data.direction;
+    const date_sampling =  props.data.date_sampling;
+    const date_reception = props.data.date_reception;
+    const date_analisis =  props.data.date_analisis;
+    const date_report =    props.data.date_report;
+    const sample =         props.data.sample;
+    const sample_name =    props.data.sample_name;
+    const sampling_type =  props.data.sampling_type;
     const farmaceutic_shape = props.data.farmaceutic_shape;
-    const analisys = props.data.analisys;
-    const lot = props.data.lot;
-    const name_provider = props.data.name_provider;
-    const ff = formateDate(props.data.ff, props.data.formatFF);
-    const fv = formateDate(props.data.fv, props.data.formatFV);
+    const analisys =        props.data.analisys;
+    const lot =             props.data.lot;
+    const name_provider =   props.data.name_provider;
+    const ff =              props.data.ff;
+    const fv =              props.data.fv;
     const method = props.data.method;
     return (
         <div className="box is-zise-7">
@@ -275,7 +275,8 @@ class HeaderGeneral extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: null
+            data: null,
+            textbackground: ""
         }
         this.testDate = this.testDate.bind(this);
     }
@@ -287,13 +288,15 @@ class HeaderGeneral extends Component {
         const { reportId } = this.props.match.params;
         let url = URLBack + "/report_supplies/" + reportId
         axios.get(url).then(res => {
-            console.log(res)
+            // console.log(res)
             this.setState({ data: res.data })
         })
-        console.log(this.state.data)
+        let rta = window.confirm("¿Es copia controlada?")
+        if(rta) this.setState({textbackground: "COPIA CONTROLADA"})
         alert("Para imprimir, por favor presionar las teclas Ctrl + P")
     }
     render() {
+        
         const dat = this.state.data;
         let isok = null;
         let test = [];
@@ -307,6 +310,8 @@ class HeaderGeneral extends Component {
         }
         else
             test = null;
+
+        const bcktxt = this.state.textbackground;
 
         return (
             <div className="container">
@@ -328,7 +333,7 @@ class HeaderGeneral extends Component {
                 {test}
                 {renderIsOk(isok)}
                 <div id="background">
-                    <p id="bg-text">COPIA CONTROLADA</p>
+                    <p id="bg-text">{bcktxt}</p>
                 </div>
                 <Signature />
                 <Note />
