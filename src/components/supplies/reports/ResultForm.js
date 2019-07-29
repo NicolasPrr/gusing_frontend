@@ -167,7 +167,7 @@ class ResultForm extends Component {
         super(props);
 
         this.state = {
-            results: { inputs: [], isOk: null},
+            results: { inputs: [], },
         }
         this.setResult = this.setResult.bind(this);
         this.setEspecification = this.setEspecification.bind(this);
@@ -175,6 +175,7 @@ class ResultForm extends Component {
     }
 
     fulfillment = React.createRef();
+    is_copy = React.createRef();
 
     setResult(e) {
         let results = this.state.results;
@@ -207,7 +208,9 @@ class ResultForm extends Component {
     }
     handleNext(step) {
         let results = this.state.results;
-        results.isOk = this.fulfillment.current.value
+        results.isok = this.fulfillment.current.value
+        results.is_copy = this.is_copy.current.value
+
         this.props.setProductForm(results, step, this.state.especifications)
     }
     render() {
@@ -222,11 +225,26 @@ class ResultForm extends Component {
                 <div className="select is-rounded is-small">
                     <select ref={this.fulfillment} defaultValue={this.props.fulfillment}>
                         <option value="No"
-                            selected={fulfillmentSelected(0, this.props.dataProduct.isOk)} >
+                            selected={fulfillmentSelected(0, this.props.dataProduct.isok)} >
                             No cumple
                         </option>
-                        <option value="Si" selected={fulfillmentSelected(1, this.props.dataProduct.isOk)}>
+                        <option value="Si" selected={fulfillmentSelected(1, this.props.dataProduct.isok)}>
                             Cumple
+                         </option>
+                    </select>
+                </div>
+                {/*fulliment*/}
+                <div className="field">
+                    <label className="label is-small">Copia controlada</label>
+                </div>
+                <div className="select is-rounded is-small">
+                    <select ref={this.is_copy} >
+                        <option value="No"
+                            selected={fulfillmentSelected(0, this.props.dataProduct.is_copy)} >
+                            No
+                        </option>
+                        <option value="Si" selected={fulfillmentSelected(1, this.props.dataProduct.is_copy)}>
+                            Si
                          </option>
                     </select>
                 </div>

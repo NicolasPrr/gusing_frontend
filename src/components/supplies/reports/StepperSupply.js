@@ -122,6 +122,7 @@ class StepperSupply extends Component {
         let url = `${URLBack}/report_supplies`;
         let dataReport = this.state.dataReport;
         dataReport.isok = this.state.dataProduct.isOk;
+        dataReport.is_copy = this.state.dataProduct.is_copy;
         dataReport.observation = this.state.dataVef
         const features = this.state.dataEspec;
         this.setState({ dataReport: dataReport });
@@ -156,7 +157,8 @@ class StepperSupply extends Component {
         let url = `${URLBack}/report_supplies/${this.state.id}`
         // selectUrlRequest(this.state.mode)
         let dataReport = this.state.dataReport;
-        dataReport.isok = this.state.dataProduct.isOk;
+        dataReport.isok = this.state.dataProduct.isok;
+        dataReport.is_copy = this.state.dataProduct.is_copy;
         dataReport.observation = this.state.dataVef
         const features = this.state.dataEspec;
         this.setState({ dataReport: dataReport });
@@ -229,7 +231,8 @@ class StepperSupply extends Component {
                 }
                 let result = {
                     isok: res.data.isok,
-                    inputs: inputs
+                    inputs: inputs,
+                    is_copy: res.data.is_copy
                 };
                 // res.inputs = res.data.result_supplies
                 this.setState({dataEspec: res.data.features})

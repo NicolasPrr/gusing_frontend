@@ -48,22 +48,22 @@ const Encabezado3 = () => {
     );
 }
 const Header = (props) => {
-    const report_number =  props.data.report_number;
-    const client_name =    props.data.client_name;
-    const direction =      props.data.direction;
-    const date_sampling =  props.data.date_sampling;
+    const report_number = props.data.report_number;
+    const client_name = props.data.client_name;
+    const direction = props.data.direction;
+    const date_sampling = props.data.date_sampling;
     const date_reception = props.data.date_reception;
-    const date_analisis =  props.data.date_analisis;
-    const date_report =    props.data.date_report;
-    const sample =         props.data.sample;
-    const sample_name =    props.data.sample_name;
-    const sampling_type =  props.data.sampling_type;
+    const date_analisis = props.data.date_analisis;
+    const date_report = props.data.date_report;
+    const sample = props.data.sample;
+    const sample_name = props.data.sample_name;
+    const sampling_type = props.data.sampling_type;
     const farmaceutic_shape = props.data.farmaceutic_shape;
-    const analisys =        props.data.analisys;
-    const lot =             props.data.lot;
-    const name_provider =   props.data.name_provider;
-    const ff =              props.data.ff;
-    const fv =              props.data.fv;
+    const analisys = props.data.analisys;
+    const lot = props.data.lot;
+    const name_provider = props.data.name_provider;
+    const ff = props.data.ff;
+    const fv = props.data.fv;
     const method = props.data.method;
     return (
         <div className="box is-zise-7">
@@ -171,9 +171,9 @@ const Signature = () => {
 }
 function renderIsOk(props) {
     console.log(props)
-    if(props === null)
+    if (props === null)
         return null
-    if(props === "No"){
+    if (props === "No") {
     }
     return (
         <React.Fragment>
@@ -276,7 +276,6 @@ class HeaderGeneral extends Component {
         super(props)
         this.state = {
             data: null,
-            textbackground: ""
         }
         this.testDate = this.testDate.bind(this);
     }
@@ -291,15 +290,16 @@ class HeaderGeneral extends Component {
             // console.log(res)
             this.setState({ data: res.data })
         })
-        let rta = window.confirm("¿Es copia controlada?")
-        if(rta) this.setState({textbackground: "COPIA CONTROLADA"})
+
+        // if(rta) this.setState({textbackground: "COPIA CONTROLADA"})
         alert("Para imprimir, por favor presionar las teclas Ctrl + P")
     }
     render() {
-        
+
         const dat = this.state.data;
         let isok = null;
         let test = [];
+        let bcktxt = ""
         if (dat !== null) {
             isok = dat.isok;
             test.push(<Header data={dat} />)
@@ -307,11 +307,13 @@ class HeaderGeneral extends Component {
                 <Report features={dat.features} results={dat.result_supplies} color={dat.color} isok={dat.isok} />
             )
             test.push(<Observation data={dat.observation} />)
+            if(dat.is_copy ==="Si"){
+                bcktxt="COPIA CONTROLADA"
+            }
         }
-        else
+        else {
             test = null;
-
-        const bcktxt = this.state.textbackground;
+        }
 
         return (
             <div className="container">
