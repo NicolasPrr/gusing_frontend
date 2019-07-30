@@ -121,7 +121,7 @@ class StepperSupply extends Component {
     createReport() {
         let url = `${URLBack}/report_supplies`;
         let dataReport = this.state.dataReport;
-        dataReport.isok = this.state.dataProduct.isOk;
+        dataReport.isok = this.state.dataProduct.isok;
         dataReport.is_copy = this.state.dataProduct.is_copy;
         dataReport.observation = this.state.dataVef
         const features = this.state.dataEspec;

@@ -22,6 +22,9 @@ class LastStep extends Component {
         this.props.action(data , -1)
        
     }
+    componentDidMount(){
+        this.observations.current.value = this.props.data.observation
+    }
     render() {
         return (
             <div>
@@ -30,7 +33,7 @@ class LastStep extends Component {
                     <div className="field">
                         Observaciones
                         <div className="control">
-                            <textarea className="textarea is-primary is-small" placeholder="Observaciones" defaultValue={this.props.data.observation} ref = {this.observations} ></textarea>
+                            <textarea className="textarea is-primary is-small" placeholder="Observaciones" defaultValue={""} ref = {this.observations} ></textarea>
                         </div>
                     </div>
                     <button className="button is-success is-small" type="submit"> Finalizar </button>

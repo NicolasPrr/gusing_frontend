@@ -135,7 +135,7 @@ function renderInputs(props, ck, name) {
     }
     return (<input className="input is-small" type="text"
         id={ck}
-        defaultValue={props.inputs[ck]}
+        defaultValue={props.inputs[ck] || ""}
         onChange={props.setResult.bind(ck)}
     />);
 }
@@ -193,11 +193,12 @@ class ResultForm extends Component {
     }
 
     componentDidMount() {
-        let init = Array(this.props.dataEspec.length).fill(null);
+        let init = Array(this.props.dataEspec.length).fill("");
         let resultsStepper = this.props.dataProduct;
         if (!isEmptyObject(resultsStepper)) {
             for (let i = 0; i < resultsStepper.inputs.length; i++) {
                 init[i] = this.props.dataProduct.inputs[i];
+                console.log("init:" ,init[i])
             }
         }
         let results = this.state.results;
@@ -208,7 +209,7 @@ class ResultForm extends Component {
     }
     handleNext(step) {
         let results = this.state.results;
-        results.isok = this.fulfillment.current.value
+        results.isok = this.fulfillment.current.value   
         results.is_copy = this.is_copy.current.value
 
         this.props.setProductForm(results, step, this.state.especifications)
