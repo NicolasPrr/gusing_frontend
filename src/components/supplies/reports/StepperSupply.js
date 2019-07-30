@@ -19,6 +19,7 @@ function selectUrlRequest(type) {
 
 
 function isEmptyObject(obj) {
+    if(obj === null || obj === undefined) return true
     return (Object.getOwnPropertyNames(obj).length === 0);
 }
 const LastStep = (props) => {
