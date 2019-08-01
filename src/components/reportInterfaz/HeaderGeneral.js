@@ -4,6 +4,7 @@ import axios from 'axios'
 import './textbackground.css'
 import URLBack from '../../UrlBack'
 import './table.sass';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const Encabezado1 = () => {
     return (
@@ -65,14 +66,25 @@ const Header = (props) => {
     const ff = props.data.ff;
     const fv = props.data.fv;
     const method = props.data.method;
+
+
+    function test(str) {
+        alert(`Se ha copiado al portapapeles el numero: ${str}`)
+    }
     return (
         <div className="box is-zise-7">
 
 
             <div className="columns">
                 <div className="column  has-text-justified is-size-7">
-                    <p className="text"> <strong>N° de reporte FQ: </strong> {report_number} </p>
-                    <p className="text"> <strong>N° de analisis: </strong> {analisys} </p>
+
+
+                    <CopyToClipboard text={report_number}>
+                        <span>
+                            <p className="text" onClick={test.bind(this,report_number)}> <strong>N° de reporte FQ: </strong> {report_number} </p>
+                            <p className="text"> <strong>N° de analisis: </strong> {analisys} </p>
+                        </span>
+                    </CopyToClipboard>
                     <p> <strong>Cliente: </strong> {client_name}</p>
                     <p> <strong>Dirección:</strong> {direction} </p>
                     <p> <strong> Lote de proveedor: </strong>  {lot}          </p>
@@ -307,8 +319,8 @@ class HeaderGeneral extends Component {
                 <Report features={dat.features} results={dat.result_supplies} color={dat.color} isok={dat.isok} />
             )
             test.push(<Observation data={dat.observation} />)
-            if(dat.is_copy ==="Si"){
-                bcktxt="COPIA CONTROLADA"
+            if (dat.is_copy === "Si") {
+                bcktxt = "COPIA CONTROLADA"
             }
         }
         else {

@@ -17,7 +17,21 @@ class Database extends Component {
         this.setState({file: file})
     }
     download = () => {
-        window.open(`${BackURL}/databases/now`)
+        
+        // axios({
+        //     url: `${BackURL}/databases/now`,
+        //     method: 'GET',
+        //     responseType: 'blob', // important
+        //   }).then((response) => {
+        //      const url = window.URL.createObjectURL(new Blob([response.data]));
+        //      const link = document.createElement('a');
+        //      console.log(response)
+        //      link.href = url;
+        //      link.setAttribute('download', 'test.tar'); //or any other extension
+        //      document.body.appendChild(link);
+        //      link.click();
+        //   });
+         window.open(`${BackURL}/databases/now`)
     }
     upload= () => {
         axios.post(BackURL)
