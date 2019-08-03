@@ -11,6 +11,8 @@ import StepperSupply from './components/supplies/reports/StepperSupply'
 import HomeSupply from './components/supplies/HomeSupply'
 import Database from './components/databaseGUI/Database'
 
+import StepperAgua from './components/products/Agua/Stepper';
+
 class App extends Component {
     render() {
         return (
@@ -28,12 +30,20 @@ class App extends Component {
                         <Route exact strict path="/print/:reportId" component={HeaderGeneral} />
                         <Route path="/reports/" component={InterfaceReport} />
                         {/*  Insumos*/}
+                        
+
+                        {/*  Aguas */}
+
+                        <Route path="/aguas/crear" component={StepperAgua} />
+                        {/*  Aguas */}
 
 
                         
+
+
                         <Route path="/clients" component={Clients} />
                         <Route path="/database" component={Database} />
-                        <Route component = {Error}/>
+                        <Route component={Error} />
                     </Switch>
 
                 </div>

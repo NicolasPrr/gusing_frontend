@@ -17,7 +17,7 @@ class Landing extends Component {
                              </p>
                             <div className="columns is-vcentered">
                                 <div className="column">
-                                    <button className={classButton} onClick={this.goTo.bind(this,'aguas')}>
+                                    <button className={classButton} onClick={this.goTo.bind(this,'aguas/crear')}>
                                         Agua
                                     </button>
                                 </div>

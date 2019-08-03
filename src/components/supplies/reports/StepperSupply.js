@@ -5,23 +5,8 @@ import axios from 'axios'
 import URLBack from '../../../UrlBack'
 import Swal from 'sweetalert2'
 import ResultForm from './ResultForm';
-function selectUrlRequest(type) {
-    //Retorna la url despues y el el tipo de require 
-    //http://localhost:3000/report_garnics
-    switch (type) {
-        //"[url, requiereDatabase]"
-        case "ReportGarnic":
-            return ["/report_garnics", "report_garnic"]
-        default:
-            return null;
-    }
-}
+import {isEmptyObject } from '../../../helpers'
 
-
-function isEmptyObject(obj) {
-    if(obj === null || obj === undefined) return true
-    return (Object.getOwnPropertyNames(obj).length === 0);
-}
 const LastStep = (props) => {
     let value = props.dataVef;
     if (isEmptyObject(value)) {
@@ -56,8 +41,6 @@ class StepperSupply extends Component {
             dataProduct: {}, //Datos del producto, es el resultado de las mediciones
             dataVef: {}, //Observaciones
             dataEspec: {}, // Datos de especificaciones
-            mode: null,
-            defaultReport: null,
         }
         this.nextStep = this.nextStep.bind(this)
         this.headerForm = this.headerForm.bind(this)
@@ -100,7 +83,6 @@ class StepperSupply extends Component {
     }
     renderForm(step) {
         //Selecciona que reenderizar por paso...
-        //mode es el tipo de producto, se renderiza un formulario para cada tipo.
         //3 es observaciones
         switch (step) {
             case 1:
