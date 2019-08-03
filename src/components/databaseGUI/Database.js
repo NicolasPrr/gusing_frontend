@@ -40,16 +40,16 @@ class Database extends Component {
     render() {
         return (
             <div>
-                <div className="hero is-fullheight is-bold is-light">
+                <div className="hero is-fullheight is-bold is-dark">
                     <div className="hero-body">
                         <div className="container">
                             <div className="columns is-centered">
                                 <div className="column">
 
                                     <article className="card is-rounded">
-                                        <header className="card-header">
-                                            <div className="card-header-title">
-                                                <p className="title">BackUp de la base de datos</p>
+                                        <header className="card-header ">
+                                            <div className="card-header-title ">
+                                                <p className="title has-text-dark">BackUp de la base de datos</p>
                                             </div>
                                         </header>
                                         <div className="card-content">
@@ -68,7 +68,7 @@ class Database extends Component {
                                     </article>
                                 </div>
 
-                                <div className="column">
+                                {/* <div className="column">
                                     <article className="card is-rounded">
                                         <header className="card-header">
                                             <div className="card-header-title">
@@ -101,7 +101,7 @@ class Database extends Component {
 
                                     </article>
 
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

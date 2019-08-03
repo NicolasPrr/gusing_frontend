@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import baseURLFront from './Urlpage'
-import { Link, Switch, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
 
@@ -17,12 +16,43 @@ class Header extends Component {
 
           <div id="buggerg" className="navbar-menu is-active">
             <div className="navbar-start">
-              <a className="navbar-item" href={baseURLFront} >
-                Pagina principal</a>
-              <Link className="navbar-item" to="/insumos/"   >
-                Insumos</Link>
-              <Link className="navbar-item" to="/reports/"   >
-                Reportes</Link>
+              <Link className="navbar-item" to="/"   >
+                Pagina principal</Link>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <div className="navbar-link">
+                  Listar reportes
+                  </div>
+                <div className="navbar-dropdown">
+                     <Link className="navbar-item" to="/reports/"   >
+                       Aguas
+                     </Link>
+                     <Link className="navbar-item" to="/reports/"   >
+                       Capsulas
+                     </Link>
+                     <Link className="navbar-item" to="/reports/"   >
+                       Insumos
+                     </Link>
+                     <Link className="navbar-item" to="/reports/"   >
+                       Liquidos
+                     </Link>
+                     <Link className="navbar-item" to="/reports/"   >
+                       Materia prima
+                     </Link>
+                     <Link className="navbar-item" to="/reports/"   >
+                       Material impreso
+                     </Link>
+                     <Link className="navbar-item" to="/reports/"   >
+                       Polvos granulados
+                     </Link>
+                     <Link className="navbar-item" to="/reports/"   >
+                       Semisolidos
+                     </Link>
+                     <Link className="navbar-item" to="/reports/"   >
+                       Tabletas
+                     </Link>
+                </div>
+              </div>
+
               <Link className="navbar-item" to='/clients' >
                 Gestion de clientes</Link>
               <Link className="navbar-item" to='/database' >
