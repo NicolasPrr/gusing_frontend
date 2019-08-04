@@ -6,14 +6,14 @@ class Landing extends Component {
         this.props.history.push(path);
     }
     render() {
-        const classButton = "button  is-dark is-fullwidth"
+        const classButton = "button is-large is-rounded is-dark is-fullwidth has-text-weight-bold"
         return (
             <div>
-                <section className="hero is-link is-fullheight-with-navbar">
+                <section className="hero is-white is-fullheight-with-navbar">
                     <div className="hero-body">
                         <div className="container">
-                            <p className="title has-text-light">
-                                Selecciona una opción
+                            <p className="title has-text-dark">
+                                Selecciona una opción para la creación  de un reporte
                              </p>
                             <div className="columns is-vcentered">
                                 <div className="column">
@@ -23,7 +23,7 @@ class Landing extends Component {
                                 </div>
                                 <div className="column">
                                     <button className={classButton} onClick={this.goTo.bind(this,'capsulas')}>
-                                        Capsulas
+                                        Cápsulas
                                     </button>
                                 </div>
                                 <div className="column">
@@ -33,7 +33,7 @@ class Landing extends Component {
                                 </div>
                                 <div className="column">
                                     <button className={classButton} onClick={this.goTo.bind(this,'liquidos')}>
-                                        Liquidos
+                                        Líquidos
                                     </button>
                                 </div>
                                 <div className="column">

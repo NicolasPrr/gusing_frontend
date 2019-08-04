@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReportForm from './ReportForm';
-// import LastStep from '../../LastStep'
 import axios from 'axios'
 import URLBack from '../../../UrlBack'
 import Swal from 'sweetalert2'
