@@ -1,5 +1,7 @@
 import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import './table.sass';
+
 
 //Codigo de empresión para reporte
 const Encabezado1 = (props) => {
@@ -67,11 +69,10 @@ export const HeaderReport = () => {
         </div>
     )
 }
-
 export const InformationReport = (props) => {
 
 
-    if(props.data === undefined || props.data === null) return null
+    if (props.data === undefined || props.data === null) return null
 
     const report_number = props.data.report_number;
     const client_name = props.data.client_name;
@@ -105,7 +106,7 @@ export const InformationReport = (props) => {
 
                     <CopyToClipboard text={report_number}>
                         <span>
-                            <p className="text" onClick={notification.bind(this,report_number)}> <strong>N° de reporte FQ: </strong> {report_number} </p>
+                            <p className="text" onClick={notification.bind(this, report_number)}> <strong>N° de reporte FQ: </strong> {report_number} </p>
                             <p className="text"> <strong>N° de analisis: </strong> {analisys} </p>
                         </span>
                     </CopyToClipboard>
@@ -138,3 +139,118 @@ export const InformationReport = (props) => {
         </div>
     )
 }
+export const Observation = (props) => {
+    return (
+        <div className="box is-size-7">
+            <p> <strong>Observaciones: </strong> </p>
+            <p> {props.data}</p>
+        </div>
+    )
+}
+export const Note = () => {
+
+    return (
+        <div id="note" className="columns">
+            <div className="column">
+                <p className=" has-text-centered">
+
+                    Nota: Solo se puede hacer reproducción parcial
+                    o total de este certificado con previa autorización de Laboratorios Gusing.
+                    El resultado es valido únicamente para la muestra analizada. MA= Material de analisis,
+                    FQ = Fisicoquimico, NA = No aplica.
+
+                </p>
+
+
+            </div>
+        </div>
+    )
+}
+
+
+export const Footer = () => {
+    return (
+        <div id="footer">
+            <p className=" has-text-centered">
+
+                Laboratorios Gusing 100% Productos Naturales y Homeopaticos S.A.S <br />
+                Carrera 10 Este N°30-03 San Mateo-Soacha PBX 781-75-98<br /> www.laboratoriosgusing.com
+            </p>
+        </div>
+    )
+}
+export const Signature = () => {
+    return (
+        <div id="signature">
+            <div className="columns"    >
+                <div className="column">
+                    <p>Realizado por:</p>
+                    <br />
+                    <hr />
+                    Coordinador control de calidad
+                </div>
+
+                <div className="column">
+                    <p>Verificado por: </p>
+                    <br />
+                    <hr />
+                    Jefe control de calidad
+            </div>
+
+            </div>
+        </div>
+    )
+}
+
+export function renderIsOk(props) {
+    let isok = "No"
+    if (props) isok = "Si"
+    return (
+        <React.Fragment>
+            <strong> Cumplimiento de parametros: </strong>
+            <label>{isok}</label>
+        </React.Fragment>
+    )
+}
+
+export const WaterTable = (props) => {
+    if(props === undefined || props === null) return null
+    return (
+        <div>
+            <table className="tables is-fullwidth is-bordered is-size-7">
+                <thead>
+                    <tr>
+                        <th>Nombre del resultado</th>
+                        <th>Resultado</th>
+                        <th>Parametros de referencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Determinación conductividad</td>
+                        <td>{props.data.conductivity}</td>
+                        <td> {"< 1.3 µS/cm"} </td>
+                    </tr>
+                    <tr>
+                        <td>Determinación pH</td>
+                        <td>{props.data.ph}</td>
+                        <td>5 - 7 </td>
+                    </tr>
+                    <tr>
+                        <td>Determinación (OTC) Total Organic Carbon</td>
+                        <td>{props.data.organic}</td>
+                        <td>≤ 500 ppb</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    );
+};
+
+export  function chooseMainURL(location){
+    if(location.includes('report_waters')) return '/report_waters/'
+    
+}
+
+
+//Water

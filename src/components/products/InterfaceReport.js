@@ -8,7 +8,7 @@ import Pagination from '../reportInterfaz/Pagination'
 
 
 class InterfaceReport extends Component {
-    constructor(props) {
+    constructor() {
         super();
         this.state = {
             reports: [],

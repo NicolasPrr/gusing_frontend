@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2'
 import {  Link } from 'react-router-dom'
+import {chooseMainURL} from './printer/Helpers'
 
 class Table extends Component {
     constructor(props) {
@@ -83,6 +84,7 @@ class Table extends Component {
                 
                         </tr>
                     </thead>
+                    {/* to={"/report_waters/print/" + info[key].id} */}
                     <tbody>
                         {Object.keys(info).map(key => (
                             <tr key={key}  onMouseEnter={this.enableHover.bind(this, key)} onMouseLeave={this.disableHover.bind(this, key)}>
@@ -92,7 +94,7 @@ class Table extends Component {
                                 <td className="has-text-centered">{info[key].sample_name}</td>
                                 <td className="has-text-centered">
                                     <button className ="button is-small">
-                                        <Link to={"/print/" + info[key].id} target="_blank"  >
+                                        <Link to={`${chooseMainURL(window.location.pathname)}print/${info[key].id}`} target="_blank"  >
                                             <span className="icon is-small has-text-success ">
                                                 <i className="fas fa-lg fa-print   "></i>
                                             </span>
