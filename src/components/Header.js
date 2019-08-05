@@ -9,21 +9,21 @@ class Header extends Component {
       <div>
         <nav className="navbar is-light">
           <div className="navbar-brand">
-            <a className="navbar-item" >
-              <img src="/resources/LogoInpv2.png" width="130" height="100" />
-            </a>
+            <div className="navbar-item" >
+              <img alt ="gusing" src="/resources/LogoInpv2.png" width="130" height="100" />
+            </div>
           </div>
 
           <div id="buggerg" className="navbar-menu is-active">
             <div className="navbar-start">
               <Link className="navbar-item" to="/"   >
                 Pagina principal</Link>
-              <div class="navbar-item has-dropdown is-hoverable">
+              <div className="navbar-item has-dropdown is-hoverable">
                 <div className="navbar-link">
                   Listar reportes
                   </div>
                 <div className="navbar-dropdown">
-                     <Link className="navbar-item" to="/reports/"   >
+                     <Link className="navbar-item" to="/report_waters/reports"   >
                        Aguas
                      </Link>
                      <Link className="navbar-item" to="/reports/"   >

@@ -77,6 +77,7 @@ class ReportForm extends Component {
       date_analisis:  this.analisis_date.current.value,
       date_reception: this.reception_date.current.value,
       date_report:    this.report_date.current.value,
+      observation: this.props.data.observation
     }
     this.props.reportAction(data)
   }
@@ -101,9 +102,7 @@ class ReportForm extends Component {
       samples_name = this.props.data.sample_name;
       method = this.props.data.method;
     }
-    console.log("Props")
-    console.log(this.props)
-
+   
     return (
       <div className="notification" >
         <form onSubmit={this.handleForm}  >
@@ -134,7 +133,7 @@ class ReportForm extends Component {
 
                 <datalist id="dataclients">
                   {Object.keys(this.state.clients).map(key => (
-                    <option value={this.state.clients[key].name} />
+                    <option value={this.state.clients[key].name}  key = {key}/>
                   ))}
 
                 </datalist>

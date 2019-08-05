@@ -2,17 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
-import {Route , BrowserRouter as Router } from 'react-router-dom'
-import Header from './components/Header'
-import Loadersn from './components/loaders/Loadersn' // don't delete
+// import {Route , BrowserRouter as Router } from 'react-router-dom'
+// import Header from './components/Header'
+// import Loadersn from './components/loaders/Loadersn' // don't delete
 
-import InterfaceReport from './components/reportInterfaz/InterfaceReport'
-import Clients from './components/clients/Clients'
-import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
-import StepperSupply from './components/supplies/reports/StepperSupply'
-import HomeSupply from './components/supplies/HomeSupply'
-import Database from './components/databaseGUI/Database'
-import Landing from './components/LandingPage/Landing'
+// import InterfaceReport from './components/reportInterfaz/InterfaceReport'
+// import Clients from './components/clients/Clients'
+// import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
+// import StepperSupply from './components/supplies/reports/StepperSupply'
+// import HomeSupply from './components/supplies/HomeSupply'
+// import Database from './components/databaseGUI/Database'
+// import Landing from './components/LandingPage/Landing'
 import './styles/App.scss';
 import App from './App'
 // const routing = (

@@ -93,14 +93,14 @@ class Especification extends Component {
                     </datalist>
                 </div>
                 <div className="control">
-                    <a className="button is-small is-info" onClick={this.addChar} >
+                    <button className="button is-small is-info" onClick={this.addChar} >
                         ±
-                    </a>
+                    </button>
                 </div>
                 <div className="control">
-                    <a className="button is-small is-danger" onClick={this.remove} >
+                    <button className="button is-small is-danger" onClick={this.remove} >
                         Remover
-                    </a>
+                    </button>
                 </div>
 
             </div >

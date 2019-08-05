@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { isEmptyObject } from '../helpers'
 const LastStep = (props) => {
     let value = props.dataVef;

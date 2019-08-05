@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import UrlBack from '../../UrlBack'
 
 import Swal from 'sweetalert2';
 import URLBack from '../../UrlBack';

@@ -34,15 +34,16 @@ const Table = (props) => {
                     {Object.keys(info).map(key => (
                         <tr key={key}>
                             <th >{info[key].id}</th>
-                            <td><a onClick={props.render_create.bind(this, key)}>
+                            <td><button className="button is-small" onClick={props.render_create.bind(this, key)}>
                                 {info[key].name}
-                            </a></td>
-                            <td><a><span className="icon is-small has-text-success " onClick={props.edit.bind(this, key)}>
-                                <i className="fas fa-lg fa-edit   "></i>
-                            </span></a></td>
-                            <td><a><span className="icon has-text-danger is-small" onClick={props.delete.bind(this, key)}>
+                            </button></td>
+                            <td><button className="button is-small"><span className="icon is-small has-text-success " onClick={props.edit.bind(this, key)}>
+                                <i className="fas fa fa-edit   "></i>
+                            </span></button>
+                            </td>
+                            <td><button className="button is-small"><span className="icon has-text-danger is-small" onClick={props.delete.bind(this, key)}>
                                 <i className="fas fa-trash-alt"></i>
-                            </span></a></td>
+                            </span></button></td>
                         </tr>
                     ))}
                 </tbody>
@@ -82,7 +83,7 @@ const TableSupplies = (props) => {
                                 </button>
                             </td>
                             <td className="has-text-centered">
-                                <a>
+                                <button className ="button is-small">
                                     <Link to={{
                                         pathname: "/supply/report/create",
                                         state: { supply: info[key] }
@@ -91,15 +92,15 @@ const TableSupplies = (props) => {
                                             <i className="far fa-sticky-note"></i>
                                         </span>
                                     </Link>
-                                </a>
+                                </button>
                             </td>
 
-                            <td className="has-text-centered"><a><span className="icon is-small has-text-link" onClick={props.setSupplie.bind(this, key)}>
+                            <td className="has-text-centered"><button className ="button is-small"><span className="icon is-small has-text-link" onClick={props.setSupplie.bind(this, key)}>
                                 <i className="fas fa-lg fa-edit   "></i>
-                            </span></a></td>
-                            <td className="has-text-centered"><a><span className="icon has-text-danger is-small" onClick={props.actionDelete.bind(this, key)}>
+                            </span></button></td>
+                            <td className="has-text-centered"><button className ="button is-small"><span className="icon has-text-danger is-small" onClick={props.actionDelete.bind(this, key)}>
                                 <i className="fas fa-trash-alt"></i>
-                            </span></a></td>
+                            </span></button></td>
                         </tr>
                     ))}
                 </tbody>
@@ -127,7 +128,7 @@ class HomeSupply extends Component {
         this.renderAddSupply = this.renderAddSupply.bind(this);// Renderiza el componente para crear un insumo
         this.deleteSupplyRequest = this.deleteSupplyRequest.bind(this);//borra el insumo
         this.setSupplie = this.setSupplie.bind(this);
-        this.getSupplies = this.getSupplies.bind(this); 
+        this.getSupplies = this.getSupplies.bind(this);
     }
     activeEditModal(key) {
         this.setState({ key: key, render_modal: true });
@@ -243,11 +244,11 @@ class HomeSupply extends Component {
             }
         });
     }
-    getSupplies(name){
+    getSupplies(name) {
         const url = `${URLBack}/supplies/search`;
-        axios.post(url, {name: name}).then(res => {
-            this.setState({supplies: res.data})
-        }).catch(function (error){
+        axios.post(url, { name: name }).then(res => {
+            this.setState({ supplies: res.data })
+        }).catch(function (error) {
             console.log(error);
         })
     }
@@ -301,7 +302,7 @@ class HomeSupply extends Component {
                 <div className="columns">
                     <div className="column is-one-third">
                         <CreateType addItem={this.addItem} />
-                        <SearchBox action = {this.getSupplies}/>
+                        <SearchBox action={this.getSupplies} />
                         <Table
                             data={this.state.type_list}
                             edit={this.activeEditModal}

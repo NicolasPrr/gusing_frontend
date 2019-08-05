@@ -9,7 +9,6 @@ class ProductForm extends Component {
 
 
     handleNext = (step) => {
-        alert(step)
         let results = {
             conductivity: this.conductivity.current.value,
             ph: this.ph.current.value,
@@ -20,16 +19,16 @@ class ProductForm extends Component {
         this.props.setProductForm(results, step)
 
     }
-    componentDidMount(){ 
-        
-        if (!isEmptyObject(this.props.dataProduct)){
+    componentDidMount() {
+
+        if (!isEmptyObject(this.props.dataProduct)) {
             const data = this.props.dataProduct
-            
-            this.ph.current.value =             data.ph
-            this.conductivity.current.value =   data.conductivity
-            this.organic.current.value =        data.organic
-            this.fulfillment.current.value =    data.fulfillment
-            this.is_copy.current.value =        data.is_copy
+
+            this.ph.current.value = data.ph
+            this.conductivity.current.value = data.conductivity
+            this.organic.current.value = data.organic
+            this.fulfillment.current.value = data.fulfillment
+            this.is_copy.current.value = data.is_copy
         }
 
     }

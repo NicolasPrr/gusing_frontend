@@ -6,12 +6,7 @@ import URLBack from '../../../UrlBack'
 function isEmptyObject(obj) {
   return (Object.getOwnPropertyNames(obj).length === 0);
 }
-function chooseFormat(isTrue) {
-  if (isTrue) {
-    return "MMM-yy"
-  }
-  return "dd-MMM-yy" //Only mmm-yy
-}
+
 class ReportForm extends Component {
   //Formulario para creación de reporte.
   constructor(props) {
@@ -78,8 +73,6 @@ class ReportForm extends Component {
       method: this.method.current.value,
       farmaceutic_shape: this.farmaceutic_shape.current.value,
       sampling_type: this.sampling_type.current.value,
-
-
       ff: this.ff.current.value,
       fv: this.fv.current.value,
       date_sampling:  this.sampling_date.current.value,
@@ -110,9 +103,7 @@ class ReportForm extends Component {
       samples_name = this.props.data.sample_name;
       method = this.props.data.method;
     }
-    console.log("Props")
-    console.log(this.props)
-
+   
     return (
       <div className="notification" >
         <form onSubmit={this.handleForm}  >

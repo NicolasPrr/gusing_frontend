@@ -2,123 +2,12 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import './textbackground.css'
-import URLBack from '../../UrlBack'
+import URLBack from '../../../UrlBack'
 import './table.sass';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import {HeaderReport, InformationReport} from './Helpers'
+import Error from '../../LandingPage/Error'
 
-const Encabezado1 = () => {
-    return (
-        <div>
-            <table className="table is-fullwidth is-bordered is-size-7 ">
-                <thead>
-                    <tr>
-                        <td className=" is-title has-text-centered">CONTROL DE CALIDAD</td >
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    );
-}
-const Encabezado2 = () => {
-    return (
-        <div>
-            <table className="table is-fullwidth is-bordered is-size-7">
-                <thead>
-                    <tr>
-                        <td className="  has-text-centered">TITULO: REPORTE DE ENSAYO DE MATERIALES</td >
-                        <td className="  has-text-centered">Codigo FR-CC -65</td >
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    );
-}
-const Encabezado3 = () => {
-    return (
-        <div>
-            <table className="table is-fullwidth is-bordered is-size-7">
-                <thead>
-                    <tr>
-                        <td className=" has-text-centered " >Version 04</td >
-                        <td className=" has-text-centered"> FECHA DEVIGENCIA DESDE EL 28 DE FEBRERO DE 2017</td >
-                        <td className=" has-text-centered">Pagina 1 de 1</td >
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    );
-}
-const Header = (props) => {
-    const report_number = props.data.report_number;
-    const client_name = props.data.client_name;
-    const direction = props.data.direction;
-    const date_sampling = props.data.date_sampling;
-    const date_reception = props.data.date_reception;
-    const date_analisis = props.data.date_analisis;
-    const date_report = props.data.date_report;
-    const sample = props.data.sample;
-    const sample_name = props.data.sample_name;
-    const sampling_type = props.data.sampling_type;
-    const farmaceutic_shape = props.data.farmaceutic_shape;
-    const analisys = props.data.analisys;
-    const lot = props.data.lot;
-    const name_provider = props.data.name_provider;
-    const ff = props.data.ff;
-    const fv = props.data.fv;
-    const method = props.data.method;
-
-
-    function test(str) {
-        alert(`Se ha copiado al portapapeles el numero: ${str}`)
-    }
-    return (
-        <div className="box is-zise-7">
-
-
-            <div className="columns">
-                <div className="column  has-text-justified is-size-7">
-
-
-                    <CopyToClipboard text={report_number}>
-                        <span>
-                            <p className="text" onClick={test.bind(this,report_number)}> <strong>N° de reporte FQ: </strong> {report_number} </p>
-                            <p className="text"> <strong>N° de analisis: </strong> {analisys} </p>
-                        </span>
-                    </CopyToClipboard>
-                    <p> <strong>Cliente: </strong> {client_name}</p>
-                    <p> <strong>Dirección:</strong> {direction} </p>
-                    <p> <strong> Lote de proveedor: </strong>  {lot}          </p>
-                    <p> <strong> Nombre de proveedor: </strong>  {name_provider}          </p>
-
-
-                </div>
-                <div className="column has-text-justified is-size-7">
-                    <p> <strong>Muestra:</strong> {sample}          </p>
-                    <p> <strong>Nombre de la muestra:</strong> {sample_name}          </p>
-                    <p> <strong>Tipo de muestreo: </strong> {sampling_type}          </p>
-                    <p> <strong>Forma farmaceutica:</strong> {farmaceutic_shape}          </p>
-                    <p> <strong>Metodo de analisis:</strong> {method}          </p>
-
-
-                </div>
-                <div className="column  has-text-left is-size-7">
-                    <p> <strong>Fecha de fabricacion: </strong> {ff}          </p>
-                    <p> <strong>Fecha de vencimiento:</strong> {fv}          </p>
-                    <p> <strong>Fecha de muestreo: </strong> {date_sampling}          </p>
-                    <p> <strong>Fecha de analisis: </strong> {date_analisis}          </p>
-                    <p> <strong>Fecha de recepción:</strong> {date_reception}          </p>
-                    <p> <strong>Fecha de informe:</strong> {date_report}          </p>
-
-
-
-
-                </div>
-
-            </div>
-
-        </div>
-    )
-}
 const Observation = (props) => {
     return (
         <div className="box is-size-7">
@@ -283,11 +172,12 @@ function formateDate(dateInput, onlyMonth) {
     }
 
 }
-class HeaderGeneral extends Component {
+class Printer extends Component {
     constructor(props) {
         super(props)
         this.state = {
             data: null,
+            error: false,
         }
         this.testDate = this.testDate.bind(this);
     }
@@ -301,20 +191,22 @@ class HeaderGeneral extends Component {
         axios.get(url).then(res => {
             // console.log(res)
             this.setState({ data: res.data })
+            alert("Para imprimir, por favor presionar las teclas Ctrl + P")
+        }).catch( error =>{
+            console.log(error)
+            this.setState({error: true})
         })
 
         // if(rta) this.setState({textbackground: "COPIA CONTROLADA"})
-        alert("Para imprimir, por favor presionar las teclas Ctrl + P")
     }
     render() {
-
+        if(this.state.error) return <Error/>
         const dat = this.state.data;
         let isok = null;
         let test = [];
         let bcktxt = ""
         if (dat !== null) {
             isok = dat.isok;
-            test.push(<Header data={dat} />)
             test.push(
                 <Report features={dat.features} results={dat.result_supplies} color={dat.color} isok={dat.isok} />
             )
@@ -326,25 +218,11 @@ class HeaderGeneral extends Component {
         else {
             test = null;
         }
-
         return (
             <div className="container">
-                <div className="columns is-gapless">
-                    <div className="column is-3  testbox">
-                        <span className="image">
-                            <br />
-                            {/* <img src="/resources/LogoGusing.png" /> */}
-                            <img  alt="gusing" src="/resources/LogoInpv2.png" />
-                        </span>
-                    </div>
-                    <div className="column">
-                        <Encabezado1 />
-                        <Encabezado2 />
-                        <Encabezado3 />
-                    </div>
-                </div>
+                <HeaderReport/>
+                <InformationReport data={dat} />
 
-                {test}
                 {renderIsOk(isok)}
                 <div id="background">
                     <p id="bg-text">{bcktxt}</p>
@@ -358,4 +236,4 @@ class HeaderGeneral extends Component {
         );
     }
 }
-export default HeaderGeneral;
+export default Printer;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import ReportForm from '../ReportForm'
-import { stateStep } from '../../../helpers'
-import ProductForm from './ProductForm'
-import LastStep from '../../LastStep'
+import ReportForm from './ReportForm'
+import { stateStep } from '../../helpers'
+import ProductForm from './water/ProductForm'
+import LastStep from '../LastStep'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import URLBack from '../../../UrlBack'
+import URLBack from '../../UrlBack'
 class Stepper extends Component {
     constructor() {
         super()
@@ -50,13 +50,13 @@ class Stepper extends Component {
     }
     createReport() {
         let finalObject = Object.assign(this.state.dataReport, this.state.dataProduct)
-        let url = `${URLBack}/report_suppliess`;
+        let url = `${URLBack}/report_waters`;
         let dataReport = this.state.dataReport;
         dataReport.fulfillment = this.state.dataProduct.fulfillment;
         dataReport.is_copy = this.state.dataProduct.is_copy;
         this.setState({ dataReport: dataReport });
         axios.post(url, {
-            report: finalObject,
+            report_water: finalObject,
            
         }).then(res => {
             if (res.status === 201) {

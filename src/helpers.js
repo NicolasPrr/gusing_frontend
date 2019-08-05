@@ -11,3 +11,4 @@ export function stateStep(step, currentState, color) {
     else
         return ""
 }
+// export function

@@ -116,23 +116,23 @@ class Clients extends Component {
                 <form onSubmit={this.handleAdd}>
                     <div className="columns">
                         <div className="column">
-                            <div class="field">
-                                <label class="label is-small">Cliente</label>
-                                <div class="control has-icons-left">
-                                    <input class="input is-small" placeholder="Cliente " ref={this.cli} />
-                                    <span class="icon is-small is-left">
-                                        <i class="fas fa-hands-helping"></i>
+                            <div className="field">
+                                <label className="label is-small">Cliente</label>
+                                <div className="control has-icons-left">
+                                    <input className="input is-small" placeholder="Cliente " ref={this.cli} />
+                                    <span className="icon is-small is-left">
+                                        <i className="fas fa-hands-helping"></i>
                                     </span>
                                 </div>
                             </div>
                         </div>
                         <div className="column">
-                            <div class="field">
-                                <label class="label is-small">Dirección</label>
-                                <div class="control has-icons-left is-expand" >
-                                    <input class="input is-small" type="text" placeholder="Direccion" ref={this.dir} />
-                                    <span class="icon is-small is-left">
-                                        <i class="fas fa-map-marker-alt"></i>
+                            <div className="field">
+                                <label className="label is-small">Dirección</label>
+                                <div className="control has-icons-left is-expand" >
+                                    <input className="input is-small" type="text" placeholder="Direccion" ref={this.dir} />
+                                    <span className="icon is-small is-left">
+                                        <i className="fas fa-map-marker-alt"></i>
                                     </span>
                                 </div>
                                 <button className="button is-success is-small">Agregar cliente</button>

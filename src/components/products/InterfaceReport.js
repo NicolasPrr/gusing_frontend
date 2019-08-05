@@ -4,7 +4,7 @@ import axios from 'axios'
 import URLBack from '../../UrlBack'
 import Swal from 'sweetalert2'
 import SearchBox from './SearchBox'
-import Pagination from './Pagination'
+import Pagination from '../reportInterfaz/Pagination'
 
 
 class InterfaceReport extends Component {
@@ -74,11 +74,11 @@ class InterfaceReport extends Component {
 
     }
     componentDidMount() {
-        let url = URLBack + "/report_supplies/pages/1"
+        let url = URLBack + "/report_waters/pages/1"
         axios.get(url).then(res => {
             this.setState({ reports: res.data })
         })
-        url = `${URLBack}/report_supplies/pages`
+        url = `${URLBack}/report_waters/pages`
         axios.get(url).then(res => {
             this.setState({ amountPages: res.data })
         })

@@ -11,7 +11,10 @@ import StepperSupply from './components/supplies/reports/StepperSupply'
 import HomeSupply from './components/supplies/HomeSupply'
 import Database from './components/databaseGUI/Database'
 
-import StepperAgua from './components/products/Agua/Stepper';
+import Stepper from './components/products/Stepper';
+
+import InterfaceReportProduct from './components/products/InterfaceReport'
+import Printer from './components/products/printer/Printer'
 
 class App extends Component {
     render() {
@@ -34,7 +37,9 @@ class App extends Component {
 
                         {/*  Aguas */}
 
-                        <Route path="/aguas/crear" component={StepperAgua} />
+                        <Route exact strict path="/report_waters/print/:reportId" component={Printer} />
+                        <Route path="/report_waters/reports" component={InterfaceReportProduct} exact />
+                        <Route path="/report_waters" component={Stepper} />
                         {/*  Aguas */}
 
 
