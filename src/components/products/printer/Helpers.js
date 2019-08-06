@@ -2,6 +2,7 @@ import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './table.sass';
 import WaterForm from '../water/ProductForm'
+import CapsuleForm from '../capsule/ProductForm'
 
 //Codigo de empresión para reporte
 const Encabezado1 = (props) => {
@@ -248,10 +249,13 @@ export const WaterTable = (props) => {
 };
 
 export function chooseMainURL(location) {
+
     if (location.includes('report_waters')) return '/report_waters/'
+    if (location.includes('report_capsules')) return '/report_capsules/'
 }
 export function chooseNameOjbect(location) {
     if (location.includes('report_waters')) return 'report_water'
+    if (location.includes('report_capsules')) return 'report_capsule'
 }
 export function chooseObject(location, obj) {
     let obj2 = {}
@@ -264,6 +268,23 @@ export function chooseObject(location, obj) {
             fulfillment: obj.fulfillment,
         }
     }
+    if (location.includes('report_capsules')) {
+        obj2 = {
+            
+
+            appearance: obj.appearance,
+            color: obj.color,
+            result_color: obj.result_color,
+            desintegration: obj.desintegration,
+            weight: obj.weight,
+            result_weight: obj.result_weight,
+            height: obj.height,
+            result_height: obj.result_height,
+
+            fulfillment: obj.fulfillment,
+            is_copy: obj.is_copy
+        }
+    }
 
     return obj2
 }
@@ -273,6 +294,12 @@ export function chooseForm(set, data, location) {
         return <WaterForm
             setProductForm={set}
             dataProduct={data} />
+    }
+    if (location.includes('report_capsules')) {
+        return <CapsuleForm
+            setProductForm={set}
+            dataProduct={data} />
+
     }
 }
 export function initReport(location) {
@@ -287,11 +314,19 @@ export function initReport(location) {
             observation: ""
         }
     }
+    if (location.includes('report_capsules')) {
+        dataReport = {
+            sampling_type: "Aleatorio",
+            observation: ""
+        }
+    }
 
     return dataReport
 }
 export function initOption(location) {
     let options = { samples: [], shapes: [] }
-
+    if (location.includes('report_capsules')) {
+        options = { samples: ["PT", "PT-EST"], shapes: ["Capsula N° 0", "Capsula N° 1"] }
+    }
     return options
 }

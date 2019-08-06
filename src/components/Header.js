@@ -26,7 +26,7 @@ class Header extends Component {
                      <Link className="navbar-item" to="/report_waters/reports"   >
                        Aguas
                      </Link>
-                     <Link className="navbar-item" to="/reports/"   >
+                     <Link className="navbar-item" to="/report_capsules/reports"   >
                        Capsulas
                      </Link>
                      <Link className="navbar-item" to="/reports/"   >

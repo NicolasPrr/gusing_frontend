@@ -174,7 +174,7 @@ class ReportForm extends Component {
                     />
                     <datalist id="samples">
                       {Object.keys(this.props.options.samples).map(key => (
-                        <option value={this.props.options.samples[key]} />
+                        <option value={this.props.options.samples[key]}  key={key}/>
                       ))}
                     </datalist>
                   </div>
@@ -318,7 +318,7 @@ class ReportForm extends Component {
                     />
                     <datalist id="shapes">
                       {Object.keys(this.props.options.shapes).map(key => (
-                        <option value={this.props.options.shapes[key]} />
+                        <option value={this.props.options.shapes[key]} key = {key} />
                       ))}
                     </datalist>
                   </div>

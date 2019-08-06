@@ -21,7 +21,7 @@ class Landing extends Component {
                                     </button>
                                 </div>
                                 <div className="column">
-                                    <button className={classButton} onClick={this.goTo.bind(this,'capsulas')}>
+                                    <button className={classButton} onClick={this.goTo.bind(this,'report_capsules')}>
                                         Cápsulas
                                     </button>
                                 </div>
