@@ -249,8 +249,22 @@ export const WaterTable = (props) => {
 
 export  function chooseMainURL(location){
     if(location.includes('report_waters')) return '/report_waters/'
-    
 }
+export  function chooseNameOjbect(location){
+    if(location.includes('report_waters')) return 'report_water'
+}
+export function chooseObject(location, obj){
+    if(location.includes('report_waters')){
+        const obj2= {
+            ph: obj.ph,
+            organic: obj.organic,
+            conductivity: obj.conductivity,
+            is_copy: obj.is_copy,
+            fulfillment: obj.fulfillment,
+        }
+        return obj2
+    } 
 
+}
 
 //Water

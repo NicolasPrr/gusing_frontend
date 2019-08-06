@@ -75,10 +75,10 @@ class ProductForm extends Component {
                 </div>
                 <div className="select is-rounded is-small">
                     <select ref={this.fulfillment} >
-                        <option value={0}>
+                        <option value={false}>
                             No cumple
                         </option>
-                        <option value={1}>
+                        <option value={true}>
                             Cumple
                          </option>
                     </select>
@@ -89,10 +89,10 @@ class ProductForm extends Component {
                 </div>
                 <div className="select is-rounded is-small">
                     <select ref={this.is_copy}>
-                        <option value={0}>
+                        <option value={false}>
                             No
                         </option>
-                        <option value={1}>
+                        <option value={true}>
                             Si
                          </option>
                     </select>

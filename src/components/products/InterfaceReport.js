@@ -5,6 +5,7 @@ import URLBack from '../../UrlBack'
 import Swal from 'sweetalert2'
 import SearchBox from './SearchBox'
 import Pagination from '../reportInterfaz/Pagination'
+import { chooseMainURL } from './printer/Helpers';
 
 
 class InterfaceReport extends Component {
@@ -30,13 +31,15 @@ class InterfaceReport extends Component {
         if (page >= 1 && page <= this.state.amountPages) {
             this.setState({ currentPage: page })
             if (this.state.paramsSearch === null) {
-                let url = URLBack + "/report_supplies/pages/" + page;
+                let url = `${URLBack}${chooseMainURL(window.location.pathname)}pages/${page}`
+                // let url = URLBack + "/report_supplies/pages/" + page;
                 axios.get(url).then(res => {
                     console.log(res)
                     this.setState({ reports: res.data })
                 })
             } else {
-                let url = URLBack + "/report_supplies/search/" + page;
+                let url = `${URLBack}${chooseMainURL(window.location.pathname)}search/${page}`
+                // let url = URLBack + "/report_supplies/search/" + page;
                 const data = this.state.paramsSearch;
                 axios.post(url, data).then(res => {
                     console.log(res)
@@ -52,7 +55,8 @@ class InterfaceReport extends Component {
     }
 
     deleteRequest(id, key) {
-        let url = URLBack + "/report_supplies/" + id;
+        // let url = URLBack + "/report_supplies/" + id;
+        let url = `${URLBack}${chooseMainURL(window.location.pathname)}${id}`
         let reports;
         axios.delete(url).then(res => {
             if (res.status === 204) {

@@ -12,34 +12,10 @@ class Table extends Component {
             selected: [],
             currentRow: null
         }
-        this.downloadLink = this.downloadLink.bind(this);
         this.delete = this.delete.bind(this);
-        this.enableHover = this.enableHover.bind(this);
-        this.disableHover = this.disableHover.bind(this);
     }
 
-    enableHover(key) {
-        let selected = [...this.state.selected]
-        let hovered = "is-selected is-warning";
-        let current = this.state.currentRow;
 
-        if (current !== key && current !== null) {
-            selected[current] = null;
-        }
-        selected[key] = hovered;
-        this.setState({ selected: selected, currentRow: key })
-    }
-    disableHover(key) {
-        let selected = [...this.state.selected]
-        let current = this.state.currentRow;
-        selected[current] = null;
-        this.setState({ selected: selected, currentRow: current })
-
-    }
-    downloadLink(key) {
-        this.setState({ goTo: true, key_r: key })
-        this.renderRedirect(this.props.data[key].id)
-    }
 
     delete(key) {
         const txt = "Numero de reporte: " + this.props.data[key].report_number
@@ -87,7 +63,7 @@ class Table extends Component {
                     {/* to={"/report_waters/print/" + info[key].id} */}
                     <tbody>
                         {Object.keys(info).map(key => (
-                            <tr key={key}  onMouseEnter={this.enableHover.bind(this, key)} onMouseLeave={this.disableHover.bind(this, key)}>
+                            <tr key={key} >
                                 <td>{info[key].report_number}</td>
                                 <td className="has-text-centered">{info[key].client_name}</td>
                                 <td className="has-text-centered">{info[key].sample}</td>
@@ -103,7 +79,7 @@ class Table extends Component {
                                 </td>
                                 <td className="has-text-centered">
                                     <button className ="button is-small">
-                                        <Link to={"/edit/report/" + info[key].id} target="_blank"  >
+                                        <Link to={`${chooseMainURL(window.location.pathname)}edit/${info[key].id}` } target="_blank"  >
 
                                             <span className="icon is-small">
                                                 <i className="fas fa-edit"></i>
@@ -114,7 +90,7 @@ class Table extends Component {
                                 </td>
                                 <td className="has-text-centered">
                                     <button className ="button is-small">
-                                        <Link to={"/clone/report/" + info[key].id} target="_blank"  >
+                                        <Link to={`${chooseMainURL(window.location.pathname)}clone/${info[key].id}` } target="_blank"  >
                                             <span className="icon  is-small has-text-primary">
                                                 <i className="fas fa-clone"></i>
                                             </span>

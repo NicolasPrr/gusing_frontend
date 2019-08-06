@@ -6,6 +6,9 @@ import LastStep from '../LastStep'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import URLBack from '../../UrlBack'
+import { chooseMainURL, chooseObject,chooseNameOjbect } from './printer/Helpers'
+
+
 class Stepper extends Component {
     constructor() {
         super()
@@ -48,15 +51,46 @@ class Stepper extends Component {
 
         }
     }
-    createReport() {
+    editReport() {
+        const { reportId } = this.props.match.params;
+        
+        const location = window.location.pathname
+        const nameObject = chooseNameOjbect(location)
+        let url = `${URLBack}${chooseMainURL(location)}${reportId}`
         let finalObject = Object.assign(this.state.dataReport, this.state.dataProduct)
-        let url = `${URLBack}/report_waters`;
-        let dataReport = this.state.dataReport;
-        dataReport.fulfillment = this.state.dataProduct.fulfillment;
-        dataReport.is_copy = this.state.dataProduct.is_copy;
-        this.setState({ dataReport: dataReport });
+        
+        axios.put(url, {
+            [nameObject] : finalObject,       
+        }).then(res => {
+            if (res.status === 200) {
+                Swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: 'Se ha editado el reporte',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }).catch(function (error) {
+            console.log(error)
+            Swal({
+                position: 'top-end',
+                type: 'error',
+                title: 'No se ha podido editar el reporte',
+                text: 'Posiblemente se ha repetido el numero de reporte!',
+                showConfirmButton: false,
+                timer: 2500
+            })
+        });
+
+    }
+    createReport() {
+        const location = window.location.pathname
+        let finalObject = Object.assign(this.state.dataReport, this.state.dataProduct)
+        let url = `${URLBack}${chooseMainURL(location)}`;
+        const nameObject = chooseNameOjbect(location)
         axios.post(url, {
-            report_water: finalObject,
+            [nameObject] : finalObject,
            
         }).then(res => {
             if (res.status === 201) {
@@ -127,6 +161,23 @@ class Stepper extends Component {
         let report = this.state.dataReport
         report.observation = info
         this.setState({ dataReport: report })
+    }
+    componentDidMount(){
+        const location = window.location.pathname;
+        if(location.includes('edit') || location.includes('clone')){
+            const { reportId } = this.props.match.params;
+            let url = `${URLBack}${chooseMainURL(location)}${reportId}}`
+            axios.get(url).then(res =>{
+                this.setState({
+                    dataReport: res.data,
+                    dataProduct: chooseObject(location, res.data) 
+                })
+            }).catch(error => {
+                console.log(error)
+            })
+            
+
+        }
     }
     render() {
         return (

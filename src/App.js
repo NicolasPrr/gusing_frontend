@@ -39,6 +39,9 @@ class App extends Component {
 
                         <Route exact strict path="/report_waters/print/:reportId" component={Printer} />
                         <Route path="/report_waters/reports" component={InterfaceReportProduct} exact />
+                        <Route path="/report_waters/reports" component={InterfaceReportProduct} exact />
+                        <Route path="/report_waters/edit/:reportId" component={Stepper} />
+                        <Route path="/report_waters/clone/:reportId" component={Stepper} />
                         <Route path="/report_waters" component={Stepper} />
                         {/*  Aguas */}
 
