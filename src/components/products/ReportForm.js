@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import URLBack from '../../UrlBack'
-import {isEmptyObject} from '../../helpers'
 
 class ReportForm extends Component {
   //Formulario para creación de reporte.
   constructor(props) {
     super(props);
-    
+
     this.handleForm = this.handleForm.bind(this)
     this.changeDirection = this.changeDirection.bind(this);
 
@@ -39,7 +38,7 @@ class ReportForm extends Component {
   sample_name = React.createRef();
   farmaceutic_shape = React.createRef();
   sampling_type = React.createRef();
-  
+
   ff = React.createRef();
   fv = React.createRef();
   report_date = React.createRef();
@@ -47,8 +46,8 @@ class ReportForm extends Component {
   sampling_date = React.createRef();
   analisis_date = React.createRef();
 
- 
-  
+
+
 
   /*<ReportGarnic obj={this.props.obj} />
   */
@@ -73,10 +72,10 @@ class ReportForm extends Component {
 
       ff: this.ff.current.value,
       fv: this.fv.current.value,
-      date_sampling:  this.sampling_date.current.value,
-      date_analisis:  this.analisis_date.current.value,
+      date_sampling: this.sampling_date.current.value,
+      date_analisis: this.analisis_date.current.value,
       date_reception: this.reception_date.current.value,
-      date_report:    this.report_date.current.value,
+      date_report: this.report_date.current.value,
       observation: this.props.data.observation
     }
     this.props.reportAction(data)
@@ -94,15 +93,6 @@ class ReportForm extends Component {
 
   }
   render() {
-    let samples;
-    let samples_name;
-    let method = "Dimensional"
-    if (!isEmptyObject(this.props.data)) {
-      samples = this.props.data.sample;
-      samples_name = this.props.data.sample_name;
-      method = this.props.data.method;
-    }
-   
     return (
       <div className="notification" >
         <form onSubmit={this.handleForm}  >
@@ -133,7 +123,7 @@ class ReportForm extends Component {
 
                 <datalist id="dataclients">
                   {Object.keys(this.state.clients).map(key => (
-                    <option value={this.state.clients[key].name}  key = {key}/>
+                    <option value={this.state.clients[key].name} key={key} />
                   ))}
 
                 </datalist>
@@ -143,7 +133,7 @@ class ReportForm extends Component {
                   <div className="field">
                     <label className="label is-small">Fecha de muestreo</label>
                   </div>
-                  
+
                   <input
                     className="input is-small"
                     type="text"
@@ -156,7 +146,7 @@ class ReportForm extends Component {
                   <div className="field">
                     <label className="label is-small">Fecha de analisis</label>
                   </div>
-         
+
                   <input
                     className="input is-small"
                     type="text"
@@ -178,9 +168,15 @@ class ReportForm extends Component {
                       placeholder="Nombre de la muestra"
                       ref={this.sample}
                       defaultValue={
-                        samples
+                        this.props.data.sample
                       }
+                      list ="samples"
                     />
+                    <datalist id="samples">
+                      {Object.keys(this.props.options.samples).map(key => (
+                        <option value={this.props.options.samples[key]} />
+                      ))}
+                    </datalist>
                   </div>
                 </div>
                 <div className="column">
@@ -194,7 +190,7 @@ class ReportForm extends Component {
                       placeholder="Nombre de la muestra"
                       ref={this.sample_name}
                       defaultValue={
-                        samples_name
+                        this.props.data.samples_name
                       }
 
                     />
@@ -317,8 +313,14 @@ class ReportForm extends Component {
                       type="text"
                       placeholder="Nombre de la muestra"
                       ref={this.farmaceutic_shape}
-                      defaultValue="N.A."
+                      defaultValue={this.props.data.farmaceutic_shape}
+                      list="shapes"
                     />
+                    <datalist id="shapes">
+                      {Object.keys(this.props.options.shapes).map(key => (
+                        <option value={this.props.options.shapes[key]} />
+                      ))}
+                    </datalist>
                   </div>
                 </div>
               </div>
@@ -357,7 +359,7 @@ class ReportForm extends Component {
                       className="input is-small"
                       type="text"
                       ref={this.method}
-                      defaultValue={method}
+                      defaultValue={this.props.data.method}
                     />
                   </div>
                 </div>

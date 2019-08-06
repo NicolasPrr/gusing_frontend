@@ -1,7 +1,7 @@
 import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './table.sass';
-
+import WaterForm from '../water/ProductForm'
 
 //Codigo de empresión para reporte
 const Encabezado1 = (props) => {
@@ -214,7 +214,7 @@ export function renderIsOk(props) {
 }
 
 export const WaterTable = (props) => {
-    if(props === undefined || props === null) return null
+    if (props === undefined || props === null) return null
     return (
         <div>
             <table className="tables is-fullwidth is-bordered is-size-7">
@@ -247,24 +247,51 @@ export const WaterTable = (props) => {
     );
 };
 
-export  function chooseMainURL(location){
-    if(location.includes('report_waters')) return '/report_waters/'
+export function chooseMainURL(location) {
+    if (location.includes('report_waters')) return '/report_waters/'
 }
-export  function chooseNameOjbect(location){
-    if(location.includes('report_waters')) return 'report_water'
+export function chooseNameOjbect(location) {
+    if (location.includes('report_waters')) return 'report_water'
 }
-export function chooseObject(location, obj){
-    if(location.includes('report_waters')){
-        const obj2= {
+export function chooseObject(location, obj) {
+    let obj2 = {}
+    if (location.includes('report_waters')) {
+        obj2 = {
             ph: obj.ph,
             organic: obj.organic,
             conductivity: obj.conductivity,
             is_copy: obj.is_copy,
             fulfillment: obj.fulfillment,
         }
-        return obj2
-    } 
+    }
 
+    return obj2
 }
+export function chooseForm(set, data, location) {
 
-//Water
+    if (location.includes('report_waters')) {
+        return <WaterForm
+            setProductForm={set}
+            dataProduct={data} />
+    }
+}
+export function initReport(location) {
+    let dataReport = {}
+    if (location.includes('report_waters')) {
+        dataReport = {
+            sample: "Agua",
+            client_name: "Laboratorios Gusing S.A.S",
+            direction: "Cra 10 este N 30-03 San Mateo - Soacha",
+            farmaceutic_shape: "N.A.",
+            sampling_type: "Aleatorio",
+            observation: ""
+        }
+    }
+
+    return dataReport
+}
+export function initOption(location) {
+    let options = { samples: [], shapes: [] }
+
+    return options
+}

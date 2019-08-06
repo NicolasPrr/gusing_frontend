@@ -6,7 +6,7 @@ import LastStep from '../LastStep'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import URLBack from '../../UrlBack'
-import { chooseMainURL, chooseObject,chooseNameOjbect } from './printer/Helpers'
+import { chooseMainURL, chooseObject, chooseNameOjbect, initReport, initOption, chooseForm } from './printer/Helpers'
 
 
 class Stepper extends Component {
@@ -15,11 +15,9 @@ class Stepper extends Component {
         this.state = {
             step: 1,
             dataReport: {
-                sample: "Agua", client_name: "Laboratorios Gusing S.A.S",
-                direction: "Cra 10 este N 30-03 San Mateo - Soacha",
-                observation: ""
             }, //Datos del reporte, como numero de reporte, es el encabezado
             dataProduct: {}, //Datos del producto, es el resultado de las mediciones
+            dataOption: { samples:[] , shapes: [] }
         }
         this.nextStep = this.nextStep.bind(this)
         this.headerForm = this.headerForm.bind(this)
@@ -53,14 +51,14 @@ class Stepper extends Component {
     }
     editReport() {
         const { reportId } = this.props.match.params;
-        
+
         const location = window.location.pathname
         const nameObject = chooseNameOjbect(location)
         let url = `${URLBack}${chooseMainURL(location)}${reportId}`
         let finalObject = Object.assign(this.state.dataReport, this.state.dataProduct)
-        
+
         axios.put(url, {
-            [nameObject] : finalObject,       
+            [nameObject]: finalObject,
         }).then(res => {
             if (res.status === 200) {
                 Swal({
@@ -90,8 +88,8 @@ class Stepper extends Component {
         let url = `${URLBack}${chooseMainURL(location)}`;
         const nameObject = chooseNameOjbect(location)
         axios.post(url, {
-            [nameObject] : finalObject,
-           
+            [nameObject]: finalObject,
+
         }).then(res => {
             if (res.status === 201) {
                 Swal({
@@ -113,26 +111,28 @@ class Stepper extends Component {
                 timer: 2500
             })
         });
-        
+
     }
 
     renderForm(step) {
         //Selecciona que reenderizar por paso...
         //3 es observaciones
+        const location = window.location.pathname;
         switch (step) {
             case 1:
                 return <ReportForm reportAction={this.headerForm}
-                    data={this.state.dataReport}
+                    data={this.state.dataReport} options ={this.state.dataOption}
                 />
             case 2:
-                return <ProductForm
-                    setProductForm={this.setProductForm}
-                    dataProduct={this.state.dataProduct}
-                />
+                return chooseForm(this.setProductForm ,this.state.dataProduct ,location)
+                // return <ProductForm
+                //     setProductForm={this.setProductForm}
+                //     dataProduct={this.state.dataProduct}
+                // />
             case 3:
                 return <LastStep
-                    dataVef={this.state.dataReport.observation} 
-                    action={this.verfForm} 
+                    dataVef={this.state.dataReport.observation}
+                    action={this.verfForm}
                     setDataVef={this.setDataVef} />
 
             default:
@@ -162,22 +162,28 @@ class Stepper extends Component {
         report.observation = info
         this.setState({ dataReport: report })
     }
-    componentDidMount(){
+    componentDidMount() {
         const location = window.location.pathname;
-        if(location.includes('edit') || location.includes('clone')){
+        if (location.includes('edit') || location.includes('clone')) {
             const { reportId } = this.props.match.params;
             let url = `${URLBack}${chooseMainURL(location)}${reportId}}`
-            axios.get(url).then(res =>{
+            axios.get(url).then(res => {
                 this.setState({
                     dataReport: res.data,
-                    dataProduct: chooseObject(location, res.data) 
+                    dataProduct: chooseObject(location, res.data)
                 })
             }).catch(error => {
                 console.log(error)
             })
-            
 
+
+        } else {
+            this.setState({
+                dataReport: initReport(location)
+            })
         }
+        this.setState({dataOption: initOption(location)})
+
     }
     render() {
         return (
