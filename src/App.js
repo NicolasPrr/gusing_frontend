@@ -53,7 +53,17 @@ class App extends Component {
                         <Route path="/report_capsules/edit/:reportId" component={Stepper} />
                         <Route path="/report_capsules/clone/:reportId" component={Stepper} />
                         <Route path="/report_capsules" component={Stepper} />
-                        {/*  Aguas */}
+                        {/* Capsulas */}
+
+                        {/*  Liquidos */}
+
+                        <Route exact strict path="/report_liquids/print/:reportId" component={Printer} />
+                        <Route path="/report_liquids/reports" component={InterfaceReportProduct} exact />
+                        <Route path="/report_liquids/reports" component={InterfaceReportProduct} exact />
+                        <Route path="/report_liquids/edit/:reportId" component={Stepper} />
+                        <Route path="/report_liquids/clone/:reportId" component={Stepper} />
+                        <Route path="/report_liquids" component={Stepper} />
+                        {/* Liquidos */}
                         
 
 

@@ -78,11 +78,12 @@ class InterfaceReport extends Component {
 
     }
     componentDidMount() {
-        let url = URLBack + "/report_waters/pages/1"
+        // let url = URLBack + "/report_waters/pages/1"
+        let url = `${URLBack}${chooseMainURL(window.location.pathname)}pages/1`
         axios.get(url).then(res => {
             this.setState({ reports: res.data })
         })
-        url = `${URLBack}/report_waters/pages`
+        url = `${URLBack}${chooseMainURL(window.location.pathname)}pages`
         axios.get(url).then(res => {
             this.setState({ amountPages: res.data })
         })
