@@ -47,22 +47,9 @@ class SearchBox extends Component {
                         </div>
                         <div className="column is-one-quarter">
                             <div className="field">
-                                <label className="label is-small">Muestra</label>
+                                <label className="label is-small">Nombre de muestra</label>
                                 <div className="control">
-                                    <div className="select is-small">
-                                        <select ref ={this.sample}>
-                                            <option value="">Selecciona muestra</option>
-                                            <option value="colapsible">Colapsible </option>
-                                            <option value="envases de vidrio" >Envases de vidrio </option>
-                                            <option value="envases de plastico">Envases de  plastico </option>
-                                            <option value="tapas">Tapas </option>
-                                            <option value="gotero">Gotero </option>
-                                            <option value="dosificadores">Dosificadores </option>
-                                            <option value="linners">Linners </option>
-                                            <option value="Tapón y Agrafe">Tapón y Agrafe </option>
-                                            <option value="otro">Otro </option>
-                                        </select>
-                                    </div>
+                                    <input className="input is-small" type="text" placeholder="Nombre de la muestra" ref={this.sample} />
                                 </div>
                             </div>
                         </div>

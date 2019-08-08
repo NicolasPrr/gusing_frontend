@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import './textbackground.css'
 import URLBack from '../../../UrlBack'
-import './table.sass';
-import { HeaderReport, InformationReport, Observation, Note, Signature, Footer, renderIsOk, WaterTable } from './Helpers'
+import { HeaderReport, InformationReport, Observation, Note, Signature, Footer, renderIsOk } from './Helpers'
+
+import {chooseTable, chooseMainURL} from './Helpers'
+
 import Error from '../../LandingPage/Error'
 
 class Printer extends Component {
@@ -17,7 +19,7 @@ class Printer extends Component {
     }
     componentDidMount() {
         const { reportId } = this.props.match.params;
-        let url = URLBack + "/report_waters/" + reportId
+        let url = `${URLBack}${chooseMainURL(window.location.pathname)}${reportId}`
         axios.get(url).then(res => {
             // console.log(res)
             this.setState({ data: res.data })
@@ -37,7 +39,7 @@ class Printer extends Component {
         let bcktxt = ""
         if (dat !== null) {
             isok = dat.fulfillment;
-            complement.push(<WaterTable data={dat} key = {0} />)
+            complement.push(chooseTable(window.location.pathname, dat)) //Selecciona la tabla  determinada
             complement.push(<Observation data={dat.observation} key = {0} />)
             if (dat.is_copy) {
                 bcktxt = "COPIA CONTROLADA"

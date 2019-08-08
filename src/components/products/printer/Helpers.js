@@ -247,6 +247,50 @@ export const WaterTable = (props) => {
         </div>
     );
 };
+export const CapsuleTable = (props) => {
+    if (props === undefined || props === null) return null
+    return (
+        <div>
+            <table className="tables is-fullwidth is-bordered is-size-7">
+                <thead>
+                    <tr>
+                        <th>Nombre del resultado</th>
+                        <th>Resultado</th>
+                        <th>Parametros de referencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Determinación aspecto</td>
+                        <td>{props.data.appearance}</td>
+                        <td> Gelatina dura </td>
+                    </tr>
+                    <tr>
+                        <td>Determinación color</td>
+                        <td>{props.data.color}</td>
+                        <td>{props.data.param_color}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación desintegración</td>
+                        <td>{props.data.desintegration}</td>
+                        <td>Max 10 min</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación peso promedio</td>
+                        <td>{props.data.weight}</td>
+                        <td>{props.data.param_weight}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación dimensiones alto x ancho</td>
+                        <td>{props.data.height}</td>
+                        <td>{props.data.param_height}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    );
+};
+
 
 export function chooseMainURL(location) {
 
@@ -258,6 +302,7 @@ export function chooseNameOjbect(location) {
     if (location.includes('report_capsules')) return 'report_capsule'
 }
 export function chooseObject(location, obj) {
+    //Selecciona los parametros segun la localización, paso 2
     let obj2 = {}
     if (location.includes('report_waters')) {
         obj2 = {
@@ -270,16 +315,14 @@ export function chooseObject(location, obj) {
     }
     if (location.includes('report_capsules')) {
         obj2 = {
-            
-
             appearance: obj.appearance,
             color: obj.color,
-            result_color: obj.result_color,
+            param_color: obj.param_color,
             desintegration: obj.desintegration,
             weight: obj.weight,
-            result_weight: obj.result_weight,
+            param_weight: obj.param_weight,
             height: obj.height,
-            result_height: obj.result_height,
+            param_height: obj.param_height,
 
             fulfillment: obj.fulfillment,
             is_copy: obj.is_copy
@@ -329,4 +372,18 @@ export function initOption(location) {
         options = { samples: ["PT", "PT-EST"], shapes: ["Capsula N° 0", "Capsula N° 1"] }
     }
     return options
+}
+
+export function chooseTable(location, data) {
+    if (location.includes('report_waters')) {
+        return <WaterTable
+            data={data}
+            key={0} />
+    }
+    if (location.includes('report_capsules')) {
+        return <CapsuleTable
+            data={data}
+            key={0} />
+    }
+
 }

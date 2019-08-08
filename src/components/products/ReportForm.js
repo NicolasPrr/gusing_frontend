@@ -190,7 +190,7 @@ class ReportForm extends Component {
                       placeholder="Nombre de la muestra"
                       ref={this.sample_name}
                       defaultValue={
-                        this.props.data.samples_name
+                        this.props.data.sample_name
                       }
 
                     />

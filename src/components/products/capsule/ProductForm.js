@@ -3,12 +3,12 @@ import { isEmptyObject } from '../../../helpers'
 class ProductForm extends Component {
     appearance = React.createRef()
     color = React.createRef()
-    result_color = React.createRef()
+    param_color = React.createRef()
     desintegration = React.createRef()
     weight = React.createRef()
-    result_weight = React.createRef()
+    param_weight = React.createRef()
     height = React.createRef()
-    result_height = React.createRef()
+    param_height = React.createRef()
 
     fulfillment = React.createRef()
     is_copy = React.createRef()
@@ -18,12 +18,12 @@ class ProductForm extends Component {
         let results = {
             appearance: this.appearance.current.value,
             color: this.color.current.value,
-            result_color: this.result_color.current.value,
+            param_color: this.param_color.current.value,
             desintegration: this.desintegration.current.value,
             weight: this.weight.current.value,
-            result_weight: this.result_weight.current.value,
+            param_weight: this.param_weight.current.value,
             height: this.height.current.value,
-            result_height: this.result_height.current.value,
+            param_height: this.param_height.current.value,
 
             fulfillment: this.fulfillment.current.value,
             is_copy: this.is_copy.current.value
@@ -38,16 +38,17 @@ class ProductForm extends Component {
             
             this.appearance.current.value =data.appearance
             this.color.current.value = data.color
-            this.result_color.current.value = data.result_color
+            this.param_color.current.value = data.param_color
             this.desintegration.current.value= data.desintegration
             this.weight.current.value= data.weight
-            this.result_weight.current.value=  data.result_weight
+            this.param_weight.current.value=  data.param_weight
             this.height.current.value = data.height
-            this.result_height.current.value = data.result_height
+            this.param_height.current.value = data.param_height
             
 
             this.fulfillment.current.value = data.fulfillment
             this.is_copy.current.value = data.is_copy
+            console.log(data)
         }
 
     }
@@ -76,7 +77,7 @@ class ProductForm extends Component {
                                 <tr>
                                     <td>Determinación color</td>
                                     <td><input className="input is-small" ref={this.color} /></td>
-                                    <td><input className="input is-small" list="colors" ref={this.result_color} /></td>
+                                    <td><input className="input is-small" list="colors" ref={this.param_color} /></td>
                                 </tr>
                                 <datalist id="colors">
                                     <option value="Blanco-Blanco" key={0} />
@@ -93,7 +94,7 @@ class ProductForm extends Component {
                                 <tr>
                                     <td>Determinación peso promedio</td>
                                     <td><input className="input is-small" ref={this.weight} /></td>
-                                    <td><input className="input is-small" list="weight" ref={this.result_weight} /></td>
+                                    <td><input className="input is-small" list="weight" ref={this.param_weight} /></td>
                                     <datalist id="weight">
                                         <option value="550 mg - 580 mg" key={0} />
                                         <option value="540 mg - 580 mg" key={1} />
@@ -104,7 +105,7 @@ class ProductForm extends Component {
                                 <tr>
                                     <td>Determinación Dimensiones alto x ancho (mm)</td>
                                     <td><input className="input is-small" ref={this.height} /></td>
-                                    <td><input className="input is-small" list="height" ref={this.result_height} /></td>
+                                    <td><input className="input is-small" list="height" ref={this.param_height} /></td>
                                     <datalist id="height">
                                         <option value="7.1- 7.7 X 20.92 - 21.92 mm" key={0} />
                                         <option value="6.4 - 7.0 X 18.25 - 19.85 mm" key={1} />

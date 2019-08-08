@@ -91,7 +91,7 @@ class InterfaceReport extends Component {
 
     search(data) {
         this.setState({ paramsSearch: data }) //parametros de busqueda para paginacion, si no está nulo, hara la consulta con estos parametros.
-        let url = URLBack + "/report_supplies/search/"
+        let url = `${URLBack}${chooseMainURL(window.location.pathname)}search/`
         axios.post(url, data).then(res => {
             console.log(res)
             if (res.status === 200) {
@@ -101,7 +101,7 @@ class InterfaceReport extends Component {
             console.log(error)
         })
 
-        url = URLBack + "/report_supplies/search/1"
+        url =`${URLBack}${chooseMainURL(window.location.pathname)}search/1`
         axios.post(url, data).then(res => {
             console.log(res)
             if (res.status === 200) {
@@ -128,7 +128,7 @@ class InterfaceReport extends Component {
             renderTable = <h1 className="title"> No hay reportes que mostrar</h1>
         return (
 
-            <div className="container notification">
+            <div className="container notification box">
                 <SearchBox search={this.search} />
                 {renderTable}
             </div>
