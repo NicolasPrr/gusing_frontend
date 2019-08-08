@@ -332,6 +332,27 @@ export function chooseObject(location, obj) {
             is_copy: obj.is_copy
         }
     }
+    if (location.includes('report_liquids')) {
+        obj2 = {
+            appaearance: obj.appaearance,
+            param_appearance: obj.appearance,
+            color: obj.color,
+            param_color: obj.param_color,
+            ph: obj.ph,
+            param_ph: obj.param_ph,
+            density: obj.density,
+            param_density: obj.param_density,
+            
+            alcoholic: obj.alcoholic,
+            param_alcoholic: obj.param_alcoholic,
+            
+            volume: obj.volume,
+            param_volume: obj.param_volume,
+
+            fulfillment: obj.fulfillment,
+            is_copy: obj.is_copy
+        }
+    }
 
     return obj2
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { isEmptyObject } from '../../../helpers'
 class ProductForm extends Component {
-    appearance = React.createRef()
-    param_appearance = React.createRef()
+    appaearance = React.createRef()
+    param_appaearance = React.createRef()
 
     color = React.createRef()
     param_color = React.createRef()
@@ -25,8 +25,8 @@ class ProductForm extends Component {
 
     handleNext = (step) => {
         let results = {
-            appearance: this.appearance.current.value,
-            param_appearance: this.appearance.current.value,
+            appaearance: this.appaearance.current.value,
+            param_appaearance: this.appaearance.current.value,
             color: this.color.current.value,
             param_color: this.param_color.current.value,
             
@@ -54,8 +54,8 @@ class ProductForm extends Component {
         if (!isEmptyObject(this.props.dataProduct)) {
             const data = this.props.dataProduct
             
-            this.appearance.current.value =data.appearance
-            this.param_appearance.current.value =data.param_appearance
+            this.appaearance.current.value =data.appaearance
+            this.param_appaearance.current.value =data.param_appaearance
             
             this.color.current.value = data.color
             this.param_color.current.value = data.param_color
@@ -96,8 +96,8 @@ class ProductForm extends Component {
                             <tbody>
                                 <tr>
                                     <td>Determinación aspecto</td>
-                                    <td><input className="input is-small" ref={this.appearance}/></td>
-                                    <td><input className="input is-small" ref={this.param_appearance}/></td>
+                                    <td><input className="input is-small" ref={this.appaearance}/></td>
+                                    <td><input className="input is-small" ref={this.param_appaearance}/></td>
                                 </tr>
                                 <tr>
                                     <td>Determinación color</td>
