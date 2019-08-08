@@ -2,13 +2,22 @@ import React, { Component } from 'react'
 import { isEmptyObject } from '../../../helpers'
 class ProductForm extends Component {
     appearance = React.createRef()
+    param_appearance = React.createRef()
+
     color = React.createRef()
-    result_color = React.createRef()
-    desintegration = React.createRef()
-    weight = React.createRef()
-    result_weight = React.createRef()
-    height = React.createRef()
-    result_height = React.createRef()
+    param_color = React.createRef()
+
+    ph = React.createRef()
+    param_ph = React.createRef()
+
+    density = React.createRef()
+    param_density = React.createRef()
+
+    alcoholic = React.createRef()
+    param_alcoholic = React.createRef()
+
+    volume = React.createRef()
+    param_volume = React.createRef()
 
     fulfillment = React.createRef()
     is_copy = React.createRef()
@@ -17,13 +26,22 @@ class ProductForm extends Component {
     handleNext = (step) => {
         let results = {
             appearance: this.appearance.current.value,
+            param_appearance: this.appearance.current.value,
             color: this.color.current.value,
-            result_color: this.result_color.current.value,
-            desintegration: this.desintegration.current.value,
-            weight: this.weight.current.value,
-            result_weight: this.result_weight.current.value,
-            height: this.height.current.value,
-            result_height: this.result_height.current.value,
+            param_color: this.param_color.current.value,
+            
+            ph: this.ph.current.value,
+            param_ph: this.param_ph.current.value,
+            
+            density: this.density.current.value,
+            param_density: this.param_density.current.value,
+            
+            alcoholic: this.alcoholic.current.value,
+            param_alcoholic: this.param_alcoholic.current.value,
+            
+            volume: this.density.current.value,
+            param_volume: this.param_volume.current.value,
+
 
             fulfillment: this.fulfillment.current.value,
             is_copy: this.is_copy.current.value
@@ -37,15 +55,23 @@ class ProductForm extends Component {
             const data = this.props.dataProduct
             
             this.appearance.current.value =data.appearance
-            this.color.current.value = data.color
-            this.result_color.current.value = data.result_color
-            this.desintegration.current.value= data.desintegration
-            this.weight.current.value= data.weight
-            this.result_weight.current.value=  data.result_weight
-            this.height.current.value = data.height
-            this.result_height.current.value = data.result_height
+            this.param_appearance.current.value =data.param_appearance
             
+            this.color.current.value = data.color
+            this.param_color.current.value = data.param_color
+            
+            this.ph.current.value = data.ph
+            this.param_ph.current.value = data.param_ph
 
+            this.density.current.value = data.density
+            this.param_density.current.value = data.param_density
+            
+            this.alcoholic.current.value = data.alcoholic
+            this.param_alcoholic.current.value = data.param_alcoholic
+            
+            this.volume.current.value = data.volume
+            this.param_volume.current.value = data.param_volume
+            
             this.fulfillment.current.value = data.fulfillment
             this.is_copy.current.value = data.is_copy
         }
@@ -71,44 +97,54 @@ class ProductForm extends Component {
                                 <tr>
                                     <td>Determinación aspecto</td>
                                     <td><input className="input is-small" ref={this.appearance}/></td>
-                                    <td>Gelatina dura</td>
+                                    <td><input className="input is-small" ref={this.param_appearance}/></td>
                                 </tr>
                                 <tr>
                                     <td>Determinación color</td>
                                     <td><input className="input is-small" ref={this.color} /></td>
-                                    <td><input className="input is-small" list="colors" ref={this.result_color} /></td>
+                                    <td><input className="input is-small" list="colors" ref={this.param_color} /></td>
                                 </tr>
-                                <datalist id="colors">
+                                {/* <datalist id="colors">
                                     <option value="Blanco-Blanco" key={0} />
                                     <option value="Blanco-Azul" key={1} />
                                     <option value="Blanco-Verde" key={2} />
                                     <option value="Blanco-Rojo" key={3} />
                                     <option value="Transparente" key={4} />
-                                </datalist>
+                                </datalist> */}
                                 <tr>
-                                    <td>Determinación desintegración</td>
-                                    <td><input className="input is-small" ref={this.desintegration} /></td>
-                                    <td>Max 10 min</td>
+                                    <td>Determinación pH</td>
+                                    <td><input className="input is-small" ref={this.ph} /></td>
+                                    <td><input className="input is-small" ref={this.param_ph} list="ph" /></td>
+                                 <datalist id="ph">
+                                    <option value="4.0 - 6.0" key={0} />
+                                    <option value="5.5 - 7.5" key={1} />
+                                    <option value="5.8 - 6.5" key={2} />
+                                    <option value="6.0 - 7.4" key={3} />
+                                    <option value="6.0 - 7.5" key={4} />
+                                    <option value="6.0 - 8.0" key={5} />
+                                    <option value="5.0 - 7.0" key={5} />
+                                </datalist> 
                                 </tr>
                                 <tr>
-                                    <td>Determinación peso promedio</td>
-                                    <td><input className="input is-small" ref={this.weight} /></td>
-                                    <td><input className="input is-small" list="weight" ref={this.result_weight} /></td>
-                                    <datalist id="weight">
-                                        <option value="550 mg - 580 mg" key={0} />
-                                        <option value="540 mg - 580 mg" key={1} />
-                                        <option value="530 mg - 570 mg" key={2} />
-                                        <option value="580 mg - 620 mg" key={3} />
+                                    <td>Determinación densidad</td>
+                                    <td><input className="input is-small" ref={this.density} /></td>
+                                    <td><input className="input is-small" list="density" ref={this.param_density} /></td>
+                                    <datalist id="density">
+                                        <option value="1,100 - 1,400 g/mL" key={0} />
+                                        <option value="0,930 -  0,980 g/mL" key={1} />
+                                        <option value="0,91 - 1,01 g/mL" key={2} />
+                                        <option value="0,95 - 1,5 g/mL " key={3} />
                                     </datalist>
                                     </tr>
                                 <tr>
-                                    <td>Determinación Dimensiones alto x ancho (mm)</td>
-                                    <td><input className="input is-small" ref={this.height} /></td>
-                                    <td><input className="input is-small" list="height" ref={this.result_height} /></td>
-                                    <datalist id="height">
-                                        <option value="7.1- 7.7 X 20.92 - 21.92 mm" key={0} />
-                                        <option value="6.4 - 7.0 X 18.25 - 19.85 mm" key={1} />
-                                    </datalist>
+                                    <td>Determinación grado alcohólico</td>
+                                    <td><input className="input is-small" ref={this.alcoholic} /></td>
+                                    <td><input className="input is-small"  ref={this.param_alcoholic}/></td>
+                                </tr>
+                                <tr>
+                                    <td>Determinación volumen</td>
+                                    <td><input className="input is-small" ref={this.volume} /></td>
+                                    <td><input className="input is-small"  ref={this.param_volume}/></td>
                                 </tr>
                             </tbody>
                         </table>

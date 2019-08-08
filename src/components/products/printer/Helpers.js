@@ -3,6 +3,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './table.sass';
 import WaterForm from '../water/ProductForm'
 import CapsuleForm from '../capsule/ProductForm'
+import LiquidForm from '../liquid/ProductForm'
+
 
 //Codigo de empresión para reporte
 const Encabezado1 = (props) => {
@@ -296,10 +298,12 @@ export function chooseMainURL(location) {
 
     if (location.includes('report_waters')) return '/report_waters/'
     if (location.includes('report_capsules')) return '/report_capsules/'
+    if (location.includes('report_liquids')) return '/report_liquids/'
 }
 export function chooseNameOjbect(location) {
     if (location.includes('report_waters')) return 'report_water'
     if (location.includes('report_capsules')) return 'report_capsule'
+    if (location.includes('report_liquids')) return 'report_liquid'
 }
 export function chooseObject(location, obj) {
     //Selecciona los parametros segun la localización, paso 2
@@ -344,6 +348,11 @@ export function chooseForm(set, data, location) {
             dataProduct={data} />
 
     }
+    if (location.includes('report_liquids')) {
+        return <LiquidForm
+            setProductForm={set}
+            dataProduct={data} />
+    }
 }
 export function initReport(location) {
     let dataReport = {}
@@ -363,6 +372,12 @@ export function initReport(location) {
             observation: ""
         }
     }
+    if (location.includes('report_liquids')) {
+        dataReport = {
+            sampling_type: "Aleatorio",
+            observation: ""
+        }
+    }
 
     return dataReport
 }
@@ -370,6 +385,9 @@ export function initOption(location) {
     let options = { samples: [], shapes: [] }
     if (location.includes('report_capsules')) {
         options = { samples: ["PT", "PT-EST"], shapes: ["Capsula N° 0", "Capsula N° 1"] }
+    }
+    if (location.includes('report_liquids')) {
+        options = { samples: ["PT","PP", "PT-EST"], shapes: ["Gota", "Ampolla","Vial","Capsula","Tableta","Granulado","Polvo" ,"Ungüento","Gel"] }
     }
     return options
 }
