@@ -36,7 +36,7 @@ class Landing extends Component {
                                     </button>
                                 </div>
                                 <div className="column">
-                                    <button className={classButton} onClick={this.goTo.bind(this,'MT')}>
+                                    <button className={classButton} onClick={this.goTo.bind(this,'report_materials')}>
 
                                         Materia prima/Tintura madre
                                     </button>

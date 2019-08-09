@@ -63,6 +63,16 @@ class App extends Component {
                         <Route path="/report_liquids" component={Stepper} />
                         {/* Liquidos */}
                         
+                        {/*  Liquidos */}
+
+                        <Route exact strict path="/report_materials/print/:reportId" component={Printer} />
+                        <Route path="/report_materials/reports" component={InterfaceReportProduct} exact />
+                        <Route path="/report_materials/reports" component={InterfaceReportProduct} exact />
+                        <Route path="/report_materials/edit/:reportId" component={Stepper} />
+                        <Route path="/report_materials/clone/:reportId" component={Stepper} />
+                        <Route path="/report_materials" component={Stepper} />
+                        {/* Liquidos */}
+                        
 
 
                         <Route path="/clients" component={Clients} />

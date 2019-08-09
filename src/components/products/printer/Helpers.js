@@ -4,7 +4,12 @@ import './table.sass';
 import WaterForm from '../water/ProductForm'
 import CapsuleForm from '../capsule/ProductForm'
 import LiquidForm from '../liquid/ProductForm'
+import MaterialForm from '../material/ProductForm'
 
+const urlWater = 'report_waters'
+const urlCapsule = 'report_capsules'
+const urlLiquid = 'report_liquids'
+const urlMaterial = 'report_materials'
 
 //Codigo de empresión para reporte
 const Encabezado1 = (props) => {
@@ -292,32 +297,83 @@ export const CapsuleTable = (props) => {
         </div>
     );
 };
+export const LiquidTable = (props) => {
+    if (props === undefined || props === null) return null
+    return (
+        <div>
+            <table className="tables is-fullwidth is-bordered is-size-7">
+                <thead>
+                    <tr>
+                        <th>Nombre del resultado</th>
+                        <th>Resultado</th>
+                        <th>Parametros de referencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Determinación aspecto</td>
+                        <td>{props.data.appaearance}</td>
+                        <td> {props.data.param_appaearance} </td>
+                    </tr>
+                    <tr>
+                        <td>Determinación color</td>
+                        <td>{props.data.color}</td>
+                        <td>{props.data.param_color}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación ph</td>
+                        <td>{props.data.ph}</td>
+                        <td>{props.data.param_ph}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación densidad</td>
+                        <td>{props.data.density}</td>
+                        <td>{props.data.param_density}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación grado alcoholico</td>
+                        <td>{props.data.alcoholic}</td>
+                        <td>{props.data.param_alcoholic}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación volumen</td>
+                        <td>{props.data.volume}</td>
+                        <td>{props.data.param_volume}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    );
+};
 
 
 export function chooseMainURL(location) {
 
-    if (location.includes('report_waters')) return '/report_waters/'
-    if (location.includes('report_capsules')) return '/report_capsules/'
-    if (location.includes('report_liquids')) return '/report_liquids/'
+    if (location.includes(urlWater)) return '/report_waters/'
+    if (location.includes(urlCapsule)) return '/report_capsules/'
+    if (location.includes(urlLiquid)) return '/report_liquids/'
+    if (location.includes(urlMaterial)) return '/report_materials/'
 }
 export function chooseNameOjbect(location) {
-    if (location.includes('report_waters')) return 'report_water'
-    if (location.includes('report_capsules')) return 'report_capsule'
-    if (location.includes('report_liquids')) return 'report_liquid'
+    if (location.includes(urlWater)) return 'report_water'
+    if (location.includes(urlCapsule)) return 'report_capsule'
+    if (location.includes(urlLiquid)) return 'report_liquid'
+    if (location.includes(urlMaterial)) return 'report_material'
 }
 export function chooseObject(location, obj) {
     //Selecciona los parametros segun la localización, paso 2
     let obj2 = {}
-    if (location.includes('report_waters')) {
+    if (location.includes(urlWater)) {
         obj2 = {
             ph: obj.ph,
             organic: obj.organic,
             conductivity: obj.conductivity,
+
             is_copy: obj.is_copy,
             fulfillment: obj.fulfillment,
         }
     }
-    if (location.includes('report_capsules')) {
+    if (location.includes(urlCapsule)) {
         obj2 = {
             appearance: obj.appearance,
             color: obj.color,
@@ -332,7 +388,7 @@ export function chooseObject(location, obj) {
             is_copy: obj.is_copy
         }
     }
-    if (location.includes('report_liquids')) {
+    if (location.includes(urlLiquid)) {
         obj2 = {
             appaearance: obj.appaearance,
             param_appearance: obj.appearance,
@@ -342,13 +398,26 @@ export function chooseObject(location, obj) {
             param_ph: obj.param_ph,
             density: obj.density,
             param_density: obj.param_density,
-            
+
             alcoholic: obj.alcoholic,
             param_alcoholic: obj.param_alcoholic,
-            
+
             volume: obj.volume,
             param_volume: obj.param_volume,
 
+            fulfillment: obj.fulfillment,
+            is_copy: obj.is_copy
+        }
+    }
+    if (location.includes(urlMaterial)) {
+        obj2 = {
+            appaearance: obj.appaearance,
+            param_appearance: obj.appearance,
+            density: obj.density,
+            param_density: obj.param_density,
+            alcoholic: obj.alcoholic,
+            param_alcoholic: obj.param_alcoholic,
+          
             fulfillment: obj.fulfillment,
             is_copy: obj.is_copy
         }
@@ -358,26 +427,31 @@ export function chooseObject(location, obj) {
 }
 export function chooseForm(set, data, location) {
 
-    if (location.includes('report_waters')) {
+    if (location.includes(urlWater)) {
         return <WaterForm
             setProductForm={set}
             dataProduct={data} />
     }
-    if (location.includes('report_capsules')) {
+    if (location.includes(urlCapsule)) {
         return <CapsuleForm
             setProductForm={set}
             dataProduct={data} />
 
     }
-    if (location.includes('report_liquids')) {
+    if (location.includes(urlLiquid)) {
         return <LiquidForm
+            setProductForm={set}
+            dataProduct={data} />
+    }
+    if (location.includes(urlMaterial)) {
+        return <MaterialForm
             setProductForm={set}
             dataProduct={data} />
     }
 }
 export function initReport(location) {
     let dataReport = {}
-    if (location.includes('report_waters')) {
+    if (location.includes(urlWater)) {
         dataReport = {
             sample: "Agua",
             client_name: "Laboratorios Gusing S.A.S",
@@ -387,15 +461,24 @@ export function initReport(location) {
             observation: ""
         }
     }
-    if (location.includes('report_capsules')) {
+    if (location.includes(urlCapsule)) {
         dataReport = {
             sampling_type: "Aleatorio",
             observation: ""
         }
     }
-    if (location.includes('report_liquids')) {
+    if (location.includes(urlLiquid)) {
         dataReport = {
             sampling_type: "Aleatorio",
+            observation: ""
+        }
+    }
+    if (location.includes(urlMaterial)) {
+        dataReport = {
+            sampling_type: "Aleatorio",
+            farmaceutic_shape: "N.A.",
+            client_name: "Laboratorios Gusing S.A.S",
+            direction: "Cra 10 este N 30-03 San Mateo - Soacha",
             observation: ""
         }
     }
@@ -404,23 +487,31 @@ export function initReport(location) {
 }
 export function initOption(location) {
     let options = { samples: [], shapes: [] }
-    if (location.includes('report_capsules')) {
+    if (location.includes(urlCapsule)) {
         options = { samples: ["PT", "PT-EST"], shapes: ["Capsula N° 0", "Capsula N° 1"] }
     }
-    if (location.includes('report_liquids')) {
-        options = { samples: ["PT","PP", "PT-EST"], shapes: ["Gota", "Ampolla","Vial","Capsula","Tableta","Granulado","Polvo" ,"Ungüento","Gel"] }
+    if (location.includes(urlLiquid)) {
+        options = { samples: ["PT", "PP", "PT-EST"], shapes: ["Gota", "Ampolla", "Vial", "Capsula", "Tableta", "Granulado", "Polvo", "Ungüento", "Gel"] }
+    }
+    if (location.includes(urlMaterial)) {
+        options = { samples: ["MP", "TM"], shapes: [] }
     }
     return options
 }
 
 export function chooseTable(location, data) {
-    if (location.includes('report_waters')) {
+    if (location.includes(urlWater)) {
         return <WaterTable
             data={data}
             key={0} />
     }
-    if (location.includes('report_capsules')) {
+    if (location.includes(urlCapsule)) {
         return <CapsuleTable
+            data={data}
+            key={0} />
+    }
+    if (location.includes(urlLiquid)) {
+        return <LiquidTable
             data={data}
             key={0} />
     }
