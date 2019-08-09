@@ -345,6 +345,39 @@ export const LiquidTable = (props) => {
         </div>
     );
 };
+export const MaterialTable = (props) => {
+    if (props === undefined || props === null) return null
+    return (
+        <div>
+            <table className="tables is-fullwidth is-bordered is-size-7">
+                <thead>
+                    <tr>
+                        <th>Nombre del resultado</th>
+                        <th>Resultado</th>
+                        <th>Parametros de referencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Determinación aspecto</td>
+                        <td>{props.data.appaearance}</td>
+                        <td> {props.data.param_appaearance} </td>
+                    </tr>
+                    <tr>
+                        <td>Determinación densidad</td>
+                        <td>{props.data.density}</td>
+                        <td>{props.data.param_density}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación grado alcoholico</td>
+                        <td>{props.data.alcoholic}</td>
+                        <td>{props.data.param_alcoholic}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    );
+};
 
 
 export function chooseMainURL(location) {
@@ -412,7 +445,7 @@ export function chooseObject(location, obj) {
     if (location.includes(urlMaterial)) {
         obj2 = {
             appaearance: obj.appaearance,
-            param_appearance: obj.appearance,
+            param_appaearance: obj.param_appaearance,
             density: obj.density,
             param_density: obj.param_density,
             alcoholic: obj.alcoholic,
@@ -512,6 +545,11 @@ export function chooseTable(location, data) {
     }
     if (location.includes(urlLiquid)) {
         return <LiquidTable
+            data={data}
+            key={0} />
+    }
+    if (location.includes(urlMaterial)) {
+        return <MaterialTable
             data={data}
             key={0} />
     }

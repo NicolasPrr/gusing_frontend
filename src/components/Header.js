@@ -35,11 +35,8 @@ class Header extends Component {
                      <Link className="navbar-item" to="/report_liquids/reports"   >
                        Liquidos
                      </Link>
-                     <Link className="navbar-item" to="/reports/"   >
+                     <Link className="navbar-item" to="/report_materials/reports"   >
                        Materia prima
-                     </Link>
-                     <Link className="navbar-item" to="/reports/"   >
-                       Material impreso
                      </Link>
                      <Link className="navbar-item" to="/reports/"   >
                        Polvos granulados

@@ -35,20 +35,14 @@ class Landing extends Component {
                                         Líquidos
                                     </button>
                                 </div>
+                            </div>
+
+                            <div className="columns is-vcentered">
                                 <div className="column">
                                     <button className={classButton} onClick={this.goTo.bind(this,'report_materials')}>
 
                                         Materia prima/Tintura madre
                                     </button>
-                                </div>
-                            </div>
-
-                            <div className="columns is-vcentered">
-                                <div className="column">
-                                    <button className={classButton} onClick={this.goTo.bind(this,'material_impreso')}>
-                                        Material impreso
-                                    </button>
-
                                 </div>
                                 <div className="column">
                                     <button className={classButton} onClick={this.goTo.bind(this,'polvos_granulados')}>
