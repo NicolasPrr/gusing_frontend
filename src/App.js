@@ -57,21 +57,42 @@ class App extends Component {
 
                         <Route exact strict path="/report_liquids/print/:reportId" component={Printer} />
                         <Route path="/report_liquids/reports" component={InterfaceReportProduct} exact />
-                        <Route path="/report_liquids/reports" component={InterfaceReportProduct} exact />
                         <Route path="/report_liquids/edit/:reportId" component={Stepper} />
                         <Route path="/report_liquids/clone/:reportId" component={Stepper} />
                         <Route path="/report_liquids" component={Stepper} />
                         {/* Liquidos */}
                         
-                        {/*  Liquidos */}
-
+                        {/*  Materiales */}
                         <Route exact strict path="/report_materials/print/:reportId" component={Printer} />
-                        <Route path="/report_materials/reports" component={InterfaceReportProduct} exact />
                         <Route path="/report_materials/reports" component={InterfaceReportProduct} exact />
                         <Route path="/report_materials/edit/:reportId" component={Stepper} />
                         <Route path="/report_materials/clone/:reportId" component={Stepper} />
                         <Route path="/report_materials" component={Stepper} />
-                        {/* Liquidos */}
+                        {/* Materiales */}
+
+                        {/*  Polvos */}
+                        <Route exact strict path="/report_dusts/print/:reportId" component={Printer} />
+                        <Route path="/report_dusts/reports" component={InterfaceReportProduct} exact />
+                        <Route path="/report_dusts/edit/:reportId" component={Stepper} />
+                        <Route path="/report_dusts/clone/:reportId" component={Stepper} />
+                        <Route path="/report_dusts" component={Stepper} />
+                        {/* Materiales */}
+
+                        {/*  Polvos */}
+                        <Route exact strict path="/report_semisolids/print/:reportId" component={Printer} />
+                        <Route path="/report_semisolids/reports" component={InterfaceReportProduct} exact />
+                        <Route path="/report_semisolids/edit/:reportId" component={Stepper} />
+                        <Route path="/report_semisolids/clone/:reportId" component={Stepper} />
+                        <Route path="/report_semisolids" component={Stepper} />
+                        {/* Materiales */}
+
+                        {/*  Tableta */}
+                        <Route exact strict path="/report_tablets/print/:reportId" component={Printer} />
+                        <Route path="/report_tablets/reports" component={InterfaceReportProduct} exact />
+                        <Route path="/report_tablets/edit/:reportId" component={Stepper} />
+                        <Route path="/report_tablets/clone/:reportId" component={Stepper} />
+                        <Route path="/report_tablets" component={Stepper} />
+                        {/* Tableta */}
                         
 
 

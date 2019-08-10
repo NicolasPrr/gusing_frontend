@@ -5,11 +5,17 @@ import WaterForm from '../water/ProductForm'
 import CapsuleForm from '../capsule/ProductForm'
 import LiquidForm from '../liquid/ProductForm'
 import MaterialForm from '../material/ProductForm'
+import DustForm from '../dust/ProductForm'
+import SemisolidForm from '../semisolid/ProductForm'
+import TabletForm from '../tablet/ProductForm'
 
 const urlWater = 'report_waters'
 const urlCapsule = 'report_capsules'
 const urlLiquid = 'report_liquids'
 const urlMaterial = 'report_materials'
+const urlDust = 'report_dusts'
+const urlSemisolid = 'report_semisolids'
+const urlTablet = 'report_tablets'
 
 //Codigo de empresión para reporte
 const Encabezado1 = (props) => {
@@ -378,6 +384,135 @@ export const MaterialTable = (props) => {
         </div>
     );
 };
+export const DustTable = (props) => {
+    if (props === undefined || props === null) return null
+    return (
+        <div>
+            <table className="tables is-fullwidth is-bordered is-size-7">
+                <thead>
+                    <tr>
+                        <th>Nombre del resultado</th>
+                        <th>Resultado</th>
+                        <th>Parametros de referencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Determinación aspecto</td>
+                        <td>{props.data.appaearance}</td>
+                        <td> {props.data.param_appaearance} </td>
+                    </tr>
+                    <tr>
+                        <td>Determinación color</td>
+                        <td>{props.data.color}</td>
+                        <td>{props.data.param_color}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación granulometria</td>
+                        <td>{props.data.granulometry}</td>
+                        <td>{props.data.param_granulometry}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación solubilidad</td>
+                        <td>{props.data.solubility}</td>
+                        <td>{props.data.param_solubility}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación peso</td>
+                        <td>{props.data.weight}</td>
+                        <td>{props.data.param_weight}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    );
+};
+export const TabletTable = (props) => {
+    if (props === undefined || props === null) return null
+    return (
+        <div>
+            <table className="tables is-fullwidth is-bordered is-size-7">
+                <thead>
+                    <tr>
+                        <th>Nombre del resultado</th>
+                        <th>Resultado</th>
+                        <th>Parametros de referencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Determinación aspecto</td>
+                        <td>{props.data.appaearance}</td>
+                        <td> Redonda - Plana</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación color</td>
+                        <td>{props.data.color}</td>
+                        <td>Blanca</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación desintegración</td>
+                        <td>{props.data.desintegration}</td>
+                        <td>Max 10 min</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación peso promedio</td>
+                        <td>{props.data.weight}</td>
+                        <td>{props.data.param_weight}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación dimensiones alto x ancho</td>
+                        <td>{props.data.height}</td>
+                        <td>{props.data.param_height}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación dureza</td>
+                        <td>{props.data.hardness}</td>
+                        <td> 4 - 6 kgf</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación friabilidad</td>
+                        <td>{props.data.friability}</td>
+                        <td> Max 1 %</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    );
+};
+export const SemisolidTable = (props) => {
+    if (props === undefined || props === null) return null
+    return (
+        <div>
+            <table className="tables is-fullwidth is-bordered is-size-7">
+                <thead>
+                    <tr>
+                        <th>Nombre del resultado</th>
+                        <th>Resultado</th>
+                        <th>Parametros de referencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Determinación aspecto</td>
+                        <td>{props.data.appaearance}</td>
+                        <td> {props.data.param_appaearance} </td>
+                    </tr>
+                    <tr>
+                        <td>Determinación color</td>
+                        <td>{props.data.color}</td>
+                        <td>{props.data.param_color}</td>
+                    </tr>
+                    <tr>
+                        <td>Determinación viscosidad</td>
+                        <td>{props.data.viscosity}</td>
+                        <td>{props.data.param_viscosity}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    );
+};
 
 
 export function chooseMainURL(location) {
@@ -386,12 +521,16 @@ export function chooseMainURL(location) {
     if (location.includes(urlCapsule)) return '/report_capsules/'
     if (location.includes(urlLiquid)) return '/report_liquids/'
     if (location.includes(urlMaterial)) return '/report_materials/'
+    if (location.includes(urlDust)) return '/report_dusts/'
+    if (location.includes(urlSemisolid)) return '/report_semisolids/'
 }
 export function chooseNameOjbect(location) {
     if (location.includes(urlWater)) return 'report_water'
     if (location.includes(urlCapsule)) return 'report_capsule'
     if (location.includes(urlLiquid)) return 'report_liquid'
     if (location.includes(urlMaterial)) return 'report_material'
+    if (location.includes(urlDust)) return 'report_dust'
+    if (location.includes(urlSemisolid)) return 'report_semisolid'
 }
 export function chooseObject(location, obj) {
     //Selecciona los parametros segun la localización, paso 2
@@ -455,6 +594,54 @@ export function chooseObject(location, obj) {
             is_copy: obj.is_copy
         }
     }
+    if (location.includes(urlDust)) {
+        obj2 = {
+            appaearance: obj.appaearance,
+            param_appaearance: obj.param_appaearance,
+            color: obj.color,
+            param_color: obj.param_color,
+            granulometry: obj.granulometry,
+            param_granulometry: obj.param_granulometry,
+            solubility: obj.solubility,
+            param_solubility: obj.param_solubility,
+            weight: obj.weight,
+            param_weight: obj.param_weight,
+          
+            fulfillment: obj.fulfillment,
+            is_copy: obj.is_copy
+        }
+    }
+    if (location.includes(urlSemisolid)) {
+        obj2 = {
+            appaearance: obj.appaearance,
+            param_appaearance: obj.param_appaearance,
+            color: obj.color,
+            param_color: obj.param_color,
+            viscosity: obj.viscosity,
+            param_viscosity: obj.param_viscosity,
+          
+            fulfillment: obj.fulfillment,
+            is_copy: obj.is_copy
+        }
+    }
+    if (location.includes(urlTablet)) {
+        obj2 = {
+            appaearance: obj.appaearance,
+            color: obj.color,
+            desintegration: obj.desintegration,
+            weight: obj.weight,
+            param_weight: obj.param_weight,
+            height: obj.param_height,
+            param_height: obj.param_height,
+            
+            hardness: obj.hardness,
+            friability: obj.hardness,
+         
+            
+            fulfillment: obj.fulfillment,
+            is_copy: obj.is_copy
+        }
+    }
 
     return obj2
 }
@@ -478,6 +665,21 @@ export function chooseForm(set, data, location) {
     }
     if (location.includes(urlMaterial)) {
         return <MaterialForm
+            setProductForm={set}
+            dataProduct={data} />
+    }
+    if (location.includes(urlDust)) {
+        return <DustForm
+            setProductForm={set}
+            dataProduct={data} />
+    }
+    if (location.includes(urlSemisolid)) {
+        return <SemisolidForm
+            setProductForm={set}
+            dataProduct={data} />
+    }
+    if (location.includes(urlTablet)) {
+        return <TabletForm
             setProductForm={set}
             dataProduct={data} />
     }
@@ -515,6 +717,25 @@ export function initReport(location) {
             observation: ""
         }
     }
+    if (location.includes(urlDust)) {
+        dataReport = {
+            sampling_type: "Aleatorio",
+            observation: ""
+        }
+    }
+    if (location.includes(urlSemisolid)) {
+        dataReport = {
+            sampling_type: "Aleatorio",
+            observation: ""
+        }
+    }
+    if (location.includes(urlTablet)) {
+        dataReport = {
+            sampling_type: "Aleatorio",
+            farmaceutic_shape: "Tableta",
+            observation: ""
+        }
+    }
 
     return dataReport
 }
@@ -528,6 +749,15 @@ export function initOption(location) {
     }
     if (location.includes(urlMaterial)) {
         options = { samples: ["MP", "TM"], shapes: [] }
+    }
+    if (location.includes(urlDust)) {
+        options = { samples: ["PT", "PT-EST"], shapes: ["Polvo" , "Granulado"] }
+    }
+    if (location.includes(urlSemisolid)) {
+        options = { samples: ["PT", "PT-EST"], shapes: ["Ungüento" , "Gel"] }
+    }
+    if (location.includes(urlTablet)) {
+        options = { samples: ["PT", "PT-EST"], shapes: [] }
     }
     return options
 }
@@ -550,6 +780,16 @@ export function chooseTable(location, data) {
     }
     if (location.includes(urlMaterial)) {
         return <MaterialTable
+            data={data}
+            key={0} />
+    }
+    if (location.includes(urlDust)) {
+        return <DustTable
+            data={data}
+            key={0} />
+    }
+    if (location.includes(urlSemisolid)) {
+        return <SemisolidTable
             data={data}
             key={0} />
     }

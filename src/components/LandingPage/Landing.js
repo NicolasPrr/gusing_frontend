@@ -45,18 +45,18 @@ class Landing extends Component {
                                     </button>
                                 </div>
                                 <div className="column">
-                                    <button className={classButton} onClick={this.goTo.bind(this,'polvos_granulados')}>
+                                    <button className={classButton} onClick={this.goTo.bind(this,'report_dusts')}>
                                         Polvos y granulados
                                     </button>
                                 </div>
                                 <div className="column">
-                                    <button className={classButton} onClick={this.goTo.bind(this,'semisolidos')}>
+                                    <button className={classButton} onClick={this.goTo.bind(this,'report_semisolids')}>
                                         Semisolidos
                                     </button>
 
                                 </div>
                                 <div className="column">
-                                    <button className={classButton} onClick={this.goTo.bind(this,'tabletas')}>
+                                    <button className={classButton} onClick={this.goTo.bind(this,'report_tablets')}>
                                         Tabletas
                                     </button>
                                 </div>

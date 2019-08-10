@@ -38,13 +38,13 @@ class Header extends Component {
                      <Link className="navbar-item" to="/report_materials/reports"   >
                        Materia prima
                      </Link>
-                     <Link className="navbar-item" to="/reports/"   >
+                     <Link className="navbar-item" to="/report_dusts/reports"   >
                        Polvos granulados
                      </Link>
-                     <Link className="navbar-item" to="/reports/"   >
+                     <Link className="navbar-item" to="/report_semisolids/reports"   >
                        Semisolidos
                      </Link>
-                     <Link className="navbar-item" to="/reports/"   >
+                     <Link className="navbar-item" to="/report_tablets/reports"   >
                        Tabletas
                      </Link>
                 </div>
