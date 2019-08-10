@@ -523,6 +523,7 @@ export function chooseMainURL(location) {
     if (location.includes(urlMaterial)) return '/report_materials/'
     if (location.includes(urlDust)) return '/report_dusts/'
     if (location.includes(urlSemisolid)) return '/report_semisolids/'
+    if (location.includes(urlTablet)) return '/report_tablets/'
 }
 export function chooseNameOjbect(location) {
     if (location.includes(urlWater)) return 'report_water'
@@ -531,6 +532,7 @@ export function chooseNameOjbect(location) {
     if (location.includes(urlMaterial)) return 'report_material'
     if (location.includes(urlDust)) return 'report_dust'
     if (location.includes(urlSemisolid)) return 'report_semisolid'
+    if (location.includes(urlTablet)) return 'report_tablet'
 }
 export function chooseObject(location, obj) {
     //Selecciona los parametros segun la localización, paso 2
@@ -790,6 +792,11 @@ export function chooseTable(location, data) {
     }
     if (location.includes(urlSemisolid)) {
         return <SemisolidTable
+            data={data}
+            key={0} />
+    }
+    if (location.includes(urlTablet)) {
+        return <TabletTable
             data={data}
             key={0} />
     }
