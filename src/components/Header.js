@@ -23,7 +23,7 @@ class Header extends Component {
                   Listar reportes
                   </div>
                 <div className="navbar-dropdown">
-                     <Link className="navbar-item" to="/report_waters/reports"   >
+                     <Link className="navbar-item" to={{pathname: "/report_waters/reports" , state: 0}}   >
                        Aguas
                      </Link>
                      <Link className="navbar-item" to="/report_capsules/reports"   >

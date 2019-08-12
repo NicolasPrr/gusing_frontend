@@ -75,10 +75,8 @@ class InterfaceReport extends Component {
         }).catch(function (error) {
             console.log(error)
         });
-
     }
-    componentDidMount() {
-        // let url = URLBack + "/report_waters/pages/1"
+    initRequest = () => {
         let url = `${URLBack}${chooseMainURL(window.location.pathname)}pages/1`
         axios.get(url).then(res => {
             this.setState({ reports: res.data })
@@ -87,6 +85,14 @@ class InterfaceReport extends Component {
         axios.get(url).then(res => {
             this.setState({ amountPages: res.data })
         })
+    }
+    componentWillReceiveProps(){
+        // console.log(nextProps.location.state)
+        this.initRequest()
+    }
+    componentDidMount() {
+        // let url = URLBack + "/report_waters/pages/1"
+        this.initRequest()
     }
 
     search(data) {

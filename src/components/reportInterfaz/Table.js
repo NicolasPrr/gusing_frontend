@@ -76,6 +76,7 @@ class Table extends Component {
                             <th>Cliente</th>
                             <th>Muestra</th>
                             <th>Nombre  muestra</th>
+                            <th>Fecha de informe</th>
                             <th>Imprimir</th>
                             <th>Editar</th>
                             <th>Duplicar</th>
@@ -90,6 +91,7 @@ class Table extends Component {
                                 <td className="has-text-centered">{info[key].client_name}</td>
                                 <td className="has-text-centered">{info[key].sample}</td>
                                 <td className="has-text-centered">{info[key].sample_name}</td>
+                                <td className="has-text-centered">{info[key].date_report}</td>
                                 <td className="has-text-centered">
                                     <button className ="button is-small">
                                         <Link to={"/print/" + info[key].id} target="_blank"  >
