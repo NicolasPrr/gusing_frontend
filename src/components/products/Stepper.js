@@ -16,7 +16,7 @@ class Stepper extends Component {
             dataReport: {
             }, //Datos del reporte, como numero de reporte, es el encabezado
             dataProduct: {}, //Datos del producto, es el resultado de las mediciones
-            dataOption: { samples: [], shapes: [] }
+            dataOption: { samples: [], shapes: [] , methods: [] }
         }
         this.nextStep = this.nextStep.bind(this)
         this.headerForm = this.headerForm.bind(this)
@@ -188,7 +188,7 @@ class Stepper extends Component {
         return (
             <div>
                 <div className="columns">
-                    <div className="column">
+                    <div className="column box">
                         <ul className="steps is-small">
                             <div className={"step-item" + stateStep(1, this.state.step, "is-link")}  >
                                 <div className="step-marker">1</div>
@@ -226,7 +226,7 @@ class Stepper extends Component {
                 <div className="container">
                     <div className="card">
                         <header className="card-header">
-                            <p className="card-header-title has-background-info has-text-white">
+                            <p className="card-header-title has-background-dark has-text-white">
                                 {chooseNameForm(window.location.pathname)}
                             </p>
                         </header>

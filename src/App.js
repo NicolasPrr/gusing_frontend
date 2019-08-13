@@ -93,6 +93,14 @@ class App extends Component {
                         <Route path="/report_tablets/clone/:reportId" component={Stepper} />
                         <Route path="/report_tablets" component={Stepper} />
                         {/* Tableta */}
+
+                        {/*  Microbiologia */}
+                        <Route exact strict path="/report_microbiologies/print/:reportId" component={Printer} />
+                        <Route path="/report_microbiologies/reports" component={InterfaceReportProduct} exact />
+                        <Route path="/report_microbiologies/edit/:reportId" component={Stepper} />
+                        <Route path="/report_microbiologies/clone/:reportId" component={Stepper} />
+                        <Route path="/report_microbiologies" component={Stepper} />
+                        {/* Tableta */}
                         
 
 

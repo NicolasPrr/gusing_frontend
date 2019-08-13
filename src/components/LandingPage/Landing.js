@@ -5,7 +5,7 @@ class Landing extends Component {
         this.props.history.push(path);
     }
     render() {
-        const classButton = "button is-large is-rounded is-link is-fullwidth has-text-weight-bold"
+        const classButton = "button  is-rounded is-link is-fullwidth has-text-weight-bold"
         return (
             <div>
                 <section className="hero is-light is-fullheight-with-navbar">
@@ -33,6 +33,11 @@ class Landing extends Component {
                                 <div className="column">
                                     <button className={classButton} onClick={this.goTo.bind(this,'report_liquids')}>
                                         Líquidos
+                                    </button>
+                                </div>
+                                <div className="column">
+                                    <button className={classButton} onClick={this.goTo.bind(this,'report_microbiologies')}>
+                                        Microbiologia
                                     </button>
                                 </div>
                             </div>

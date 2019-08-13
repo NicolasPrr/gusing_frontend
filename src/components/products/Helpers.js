@@ -16,6 +16,7 @@ const urlMaterial = 'report_materials'
 const urlDust = 'report_dusts'
 const urlSemisolid = 'report_semisolids'
 const urlTablet = 'report_tablets'
+const urlMB = 'report_microbiologies'
 
 //Codigo de empresión para reporte
 const Encabezado1 = (props) => {
@@ -60,15 +61,15 @@ const Encabezado3 = (props) => {
         </div>
     );
 }
-function chooseTitle(){
+function chooseTitle() {
     const location = window.location.pathname
-    if(location === 'water' || location === 'material') return "TITULO: REPORTE DE ENSAYO DE MATERIALES"
-    return  "TITULO: REPORTE DE ENSAYO PT - PP"
+    if (location === 'water' || location === 'material') return "TITULO: REPORTE DE ENSAYO DE MATERIALES"
+    return "TITULO: REPORTE DE ENSAYO PT - PP"
 }
-function chooseCode(){
+function chooseCode() {
     const location = window.location.pathname
-    if(location === 'water' || location === 'material') return "Codigo FR-CC - 65"
-    return  "Codigo FR-CC - 65"
+    if (location === 'water' || location === 'material') return "Codigo FR-CC - 65"
+    return "Codigo FR-CC - 65"
 }
 export const HeaderReport = () => {
     return (
@@ -524,7 +525,7 @@ export const SemisolidTable = (props) => {
     );
 };
 
-export function chooseNameForm(location){
+export function chooseNameForm(location) {
     if (location.includes(urlWater)) return 'Aguas'
     if (location.includes(urlCapsule)) return 'Capsulas'
     if (location.includes(urlLiquid)) return 'Liquidos'
@@ -532,6 +533,7 @@ export function chooseNameForm(location){
     if (location.includes(urlDust)) return 'Polbos y granulados'
     if (location.includes(urlSemisolid)) return 'Semisolidos'
     if (location.includes(urlTablet)) return 'Tabletas'
+    if (location.includes(urlMB)) return 'Microbiologia'
 
 }
 export function chooseMainURL(location) {
@@ -543,6 +545,7 @@ export function chooseMainURL(location) {
     if (location.includes(urlDust)) return '/report_dusts/'
     if (location.includes(urlSemisolid)) return '/report_semisolids/'
     if (location.includes(urlTablet)) return '/report_tablets/'
+    if (location.includes(urlMB)) return '/report_microbiologies/'
 }
 export function chooseNameOjbect(location) {
     if (location.includes(urlWater)) return 'report_water'
@@ -552,6 +555,7 @@ export function chooseNameOjbect(location) {
     if (location.includes(urlDust)) return 'report_dust'
     if (location.includes(urlSemisolid)) return 'report_semisolid'
     if (location.includes(urlTablet)) return 'report_tablet'
+    if (location.includes(urlMB)) return 'report_microbiologies'
 }
 export function chooseObject(location, obj) {
     //Selecciona los parametros segun la localización, paso 2
@@ -610,7 +614,7 @@ export function chooseObject(location, obj) {
             param_density: obj.param_density,
             alcoholic: obj.alcoholic,
             param_alcoholic: obj.param_alcoholic,
-          
+
             fulfillment: obj.fulfillment,
             is_copy: obj.is_copy
         }
@@ -627,7 +631,7 @@ export function chooseObject(location, obj) {
             param_solubility: obj.param_solubility,
             weight: obj.weight,
             param_weight: obj.param_weight,
-          
+
             fulfillment: obj.fulfillment,
             is_copy: obj.is_copy
         }
@@ -640,7 +644,7 @@ export function chooseObject(location, obj) {
             param_color: obj.param_color,
             viscosity: obj.viscosity,
             param_viscosity: obj.param_viscosity,
-          
+
             fulfillment: obj.fulfillment,
             is_copy: obj.is_copy
         }
@@ -654,11 +658,11 @@ export function chooseObject(location, obj) {
             param_weight: obj.param_weight,
             height: obj.param_height,
             param_height: obj.param_height,
-            
+
             hardness: obj.hardness,
             friability: obj.hardness,
-         
-            
+
+
             fulfillment: obj.fulfillment,
             is_copy: obj.is_copy
         }
@@ -758,6 +762,13 @@ export function initReport(location) {
         }
     }
 
+    if (location.includes(urlMB)) {
+        dataReport = {
+            client_name: "Laboratorios Gusing S.A.S",
+            direction: "Cra 10 este N 30-03 San Mateo - Soacha",
+            observation: ""
+        }
+    }
     return dataReport
 }
 export function initOption(location) {
@@ -772,11 +783,23 @@ export function initOption(location) {
         options = { samples: ["MP", "TM"], shapes: [] }
     }
     if (location.includes(urlDust)) {
-        options = { samples: ["PT", "PT-EST"], shapes: ["Polvo" , "Granulado"] }
+        options = { samples: ["PT", "PT-EST"], shapes: ["Polvo", "Granulado"] }
     }
     if (location.includes(urlSemisolid)) {
-        options = { samples: ["PT", "PT-EST"], shapes: ["Ungüento" , "Gel"] }
+        options = { samples: ["PT", "PT-EST"], shapes: ["Ungüento", "Gel"] }
     }
+    if (location.includes(urlMB)) {
+        options = {
+            samples: ["PT", "INS", "IMP", "PT-EST", "PP", "AGUA",
+                "AGUA UF", "AGUA POT", "FM" ,"FS", "ABM Grado A", "ABM Grado B",
+                "ABM Grado C" ,"ABM Grado D" , "TM" ,"AIRE"," FS GRADO A", "FS GRADO B",
+                "FS GRADO C" ,"FS GRADO D", "Desinfectante"
+            ],
+            shapes: ["Aletorio","Conveniencia"],
+            methods: ["Recuento en Placa/Vertido", "Filtración por Membrana","Sedimentacion en Placa","Frotis con Siembra Directa","Inoculacion directa (Esterilidad)", "Coagulacion (Gel - Clot)"]
+        }
+    }
+    options.methods = []
     if (location.includes(urlTablet)) {
         options = { samples: ["PT", "PT-EST"], shapes: [] }
     }
