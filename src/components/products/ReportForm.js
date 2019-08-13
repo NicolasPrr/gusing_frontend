@@ -94,12 +94,12 @@ class ReportForm extends Component {
   }
   render() {
     return (
-      <div className="notification" >
+      <div>
         <form onSubmit={this.handleForm}  >
           <p>N°de reporte ensayo FQ </p>
 
           <input
-            className="input is-small"
+            className="input is-small is-link"
             type="text"
             placeholder="Numero de reporte"
             ref={this.report}
@@ -170,11 +170,11 @@ class ReportForm extends Component {
                       defaultValue={
                         this.props.data.sample
                       }
-                      list ="samples"
+                      list="samples"
                     />
                     <datalist id="samples">
                       {Object.keys(this.props.options.samples).map(key => (
-                        <option value={this.props.options.samples[key]}  key={key}/>
+                        <option value={this.props.options.samples[key]} key={key} />
                       ))}
                     </datalist>
                   </div>
@@ -318,7 +318,7 @@ class ReportForm extends Component {
                     />
                     <datalist id="shapes">
                       {Object.keys(this.props.options.shapes).map(key => (
-                        <option value={this.props.options.shapes[key]} key = {key} />
+                        <option value={this.props.options.shapes[key]} key={key} />
                       ))}
                     </datalist>
                   </div>

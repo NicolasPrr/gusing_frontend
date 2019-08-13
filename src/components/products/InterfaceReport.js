@@ -5,7 +5,7 @@ import URLBack from '../../UrlBack'
 import Swal from 'sweetalert2'
 import SearchBox from './SearchBox'
 import Pagination from '../reportInterfaz/Pagination'
-import { chooseMainURL } from './printer/Helpers';
+import { chooseMainURL } from './Helpers';
 
 
 class InterfaceReport extends Component {

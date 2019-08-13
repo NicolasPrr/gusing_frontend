@@ -1,13 +1,13 @@
 import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import './table.sass';
-import WaterForm from '../water/ProductForm'
-import CapsuleForm from '../capsule/ProductForm'
-import LiquidForm from '../liquid/ProductForm'
-import MaterialForm from '../material/ProductForm'
-import DustForm from '../dust/ProductForm'
-import SemisolidForm from '../semisolid/ProductForm'
-import TabletForm from '../tablet/ProductForm'
+import './printer/table.sass';
+import WaterForm from './water/ProductForm'
+import CapsuleForm from './capsule/ProductForm'
+import LiquidForm from './liquid/ProductForm'
+import MaterialForm from './material/ProductForm'
+import DustForm from './dust/ProductForm'
+import SemisolidForm from './semisolid/ProductForm'
+import TabletForm from './tablet/ProductForm'
 
 const urlWater = 'report_waters'
 const urlCapsule = 'report_capsules'
@@ -60,6 +60,16 @@ const Encabezado3 = (props) => {
         </div>
     );
 }
+function chooseTitle(){
+    const location = window.location.pathname
+    if(location === 'water' || location === 'material') return "TITULO: REPORTE DE ENSAYO DE MATERIALES"
+    return  "TITULO: REPORTE DE ENSAYO PT - PP"
+}
+function chooseCode(){
+    const location = window.location.pathname
+    if(location === 'water' || location === 'material') return "Codigo FR-CC - 65"
+    return  "Codigo FR-CC - 65"
+}
 export const HeaderReport = () => {
     return (
         <div className="columns is-gapless">
@@ -72,8 +82,8 @@ export const HeaderReport = () => {
             </div>
             <div className="column">
                 <Encabezado1 name="CONTROL DE CALIDAD" />
-                <Encabezado2 title="TITULO: REPORTE DE ENSAYO DE MATERIALES"
-                    code="Codigo FR-CC -65"
+                <Encabezado2 title={chooseTitle()}
+                    code={chooseCode()}
                 />
                 <Encabezado3 version="Version 04"
                     date="FECHA DEVIGENCIA DESDE EL 28 DE FEBRERO DE 2017"
@@ -514,7 +524,16 @@ export const SemisolidTable = (props) => {
     );
 };
 
+export function chooseNameForm(location){
+    if (location.includes(urlWater)) return 'Aguas'
+    if (location.includes(urlCapsule)) return 'Capsulas'
+    if (location.includes(urlLiquid)) return 'Liquidos'
+    if (location.includes(urlMaterial)) return 'MT / TM'
+    if (location.includes(urlDust)) return 'Polbos y granulados'
+    if (location.includes(urlSemisolid)) return 'Semisolidos'
+    if (location.includes(urlTablet)) return 'Tabletas'
 
+}
 export function chooseMainURL(location) {
 
     if (location.includes(urlWater)) return '/report_waters/'

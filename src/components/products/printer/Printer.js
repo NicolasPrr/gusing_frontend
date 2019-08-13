@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import './textbackground.css'
 import URLBack from '../../../UrlBack'
-import { HeaderReport, InformationReport, Observation, Note, Signature, Footer, renderIsOk } from './Helpers'
+import { HeaderReport, InformationReport, Observation, Note, Signature, Footer, renderIsOk } from '../Helpers'
 
-import {chooseTable, chooseMainURL} from './Helpers'
+import {chooseTable, chooseMainURL} from '../Helpers'
 
 import Error from '../../LandingPage/Error'
 

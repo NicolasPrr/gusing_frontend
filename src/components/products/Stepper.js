@@ -5,7 +5,7 @@ import LastStep from '../LastStep'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import URLBack from '../../UrlBack'
-import { chooseMainURL, chooseObject, chooseNameOjbect, initReport, initOption, chooseForm } from './printer/Helpers'
+import { chooseMainURL, chooseObject, chooseNameOjbect, initReport, initOption, chooseForm, chooseNameForm } from './Helpers'
 
 
 class Stepper extends Component {
@@ -16,7 +16,7 @@ class Stepper extends Component {
             dataReport: {
             }, //Datos del reporte, como numero de reporte, es el encabezado
             dataProduct: {}, //Datos del producto, es el resultado de las mediciones
-            dataOption: { samples:[] , shapes: [] }
+            dataOption: { samples: [], shapes: [] }
         }
         this.nextStep = this.nextStep.bind(this)
         this.headerForm = this.headerForm.bind(this)
@@ -120,14 +120,14 @@ class Stepper extends Component {
         switch (step) {
             case 1:
                 return <ReportForm reportAction={this.headerForm}
-                    data={this.state.dataReport} options ={this.state.dataOption}
+                    data={this.state.dataReport} options={this.state.dataOption}
                 />
             case 2:
-                return chooseForm(this.setProductForm ,this.state.dataProduct ,location)
-                // return <ProductForm
-                //     setProductForm={this.setProductForm}
-                //     dataProduct={this.state.dataProduct}
-                // />
+                return chooseForm(this.setProductForm, this.state.dataProduct, location)
+            // return <ProductForm
+            //     setProductForm={this.setProductForm}
+            //     dataProduct={this.state.dataProduct}
+            // />
             case 3:
                 return <LastStep
                     dataVef={this.state.dataReport.observation}
@@ -181,7 +181,7 @@ class Stepper extends Component {
                 dataReport: initReport(location)
             })
         }
-        this.setState({dataOption: initOption(location)})
+        this.setState({ dataOption: initOption(location) })
 
     }
     render() {
@@ -223,8 +223,19 @@ class Stepper extends Component {
                         {this.renderButtons(1)}
                     </div>
                 </div>
-                {this.renderForm(this.state.step)}
+                <div className="container">
+                    <div className="card">
+                        <header className="card-header">
+                            <p className="card-header-title has-background-info has-text-white">
+                                {chooseNameForm(window.location.pathname)}
+                            </p>
+                        </header>
+                        <div className="card-content">
+                            {this.renderForm(this.state.step)}
 
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
