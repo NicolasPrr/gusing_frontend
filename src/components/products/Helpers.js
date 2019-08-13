@@ -525,6 +525,81 @@ export const SemisolidTable = (props) => {
         </div>
     );
 };
+export const MicrobiologyTable = (props) => {
+    if (props === undefined || props === null) return null
+    return (
+        <div className="columns">
+            <div className="column">
+                <table className="tables is-fullwidth is-bordered is-size-7">
+                    <thead>
+                        <tr>
+                            <th>Nombre del resultado</th>
+                            <th>Resultado</th>
+                            <th>Parametros de referencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Recuento de Aerobios(RTMA)</td>
+                            <td>{props.data.aeorobic}</td>
+                            <td> {props.data.param_aeorobic} </td>
+                        </tr>
+                        <tr>
+                            <td>Recuento de Mohos y Levaduras(RTCHL)</td>
+                            <td>{props.data.mold}</td>
+                            <td>{props.data.param_mold}</td>
+                        </tr>
+                        <tr>
+                            <td>Recuento de Coliformes Totales (CT)</td>
+                            <td>{props.data.coliform}</td>
+                            <td>{props.data.param_coliform}</td>
+                        </tr>
+                        <tr>
+                            <td>Detección Escherichia coli</td>
+                            <td>{props.data.coi}</td>
+                            <td>{props.data.param_coi}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div className="column">
+                <table className="tables is-fullwidth is-bordered is-size-7">
+                    <thead>
+                        <tr>
+                            <th>Nombre del resultado</th>
+                            <th>Resultado</th>
+                            <th>Parametros de referencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Detección Pseudomona aeruginosa</td>
+                            <td>{props.data.mona}</td>
+                            <td> {props.data.param_mona} </td>
+                        </tr>
+                        <tr>
+                            <td>Detección Sthaphylococcus aureus</td>
+                            <td>{props.data.aureus}</td>
+                            <td>{props.data.param_aureus}</td>
+                        </tr>
+                        <tr>
+                            <td>Prueba de Esterilidad</td>
+                            <td>{props.data.sterility}</td>
+                            <td>{props.data.param_sterility}</td>
+                        </tr>
+                        <tr>
+                            <td>Prueba de Prueba de Endotoxinas</td>
+                            <td>{props.data.endotoxin}</td>
+                            <td>{props.data.param_endotoxin}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    );
+};
 
 export function chooseNameForm(location) {
     if (location.includes(urlWater)) return 'Aguas'
@@ -662,6 +737,37 @@ export function chooseObject(location, obj) {
 
             hardness: obj.hardness,
             friability: obj.hardness,
+
+
+            fulfillment: obj.fulfillment,
+            is_copy: obj.is_copy
+        }
+    }
+    if (location.includes(urlMB)) {
+        obj2 = {
+            aeorobic: obj.aeorobic,
+            param_aeorobic: obj.aeorobic,
+
+            mold: obj.mold,
+            param_mold: obj.param_mold,
+
+            coliform: obj.coliform,
+            param_coliform: obj.param_coliform,
+
+            coli: obj.coli,
+            param_coli: obj.param_coli,
+
+            mona: obj.mona,
+            param_mona: obj.param_mona,
+
+            aureus: obj.mona,
+            param_aureus: obj.param_aureus,
+
+            sterility: obj.sterility,
+            param_sterility: obj.param_sterility,
+
+            endotoxin: obj.endotoxin,
+            param_endotoxin: obj.param_endotoxin.current.value,
 
 
             fulfillment: obj.fulfillment,
