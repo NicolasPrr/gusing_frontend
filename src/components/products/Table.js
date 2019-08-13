@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2'
 import {  Link } from 'react-router-dom'
 import {chooseMainURL} from './Helpers'
+import Loader from '../loaders/Loadersn'
 
 class Table extends Component {
     constructor(props) {
@@ -42,6 +43,7 @@ class Table extends Component {
         this.setState({ selected: arraySelected })
     }
     render() {
+        if(this.props.loader) return  <Loader/>
         let info = this.props.data
         return (
             <div>

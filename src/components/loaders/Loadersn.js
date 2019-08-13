@@ -33,28 +33,7 @@ class Loadersn extends Component {
                     <div className="sk-circle11 sk-circle"></div>
                     <div className="sk-circle12 sk-circle"></div>
                 </div>
-                Selecciona una opción
-
-                
-
-{/*
-<input type="text" list="data" onChange={this._onChange} />
-
-<datalist id="data">
-        <option value="hola" />
-    
-</datalist>
-
-
-<datalist id="dataclients">
-        <option value="Cliente 1" />
-        <option value="Cl2 1" />
-        <option value="Cl3 " />
-    
-</datalist>
-
-*/
-}
+                Cargando...
             </div>
         );
     }

@@ -34,7 +34,7 @@ class ProductForm extends Component {
     }
     render() {
         return (
-            <div className="container box">
+            <div>
                 <div className="columns is-vcentered">
                     <div className="column">
 

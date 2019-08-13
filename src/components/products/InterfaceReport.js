@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import SearchBox from './SearchBox'
 import Pagination from '../reportInterfaz/Pagination'
 import { chooseMainURL, chooseNameForm } from './Helpers';
+import Loader from '../loaders/Loadersn' 
 
 
 class InterfaceReport extends Component {
@@ -16,13 +17,16 @@ class InterfaceReport extends Component {
             currentPage: 1,
             amountPages: 0,
             paramsSearch: null,
+            loader: true,
 
         };
         this.deleteRequest = this.deleteRequest.bind(this);
         this.search = this.search.bind(this);
         this.goToPage = this.goToPage.bind(this);
     }
-
+    isLoad = (value) =>{
+        this.setState({loader: value})
+    }
     /* Funciones para control de paginación
         goToPage cambia la pagina y hace la solicitud correspondiente.
         nextOnePage(i) donde i es -1 o  previos or next
@@ -31,11 +35,16 @@ class InterfaceReport extends Component {
         if (page >= 1 && page <= this.state.amountPages) {
             this.setState({ currentPage: page })
             if (this.state.paramsSearch === null) {
+                this.isLoad(true)
                 let url = `${URLBack}${chooseMainURL(window.location.pathname)}pages/${page}`
                 // let url = URLBack + "/report_supplies/pages/" + page;
                 axios.get(url).then(res => {
                     console.log(res)
                     this.setState({ reports: res.data })
+                    this.isLoad(false)
+                }).catch( (error) =>{
+                    console.log(error)
+                    this.isLoad(false)
                 })
             } else {
                 let url = `${URLBack}${chooseMainURL(window.location.pathname)}search/${page}`
@@ -78,8 +87,13 @@ class InterfaceReport extends Component {
     }
     initRequest = () => {
         let url = `${URLBack}${chooseMainURL(window.location.pathname)}pages/1`
+        this.isLoad(true)
         axios.get(url).then(res => {
             this.setState({ reports: res.data })
+            this.isLoad(false)
+        }).catch(error => {
+            console.log(error)
+            this.isLoad(false)
         })
         url = `${URLBack}${chooseMainURL(window.location.pathname)}pages`
         axios.get(url).then(res => {
@@ -87,11 +101,9 @@ class InterfaceReport extends Component {
         })
     }
     componentWillReceiveProps() {
-        // console.log(nextProps.location.state)
         this.initRequest()
     }
     componentDidMount() {
-        // let url = URLBack + "/report_waters/pages/1"
         this.initRequest()
     }
 
@@ -106,21 +118,24 @@ class InterfaceReport extends Component {
         }).catch(function (error) {
             console.log(error)
         })
-
+        
+        this.isLoad(true)
         url = `${URLBack}${chooseMainURL(window.location.pathname)}search/1`
         axios.post(url, data).then(res => {
             console.log(res)
             if (res.status === 200) {
                 this.setState({ reports: res.data })
             }
+            this.isLoad(false)
         }).catch(function (error) {
+            this.isLoad(false)
             console.log(error)
         })
     }
     render() {
         let renderTable = [];
         if (this.state.reports.length > 0) {
-            renderTable.push(<Table data={this.state.reports}
+            renderTable.push(<Table data={this.state.reports} loader={this.state.loader}
                 deleteRequest={this.deleteRequest}
                 search={this.search}
                 key={0} />)
@@ -130,8 +145,11 @@ class InterfaceReport extends Component {
                 changePage={this.goToPage}
                 key={1} />)
         }
-        else
+        else if(this.state.loader){
+            renderTable[0] = <Loader/>
+        }else{
             renderTable[0] = <h1 className="title"> No hay reportes que mostrar</h1>
+        }
         return (
 
             <div className="card">
