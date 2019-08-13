@@ -124,10 +124,6 @@ class Stepper extends Component {
                 />
             case 2:
                 return chooseForm(this.setProductForm, this.state.dataProduct, location)
-            // return <ProductForm
-            //     setProductForm={this.setProductForm}
-            //     dataProduct={this.state.dataProduct}
-            // />
             case 3:
                 return <LastStep
                     dataVef={this.state.dataReport.observation}

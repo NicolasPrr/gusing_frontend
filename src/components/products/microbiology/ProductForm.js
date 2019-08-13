@@ -48,7 +48,7 @@ class ProductForm extends Component {
         let results = {
 
             aeorobic: this.aeorobic.current.value,
-            param_aeorobic: this.aeorobic.current.value,
+            param_aeorobic: this.param_aeorobic.current.value,
 
             mold: this.mold.current.value,
             param_mold: this.param_mold.current.value,
@@ -62,7 +62,7 @@ class ProductForm extends Component {
             mona: this.mona.current.value,
             param_mona: this.param_mona.current.value,
 
-            aureus: this.mona.current.value,
+            aureus: this.aureus.current.value,
             param_aureus: this.param_aureus.current.value,
 
             sterility: this.sterility.current.value,

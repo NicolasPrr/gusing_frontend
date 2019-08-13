@@ -46,7 +46,7 @@ class ReportForm extends Component {
   reception_date = React.createRef();
   sampling_date = React.createRef();
   analisis_date = React.createRef();
-
+  technique = React.createRef()
 
 
 
@@ -68,6 +68,7 @@ class ReportForm extends Component {
       lot: this.lot.current.value,
       name_provider: this.name_provider.current.value,
       method: this.method.current.value,
+      technique: this.technique.current.value,
       farmaceutic_shape: this.farmaceutic_shape.current.value,
       sampling_type: this.sampling_type.current.value,
 
@@ -391,8 +392,8 @@ class ReportForm extends Component {
                     <input
                       className="input is-small"
                       type="text"
-                      ref={this.method}
-                      defaultValue={this.props.data.method}
+                      ref={this.technique}
+                      defaultValue={this.props.data.technique}
                       list="tec"
                     />
                   </div>

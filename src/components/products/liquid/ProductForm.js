@@ -26,7 +26,7 @@ class ProductForm extends Component {
     handleNext = (step) => {
         let results = {
             appaearance: this.appaearance.current.value,
-            param_appaearance: this.appaearance.current.value,
+            param_appaearance: this.param_appaearance.current.value,
             color: this.color.current.value,
             param_color: this.param_color.current.value,
             
@@ -39,7 +39,7 @@ class ProductForm extends Component {
             alcoholic: this.alcoholic.current.value,
             param_alcoholic: this.param_alcoholic.current.value,
             
-            volume: this.density.current.value,
+            volume: this.volume.current.value,
             param_volume: this.param_volume.current.value,
 
 

@@ -118,6 +118,10 @@ export const InformationReport = (props) => {
     const fv = props.data.fv;
     const method = props.data.method;
 
+    let sample_code = null
+    let technique  = null
+    if(props.data.sample_code !== undefined) sample_code = <p> <strong>Codigo de la muestra:</strong> {props.data.sample_code}   </p>
+    if(props.data.technique !== undefined) technique = <p> <strong>Tecnica de analisis:</strong> {props.data.technique}          </p>
 
     function notification(str) {
         alert(`Se ha copiado al portapapeles el numero: ${str}`)
@@ -146,10 +150,11 @@ export const InformationReport = (props) => {
                 <div className="column has-text-justified is-size-7">
                     <p> <strong>Muestra:</strong> {sample}          </p>
                     <p> <strong>Nombre de la muestra:</strong> {sample_name}          </p>
+                    {sample_code}
                     <p> <strong>Tipo de muestreo: </strong> {sampling_type}          </p>
                     <p> <strong>Forma farmaceutica:</strong> {farmaceutic_shape}          </p>
                     <p> <strong>Metodo de analisis:</strong> {method}          </p>
-
+                    {technique}
 
                 </div>
                 <div className="column  has-text-left is-size-7">
@@ -556,8 +561,8 @@ export const MicrobiologyTable = (props) => {
                         </tr>
                         <tr>
                             <td>Detección Escherichia coli</td>
-                            <td>{props.data.coi}</td>
-                            <td>{props.data.param_coi}</td>
+                            <td>{props.data.coli}</td>
+                            <td>{props.data.param_coli}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -631,7 +636,7 @@ export function chooseNameOjbect(location) {
     if (location.includes(urlDust)) return 'report_dust'
     if (location.includes(urlSemisolid)) return 'report_semisolid'
     if (location.includes(urlTablet)) return 'report_tablet'
-    if (location.includes(urlMB)) return 'report_microbiologies'
+    if (location.includes(urlMB)) return 'report_microbiology'
 }
 export function chooseObject(location, obj) {
     //Selecciona los parametros segun la localización, paso 2
@@ -664,7 +669,7 @@ export function chooseObject(location, obj) {
     if (location.includes(urlLiquid)) {
         obj2 = {
             appaearance: obj.appaearance,
-            param_appearance: obj.appearance,
+            param_appearance: obj.param_appearance,
             color: obj.color,
             param_color: obj.param_color,
             ph: obj.ph,
@@ -746,7 +751,7 @@ export function chooseObject(location, obj) {
     if (location.includes(urlMB)) {
         obj2 = {
             aeorobic: obj.aeorobic,
-            param_aeorobic: obj.aeorobic,
+            param_aeorobic: obj.param_aeorobic,
 
             mold: obj.mold,
             param_mold: obj.param_mold,
@@ -760,14 +765,14 @@ export function chooseObject(location, obj) {
             mona: obj.mona,
             param_mona: obj.param_mona,
 
-            aureus: obj.mona,
+            aureus: obj.aureus,
             param_aureus: obj.param_aureus,
 
             sterility: obj.sterility,
             param_sterility: obj.param_sterility,
 
             endotoxin: obj.endotoxin,
-            param_endotoxin: obj.param_endotoxin.current.value,
+            param_endotoxin: obj.param_endotoxin,
 
 
             fulfillment: obj.fulfillment,
@@ -951,6 +956,11 @@ export function chooseTable(location, data) {
     }
     if (location.includes(urlTablet)) {
         return <TabletTable
+            data={data}
+            key={0} />
+    }
+    if (location.includes(urlMB)) {
+        return <MicrobiologyTable
             data={data}
             key={0} />
     }

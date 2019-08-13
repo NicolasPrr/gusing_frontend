@@ -124,10 +124,6 @@ class Stepper extends Component {
                 />
             case 2:
                 return chooseForm(this.setProductForm, this.state.dataProduct, location)
-            // return <ProductForm
-            //     setProductForm={this.setProductForm}
-            //     dataProduct={this.state.dataProduct}
-            // />
             case 3:
                 return <LastStep
                     dataVef={this.state.dataReport.observation}
@@ -167,6 +163,7 @@ class Stepper extends Component {
             const { reportId } = this.props.match.params;
             let url = `${URLBack}${chooseMainURL(location)}${reportId}}`
             axios.get(url).then(res => {
+                console.log(res)
                 this.setState({
                     dataReport: res.data,
                     dataProduct: chooseObject(location, res.data)
