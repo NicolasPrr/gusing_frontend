@@ -5,7 +5,7 @@ import URLBack from '../../UrlBack'
 import Swal from 'sweetalert2'
 import SearchBox from './SearchBox'
 import Pagination from '../reportInterfaz/Pagination'
-import { chooseMainURL } from './Helpers';
+import { chooseMainURL, chooseNameForm } from './Helpers';
 
 
 class InterfaceReport extends Component {
@@ -51,7 +51,7 @@ class InterfaceReport extends Component {
                 })
             }
         }
-        
+
     }
 
     deleteRequest(id, key) {
@@ -86,7 +86,7 @@ class InterfaceReport extends Component {
             this.setState({ amountPages: res.data })
         })
     }
-    componentWillReceiveProps(){
+    componentWillReceiveProps() {
         // console.log(nextProps.location.state)
         this.initRequest()
     }
@@ -107,7 +107,7 @@ class InterfaceReport extends Component {
             console.log(error)
         })
 
-        url =`${URLBack}${chooseMainURL(window.location.pathname)}search/1`
+        url = `${URLBack}${chooseMainURL(window.location.pathname)}search/1`
         axios.post(url, data).then(res => {
             console.log(res)
             if (res.status === 200) {
@@ -120,23 +120,36 @@ class InterfaceReport extends Component {
     render() {
         let renderTable = [];
         if (this.state.reports.length > 0) {
-            renderTable.push(<Table data={this.state.reports} 
-                deleteRequest={this.deleteRequest} 
-                search={this.search} 
-                key = {0} />  )
-            renderTable.push(<Pagination 
-                pages={this.state.amountPages} 
-                currentPage={this.state.currentPage} 
-                changePage={this.goToPage}  
-                key = {1}/>)
+            renderTable.push(<Table data={this.state.reports}
+                deleteRequest={this.deleteRequest}
+                search={this.search}
+                key={0} />)
+            renderTable.push(<Pagination
+                pages={this.state.amountPages}
+                currentPage={this.state.currentPage}
+                changePage={this.goToPage}
+                key={1} />)
         }
         else
-            renderTable = <h1 className="title"> No hay reportes que mostrar</h1>
+            renderTable[0] = <h1 className="title"> No hay reportes que mostrar</h1>
         return (
 
-            <div className="container notification box">
-                <SearchBox search={this.search} />
-                {renderTable}
+            <div className="card">
+                <header className="card-header">
+                    <p className="card-header-title has-background-dark has-text-white">
+                        {chooseNameForm(window.location.pathname)}
+                    </p>
+                </header>
+                <div className="card-content">
+                    <SearchBox search={this.search} />
+                    {renderTable[0]}
+                    <div className="card-footer">
+                        <div className="card-footer-item">
+
+                            {renderTable[1]}
+                        </div>
+                    </div>
+                </div>
             </div>
 
         );

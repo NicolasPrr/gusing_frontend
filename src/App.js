@@ -12,7 +12,7 @@ import HomeSupply from './components/supplies/HomeSupply'
 import Database from './components/databaseGUI/Database'
 
 import Stepper from './components/products/Stepper';
-
+import StepperMB from './components/microbiology/Stepper'
 import InterfaceReportProduct from './components/products/InterfaceReport'
 import Printer from './components/products/printer/Printer'
 
@@ -99,7 +99,7 @@ class App extends Component {
                         <Route path="/report_microbiologies/reports" component={InterfaceReportProduct} exact />
                         <Route path="/report_microbiologies/edit/:reportId" component={Stepper} />
                         <Route path="/report_microbiologies/clone/:reportId" component={Stepper} />
-                        <Route path="/report_microbiologies" component={Stepper} />
+                        <Route path="/report_microbiologies" component={StepperMB} />
                         {/* Tableta */}
                         
 

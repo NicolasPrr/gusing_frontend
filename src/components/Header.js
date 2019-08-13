@@ -47,6 +47,9 @@ class Header extends Component {
                      <Link className="navbar-item" to="/report_tablets/reports"   >
                        Tabletas
                      </Link>
+                     <Link className="navbar-item" to="/report_microbiologies/reports"   >
+                       Microbiologia
+                     </Link>
                 </div>
               </div>
 

@@ -367,7 +367,7 @@ class ReportForm extends Component {
             </div>
           </div>
           <div className="field">
-            <label className="label is-small">*En caso de NO tener fecha, DEJAR EN BLANCO, el sistema lo reconocera como 'N.A'</label>
+           
           </div>
           <button className="button is-small is-info" type="submit"> Siguiente </button>
 

@@ -8,6 +8,7 @@ import MaterialForm from './material/ProductForm'
 import DustForm from './dust/ProductForm'
 import SemisolidForm from './semisolid/ProductForm'
 import TabletForm from './tablet/ProductForm'
+import MicrobiologyForm from './microbiology/ProductForm'
 
 const urlWater = 'report_waters'
 const urlCapsule = 'report_capsules'
@@ -530,7 +531,7 @@ export function chooseNameForm(location) {
     if (location.includes(urlCapsule)) return 'Capsulas'
     if (location.includes(urlLiquid)) return 'Liquidos'
     if (location.includes(urlMaterial)) return 'MT / TM'
-    if (location.includes(urlDust)) return 'Polbos y granulados'
+    if (location.includes(urlDust)) return 'Polvos y granulados'
     if (location.includes(urlSemisolid)) return 'Semisolidos'
     if (location.includes(urlTablet)) return 'Tabletas'
     if (location.includes(urlMB)) return 'Microbiologia'
@@ -708,6 +709,11 @@ export function chooseForm(set, data, location) {
             setProductForm={set}
             dataProduct={data} />
     }
+    if (location.includes(urlMB)) {
+        return <MicrobiologyForm
+            setProductForm={set}
+            dataProduct={data} />
+    }
 }
 export function initReport(location) {
     let dataReport = {}
@@ -788,20 +794,20 @@ export function initOption(location) {
     if (location.includes(urlSemisolid)) {
         options = { samples: ["PT", "PT-EST"], shapes: ["Ungüento", "Gel"] }
     }
+    if (location.includes(urlTablet)) {
+        options = { samples: ["PT", "PT-EST"], shapes: [] }
+    }
+    options.methods = []
     if (location.includes(urlMB)) {
         options = {
             samples: ["PT", "INS", "IMP", "PT-EST", "PP", "AGUA",
-                "AGUA UF", "AGUA POT", "FM" ,"FS", "ABM Grado A", "ABM Grado B",
-                "ABM Grado C" ,"ABM Grado D" , "TM" ,"AIRE"," FS GRADO A", "FS GRADO B",
-                "FS GRADO C" ,"FS GRADO D", "Desinfectante"
+                "AGUA UF", "AGUA POT", "FM", "FS", "ABM Grado A", "ABM Grado B",
+                "ABM Grado C", "ABM Grado D", "TM", "AIRE", " FS GRADO A", "FS GRADO B",
+                "FS GRADO C", "FS GRADO D", "Desinfectante"
             ],
-            shapes: ["Aletorio","Conveniencia"],
-            methods: ["Recuento en Placa/Vertido", "Filtración por Membrana","Sedimentacion en Placa","Frotis con Siembra Directa","Inoculacion directa (Esterilidad)", "Coagulacion (Gel - Clot)"]
+            shapes: ["Aletorio", "Conveniencia"],
+            methods: ["Recuento en Placa/Vertido", "Filtración por Membrana", "Sedimentacion en Placa", "Frotis con Siembra Directa", "Inoculacion directa (Esterilidad)", "Coagulacion (Gel - Clot)"]
         }
-    }
-    options.methods = []
-    if (location.includes(urlTablet)) {
-        options = { samples: ["PT", "PT-EST"], shapes: [] }
     }
     return options
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import URLBack from '../../UrlBack'
-
+  
 class ReportForm extends Component {
   //Formulario para creación de reporte.
   constructor(props) {
@@ -36,6 +36,7 @@ class ReportForm extends Component {
   method = React.createRef();
   sample = React.createRef();
   sample_name = React.createRef();
+  sample_code = React.createRef();
   farmaceutic_shape = React.createRef();
   sampling_type = React.createRef();
 
@@ -59,6 +60,7 @@ class ReportForm extends Component {
 
       sample: this.sample.current.value,
       sample_name: this.sample_name.current.value,
+      sample_code: this.sample_code.current.value,
       report_number: this.report.current.value,
       client_name: this.client_name.current.value,
       direction: this.direction.current.value,
@@ -165,7 +167,7 @@ class ReportForm extends Component {
                     <input
                       className="input is-small"
                       type="text"
-                      placeholder="Nombre de la muestra"
+                      placeholder="Muestra"
                       ref={this.sample}
                       defaultValue={
                         this.props.data.sample
@@ -191,6 +193,23 @@ class ReportForm extends Component {
                       ref={this.sample_name}
                       defaultValue={
                         this.props.data.sample_name
+                      }
+
+                    />
+                  </div>
+                </div>
+                <div className="column">
+                  <div className="field">
+                    <label className="label is-small">Codigo de la muestra</label>
+                  </div>
+                  <div className="control">
+                    <input
+                      className="input is-small"
+                      type="text"
+                      placeholder="Codigo de la muestra"
+                      ref={this.sample_code}
+                      defaultValue={
+                        this.props.data.sample_code
                       }
 
                     />
@@ -311,7 +330,7 @@ class ReportForm extends Component {
                     <input
                       className="input is-small"
                       type="text"
-                      placeholder="Nombre de la muestra"
+                      placeholder="Forma farmaceutica"
                       ref={this.farmaceutic_shape}
                       defaultValue={this.props.data.farmaceutic_shape}
                       list="shapes"
@@ -337,6 +356,7 @@ class ReportForm extends Component {
                     defaultValue={this.props.data.ff}
                   />
                 </div>
+
                 <div className="column">
                   <div className="field">
                     <label className="label is-small">FV</label>
@@ -362,6 +382,25 @@ class ReportForm extends Component {
                       defaultValue={this.props.data.method}
                     />
                   </div>
+                </div>
+                <div className="column">
+                  <div className="field">
+                    <label className="label is-small">Tecnica de analisis</label>
+                  </div>
+                  <div className="control">
+                    <input
+                      className="input is-small"
+                      type="text"
+                      ref={this.method}
+                      defaultValue={this.props.data.method}
+                      list="tec"
+                    />
+                  </div>
+                  <datalist id="tec">
+                    {Object.keys(this.props.options.methods).map(key => (
+                      <option value={this.props.options.methods[key]} key={key} />
+                    ))}
+                  </datalist>
                 </div>
               </div>
               {/*second column main*/}
