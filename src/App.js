@@ -15,6 +15,7 @@ import Stepper from './components/products/Stepper';
 import StepperMB from './components/microbiology/Stepper'
 import InterfaceReportProduct from './components/products/InterfaceReport'
 import Printer from './components/products/printer/Printer'
+import Login from './components/Login'
 
 class App extends Component {
     render() {
@@ -23,6 +24,7 @@ class App extends Component {
                 <div>
                     <Header />
                     <Switch>
+                        <Route exact path="/login" component={Login} />
                         <Route exact path="/" component={Home} />
 
                         {/*  Insumos*/}
