@@ -64,13 +64,15 @@ const Encabezado3 = (props) => {
 }
 function chooseTitle() {
     const location = window.location.pathname
-    if (location === 'water' || location === 'material') return "TITULO: REPORTE DE ENSAYO DE MATERIALES"
+    if (location.includes('water') || location.includes('material')) return "TITULO: REPORTE DE ENSAYO DE MATERIALES"
+    if (location.includes('microbiologies')) return "TITULO: REPORTE DE ENSAYO MB"
     return "TITULO: REPORTE DE ENSAYO PT - PP"
 }
 function chooseCode() {
     const location = window.location.pathname
-    if (location === 'water' || location === 'material') return "Codigo FR-CC - 65"
-    return "Codigo FR-CC - 65"
+    if (location.includes('microbiologies')) return "Codigo FR-CC-23"
+    if (location.includes('water') || location.includes('material')) return "Codigo FR-CC-65"
+    return "Codigo FR-CC-51"
 }
 export const HeaderReport = () => {
     return (
