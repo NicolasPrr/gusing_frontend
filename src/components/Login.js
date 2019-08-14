@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import URLBack from '../UrlBack'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 export default class Login extends Component {
     
     pass = React.createRef()
@@ -15,8 +16,21 @@ export default class Login extends Component {
             password: pass,
         }}).then(res =>{
             console.log(res)
+            Swal.fire({
+                type: 'success',
+                title: 'Datos correctos',
+                text: 'Ha ingresado correctamente al sistema',
+                // footer: '<a href>Why do I have this issue?</a>'
+              })
+              sessionStorage.setItem('test', "holi")
         }).catch( error => {
-            console.log(error)
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Contraseña o nombre de usuario incorrectos!',
+                footer: 'Consultar el admministrador del sistema si algo no anda bien'
+              })
+              console.log(error)
         })
     }
     render() {  
@@ -25,8 +39,8 @@ export default class Login extends Component {
                 <div className="hero is-fullheight is-light">
                     <div className="hero-body">
                         <div className="container">
-                            <div className="columns">
-                                <div className="column">
+                            <div className="columns is-multiline" >
+                                <div className="column is-half is-offset-one-quarter">
                                     <article className="card is-rounded">
                                         <header className="card-header ">
                                             <div className="card-header-title ">
@@ -55,7 +69,7 @@ export default class Login extends Component {
                                                 </div>
                                             </div>
                                             <footer className="card-footer">
-                                                <button className="button is-info is-fullwidth is-medium" type="submit">
+                                                <button className="button is-light is-fullwidth is-medium" type="submit">
                                                     <span className="icon ">
                                                         <i className="fas fa-door-open"></i>
                                                     </span>
