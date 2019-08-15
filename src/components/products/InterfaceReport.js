@@ -68,7 +68,7 @@ class InterfaceReport extends Component {
         let url = `${URLBack}${chooseMainURL(window.location.pathname)}${id}`
         let reports;
         axios.delete(url).then(res => {
-            if (res.status === 204) {
+            if (res.status === 200) {
                 Swal({
                     position: 'top-end',
                     type: 'success',
@@ -128,7 +128,7 @@ class InterfaceReport extends Component {
             }
             this.isLoad(false)
         }).catch(function (error) {
-            this.isLoad(false)
+            // this.isLoad(false)
             console.log(error)
         })
     }

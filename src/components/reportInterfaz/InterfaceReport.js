@@ -54,8 +54,8 @@ class InterfaceReport extends Component {
     deleteRequest(id, key) {
         let url = URLBack + "/report_supplies/" + id;
         let reports;
-        axios.delete(url).then(res => {
-            if (res.status === 204) {
+        axios.delete(url).then(() => {
+            
                 Swal({
                     position: 'top-end',
                     type: 'success',
@@ -66,7 +66,6 @@ class InterfaceReport extends Component {
                 reports = [...this.state.reports];
                 reports.splice(key, 1)
                 this.setState({ reports: reports })
-            }
 
         }).catch(function (error) {
             console.log(error)

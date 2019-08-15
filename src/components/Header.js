@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import { Link } from 'react-router-dom';
-
+import jwt from 'jsonwebtoken'
+function getName(){
+  const  token = localStorage.getItem('jwt')
+  if (token === null) return null
+  const name = jwt.decode(token).name
+  return name
+}
 class Header extends Component {
+   signOut =  () =>{
+     localStorage.clear()
+     delete axios.defaults.headers.common['Authorization']  
+     window.location.reload()
+   }
 
+  
   render() {
-    if (window.location.pathname.includes("print")) return null;
+    const pathname = window.location.pathname
+    if (pathname.includes("print") || pathname.includes("login")) return null;
     return (
       <div>
         <nav className="navbar is-light">
@@ -58,6 +72,17 @@ class Header extends Component {
               <Link className="navbar-item" to='/database' >
                 Archivo BackUp</Link>
             </div>
+          </div>
+          <div className="navbar-end">
+
+            <div className ="navbar-item">
+               <span className="tag is-dark is-medium"> Nombre: {getName()} </span>
+            </div>
+            
+            <div className ="navbar-item">
+              <button className="button is-danger" onClick={this.signOut.bind(this)}> Salir </button>
+            </div>
+
           </div>
         </nav>
       </div>

@@ -2,38 +2,51 @@ import React, { Component } from 'react'
 import URLBack from '../UrlBack'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import jwt from 'jsonwebtoken'
+
 export default class Login extends Component {
-    
+
     pass = React.createRef()
     username = React.createRef()
 
-    handle = (e) =>{
+    handle = (e) => {
         e.preventDefault()
         let username = this.username.current.value
         let pass = this.pass.current.value
-        axios.post(`${URLBack}/user_token`,{auth:{
-            email: username,
-            password: pass,
-        }}).then(res =>{
-            console.log(res)
+        axios.post(`${URLBack}/user_token`, {
+            auth: {
+                email: username,
+                password: pass,
+            }
+        }).then((res) => {
+            // console.log(res)
             Swal.fire({
                 type: 'success',
                 title: 'Datos correctos',
                 text: 'Ha ingresado correctamente al sistema',
                 // footer: '<a href>Why do I have this issue?</a>'
-              })
-              sessionStorage.setItem('test', "holi")
-        }).catch( error => {
+            })
+            axios.defaults.headers.common['Authorization'] = `Bareer ${res.data.jwt}`
+            localStorage.setItem('jwt', res.data.jwt)
+            const time = new Date(jwt.decode(res.data.jwt).exp*1000)
+            // const nows = new Date(Date.now())
+            sessionStorage.setItem('exp', time)
+            this.props.history.push('/');
+        }).catch(error => {
             Swal.fire({
                 type: 'error',
                 title: 'Oops...',
                 text: 'Contraseña o nombre de usuario incorrectos!',
                 footer: 'Consultar el admministrador del sistema si algo no anda bien'
-              })
-              console.log(error)
+            })
+            console.log(error)
         })
     }
-    render() {  
+    componentDidMount() {
+        const jwt = localStorage.getItem('jwt')
+        if (jwt !== null) this.props.history.push('/');
+    }
+    render() {
         return (
             <div>
                 <div className="hero is-fullheight is-light">
@@ -47,13 +60,13 @@ export default class Login extends Component {
                                                 <p className="subtitle has-text-dark">Ingresar al sistema de reportes</p>
                                             </div>
                                         </header>
-                                        <form onSubmit={this.handle}> 
+                                        <form onSubmit={this.handle}>
                                             <div className="card-content">
 
                                                 <div className="field">
                                                     <label className="label">Nombre de usuario</label>
                                                     <div className="control has-icons-left has-icons-right">
-                                                        <input  ref ={this.username}className="input is-dark" type="text" />
+                                                        <input ref={this.username} className="input is-dark" type="text" />
                                                         <span className="icon is-small is-left">
                                                             <i className="fas fa-user"></i>
                                                         </span>
