@@ -20,6 +20,7 @@ import StepperMB from './components/microbiology/Stepper'
 import InterfaceReportProduct from './components/products/InterfaceReport'
 import Printer from './components/products/printer/Printer'
 import Login from './components/Login'
+import User from './components/users/User'
 import jwt from 'jsonwebtoken'
 
 
@@ -167,6 +168,7 @@ class App extends Component {
 
 
 
+                        <PrivateRoute path="/users" component={User} />
                         <PrivateRoute path="/clients" component={Clients} />
                         <PrivateRoute path="/database" component={Database} />
                         <PrivateRoute component={Error} />
