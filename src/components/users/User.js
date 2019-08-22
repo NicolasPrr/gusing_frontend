@@ -7,7 +7,7 @@ import ModalEdit from './ModalEdit'
 function nameRol(number) {
     if (number === 0) return "Admin"
     if (number === 1) return "Microbiologia"
-    if (number === 2) return "QF"
+    if (number === 2) return "FQ"
     if (number === 3) return "Garantia"
     return "N.A."
 }
@@ -55,7 +55,7 @@ const CreateUser = ({ handle, nameRef, loginRef, rolRef, pass, passC }) => {
                             <select ref={rolRef}>
                                 <option value={0}>Admin</option>
                                 <option value={1}>Microbiologia</option>
-                                <option value={2}>QF</option>
+                                <option value={2}>FQ</option>
                                 <option value={3}>Garantia</option>
                             </select>
                         </div>
