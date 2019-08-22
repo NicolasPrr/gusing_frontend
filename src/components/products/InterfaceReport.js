@@ -154,7 +154,7 @@ class InterfaceReport extends Component {
 
             <div className="card">
                 <header className="card-header">
-                    <p className="card-header-title has-background-dark has-text-white">
+                    <p className="card-header-title has-background-info has-text-white">
                         {chooseNameForm(window.location.pathname)}
                     </p>
                 </header>
