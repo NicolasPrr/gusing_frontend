@@ -48,24 +48,24 @@ class InterfaceReport extends Component {
                 })
             }
         }
-        
+
     }
 
     deleteRequest(id, key) {
         let url = URLBack + "/report_supplies/" + id;
         let reports;
         axios.delete(url).then(() => {
-            
-                Swal({
-                    position: 'top-end',
-                    type: 'success',
-                    title: 'Elemento eliminado',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                reports = [...this.state.reports];
-                reports.splice(key, 1)
-                this.setState({ reports: reports })
+
+            Swal({
+                position: 'top-end',
+                type: 'success',
+                title: 'Elemento eliminado',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            reports = [...this.state.reports];
+            reports.splice(key, 1)
+            this.setState({ reports: reports })
 
         }).catch(function (error) {
             console.log(error)
@@ -108,23 +108,32 @@ class InterfaceReport extends Component {
     render() {
         let renderTable = [];
         if (this.state.reports.length > 0) {
-            renderTable.push(<Table data={this.state.reports} 
-                deleteRequest={this.deleteRequest} 
-                search={this.search} 
-                key = {0} />  )
-            renderTable.push(<Pagination 
-                pages={this.state.amountPages} 
-                currentPage={this.state.currentPage} 
-                changePage={this.goToPage}  
-                key = {1}/>)
+            renderTable.push(<Table data={this.state.reports}
+                deleteRequest={this.deleteRequest}
+                search={this.search}
+                key={0} />)
+            renderTable.push(<Pagination
+                pages={this.state.amountPages}
+                currentPage={this.state.currentPage}
+                changePage={this.goToPage}
+                key={1} />)
         }
         else
             renderTable = <h1 className="title"> No hay reportes que mostrar</h1>
         return (
 
-            <div className="container notification">
-                <SearchBox search={this.search} />
-                {renderTable}
+            <div className="card">
+                <header className=" card-header4">
+                    <p className="card-header-title has-background-info has-text-white">
+                        Insumos
+                    </p>
+                </header>
+                <div className="card-content">
+
+                    <SearchBox search={this.search} />
+                    {renderTable}
+
+                </div>
             </div>
 
         );

@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { isEmptyObject } from '../../../helpers'
 const aeroibics_data = ["Max 100 UFC/g", "Max 100 UFC/mL", "Max 100 UFC/mL",
     "Max 500 UFC/mL", "< 1 UFC/4 horas", "Max 5 UFC/4 horas", "Max 50 UFC/4 horas",
-    "Max 100 UFC/4 horas", "< 15 UFC/25cm2", "< 1 UFC/25cm2", "< 200 UFC/m3",
-    "NA", "< 50 UFC/25cm2", "< 20 UFC/25cm2", "< 5 UFC/25cm2", "Max 100 UFC/100g",
+    "Max 100 UFC/4 horas", "< 15 UFC/25cm²", "< 1 UFC/25cm²", "< 200 UFC/m³",
+    "NA", "< 50 UFC/25cm²", "< 20 UFC/25cm²", "< 5 UFC/25cm²", "Max 100 UFC/100g",
     "Máx 100UFC/100mL", "Máx  20 UFC/4 horas", "<1 UFC/mL", "Max 10 UFC/mL"
 ]
 const mold = ["Max 100 UFC/g", "Max 10 UFC/mL", "Max 10 UFC/g", "< 1 UFC/100 mL", "< 1 UFC/4 horas ",
-    "< 15 UFC/25cm2", "< 1 UFC/25cm2", "< 200 UFC/m3", "NA", "Max 10 UFC/100mL", "Max 100 UFC/4 horas",
-    "< 5/UFC4 horas", "< 1 UFC/4 horas", "< 15 UFC/25 cm2", "< 1 UFC/25 cm2", "< 200 UFC/m3", "< 50 UFC/25 cm2",
-    "< 20 UFC/25 cm2", "< 5 UFC/25 cm2", "Max 10 UFC/g", "Max 500 UFC/100g", "Max 100 UFC/100mL",
+    "< 15 UFC/25cm²", "< 1 UFC/25cm²", "< 200 UFC/m³", "NA", "Max 10 UFC/100mL", "Max 100 UFC/4 horas",
+    "< 5/UFC4 horas", "< 1 UFC/4 horas", "< 15 UFC/25 cm²", "< 1 UFC/25 cm²", "< 200 UFC/m³", "< 50 UFC/25 cm²",
+    "< 20 UFC/25 cm²", "< 5 UFC/25 cm²", "Max 10 UFC/g", "Max 500 UFC/100g", "Max 100 UFC/100mL",
     "Máx 20 UFC/4 horas", "Max 5/UFC4 horas", "<1 UFC/mL",
 ]
 const detect = ["Detectado", "No detectado", "NA"]

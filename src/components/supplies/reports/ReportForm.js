@@ -105,7 +105,7 @@ class ReportForm extends Component {
     }
    
     return (
-      <div className="notification" >
+      <div>
         <form onSubmit={this.handleForm}  >
           <p>N°de reporte ensayo FQ </p>
 

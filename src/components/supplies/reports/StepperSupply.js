@@ -4,7 +4,7 @@ import axios from 'axios'
 import URLBack from '../../../UrlBack'
 import Swal from 'sweetalert2'
 import ResultForm from './ResultForm';
-import {isEmptyObject } from '../../../helpers'
+import { isEmptyObject } from '../../../helpers'
 
 const LastStep = (props) => {
     let value = props.dataVef;
@@ -133,7 +133,7 @@ class StepperSupply extends Component {
                 timer: 2500
             })
         });
-        
+
     }
     editReport() {
         let url = `${URLBack}/report_supplies/${this.state.id}`
@@ -144,7 +144,7 @@ class StepperSupply extends Component {
         dataReport.observation = this.state.dataVef
         const features = this.state.dataEspec;
         this.setState({ dataReport: dataReport });
-        
+
         axios.put(url, {
             report_supply: dataReport,
             features: features,
@@ -201,14 +201,14 @@ class StepperSupply extends Component {
         let dataEspec = [];
         //const {supply} = this.props.location.state;
         //&& isEmptyObject(this.state.dataReport))
-        const name = window.location.pathname; 
+        const name = window.location.pathname;
         if (name.includes("edit") || name.includes("clone")) {
             const { reportId } = this.props.match.params;
             let url = URLBack + "/report_supplies/" + reportId;
             axios.get(url).then(res => {
                 console.log(res)
                 let inputs = []
-                for(let i = 0; i < res.data.result_supplies.length; i++){
+                for (let i = 0; i < res.data.result_supplies.length; i++) {
                     inputs.push(res.data.result_supplies[i].result)
                 }
                 let result = {
@@ -217,11 +217,11 @@ class StepperSupply extends Component {
                     is_copy: res.data.is_copy
                 };
                 // res.inputs = res.data.result_supplies
-                this.setState({dataEspec: res.data.features})
-                this.setState({dataReport: res.data})
-                this.setState({dataProduct: result})
-                this.setState({id: res.data.id})
-                this.setState({dataVef: res.data.observation})
+                this.setState({ dataEspec: res.data.features })
+                this.setState({ dataReport: res.data })
+                this.setState({ dataProduct: result })
+                this.setState({ id: res.data.id })
+                this.setState({ dataVef: res.data.observation })
                 // this.setState({dataProduct: {inputs: {res.data.results_supllies}}})
             })
 
@@ -246,7 +246,7 @@ class StepperSupply extends Component {
         return (
             <div>
                 <div className="columns">
-                    <div className="column">
+                    <div className="column box">
                         <ul className="steps is-small">
                             <div className={"step-item" + this.stateStep(1)}  >
                                 <div className="step-marker">1</div>
@@ -281,8 +281,19 @@ class StepperSupply extends Component {
                         {this.renderButtons(1)}
                     </div>
                 </div>
-                {this.renderForm(this.state.step)}
 
+                <div className="container">
+                    <div className="card">
+                        <header className="card-header">
+                            <p className="card-header-title has-background-info has-text-white">
+                                Insumos
+                            </p>
+                        </header>
+                        <div className="card-content">
+                            {this.renderForm(this.state.step)}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

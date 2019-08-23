@@ -16,10 +16,22 @@ function toUsers() {
   // console.log(jwt.decode(token))
   if (rol === 0)
     return (
-    <Link className="navbar-item" to={{ pathname: "/users", state: 0 }}   >
-      Usuarios
+      <Link className="navbar-item" to={{ pathname: "/users", state: 0 }}   >
+        Usuarios
   </Link>
-  )
+    )
+}
+function toBackUp() {
+  //Link para usuario
+  const token = localStorage.getItem('jwt')
+  if (token === null) return null
+  const rol = jwt.decode(token).rol
+  // console.log(jwt.decode(token))
+  if (rol === 0)
+    return (
+      <Link className="navbar-item" to='/database' >
+        Archivo BackUp</Link>
+    )
 }
 class Header extends Component {
   signOut = () => {
@@ -79,11 +91,9 @@ class Header extends Component {
                      </Link>
                 </div>
               </div>
-
+              {toBackUp()}
               <Link className="navbar-item" to='/clients' >
                 Gestion de clientes</Link>
-              <Link className="navbar-item" to='/database' >
-                Archivo BackUp</Link>
             </div>
           </div>
           <div className="navbar-end">

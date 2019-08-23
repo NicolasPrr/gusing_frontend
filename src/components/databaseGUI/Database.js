@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import BackURL from '../../UrlBack'
+import jwt from 'jsonwebtoken'
+
 class Database extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            file:  {
+            file: {
                 name: null
             }
         }
@@ -14,10 +16,15 @@ class Database extends Component {
     getFile = (e) => {
         let file = e.target.files[0]
         console.log(file)
-        this.setState({file: file})
+        this.setState({ file: file })
     }
     download = () => {
-        
+        const token = localStorage.getItem('jwt')
+        if (token === null) return null
+        const rol = jwt.decode(token).rol
+        // console.log(jwt.decode(token))
+        if (rol === 0) window.open(`${BackURL}/databases/now`)
+
         // axios({
         //     url: `${BackURL}/databases/now`,
         //     method: 'GET',
@@ -31,9 +38,9 @@ class Database extends Component {
         //      document.body.appendChild(link);
         //      link.click();
         //   });
-         window.open(`${BackURL}/databases/now`)
+
     }
-    upload= () => {
+    upload = () => {
         axios.post(BackURL)
     }
 
