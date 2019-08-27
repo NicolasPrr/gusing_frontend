@@ -90,7 +90,7 @@ export const HeaderReport = () => {
                     code={chooseCode()}
                 />
                 <Encabezado3 version="Version 04"
-                    date="FECHA DEVIGENCIA DESDE EL 28 DE FEBRERO DE 2017"
+                    date="FECHA DE VIGENCIA DESDE EL 28 DE FEBRERO DE 2017"
                     page="Pagina 1 de 1"
                 />
             </div>
@@ -122,9 +122,10 @@ export const InformationReport = (props) => {
 
     let sample_code = null
     let technique  = null
+    let render_name_provider =  <p> <strong> Nombre de proveedor: </strong>  {name_provider}          </p>
     if(props.data.sample_code !== undefined) sample_code = <p> <strong>Codigo de la muestra:</strong> {props.data.sample_code}   </p>
     if(props.data.technique !== undefined) technique = <p> <strong>Tecnica de analisis:</strong> {props.data.technique}          </p>
-
+    if(window.location.pathname.includes('liquids') && name_provider === "") render_name_provider = null
     function notification(str) {
         alert(`Se ha copiado al portapapeles el numero: ${str}`)
     }
@@ -145,7 +146,8 @@ export const InformationReport = (props) => {
                     <p> <strong>Cliente: </strong> {client_name}</p>
                     <p> <strong>Dirección:</strong> {direction} </p>
                     <p> <strong> Lote de proveedor: </strong>  {lot}          </p>
-                    <p> <strong> Nombre de proveedor: </strong>  {name_provider}          </p>
+                    {/* <p> <strong> Nombre de proveedor: </strong>  {name_provider}          </p> */}
+                    {render_name_provider}
 
 
                 </div>
@@ -671,7 +673,7 @@ export function chooseObject(location, obj) {
     if (location.includes(urlLiquid)) {
         obj2 = {
             appaearance: obj.appaearance,
-            param_appearance: obj.param_appearance,
+            param_appaearance: obj.param_appaearance,
             color: obj.color,
             param_color: obj.param_color,
             ph: obj.ph,
@@ -849,6 +851,7 @@ export function initReport(location) {
     if (location.includes(urlLiquid)) {
         dataReport = {
             sampling_type: "Aleatorio",
+            method: "USP VIGENTE",
             observation: ""
         }
     }
@@ -896,7 +899,8 @@ export function initOption(location) {
         options = { samples: ["PT", "PT-EST"], shapes: ["Capsula N° 0", "Capsula N° 1"] }
     }
     if (location.includes(urlLiquid)) {
-        options = { samples: ["PT", "PP", "PT-EST"], shapes: ["Gota", "Ampolla", "Vial", "Capsula", "Tableta", "Granulado", "Polvo", "Ungüento", "Gel"] }
+        options = { samples: ["PT", "PP", "PT-EST"], 
+        shapes: ["Gota", "Ampolla", "Vial", "Capsula", "Tableta", "Granulado", "Polvo", "Ungüento", "Gel","Jarabe"] }
     }
     if (location.includes(urlMaterial)) {
         options = { samples: ["MP", "TM"], shapes: [] }
