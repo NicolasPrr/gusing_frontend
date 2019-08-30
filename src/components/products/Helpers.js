@@ -70,9 +70,32 @@ function chooseTitle() {
 }
 function chooseCode() {
     const location = window.location.pathname
-    if (location.includes('microbiologies')) return "Codigo FR-CC-23"
+    if (location.includes('microbiologies') || location.includes('liquids')
+        || location.includes('capsules') || location.includes('tablets') || location.includes('dusts')
+        || location.includes('semisolids') || location.includes('materials')
+    ) return "Codigo FR-CC-23"
     if (location.includes('water') || location.includes('material')) return "Codigo FR-CC-65"
     return "Codigo FR-CC-51"
+}
+function chooseMBorFQ() {
+    const location = window.location.pathname
+    if (location.includes('microbiologies')) return "MB"
+    return "FQ"
+}
+function chooseVerson() {
+    const location = window.location.pathname
+    if (location.includes('microbiologies')) return "06"
+    return "04"
+}
+function chooseDate() {
+    const location = window.location.pathname
+    if (location.includes('microbiologies')) return "FECHA DE VIGENCIA DESDE EL 02 DE SEPTIEMBRE DE 2019"
+    return "FECHA DE VIGENCIA DESDE EL 28 DE FEBRERO DE 2017"
+}
+function chooseMadeBy() {
+    const location = window.location.pathname
+    if (location.includes('microbiologies')) return "Jefe de microbiologia"
+    return "Coordinador control de calidad"
 }
 export const HeaderReport = () => {
     return (
@@ -89,8 +112,8 @@ export const HeaderReport = () => {
                 <Encabezado2 title={chooseTitle()}
                     code={chooseCode()}
                 />
-                <Encabezado3 version="Version 04"
-                    date="FECHA DE VIGENCIA DESDE EL 28 DE FEBRERO DE 2017"
+                <Encabezado3 version={`Version ${chooseVerson()}`}
+                    date={chooseDate()}
                     page="Pagina 1 de 1"
                 />
             </div>
@@ -121,11 +144,11 @@ export const InformationReport = (props) => {
     const method = props.data.method;
 
     let sample_code = null
-    let technique  = null
-    let render_name_provider =  <p> <strong> Nombre de proveedor: </strong>  {name_provider}          </p>
-    if(props.data.sample_code !== undefined) sample_code = <p> <strong>Codigo de la muestra:</strong> {props.data.sample_code}   </p>
-    if(props.data.technique !== undefined) technique = <p> <strong>Tecnica de analisis:</strong> {props.data.technique}          </p>
-    if(window.location.pathname.includes('liquids') && name_provider === "") render_name_provider = null
+    let technique = null
+    let render_name_provider = <p> <strong> Nombre de proveedor: </strong>  {name_provider}          </p>
+    if (props.data.sample_code !== undefined) sample_code = <p> <strong>Codigo de la muestra:</strong> {props.data.sample_code}   </p>
+    if (props.data.technique !== undefined) technique = <p> <strong>Tecnica de analisis:</strong> {props.data.technique}          </p>
+    if (window.location.pathname.includes('liquids') && name_provider === "") render_name_provider = null
     function notification(str) {
         alert(`Se ha copiado al portapapeles el numero: ${str}`)
     }
@@ -139,7 +162,7 @@ export const InformationReport = (props) => {
 
                     <CopyToClipboard text={report_number}>
                         <span>
-                            <p className="text" onClick={notification.bind(this, report_number)}> <strong>N° de reporte FQ: </strong> {report_number} </p>
+                            <p className="text" onClick={notification.bind(this, report_number)}> <strong>N° de reporte {chooseMBorFQ()}: </strong> {report_number} </p>
                             <p className="text"> <strong>N° de analisis: </strong> {analisys} </p>
                         </span>
                     </CopyToClipboard>
@@ -182,6 +205,19 @@ export const Observation = (props) => {
         </div>
     )
 }
+function chooseFoot() {
+    const location = window.location.pathname
+    let text53 = "MP= Materia prima, TM= Tintura madre, INS= Insumo, PP= Producto en proceso, "
+    text53 = text53 + "AMB= Ambiente, FM= Frotis de manos, FS= Frotis de superficie, PT-EST= Producto de estabilidad, "
+    text53 = text53 + "MB= Microbiologia, NA = No aplica "
+    let usualText = "MP= Materia prima, TM= Tintura madre, FQ= Fisicoquimica,   NA= No aplica, MA= Material de análisis"
+    if (
+       location.includes('microbiologies') || location.includes('liquids') 
+    || location.includes('capsules') || location.includes('tablets') 
+    || location.includes('dusts')
+    || location.includes('semisolids') || location.includes('materials')) return text53
+    return usualText
+}
 export const Note = () => {
 
     return (
@@ -191,8 +227,8 @@ export const Note = () => {
 
                     Nota: Solo se puede hacer reproducción parcial
                     o total de este certificado con previa autorización de Laboratorios Gusing.
-                    El resultado es valido únicamente para la muestra analizada. MA= Material de analisis,
-                    FQ = Fisicoquimico, NA = No aplica.
+                    El resultado es valido únicamente para la muestra analizada.
+                    {chooseFoot()}
 
                 </p>
 
@@ -214,6 +250,7 @@ export const Footer = () => {
         </div>
     )
 }
+
 export const Signature = () => {
     return (
         <div id="signature">
@@ -222,7 +259,7 @@ export const Signature = () => {
                     <p>Realizado por:</p>
                     <br />
                     <hr />
-                    Coordinador control de calidad
+                    {chooseMadeBy()}
                 </div>
 
                 <div className="column">
@@ -230,7 +267,7 @@ export const Signature = () => {
                     <br />
                     <hr />
                     Jefe control de calidad
-            </div>
+                </div>
 
             </div>
         </div>
@@ -534,6 +571,16 @@ export const SemisolidTable = (props) => {
         </div>
     );
 };
+const RenderRow = ({ name, result, especification }) => {
+    if (result === 'NA') return null
+    return (
+        <tr>
+            <td>{name}</td>
+            <td>{result}</td>
+            <td>{especification} </td>
+        </tr>
+    )
+}
 export const MicrobiologyTable = (props) => {
     if (props === undefined || props === null) return null
     return (
@@ -542,37 +589,49 @@ export const MicrobiologyTable = (props) => {
                 <table className="tables is-fullwidth is-bordered is-size-7">
                     <thead>
                         <tr>
-                            <th>Nombre del resultado</th>
+                            <th>Nombre del análisis</th>
                             <th>Resultado</th>
-                            <th>Parametros de referencia</th>
+                            <th>Especificación</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Recuento de Aerobios(RTMA)</td>
-                            <td>{props.data.aeorobic}</td>
-                            <td> {props.data.param_aeorobic} </td>
-                        </tr>
-                        <tr>
-                            <td>Recuento de Mohos y Levaduras(RTCHL)</td>
-                            <td>{props.data.mold}</td>
-                            <td>{props.data.param_mold}</td>
-                        </tr>
-                        <tr>
-                            <td>Recuento de Coliformes Totales (CT)</td>
-                            <td>{props.data.coliform}</td>
-                            <td>{props.data.param_coliform}</td>
-                        </tr>
-                        <tr>
-                            <td>Detección Escherichia coli</td>
-                            <td>{props.data.coli}</td>
-                            <td>{props.data.param_coli}</td>
-                        </tr>
+                        <RenderRow name="Recuento de Aerobios(RTMA)"
+                            result={props.data.aeorobic}
+                            especification={props.data.param_aeorobic}
+                        />
+                        <RenderRow name="Recuento de Mohos y Levaduras(RTCHL)"
+                            result={props.data.mold}
+                            especification={props.data.param_mold}
+                        />
+                        <RenderRow name="Recuento de Coliformes Totales (CT)"
+                            result={props.data.coliform}
+                            especification={props.data.param_coliform}
+                        />
+                        <RenderRow name="Detección Escherichia coli"
+                            result={props.data.coli}
+                            especification={props.data.param_coli}
+                        />
+                        <RenderRow name="Detección Pseudomona aeruginosa"
+                            result={props.data.mona}
+                            especification={props.data.param_mona}
+                        />
+                        <RenderRow name="Detección Sthaphylococcus aureus"
+                            result={props.data.aureus}
+                            especification={props.data.param_aureus}
+                        />
+                        <RenderRow name="Prueba de Esterilidad"
+                            result={props.data.sterility}
+                            especification={props.data.param_sterility}
+                        />
+                        <RenderRow name="Prueba de Prueba de Endotoxinas"
+                            result={props.data.endotoxin}
+                            especification={props.data.param_endotoxin}
+                        />
                     </tbody>
                 </table>
 
             </div>
-            <div className="column">
+            {/* <div className="column">
                 <table className="tables is-fullwidth is-bordered is-size-7">
                     <thead>
                         <tr>
@@ -582,30 +641,10 @@ export const MicrobiologyTable = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Detección Pseudomona aeruginosa</td>
-                            <td>{props.data.mona}</td>
-                            <td> {props.data.param_mona} </td>
-                        </tr>
-                        <tr>
-                            <td>Detección Sthaphylococcus aureus</td>
-                            <td>{props.data.aureus}</td>
-                            <td>{props.data.param_aureus}</td>
-                        </tr>
-                        <tr>
-                            <td>Prueba de Esterilidad</td>
-                            <td>{props.data.sterility}</td>
-                            <td>{props.data.param_sterility}</td>
-                        </tr>
-                        <tr>
-                            <td>Prueba de Prueba de Endotoxinas</td>
-                            <td>{props.data.endotoxin}</td>
-                            <td>{props.data.param_endotoxin}</td>
-                        </tr>
                     </tbody>
                 </table>
 
-            </div>
+            </div> */}
         </div>
     );
 };
@@ -899,8 +938,10 @@ export function initOption(location) {
         options = { samples: ["PT", "PT-EST"], shapes: ["Capsula N° 0", "Capsula N° 1"] }
     }
     if (location.includes(urlLiquid)) {
-        options = { samples: ["PT", "PP", "PT-EST"], 
-        shapes: ["Gota", "Ampolla", "Vial", "Capsula", "Tableta", "Granulado", "Polvo", "Ungüento", "Gel","Jarabe"] }
+        options = {
+            samples: ["PT", "PP", "PT-EST"],
+            shapes: ["Gota", "Ampolla", "Vial", "Capsula", "Tableta", "Granulado", "Polvo", "Ungüento", "Gel", "Jarabe"]
+        }
     }
     if (location.includes(urlMaterial)) {
         options = { samples: ["MP", "TM"], shapes: [] }
@@ -922,7 +963,7 @@ export function initOption(location) {
                 "ABM Grado C", "ABM Grado D", "TM", "AIRE", " FS GRADO A", "FS GRADO B",
                 "FS GRADO C", "FS GRADO D", "Desinfectante"
             ],
-            shapes: ["Aletorio", "Conveniencia"],
+            // shapes: ["Aletorio", "Conveniencia"],
             methods: ["Recuento en Placa/Vertido", "Filtración por Membrana", "Sedimentacion en Placa", "Frotis con Siembra Directa", "Inoculacion directa (Esterilidad)", "Coagulacion (Gel - Clot)"]
         }
     }

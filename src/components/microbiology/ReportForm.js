@@ -99,7 +99,7 @@ class ReportForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleForm}  >
-          <p>N°de reporte ensayo FQ </p>
+          <p>N°de reporte ensayo MB </p>
 
           <input
             className="input is-small is-link"
@@ -317,11 +317,15 @@ class ReportForm extends Component {
                     <input
                       className="input is-small"
                       type="text"
-                      placeholder="Nombre de la muestra"
+                      placeholder="Tipo de muestreo"
                       ref={this.sampling_type}
-                      defaultValue="Aleatorio"
+                      list="type"
                     />
                   </div>
+                  <datalist id="type">
+                        <option value="Aleatorio" key={0} />
+                        <option value="Convenencia" key={1} />
+                    </datalist>
                 </div>
                 <div className="column">
                   <div className="field">
@@ -334,13 +338,7 @@ class ReportForm extends Component {
                       placeholder="Forma farmaceutica"
                       ref={this.farmaceutic_shape}
                       defaultValue={this.props.data.farmaceutic_shape}
-                      list="shapes"
                     />
-                    <datalist id="shapes">
-                      {Object.keys(this.props.options.shapes).map(key => (
-                        <option value={this.props.options.shapes[key]} key={key} />
-                      ))}
-                    </datalist>
                   </div>
                 </div>
               </div>
