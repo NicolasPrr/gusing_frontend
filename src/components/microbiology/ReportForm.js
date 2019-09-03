@@ -319,6 +319,7 @@ class ReportForm extends Component {
                       type="text"
                       placeholder="Tipo de muestreo"
                       ref={this.sampling_type}
+                      defaultValue={this.props.data.sampling_type}
                       list="type"
                     />
                   </div>

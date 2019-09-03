@@ -925,8 +925,7 @@ export function initReport(location) {
 
     if (location.includes(urlMB)) {
         dataReport = {
-            client_name: "Laboratorios Gusing S.A.S",
-            direction: "Cra 10 este N 30-03 San Mateo - Soacha",
+            method: "USP VIGENTE",
             observation: ""
         }
     }

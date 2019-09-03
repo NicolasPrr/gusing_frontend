@@ -211,12 +211,12 @@ class ProductForm extends Component {
                 </div>
                 <div className="select is-rounded is-small">
                     <select ref={this.fulfillment} >
-                        <option value={false}>
-                            No cumple
-                        </option>
                         <option value={true}>
                             Cumple
                          </option>
+                        <option value={false}>
+                            No cumple
+                        </option>
                     </select>
                 </div>
                 {/*fulliment*/}
