@@ -44,6 +44,11 @@ class Printer extends Component {
             if (dat.is_copy) {
                 bcktxt = "COPIA CONTROLADA"
             }
+            if(window.location.pathname.includes("microbiologies")){
+                if(window.confirm("Copia controlada?")){
+                    bcktxt = "COPIA CONTROLADA"
+                 }
+            }
         }
         else {
             complement = null;

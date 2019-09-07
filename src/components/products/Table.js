@@ -4,6 +4,11 @@ import {  Link } from 'react-router-dom'
 import {chooseMainURL} from './Helpers'
 import Loader from '../loaders/Loadersn'
 
+function is_oficial(param){
+    if(param)
+        return  "Oficial"
+    return "No oficial"
+}
 class Table extends Component {
     constructor(props) {
         super(props)
@@ -56,6 +61,7 @@ class Table extends Component {
                             <th>Muestra</th>
                             <th>Nombre  muestra</th>
                             <th>Fecha de informe</th>
+                            <th>Oficial</th>
                             <th>Imprimir</th>
                             <th>Editar</th>
                             <th>Duplicar</th>
@@ -72,6 +78,7 @@ class Table extends Component {
                                 <td className="has-text-centered">{info[key].sample}</td>
                                 <td className="has-text-centered">{info[key].sample_name}</td>
                                 <td className="has-text-centered">{info[key].date_report}</td>
+                                <td className="has-text-centered">{is_oficial(info[key].is_oficial)}</td>
                                 <td className="has-text-centered">
                                     <button className ="button is-small">
                                         <Link to={`${chooseMainURL(window.location.pathname)}print/${info[key].id}`} target="_blank"  >

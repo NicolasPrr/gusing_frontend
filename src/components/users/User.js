@@ -9,6 +9,7 @@ function nameRol(number) {
     if (number === 1) return "Microbiologia"
     if (number === 2) return "FQ"
     if (number === 3) return "Garantia"
+    if (number === 4) return "No oficial"
     return "N.A."
 }
 
@@ -57,6 +58,7 @@ const CreateUser = ({ handle, nameRef, loginRef, rolRef, pass, passC }) => {
                                 <option value={1}>Microbiologia</option>
                                 <option value={2}>FQ</option>
                                 <option value={3}>Garantia</option>
+                                <option value={4}>No oficial</option>
                             </select>
                         </div>
                     </div>
