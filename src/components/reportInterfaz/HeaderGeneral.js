@@ -319,7 +319,7 @@ class HeaderGeneral extends Component {
                 <Report features={dat.features} results={dat.result_supplies} color={dat.color} isok={dat.isok} />
             )
             test.push(<Observation data={dat.observation} />)
-            if (dat.is_copy === "Si") {
+            if (window.confirm("Copia controlada?")) {
                 bcktxt = "COPIA CONTROLADA"
             }
         }

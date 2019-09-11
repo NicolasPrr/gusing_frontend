@@ -5,7 +5,7 @@ import './textbackground.css'
 import URLBack from '../../../UrlBack'
 import { HeaderReport, InformationReport, Observation, Note, Signature, Footer, renderIsOk } from '../Helpers'
 
-import {chooseTable, chooseMainURL} from '../Helpers'
+import { chooseTable, chooseMainURL } from '../Helpers'
 
 import Error from '../../LandingPage/Error'
 
@@ -35,19 +35,14 @@ class Printer extends Component {
         if (this.state.error) return <Error />
         const dat = this.state.data;
         let isok = null;
-        let  complement= [];
+        let complement = [];
         let bcktxt = ""
         if (dat !== null) {
             isok = dat.fulfillment;
             complement.push(chooseTable(window.location.pathname, dat)) //Selecciona la tabla  determinada
-            complement.push(<Observation data={dat.observation} key = {0} />)
-            if (dat.is_copy) {
+            complement.push(<Observation data={dat.observation} key={0} />)
+            if (window.confirm("Copia controlada?")) {
                 bcktxt = "COPIA CONTROLADA"
-            }
-            if(window.location.pathname.includes("microbiologies")){
-                if(window.confirm("Copia controlada?")){
-                    bcktxt = "COPIA CONTROLADA"
-                 }
             }
         }
         else {
