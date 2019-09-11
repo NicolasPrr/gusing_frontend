@@ -152,6 +152,8 @@ export const InformationReport = (props) => {
     function notification(str) {
         alert(`Se ha copiado al portapapeles el numero: ${str}`)
     }
+    let underline ="text"
+    if(window.location.pathname.includes('microbiologies')) underline = "text-green"
     return (
         <div className="box is-zise-7">
 
@@ -162,8 +164,8 @@ export const InformationReport = (props) => {
 
                     <CopyToClipboard text={report_number}>
                         <span>
-                            <p className="text" onClick={notification.bind(this, report_number)}> <strong>N° de reporte {chooseMBorFQ()}: </strong> {report_number} </p>
-                            <p className="text"> <strong>N° de analisis: </strong> {analisys} </p>
+                            <p className={underline} onClick={notification.bind(this, report_number)}> <strong>N° de reporte {chooseMBorFQ()}: </strong> {report_number} </p>
+                            <p className={underline}> <strong>N° de analisis: </strong> {analisys} </p>
                         </span>
                     </CopyToClipboard>
                     <p> <strong>Cliente: </strong> {client_name}</p>

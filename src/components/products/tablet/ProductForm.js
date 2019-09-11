@@ -85,12 +85,12 @@ class ProductForm extends Component {
                             <tbody>
                                 <tr>
                                     <td>Determinación aspecto</td>
-                                    <td><input className="input is-small" ref={this.appaearance} /></td>
+                                    <td><input className="input is-small" ref={this.appaearance} list="isok" /></td>
                                     <td>Redonda - Plana</td>
                                 </tr>
                                 <tr>
                                     <td>Determinación color</td>
-                                    <td><input className="input is-small" ref={this.color} /></td>
+                                    <td><input className="input is-small" ref={this.color} list="isok" /></td>
                                     <td>Blanca</td>
                                 </tr>
                                 <tr>
@@ -126,6 +126,13 @@ class ProductForm extends Component {
                                     <td><input className="input is-small" ref={this.friability} /></td>
                                     <td> Max 1 % </td>
                                 </tr>
+
+
+                                
+                                <datalist id="isok">
+                                    <option value="Cumple" key={0} />
+                                    <option value="No comple" key={1} />
+                                </datalist> 
 
                             </tbody>
                         </table>

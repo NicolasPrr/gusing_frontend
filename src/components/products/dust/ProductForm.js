@@ -90,13 +90,13 @@ class ProductForm extends Component {
                             <tbody>
                                 <tr>
                                     <td>Determinación aspecto</td>
-                                    <td><input className="input is-small" ref={this.appaearance}/></td>
-                                    <td><input className="input is-small" ref={this.param_appaearance}/></td>
+                                    <td><input className="input is-small" ref={this.appaearance} list="isok" /></td>
+                                    <td><input className="input is-small" ref={this.param_appaearance} defaultValue="Polvos"/></td>
                                 </tr>
                                 <tr>
                                     <td>Determinación color</td>
-                                    <td><input className="input is-small" ref={this.color} /></td>
-                                    <td><input className="input is-small" list="colors" ref={this.param_color} /></td>
+                                    <td><input className="input is-small" ref={this.color} list="isok" /></td>
+                                    <td><input className="input is-small" list="colors" ref={this.param_color} defaultValue="Blanco o beige"/></td>
                                 </tr>
                                 {/* <datalist id="colors">
                                     <option value="Blanco-Blanco" key={0} />
@@ -108,19 +108,23 @@ class ProductForm extends Component {
                                 <tr>
                                     <td>Determinación granulometria</td>
                                     <td><input className="input is-small" ref={this.granulometry} /></td>
-                                    <td><input className="input is-small" ref={this.param_granulometry} /></td>
+                                    <td><input className="input is-small" ref={this.param_granulometry} defaultValue="Minimo 95%" /></td>
                                 </tr>
                                 <tr>
                                     <td>Determinación solubilidad</td>
                                     <td><input className="input is-small" ref={this.solubility} /></td>
-                                    <td><input className="input is-small" ref={this.param_solubility} /></td>
+                                    <td><input className="input is-small" ref={this.param_solubility}  defaultValue ="Soluble en agua"/></td>
                                 </tr>
                                 <tr>
                                     <td>Determinación peso</td>
                                     <td><input className="input is-small" ref={this.weight} /></td>
-                                    <td><input className="input is-small" ref={this.param_weight} /></td>
+                                    <td><input className="input is-small" ref={this.param_weight} defaultValue ="400 ± 20 gramos" /></td>
                                 </tr>
                                 
+                                <datalist id="isok">
+                                    <option value="Cumple" key={0} />
+                                    <option value="No comple" key={1} />
+                                </datalist> 
                             </tbody>
                         </table>
                     </div>

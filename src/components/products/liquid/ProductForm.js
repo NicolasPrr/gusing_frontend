@@ -101,7 +101,7 @@ class ProductForm extends Component {
                                 </tr>
                                 <tr>
                                     <td>Determinación color</td>
-                                    <td><input className="input is-small" ref={this.color} /></td>
+                                    <td><input className="input is-small" list="isok" ref={this.color} /></td>
                                     <td><input className="input is-small" list="colors" ref={this.param_color} /></td>
                                 </tr>
                                 <datalist id="colors">
@@ -116,9 +116,7 @@ class ProductForm extends Component {
                                 <datalist id="isok">
                                     <option value="Cumple" key={0} />
                                     <option value="No comple" key={1} />
-
-
-                                </datalist>
+                                </datalist> 
                                 <tr>
                                     <td>Determinación pH</td>
                                     <td><input className="input is-small" ref={this.ph} /></td>

@@ -53,6 +53,8 @@ hr {
 }
 .text {
     background-color: #B6DCFE
+}.text-green {
+    background-color: #DEFFCC
 }
 .testbox {
     border: 1.5px;
