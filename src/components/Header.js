@@ -49,7 +49,7 @@ class Header extends Component {
         <nav className="navbar is-light">
           <div className="navbar-brand">
             <div className="navbar-item" >
-              <img alt="gusing" src="/resources/LogoInpv2.png" width="130" height="100" />
+              {/* <img alt="gusing" src="/resources/LogoInpv2.png" width="130" height="100" /> */}
             </div>
           </div>
 
