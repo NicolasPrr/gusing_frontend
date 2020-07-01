@@ -14,6 +14,7 @@ import HeaderGeneral from './components/reportInterfaz/HeaderGeneral'
 import StepperSupply from './components/supplies/reports/StepperSupply'
 import HomeSupply from './components/supplies/HomeSupply'
 import Database from './components/databaseGUI/Database'
+import ControlAccess from './components/databaseGUI/ControlAccess'
 
 import Stepper from './components/products/Stepper';
 import StepperMB from './components/microbiology/Stepper'
@@ -170,7 +171,7 @@ class App extends Component {
 
                         <PrivateRoute path="/users" component={User} />
                         <PrivateRoute path="/clients" component={Clients} />
-                        <PrivateRoute path="/database" component={Database} />
+                        <PrivateRoute path="/database" component={ControlAccess} />
                         <PrivateRoute component={Error} />
                     </Switch>
 

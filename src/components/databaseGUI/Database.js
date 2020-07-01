@@ -74,41 +74,6 @@ class Database extends Component {
                                         </footer>
                                     </article>
                                 </div>
-
-                                {/* <div className="column">
-                                    <article className="card is-rounded">
-                                        <header className="card-header">
-                                            <div className="card-header-title">
-                                                <p className="title">BackUp de la base de datos</p>
-                                            </div>
-                                        </header>
-                                        <div className="card-content">
-
-                                            <p> Actualice desde un archivo la base de datos  </p>
-                                        </div>
-                                        <footer className="card-footer">
-                                            <div class="file has-name is-fullwidth">
-                                                <label class="file-label">
-                                                    <input class="file-input is-dark" type="file" name="resume"  onChange = {this.getFile}/>
-                                                    <span class="file-cta">
-                                                        <span class="file-icon">
-                                                            <i class="fas fa-upload"></i>
-                                                        </span>
-                                                        <span class="file-label">
-                                                            Choose a file…
-                                                        </span>
-                                                    </span>
-                                                    <span class="file-name">
-                                                         {this.state.file.name}
-                                                    </span>
-                                                </label>
-                                            </div>
-                                        </footer>
-
-
-                                    </article>
-
-                                </div> */}
                             </div>
                         </div>
                     </div>
