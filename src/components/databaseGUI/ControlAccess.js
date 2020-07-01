@@ -63,7 +63,7 @@ const ControlAcces = () => {
       .then((res) => {
         handleAlert(
           "success",
-          "El codigo de acceso es correcto, tiene 2 minutos para hacer el backup"
+          "El codigo de acceso es correcto, tiene 5 minutos para hacer el backup"
         );
       })
       .catch((res, status) => {
